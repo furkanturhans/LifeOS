@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, GripVertical } from 'lucide-react';
+import { X } from 'lucide-react';
 import {
   DndContext,
   closestCenter,
@@ -30,13 +30,14 @@ interface AppIconProps {
   isEditMode: boolean;
   onPress: (moduleId: string) => void;
   onRemove: (moduleId: string) => void;
+  onLongPress: (moduleId: string) => void;
 }
 
-function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
-  const module = getModuleById(item.moduleId);
+function AppIcon({ item, isEditMode, onPress, onRemove, onLongPress }: AppIconProps) {
+  const moduleDef = getModuleById(item.moduleId);
   const { locale } = useThemeStore();
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { setEditMode } = useHomescreenStore();
+  const wasLongPressed = useRef(false);
 
   const {
     attributes,
@@ -55,8 +56,10 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
 
   function handlePointerDown() {
     if (!isEditMode) {
+      wasLongPressed.current = false;
       longPressTimer.current = setTimeout(() => {
-        setEditMode(true);
+        wasLongPressed.current = true;
+        onLongPress(item.moduleId);
       }, 500);
     }
   }
@@ -69,14 +72,14 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
   }
 
   function handleClick() {
-    if (!isEditMode) {
+    if (!isEditMode && !wasLongPressed.current) {
       onPress(item.moduleId);
     }
   }
 
-  if (!module) return null;
+  if (!moduleDef) return null;
 
-  const name = locale === 'tr' ? module.name : module.nameEn;
+  const name = locale === 'tr' ? moduleDef.name : moduleDef.nameEn;
 
   return (
     <motion.div
@@ -121,13 +124,13 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
         whileTap={!isEditMode ? { scale: 0.9 } : {}}
         className={cn(
           'h-[68px] w-[68px] rounded-[18px] flex items-center justify-center text-3xl shadow-md transition-shadow duration-200',
-          `bg-gradient-to-br ${module.gradient}`,
+          `bg-gradient-to-br ${moduleDef.gradient}`,
           isEditMode && 'cursor-grab active:cursor-grabbing'
         )}
         {...(isEditMode ? { ...attributes, ...listeners } : {})}
         aria-label={name}
       >
-        <span>{module.icon}</span>
+        <span>{moduleDef.icon}</span>
       </motion.button>
 
       {/* Label */}
@@ -152,6 +155,7 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
   } = useHomescreenStore();
 
   const [comingSoonModule, setComingSoonModule] = useState<string | null>(null);
+  const [activeOptionsModule, setActiveOptionsModule] = useState<string | null>(null);
   const { locale } = useThemeStore();
 
   const sensors = useSensors(
@@ -191,9 +195,9 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
 
   const handleModulePress = useCallback(
     (moduleId: string) => {
-      const module = getModuleById(moduleId);
-      if (!module) return;
-      if (module.status === 'COMING_SOON' || module.status !== 'ACTIVE') {
+      const moduleDef = getModuleById(moduleId);
+      if (!moduleDef) return;
+      if (moduleDef.status === 'COMING_SOON' || moduleDef.status !== 'ACTIVE') {
         setComingSoonModule(moduleId);
       }
     },
@@ -205,6 +209,13 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
       removeModuleFromHomescreen(moduleId);
     },
     [removeModuleFromHomescreen]
+  );
+
+  const handleLongPress = useCallback(
+    (moduleId: string) => {
+      setActiveOptionsModule(moduleId);
+    },
+    []
   );
 
   const sortedItems = [...items].sort((a, b) => a.position - b.position);
@@ -226,6 +237,7 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
                   isEditMode={isEditMode}
                   onPress={handleModulePress}
                   onRemove={handleRemove}
+                  onLongPress={handleLongPress}
                 />
               </div>
             ))}
@@ -258,6 +270,15 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
         onClose={() => setComingSoonModule(null)}
         locale={locale}
       />
+
+      {/* App Options Menu Modal */}
+      <AppOptionsModal
+        moduleId={activeOptionsModule}
+        onClose={() => setActiveOptionsModule(null)}
+        onOpenApp={handleModulePress}
+        onRemoveApp={handleRemove}
+        locale={locale}
+      />
     </>
   );
 }
@@ -270,11 +291,11 @@ interface ComingSoonModalProps {
 }
 
 function ComingSoonModal({ moduleId, onClose, locale }: ComingSoonModalProps) {
-  const module = moduleId ? getModuleById(moduleId) : null;
+  const moduleDef = moduleId ? getModuleById(moduleId) : null;
 
-  if (!module) return null;
+  if (!moduleDef) return null;
 
-  const name = locale === 'tr' ? module.name : module.nameEn;
+  const name = locale === 'tr' ? moduleDef.name : moduleDef.nameEn;
 
   return (
     <AnimatePresence>
@@ -301,10 +322,10 @@ function ComingSoonModal({ moduleId, onClose, locale }: ComingSoonModalProps) {
                 <div
                   className={cn(
                     'h-20 w-20 rounded-[24px] flex items-center justify-center text-4xl mb-4 shadow-lg',
-                    `bg-gradient-to-br ${module.gradient}`
+                    `bg-gradient-to-br ${moduleDef.gradient}`
                   )}
                 >
-                  {module.icon}
+                  {moduleDef.icon}
                 </div>
 
                 {/* Badge */}
@@ -332,6 +353,91 @@ function ComingSoonModal({ moduleId, onClose, locale }: ComingSoonModalProps) {
                 className="w-full py-4 text-center text-base font-semibold text-primary hover:bg-muted/50 transition-colors"
               >
                 {locale === 'tr' ? 'Tamam' : 'OK'}
+              </button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
+interface AppOptionsModalProps {
+  moduleId: string | null;
+  onClose: () => void;
+  onOpenApp: (moduleId: string) => void;
+  onRemoveApp: (moduleId: string) => void;
+  locale: string;
+}
+
+function AppOptionsModal({ moduleId, onClose, onOpenApp, onRemoveApp, locale }: AppOptionsModalProps) {
+  const moduleDef = moduleId ? getModuleById(moduleId) : null;
+
+  if (!moduleDef) return null;
+
+  const name = locale === 'tr' ? moduleDef.name : moduleDef.nameEn;
+
+  return (
+    <AnimatePresence>
+      {moduleId && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[3px]"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ y: '100%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: '100%', opacity: 0 }}
+            transition={{ type: 'spring', damping: 28, stiffness: 350 }}
+            className="fixed inset-x-4 bottom-6 z-50 mx-auto max-w-sm"
+          >
+            <div className="rounded-3xl bg-card/90 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden p-4 space-y-3">
+              <div className="flex items-center gap-3 px-2 py-1">
+                <div className={cn(
+                  "h-12 w-12 rounded-[14px] flex items-center justify-center text-2xl shadow-sm bg-gradient-to-br",
+                  moduleDef.gradient
+                )}>
+                  {moduleDef.icon}
+                </div>
+                <div>
+                  <h3 className="font-bold text-foreground">{name}</h3>
+                  <p className="text-xs text-muted-foreground">
+                    {locale === 'tr' ? 'Uygulama Seçenekleri' : 'App Options'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/5 bg-white/5 overflow-hidden divide-y divide-white/5">
+                <button
+                  onClick={() => {
+                    onOpenApp(moduleId);
+                    onClose();
+                  }}
+                  className="w-full py-3.5 px-4 text-left text-sm font-semibold text-foreground hover:bg-white/10 transition-colors flex items-center justify-between"
+                >
+                  <span>{locale === 'tr' ? 'Aç' : 'Open'}</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    onRemoveApp(moduleId);
+                    onClose();
+                  }}
+                  className="w-full py-3.5 px-4 text-left text-sm font-semibold text-destructive hover:bg-destructive/10 transition-colors flex items-center justify-between"
+                >
+                  <span>{locale === 'tr' ? 'Ana Ekrandan Kaldır' : 'Remove from Home'}</span>
+                </button>
+              </div>
+
+              <button
+                onClick={onClose}
+                className="w-full py-3.5 rounded-2xl bg-muted/60 hover:bg-muted font-semibold text-sm text-foreground transition-all active:scale-[0.98]"
+              >
+                {locale === 'tr' ? 'İptal' : 'Cancel'}
               </button>
             </div>
           </motion.div>

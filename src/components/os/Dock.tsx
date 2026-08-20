@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Home, Search, BookOpen, User, X } from 'lucide-react';
+import { Home, Search, BookOpen, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useThemeStore } from '@/stores/useThemeStore';
@@ -31,9 +31,9 @@ export function Dock() {
   ];
 
   function handleModuleClick(moduleId: string) {
-    const module = getModuleById(moduleId);
-    if (!module) return;
-    if (module.status === 'COMING_SOON' || module.status !== 'ACTIVE') {
+    const moduleDef = getModuleById(moduleId);
+    if (!moduleDef) return;
+    if (moduleDef.status === 'COMING_SOON' || moduleDef.status !== 'ACTIVE') {
       setComingSoonModule(moduleId);
     } else {
       router.push(`/home?module=${moduleId}`);
@@ -90,10 +90,10 @@ export function Dock() {
 
               {/* Dynamic User Custom Dock Items */}
               {sortedDockItems.map((dockItem) => {
-                const module = getModuleById(dockItem.moduleId);
-                if (!module) return null;
-                const label = locale === 'tr' ? module.name : module.nameEn;
-                const isActive = pathname.includes(`module=${module.id}`);
+                const moduleDef = getModuleById(dockItem.moduleId);
+                if (!moduleDef) return null;
+                const label = locale === 'tr' ? moduleDef.name : moduleDef.nameEn;
+                const isActive = pathname.includes(`module=${moduleDef.id}`);
 
                 return (
                   <button
@@ -105,11 +105,11 @@ export function Dock() {
                       whileTap={{ scale: 0.85 }}
                       className={cn(
                         'flex h-12 w-12 items-center justify-center rounded-[16px] text-2xl shadow-sm bg-gradient-to-br transition-all duration-200',
-                        module.gradient,
+                        moduleDef.gradient,
                         isActive && 'ring-2 ring-primary ring-offset-2 ring-offset-background'
                       )}
                     >
-                      <span>{module.icon}</span>
+                      <span>{moduleDef.icon}</span>
                     </motion.div>
                     <span className="text-[10px] font-medium text-muted-foreground truncate max-w-[48px]">
                       {label}
@@ -171,11 +171,11 @@ interface ComingSoonModalProps {
 }
 
 function ComingSoonModal({ moduleId, onClose, locale }: ComingSoonModalProps) {
-  const module = moduleId ? getModuleById(moduleId) : null;
+  const moduleDef = moduleId ? getModuleById(moduleId) : null;
 
-  if (!module) return null;
+  if (!moduleDef) return null;
 
-  const name = locale === 'tr' ? module.name : module.nameEn;
+  const name = locale === 'tr' ? moduleDef.name : moduleDef.nameEn;
 
   return (
     <AnimatePresence>
@@ -202,10 +202,10 @@ function ComingSoonModal({ moduleId, onClose, locale }: ComingSoonModalProps) {
                 <div
                   className={cn(
                     'h-20 w-20 rounded-[24px] flex items-center justify-center text-4xl mb-4 shadow-lg',
-                    `bg-gradient-to-br ${module.gradient}`
+                    `bg-gradient-to-br ${moduleDef.gradient}`
                   )}
                 >
-                  {module.icon}
+                  {moduleDef.icon}
                 </div>
 
                 {/* Badge */}

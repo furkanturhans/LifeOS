@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      return NextResponse.json({
+      const response = NextResponse.json({
         success: true,
         user: {
           id: newUser.id,
@@ -101,13 +101,22 @@ export async function POST(request: NextRequest) {
           updatedAt: newUser.updatedAt.toISOString(),
         },
       });
+      response.cookies.set('lifeos_session', newUser.supabaseId, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+        sameSite: 'lax',
+        httpOnly: false,
+      });
+      return response;
     } catch (dbError) {
       console.warn('DB creation fallback to local:', dbError);
-      return NextResponse.json({
+      const finalSupabaseId = supabaseId || `sb_${Date.now()}`;
+
+      const response = NextResponse.json({
         success: true,
         user: {
           id: `local_${Date.now()}`,
-          supabaseId: supabaseId || `sb_${Date.now()}`,
+          supabaseId: finalSupabaseId,
           lifeosId,
           email,
           displayName,
@@ -121,6 +130,13 @@ export async function POST(request: NextRequest) {
           updatedAt: new Date().toISOString(),
         },
       });
+      response.cookies.set('lifeos_session', finalSupabaseId, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+        sameSite: 'lax',
+        httpOnly: false,
+      });
+      return response;
     }
   } catch (error: any) {
     console.error('Registration API error:', error);

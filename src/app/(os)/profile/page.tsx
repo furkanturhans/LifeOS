@@ -20,7 +20,7 @@ import { Avatar } from '@/components/ui/Avatar';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useThemeStore } from '@/stores/useThemeStore';
 import { createClient } from '@/lib/supabase/client';
-import { cn, formatLifeOSId } from '@/lib/utils';
+import { cn, formatLifeOSId, clearSessionCookie } from '@/lib/utils';
 
 interface ProfileRowProps {
   icon: React.ReactNode;
@@ -86,6 +86,7 @@ export default function ProfilePage() {
       const supabase = createClient();
       await supabase.auth.signOut();
     } catch (e) {}
+    clearSessionCookie();
     logout();
     resetBackground();
     router.push('/login');

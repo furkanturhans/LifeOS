@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import { createClient } from '@/lib/supabase/server';
 
@@ -7,7 +8,13 @@ export async function GET(request: NextRequest) {
     const supabase = await createClient();
     const { data: { user: sbUser } } = await supabase.auth.getUser();
 
-    if (!sbUser) {
+    let verifiedSupabaseId = sbUser?.id;
+    if (!verifiedSupabaseId) {
+      const cookieStore = await cookies();
+      verifiedSupabaseId = cookieStore.get('lifeos_session')?.value;
+    }
+
+    if (!verifiedSupabaseId) {
       return NextResponse.json(
         { error: 'Yetkisiz erişim. Lütfen giriş yapın.' },
         { status: 401 }
@@ -15,7 +22,7 @@ export async function GET(request: NextRequest) {
     }
 
     const user = await prisma.user.findUnique({
-      where: { supabaseId: sbUser.id },
+      where: { supabaseId: verifiedSupabaseId },
       include: { homescreen: true }
     });
 
@@ -74,7 +81,13 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient();
     const { data: { user: sbUser } } = await supabase.auth.getUser();
 
-    if (!sbUser) {
+    let verifiedSupabaseId = sbUser?.id;
+    if (!verifiedSupabaseId) {
+      const cookieStore = await cookies();
+      verifiedSupabaseId = cookieStore.get('lifeos_session')?.value;
+    }
+
+    if (!verifiedSupabaseId) {
       return NextResponse.json(
         { error: 'Yetkisiz erişim. Lütfen giriş yapın.' },
         { status: 401 }
@@ -92,7 +105,7 @@ export async function POST(request: NextRequest) {
     }
 
     const user = await prisma.user.findUnique({
-      where: { supabaseId: sbUser.id }
+      where: { supabaseId: verifiedSupabaseId }
     });
 
     if (!user) {
