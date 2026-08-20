@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌌 LifeOS — Phase 1: Core & Phone Experience
 
-## Getting Started
+LifeOS, klasik bir mobil/web uygulaması gibi değil, **kişisel dijital yaşam alanı ve telefon benzeri sanal ana ekran** olarak tasarlanmış modern bir işletim sistemi deneyimidir.
 
-First, run the development server:
+---
 
+## 🚀 Hızlı Başlangıç
+
+### 1. Geliştirme Sunucusunu Başlatma
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+Uygulama [http://localhost:3000](http://localhost:3000) adresinde çalışacaktır.
+
+---
+
+## 🛠️ Mimari ve Özellikler
+
+### 1. LifeOS Core
+- **Telefon benzeri Ana Ekran**: Minimal, modern, cam (glassmorphism) efektli ve dokunmatik odaklı.
+- **Canlı Durum Çubuğu (Status Bar)**: Canlı saat, tarih ve günün saatine göre akıllı selamlama (*"İyi Akşamlar"*).
+- **Entegre Arama Çubuğu**: Modülleri anlık arama ve hızlı erişim.
+- **Floating Dock**: Ekranın altında 5 modüle kadar sabitlenebilen yüzer dock.
+
+### 2. Modül Sistemi & Kişiselleştirme
+- **22 Sistem Modülü**: AI, Chat, MedAI, Finans, Aile, Enerji, Akıllı Ev, Dosyalar, vb.
+- **Sürükle-Bırak Sıralama**: `@dnd-kit` ile akıcı grid düzeni.
+- **Düzenleme Modu**: Modüle basılı tutulduğunda (long-press) iOS benzeri titreme (shake) animasyonu ve kaldırma butonu.
+- **Modül Kitaplığı**: Tüm kategorilerdeki modülleri keşfetme ve ana ekrana ekleme (`/library`).
+- **Faz 1 Modül Durumu**: İlk aşama modüller *COMING_SOON* durumundadır ve tıklandığında bilgilendirici modal açılır.
+
+### 3. Kullanıcı ve Kimlik
+- **LifeOS ID**: `@furkan` formatında benzersiz sistem kimliği.
+- **Profil Yönetimi**: Kişiselleştirilmiş profil, LifeOS ID ve avatar (`/profile`).
+
+### 4. Ayarlar & Tema
+- **Tema Yönetimi**: Koyu Mod (varsayılan), Açık Mod ve Sistem Teması (`/settings/appearance`).
+- **Dil Seçeneği**: Türkçe (varsayılan) ve İngilizce (`/settings/language`).
+- **Güvenlik & Gizlilik**: 2FA/Passkey altyapısı, aktif cihazlar ve oturum yönetimi (`/settings/security`, `/settings/devices`, `/settings/privacy`).
+
+---
+
+## 📦 Veritabanı ve Supabase Yapılandırması
+
+Supabase ve PostgreSQL bağlantılarınızı `.env.local` dosyasına ekleyebilirsiniz:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+DATABASE_URL=postgresql://postgres:password@db.your-project.supabase.co:5432/postgres
+DIRECT_URL=postgresql://postgres:password@db.your-project.supabase.co:5432/postgres
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Prisma şemasını güncellemek ve generate etmek için:
+```bash
+npx prisma generate
+```

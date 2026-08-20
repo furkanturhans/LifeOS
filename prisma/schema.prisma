@@ -1,0 +1,148 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id              String   @id @default(cuid())
+  supabaseId      String   @unique
+  lifeosId        String   @unique
+  email           String   @unique
+  displayName     String
+  avatarUrl       String?
+  bio             String?
+  locale          String   @default("tr")
+  theme           String   @default("system")
+  backgroundType  String   @default("default")
+  backgroundValue String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  homescreen   Homescreen?
+  moduleAccess UserModuleAccess[]
+  permissions  UserPermission[]
+  subscription Subscription?
+  sessions     UserSession[]
+  auditLogs    AuditLog[]
+
+  @@map("users")
+}
+
+model Homescreen {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pages     Json     @default("[]")
+  dockItems Json     @default("[]")
+  updatedAt DateTime @updatedAt
+
+  @@map("homescreens")
+}
+
+model ModuleDefinition {
+  id          String       @id
+  name        String
+  nameEn      String
+  description String
+  descriptionEn String
+  icon        String
+  color       String
+  category    String
+  status      ModuleStatus @default(COMING_SOON)
+  version     String       @default("1.0.0")
+  sortOrder   Int          @default(0)
+  createdAt   DateTime     @default(now())
+
+  userAccess UserModuleAccess[]
+
+  @@map("module_definitions")
+}
+
+model UserModuleAccess {
+  id       String           @id @default(cuid())
+  userId   String
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  moduleId String
+  module   ModuleDefinition @relation(fields: [moduleId], references: [id])
+  status   UserModuleStatus @default(ENABLED)
+  addedAt  DateTime         @default(now())
+
+  @@unique([userId, moduleId])
+  @@map("user_module_access")
+}
+
+model UserPermission {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  moduleId  String
+  resource  String
+  granted   Boolean  @default(false)
+  grantedAt DateTime @default(now())
+
+  @@unique([userId, moduleId, resource])
+  @@map("user_permissions")
+}
+
+model Subscription {
+  id             String             @id @default(cuid())
+  userId         String             @unique
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan           String             @default("free")
+  status         SubscriptionStatus @default(ACTIVE)
+  enabledModules String[]
+  expiresAt      DateTime?
+  createdAt      DateTime           @default(now())
+
+  @@map("subscriptions")
+}
+
+model UserSession {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deviceInfo Json     @default("{}")
+  ipAddress  String?
+  lastSeen   DateTime @default(now())
+  createdAt  DateTime @default(now())
+
+  @@map("user_sessions")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  action    String
+  resource  String
+  metadata  Json?    @default("{}")
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+enum ModuleStatus {
+  ACTIVE
+  COMING_SOON
+  BETA
+  PREMIUM
+  DISABLED
+}
+
+enum UserModuleStatus {
+  ENABLED
+  HIDDEN
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
