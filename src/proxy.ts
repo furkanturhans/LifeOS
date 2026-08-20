@@ -61,8 +61,10 @@ export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     // Protected routes
-    const protectedPaths = ['/home', '/library', '/search', '/profile', '/settings'];
-    const isProtectedPath = protectedPaths.some((path) => pathname.startsWith(path));
+    const protectedPaths = ['/home', '/library', '/profile', '/settings'];
+    const isProtectedPath = protectedPaths.some(
+      (path) => pathname === path || pathname.startsWith(path + '/')
+    );
 
     // Auth routes (redirect to home if logged in)
     const authPaths = ['/login', '/register'];

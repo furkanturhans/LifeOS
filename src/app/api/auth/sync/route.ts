@@ -36,8 +36,26 @@ export async function POST(request: NextRequest) {
             backgroundValue: userMetadata?.background_value || null,
             homescreen: {
               create: {
-                pages: ['ai', 'chat', 'family', 'finance', 'medai', 'energy', 'camera', 'smart-home'],
-                dockItems: ['ai', 'files', 'cloud'],
+                pages: [
+                  {
+                    page: 0,
+                    items: [
+                      { moduleId: 'ai', position: 0, size: 'small' },
+                      { moduleId: 'chat', position: 1, size: 'small' },
+                      { moduleId: 'family', position: 2, size: 'small' },
+                      { moduleId: 'finance', position: 3, size: 'small' },
+                      { moduleId: 'medai', position: 4, size: 'small' },
+                      { moduleId: 'energy', position: 5, size: 'small' },
+                      { moduleId: 'camera', position: 6, size: 'small' },
+                      { moduleId: 'smart-home', position: 7, size: 'small' }
+                    ]
+                  }
+                ],
+                dockItems: [
+                  { moduleId: 'ai', position: 0 },
+                  { moduleId: 'files', position: 1 },
+                  { moduleId: 'cloud', position: 2 }
+                ]
               },
             },
           },
