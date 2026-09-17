@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, GripVertical } from 'lucide-react';
+import { X } from 'lucide-react';
 import {
   DndContext,
   closestCenter,
@@ -23,6 +24,7 @@ import { cn } from '@/lib/utils';
 import { getModuleById } from '@/modules/registry';
 import { useHomescreenStore } from '@/stores/useHomescreenStore';
 import { useThemeStore } from '@/stores/useThemeStore';
+import { LockedFeatureModal } from '@/components/ui/LockedFeatureModal';
 import type { HomescreenItem } from '@/types/module';
 
 interface AppIconProps {
@@ -105,7 +107,7 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
               e.stopPropagation();
               onRemove(item.moduleId);
             }}
-            className="absolute -top-2 -left-2 z-10 h-5 w-5 rounded-full bg-foreground/80 text-background flex items-center justify-center shadow-sm"
+            className="absolute -top-2 -left-2 z-10 h-5 w-5 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center shadow-sm"
           >
             <X className="h-3 w-3" />
           </motion.button>
@@ -118,9 +120,9 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
         onClick={handleClick}
-        whileTap={!isEditMode ? { scale: 0.9 } : {}}
+        whileTap={!isEditMode ? { scale: 0.92 } : {}}
         className={cn(
-          'h-[68px] w-[68px] rounded-[18px] flex items-center justify-center text-3xl shadow-md transition-shadow duration-200',
+          'h-16 w-16 rounded-2xl flex items-center justify-center text-2xl shadow-sm border border-white/10 transition-all duration-200',
           `bg-gradient-to-br ${module.gradient}`,
           isEditMode && 'cursor-grab active:cursor-grabbing'
         )}
@@ -131,7 +133,7 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
       </motion.button>
 
       {/* Label */}
-      <span className="text-[11px] font-medium text-foreground/90 text-center leading-tight max-w-[72px] truncate">
+      <span className="text-xs font-medium text-foreground text-center leading-tight max-w-[72px] truncate">
         {name}
       </span>
     </motion.div>
@@ -143,6 +145,7 @@ interface AppGridProps {
 }
 
 export function AppGrid({ pageIndex = 0 }: AppGridProps) {
+  const router = useRouter();
   const {
     layout,
     isEditMode,
@@ -193,11 +196,37 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
     (moduleId: string) => {
       const module = getModuleById(moduleId);
       if (!module) return;
-      if (module.status === 'COMING_SOON' || module.status !== 'ACTIVE') {
-        setComingSoonModule(moduleId);
+
+      if (moduleId === 'taxi') {
+        router.push('/services/taxi');
+        return;
       }
+      if (moduleId === 'travel') {
+        router.push('/services/travel');
+        return;
+      }
+      if (moduleId === 'moving') {
+        router.push('/services/moving');
+        return;
+      }
+      if (moduleId === 'craftsman') {
+        router.push('/services/craftsman');
+        return;
+      }
+      if (
+        moduleId === 'family' ||
+        moduleId === 'finance' ||
+        moduleId === 'arcade' ||
+        moduleId === 'explore' ||
+        moduleId === 'services' ||
+        module.status === 'ACTIVE'
+      ) {
+        router.push(`/${moduleId}`);
+        return;
+      }
+      setComingSoonModule(moduleId);
     },
-    []
+    [router]
   );
 
   const handleRemove = useCallback(
@@ -207,8 +236,17 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
     [removeModuleFromHomescreen]
   );
 
-  const sortedItems = [...items].sort((a, b) => a.position - b.position);
+  const SUB_SERVICES = new Set(['taxi', 'travel', 'moving', 'craftsman']);
+  const filteredItems = items.filter((item) => !SUB_SERVICES.has(item.moduleId));
+  const sortedItems = [...filteredItems].sort((a, b) => a.position - b.position);
   const sortableIds = sortedItems.map((item) => item.moduleId);
+
+  const activeComingSoonModule = comingSoonModule ? getModuleById(comingSoonModule) : null;
+  const comingSoonName = activeComingSoonModule
+    ? locale === 'tr'
+      ? activeComingSoonModule.name
+      : activeComingSoonModule.nameEn
+    : '';
 
   return (
     <>
@@ -244,7 +282,7 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
           >
             <button
               onClick={() => setEditMode(false)}
-              className="px-6 py-2.5 rounded-full bg-foreground text-background text-sm font-semibold shadow-lg"
+              className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold shadow-lg"
             >
               {locale === 'tr' ? 'Bitti' : 'Done'}
             </button>
@@ -253,90 +291,18 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
       </AnimatePresence>
 
       {/* Coming Soon Modal */}
-      <ComingSoonModal
-        moduleId={comingSoonModule}
+      <LockedFeatureModal
+        isOpen={Boolean(comingSoonModule)}
         onClose={() => setComingSoonModule(null)}
-        locale={locale}
+        title={comingSoonName}
+        description={
+          locale === 'tr'
+            ? `${comingSoonName} modülünü sizin için hazırlıyoruz. Çok yakında LifeOS içerisinde kullanıma sunulacaktır.`
+            : `We are preparing the ${comingSoonName} module for you. It will be available in LifeOS soon.`
+        }
+        moduleName="LifeOS Modül"
       />
     </>
   );
 }
 
-// Coming Soon Modal inline
-interface ComingSoonModalProps {
-  moduleId: string | null;
-  onClose: () => void;
-  locale: string;
-}
-
-function ComingSoonModal({ moduleId, onClose, locale }: ComingSoonModalProps) {
-  const module = moduleId ? getModuleById(moduleId) : null;
-
-  if (!module) return null;
-
-  const name = locale === 'tr' ? module.name : module.nameEn;
-
-  return (
-    <AnimatePresence>
-      {moduleId && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
-            onClick={onClose}
-          />
-          <motion.div
-            initial={{ y: '100%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: '100%', opacity: 0 }}
-            transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-            className="fixed inset-x-4 bottom-6 z-50 mx-auto max-w-sm"
-          >
-            <div className="rounded-3xl bg-card border border-border shadow-2xl overflow-hidden">
-              {/* Header */}
-              <div className="flex flex-col items-center pt-8 pb-6 px-6">
-                {/* Icon */}
-                <div
-                  className={cn(
-                    'h-20 w-20 rounded-[24px] flex items-center justify-center text-4xl mb-4 shadow-lg',
-                    `bg-gradient-to-br ${module.gradient}`
-                  )}
-                >
-                  {module.icon}
-                </div>
-
-                {/* Badge */}
-                <span className="mb-3 inline-flex items-center rounded-full bg-blue-500/15 px-3 py-1 text-xs font-medium text-blue-400">
-                  {locale === 'tr' ? '🚀 Çok Yakında' : '🚀 Coming Soon'}
-                </span>
-
-                {/* Title */}
-                <h2 className="text-xl font-bold text-foreground text-center">{name}</h2>
-
-                {/* Description */}
-                <p className="mt-3 text-sm text-muted-foreground text-center leading-relaxed">
-                  {locale === 'tr'
-                    ? `${name} modülünü sizin için hazırlıyoruz. Çok yakında LifeOS içerisinde kullanıma sunacağız.`
-                    : `We're preparing the ${name} module for you. It will be available in LifeOS very soon.`}
-                </p>
-              </div>
-
-              {/* Divider */}
-              <div className="h-px bg-border" />
-
-              {/* Action */}
-              <button
-                onClick={onClose}
-                className="w-full py-4 text-center text-base font-semibold text-primary hover:bg-muted/50 transition-colors"
-              >
-                {locale === 'tr' ? 'Tamam' : 'OK'}
-              </button>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
-  );
-}

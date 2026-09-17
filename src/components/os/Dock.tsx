@@ -11,7 +11,7 @@ import { useHomescreenStore } from '@/stores/useHomescreenStore';
 const NAV_ITEMS = [
   { id: 'home', labelTr: 'Ana Ekran', labelEn: 'Home', icon: Home, href: '/home' },
   { id: 'search', labelTr: 'Ara', labelEn: 'Search', icon: Search, href: '/search' },
-  { id: 'ai', labelTr: 'AI', labelEn: 'AI', icon: Sparkles, href: '/home?module=ai' },
+  { id: 'ai', labelTr: 'Asistan', labelEn: 'AI', icon: Sparkles, href: '/ai' },
   { id: 'library', labelTr: 'Kütüphane', labelEn: 'Library', icon: BookOpen, href: '/library' },
   { id: 'profile', labelTr: 'Profil', labelEn: 'Profile', icon: User, href: '/profile' },
 ] as const;
@@ -24,14 +24,13 @@ export function Dock() {
   if (isEditMode) return null;
 
   return (
-    <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30, delay: 0.2 }}
-      className="fixed bottom-4 left-4 right-4 z-20 safe-bottom"
+    <nav
+      role="navigation"
+      aria-label="Ana Navigasyon"
+      className="fixed bottom-3.5 left-3.5 right-3.5 z-30 safe-bottom lg:hidden pointer-events-none"
     >
-      <div className="mx-auto max-w-sm">
-        <div className="glass-dock rounded-[28px] border border-white/10 px-4 py-3 shadow-xl">
+      <div className="mx-auto max-w-sm pointer-events-auto">
+        <div className="glass-dock rounded-2xl border border-border/80 bg-card/90 px-3 py-2 shadow-lg backdrop-blur-xl">
           <div className="flex items-center justify-around">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
@@ -42,22 +41,25 @@ export function Dock() {
                   : pathname.startsWith(item.href.split('?')[0]);
 
               return (
-                <Link key={item.id} href={item.href} className="flex flex-col items-center gap-1">
-                  <motion.div
-                    whileTap={{ scale: 0.85 }}
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className="flex flex-col items-center gap-1 py-0.5 px-2 rounded-xl transition-colors select-none"
+                >
+                  <div
                     className={cn(
-                      'flex h-12 w-12 items-center justify-center rounded-[16px] transition-all duration-200',
+                      'flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-150',
                       isActive
-                        ? 'bg-primary/15 text-primary'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
+                        ? 'bg-primary/10 text-primary font-bold'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                     )}
                   >
-                    <Icon className="h-5 w-5" strokeWidth={isActive ? 2.5 : 2} />
-                  </motion.div>
+                    <Icon className="h-4 w-4" strokeWidth={isActive ? 2.5 : 2} />
+                  </div>
                   <span
                     className={cn(
-                      'text-[10px] font-medium transition-colors',
-                      isActive ? 'text-primary' : 'text-muted-foreground'
+                      'text-[10px] font-medium leading-none transition-colors',
+                      isActive ? 'text-primary font-bold' : 'text-muted-foreground'
                     )}
                   >
                     {label}
@@ -68,6 +70,7 @@ export function Dock() {
           </div>
         </div>
       </div>
-    </motion.div>
+    </nav>
   );
 }
+

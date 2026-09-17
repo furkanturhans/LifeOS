@@ -12,6 +12,7 @@ export interface ModalProps {
   description?: string;
   children: React.ReactNode;
   className?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export function Modal({
@@ -21,6 +22,7 @@ export function Modal({
   description,
   children,
   className,
+  size = 'md',
 }: ModalProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -36,37 +38,51 @@ export function Modal({
     };
   }, [isOpen, onClose]);
 
+  const sizeClasses = {
+    sm: 'max-w-sm',
+    md: 'max-w-md',
+    lg: 'max-w-lg',
+    xl: 'max-w-xl',
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-md"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.96, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            exit={{ opacity: 0, scale: 0.96, y: 10 }}
+            transition={{ type: 'spring', damping: 26, stiffness: 350 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label={title}
             className={cn(
-              'relative w-full max-w-md rounded-3xl border border-white/10 bg-card/95 p-6 shadow-2xl backdrop-blur-xl',
+              'relative max-h-[90vh] w-full overflow-y-auto rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-xl',
+              sizeClasses[size],
               className
             )}
           >
             <button
+              type="button"
               onClick={onClose}
-              className="absolute right-4 top-4 rounded-full p-2 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground active:scale-95"
+              className="absolute right-3.5 top-3.5 rounded-xl p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:scale-95"
+              aria-label="Kapat"
             >
-              <X className="h-5 w-5" />
+              <X className="h-4 w-4" />
             </button>
             {(title || description) && (
-              <div className="mb-4 pr-8">
-                {title && <h3 className="text-xl font-bold tracking-tight text-foreground">{title}</h3>}
-                {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
+              <div className="mb-4 pr-7">
+                {title && <h3 className="text-base sm:text-lg font-bold text-foreground">{title}</h3>}
+                {description && <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{description}</p>}
               </div>
             )}
             {children}
@@ -76,3 +92,4 @@ export function Modal({
     </AnimatePresence>
   );
 }
+

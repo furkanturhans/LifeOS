@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useThemeStore } from '@/stores/useThemeStore';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const { theme, setResolvedTheme } = useThemeStore();
+  const { theme, accentColor, reducedMotion, setResolvedTheme } = useThemeStore();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -12,6 +12,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     function applyTheme(resolved: 'light' | 'dark') {
       root.classList.remove('light', 'dark');
       root.classList.add(resolved);
+      root.setAttribute('data-theme', resolved);
       root.style.colorScheme = resolved;
       setResolvedTheme(resolved);
     }
@@ -26,6 +27,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       applyTheme(theme as 'light' | 'dark');
     }
   }, [theme, setResolvedTheme]);
+
+  // Accent Color
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute('data-accent', accentColor || 'blue');
+  }, [accentColor]);
+
+  // Reduced Motion
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute('data-reduced-motion', reducedMotion ? 'true' : 'false');
+  }, [reducedMotion]);
 
   return <>{children}</>;
 }

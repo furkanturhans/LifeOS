@@ -9,7 +9,7 @@ import { useThemeStore } from '@/stores/useThemeStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
-import type { ThemePreference, BackgroundType } from '@/types/user';
+import type { ThemePreference, BackgroundType, AccentColor } from '@/types/user';
 
 interface ThemeOptionProps {
   value: ThemePreference;
@@ -202,6 +202,13 @@ export default function AppearancePage() {
     },
   ];
 
+  const ACCENT_OPTIONS: { id: AccentColor; labelTr: string; labelEn: string; bgClass: string; hex: string }[] = [
+    { id: 'blue', labelTr: 'Mavi (Varsayılan)', labelEn: 'Blue (Default)', bgClass: 'bg-blue-500', hex: '#3b82f6' },
+    { id: 'green', labelTr: 'Yeşil (Zümrüt)', labelEn: 'Emerald Green', bgClass: 'bg-emerald-500', hex: '#10b981' },
+    { id: 'purple', labelTr: 'Mor (Lavanta)', labelEn: 'Royal Purple', bgClass: 'bg-purple-500', hex: '#8b5cf6' },
+    { id: 'orange', labelTr: 'Turuncu (Kehribar)', labelEn: 'Warm Amber', bgClass: 'bg-amber-500', hex: '#f59e0b' },
+  ];
+
   return (
     <div className="flex h-full flex-col">
       <div className="flex-1 overflow-y-auto pb-32">
@@ -219,16 +226,125 @@ export default function AppearancePage() {
           </button>
           <div>
             <h1 className="text-2xl font-bold text-foreground">
-              {locale === 'tr' ? 'Görünüm & Arka Plan' : 'Appearance & Background'}
+              {locale === 'tr' ? 'Görünüm & Tema' : 'Appearance & Theme'}
             </h1>
             <p className="text-xs text-muted-foreground mt-0.5">
-              {locale === 'tr' ? 'Tema ve ana ekran arka planını özelleştirin' : 'Customize theme and homescreen background'}
+              {locale === 'tr' ? 'Tema, vurgu rengi ve arayüz tercihlerini özelleştirin' : 'Customize theme mode, accent color, and interface preferences'}
             </p>
           </div>
         </motion.div>
 
-        {/* Section 1: Background Customization */}
-        <div className="px-4 mt-4 space-y-4">
+        {/* Section 1: Theme Mode */}
+        <div className="px-4 mt-2 space-y-3">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            {locale === 'tr' ? 'Tema Modu' : 'Theme Mode'}
+          </h2>
+          <div className="space-y-2.5">
+            {themes.map((t) => (
+              <ThemeOption
+                key={t.value}
+                value={t.value}
+                label={locale === 'tr' ? t.labelTr : t.labelEn}
+                description={locale === 'tr' ? t.descTr : t.descEn}
+                isSelected={theme === t.value}
+                onSelect={() => {
+                  setTheme(t.value);
+                  if (user) {
+                    fetch('/api/user/profile', {
+                      method: 'PATCH',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ id: user.id, email: user.email, theme: t.value }),
+                    }).catch(() => {});
+                  }
+                }}
+                preview={t.preview}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Section 2: Accent Color */}
+        <div className="px-4 mt-8 space-y-3">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            {locale === 'tr' ? 'Vurgu Rengi (Accent)' : 'Accent Color'}
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            {ACCENT_OPTIONS.map((opt) => {
+              const isSelected = (useThemeStore.getState().accentColor || 'blue') === opt.id;
+              return (
+                <button
+                  key={opt.id}
+                  type="button"
+                  onClick={() => {
+                    useThemeStore.getState().setAccentColor(opt.id);
+                    if (user) {
+                      fetch('/api/user/profile', {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: user.id, email: user.email, accentColor: opt.id }),
+                      }).catch(() => {});
+                    }
+                  }}
+                  className={cn(
+                    'flex flex-col items-center gap-2.5 p-3 rounded-2xl border text-center transition-all',
+                    isSelected
+                      ? 'border-primary ring-2 ring-primary/30 bg-primary/5'
+                      : 'border-border bg-card hover:bg-muted/40'
+                  )}
+                >
+                  <div className={cn('h-8 w-8 rounded-full shadow-sm flex items-center justify-center text-white', opt.bgClass)}>
+                    {isSelected && <Check className="h-4 w-4 stroke-[3]" />}
+                  </div>
+                  <span className="text-xs font-semibold text-foreground">
+                    {locale === 'tr' ? opt.labelTr : opt.labelEn}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Section 3: Reduced Motion */}
+        <div className="px-4 mt-8 space-y-3">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            {locale === 'tr' ? 'Erişilebilirlik & Hareket' : 'Accessibility & Motion'}
+          </h2>
+          <div className="flex items-center justify-between p-4 rounded-2xl border border-border bg-card">
+            <div>
+              <div className="text-sm font-medium text-foreground">
+                {locale === 'tr' ? 'Animasyonları Azalt' : 'Reduce Motion'}
+              </div>
+              <div className="text-xs text-muted-foreground mt-0.5">
+                {locale === 'tr'
+                  ? 'Arayüz geçişlerini ve hareketli efektleri en aza indirir'
+                  : 'Minimizes interface transitions and decorative motion'}
+              </div>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={useThemeStore.getState().reducedMotion}
+              onClick={() => {
+                const cur = useThemeStore.getState().reducedMotion;
+                useThemeStore.getState().setReducedMotion(!cur);
+              }}
+              className={cn(
+                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+                useThemeStore.getState().reducedMotion ? 'bg-primary' : 'bg-muted'
+              )}
+            >
+              <span
+                className={cn(
+                  'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
+                  useThemeStore.getState().reducedMotion ? 'translate-x-5' : 'translate-x-0'
+                )}
+              />
+            </button>
+          </div>
+        </div>
+
+        {/* Section 4: Background Customization */}
+        <div className="px-4 mt-8 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               {locale === 'tr' ? 'Ana Ekran Arka Planı' : 'Homescreen Background'}
@@ -410,33 +526,6 @@ export default function AppearancePage() {
               )}
             </motion.div>
           )}
-        </div>
-
-        {/* Section 2: Theme Preference */}
-        <div className="px-4 mt-8 space-y-3">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            {locale === 'tr' ? 'Tema Tercihi' : 'Theme Mode'}
-          </h2>
-          {themes.map((t) => (
-            <ThemeOption
-              key={t.value}
-              value={t.value}
-              label={locale === 'tr' ? t.labelTr : t.labelEn}
-              description={locale === 'tr' ? t.descTr : t.descEn}
-              isSelected={theme === t.value}
-              onSelect={() => {
-                setTheme(t.value);
-                if (user) {
-                  fetch('/api/user/profile', {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: user.id, email: user.email, theme: t.value }),
-                  }).catch(() => {});
-                }
-              }}
-              preview={t.preview}
-            />
-          ))}
         </div>
       </div>
       <Dock />

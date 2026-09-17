@@ -1,3 +1,8 @@
+export type ThemePreference = 'light' | 'dark' | 'system';
+export type LocalePreference = 'tr' | 'en';
+export type BackgroundType = 'default' | 'color' | 'image';
+export type AccentColor = 'blue' | 'green' | 'purple' | 'orange';
+
 export interface UserProfile {
   id: string;
   supabaseId: string;
@@ -7,7 +12,9 @@ export interface UserProfile {
   avatarUrl: string | null;
   bio: string | null;
   locale: 'tr' | 'en';
-  theme: 'light' | 'dark' | 'system';
+  theme: ThemePreference;
+  accentColor?: AccentColor;
+  reducedMotion?: boolean;
   backgroundType?: 'default' | 'color' | 'image';
   backgroundValue?: string | null;
   createdAt: string;
@@ -28,7 +35,3 @@ export interface DeviceInfo {
   device?: string;
   userAgent?: string;
 }
-
-export type ThemePreference = 'light' | 'dark' | 'system';
-export type LocalePreference = 'tr' | 'en';
-export type BackgroundType = 'default' | 'color' | 'image';
