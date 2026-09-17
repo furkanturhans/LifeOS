@@ -9,26 +9,22 @@ import {
   UserCheck,
   Clock,
   BookOpen,
+  ArrowRight,
 } from 'lucide-react';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { useEducationStore } from '@/stores/useEducationStore';
 import { cn } from '@/lib/utils';
 
 export function EducationHeader() {
-  const { role, setRole, verifyInstructorDemo, revertToLearnerDemo } = useEducationStore();
+  const { role, setActiveSection, fetchInstructorStatus } = useEducationStore();
 
-  const roleConfigs: Record<
-    string,
-    { label: string; status: 'active' | 'pending' | 'verified' | 'draft'; icon: string }
-  > = {
-    learner: { label: 'Öğrenci', status: 'active', icon: '🎒' },
-    guardian: { label: 'Veli / İzin Sahibi', status: 'verified', icon: '🛡️' },
-    instructor_applicant: { label: 'Eğitmen Adayı', status: 'pending', icon: '⏳' },
-    instructor_verified: { label: 'Doğrulanmış Eğitmen', status: 'verified', icon: '🎓' },
-    education_moderator: { label: 'Eğitim Moderatörü', status: 'verified', icon: '⚖️' },
+  const isInstructor = role === 'instructor_verified';
+  const isApplicant = role === 'instructor_applicant';
+
+  const handleInstructorPanelClick = () => {
+    fetchInstructorStatus();
+    setActiveSection('instructor_hub');
   };
-
-  const currentRoleConfig = roleConfigs[role] || roleConfigs.learner;
 
   return (
     <header className="sticky top-0 z-20 border-b border-border/80 bg-card/70 backdrop-blur-md">
@@ -48,40 +44,43 @@ export function EducationHeader() {
               <h1 className="text-base font-bold tracking-tight text-foreground truncate">
                 Dersler & Akademi
               </h1>
-              <StatusBadge
-                status={currentRoleConfig.status}
-                label={currentRoleConfig.label}
-                size="sm"
-              />
+              <span className="hidden xs:inline-block">
+                <StatusBadge
+                  status="active"
+                  label="Öğrenci Merkezi"
+                  size="sm"
+                />
+              </span>
             </div>
             <p className="text-xs text-muted-foreground truncate">
-              Kurslar, canlı dersler ve sertifika merkezi
+              Kurslar, canlı dersler, sınavlar ve akademi stüdyosu
             </p>
           </div>
         </div>
 
-        {/* Right: Demo Role Toggle Pill for easy testing */}
-        <div className="flex items-center gap-1.5 shrink-0">
+        {/* Right: Clean Instructor Panel Entry Point (No manual role switchers) */}
+        <div className="flex items-center gap-2 shrink-0">
           <button
-            onClick={() => {
-              if (role === 'instructor_verified') {
-                revertToLearnerDemo();
-              } else {
-                verifyInstructorDemo();
-              }
-            }}
+            onClick={handleInstructorPanelClick}
             className={cn(
-              'px-2.5 py-1 rounded-xl text-[11px] font-bold border transition-all shadow-2xs flex items-center gap-1',
-              role === 'instructor_verified'
+              'px-3 py-1.5 rounded-xl text-xs font-bold border transition-all shadow-2xs flex items-center gap-1.5',
+              isInstructor
+                ? 'bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400 hover:bg-amber-500/20'
+                : isApplicant
                 ? 'bg-blue-500/10 border-blue-500/30 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20'
-                : 'bg-card border-border hover:bg-muted text-muted-foreground'
+                : 'bg-card border-border hover:bg-muted text-foreground'
             )}
-            title="Eğitmen / Öğrenci Rolü Değiştir (Geliştirici Modu)"
+            title="Eğitmen Paneli & Stüdyo Girişi"
           >
-            <UserCheck className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">
-              {role === 'instructor_verified' ? 'Eğitmen Görünümü' : 'Öğrenci Görünümü'}
+            <GraduationCap className={cn('h-4 w-4', isInstructor ? 'text-amber-500' : 'text-primary')} />
+            <span>
+              {isInstructor
+                ? 'Eğitmen Paneli'
+                : isApplicant
+                ? 'Başvuru İnceleniyor'
+                : 'Eğitmen Ol'}
             </span>
+            <ArrowRight className="h-3 w-3 opacity-60" />
           </button>
         </div>
       </div>

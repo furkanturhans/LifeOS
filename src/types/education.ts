@@ -198,44 +198,79 @@ export interface LiveClassHealthResult {
 }
 
 // -----------------------------------------------------------------------------
-// Future Infrastructure Models (Exams, Groups, Guardian, Certs)
+// Timed Exam Infrastructure Models
 // -----------------------------------------------------------------------------
 
-export interface QuestionItem {
+export type ExamStatus = 'draft' | 'scheduled' | 'open' | 'ended' | 'evaluated';
+
+export interface ExamOption {
   id: string;
-  questionText: string;
-  options: string[];
-  correctOptionIndex: number;
-  explanation?: string;
-  points: number;
+  text: string;
 }
 
-export interface QuestionBank {
+export interface ExamQuestion {
   id: string;
-  title: string;
-  category: string;
-  questions: QuestionItem[];
+  examId: string;
+  order: number;
+  questionText: string;
+  options: ExamOption[];
+  correctOptionIndex: number; // Server-only, stripped for students during active exam
+  points: number;
+  explanation?: string;
 }
 
 export interface Exam {
   id: string;
-  courseId?: string;
+  courseId: string;
+  courseTitle: string;
+  instructorId: string;
+  instructorName: string;
   title: string;
   description: string;
-  durationMinutes: number;
-  passScorePercent: number;
-  questionBankId: string;
+  scheduledAt: string; // ISO timestamp for exam start
+  durationMinutes: number; // Configurable (e.g. 40 min)
+  passScorePercent: number; // Configurable (e.g. 70%)
   questionsCount: number;
+  totalPoints: number;
+  status: ExamStatus;
+  createdAt: string;
+  updatedAt: string;
+  questions?: ExamQuestion[];
 }
 
 export interface ExamAttempt {
   id: string;
   examId: string;
+  examTitle: string;
+  courseId: string;
   learnerId: string;
-  scorePercent: number;
-  passed: boolean;
-  attemptedAt: string;
+  learnerName: string;
+  startedAt: string; // Server ISO timestamp
+  expiresAt: string; // Server ISO timestamp (startedAt + durationMinutes)
+  submittedAt?: string;
+  status: 'in_progress' | 'submitted' | 'expired' | 'graded';
+  answers: Record<string, number>; // questionId -> selectedOptionIndex
+  scorePercent?: number;
+  totalScore?: number;
+  isPassed?: boolean;
   certificateEarned?: boolean;
+  serverRemainingSeconds?: number;
+}
+
+export interface ExamAuditLog {
+  id: string;
+  examId: string;
+  attemptId: string;
+  learnerId: string;
+  action: 'started' | 'answer_saved' | 'auto_submitted' | 'manual_submitted' | 'graded';
+  timestamp: string;
+  metadata?: Record<string, unknown>;
+}
+
+export interface ExamSubmissionResult {
+  success: boolean;
+  message: string;
+  attempt: ExamAttempt;
 }
 
 export interface ClassroomAnnouncement {

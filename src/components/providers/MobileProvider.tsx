@@ -6,6 +6,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { useThemeStore } from '@/stores/useThemeStore';
+import { UniversalCheckoutModal } from '@/components/payment/UniversalCheckoutModal';
 
 function applyPlatformClasses() {
   const root = document.documentElement;
@@ -62,5 +63,10 @@ export function MobileProvider({ children }: { children: React.ReactNode }) {
     }).catch(() => undefined);
   }, [resolvedTheme]);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <UniversalCheckoutModal />
+    </>
+  );
 }

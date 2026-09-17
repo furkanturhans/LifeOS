@@ -25,7 +25,7 @@ export function HomeActiveModules() {
           Aktif Yaşam Modülleri
         </h2>
         <span className="text-xs font-semibold text-muted-foreground">
-          4 Modül
+          5 Modül
         </span>
       </div>
 
@@ -121,6 +121,30 @@ export function HomeActiveModules() {
 
             <div className="mt-4 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-primary">
               <span>Oyun Merkezine Gir</span>
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Card>
+        </Link>
+
+        {/* Smart Home Card */}
+        <Link href="/smarthome" className="group md:col-span-2">
+          <Card hover className="h-full border-border bg-card p-5 transition-all shadow-xs hover:shadow-md">
+            <div className="flex items-start justify-between gap-3 mb-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-500/10 text-sky-500 border border-sky-500/20 group-hover:scale-105 transition-transform">
+                <span className="text-xl">🏠</span>
+              </div>
+              <StatusBadge status="active" label="Aktif" size="sm" />
+            </div>
+
+            <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
+              Akıllı Ev & IoT Merkezi
+            </h3>
+            <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+              Home Assistant ve Matter destekli aydınlatma, iklimlendirme, güvenlik ve enerji izleme.
+            </p>
+
+            <div className="mt-4 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-primary">
+              <span>Ev Kontrol Merkezini Aç</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </Card>

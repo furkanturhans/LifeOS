@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server';
-import type { InstructorApplication } from '@/types/education';
-
-// In-memory application registry for development (can be tied to Prisma)
-const applicationsRegistry: InstructorApplication[] = [];
+import { InstructorRegistry } from '@/lib/education/InstructorRegistry';
 
 export async function POST(request: Request) {
   try {
@@ -15,23 +12,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const application: InstructorApplication = {
-      id: `app_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+    const result = InstructorRegistry.submitApplication({
       applicantLifeosId: body.applicantLifeosId || 'user_local',
-      fullName: body.fullName.trim(),
-      expertiseArea: body.expertiseArea.trim(),
+      fullName: body.fullName,
+      expertiseArea: body.expertiseArea,
       educationLevel: body.educationLevel || 'bachelor',
-      bio: body.bio.trim(),
+      bio: body.bio,
       teachingCategories: Array.isArray(body.teachingCategories) ? body.teachingCategories : ['Genel'],
-      submittedAt: new Date().toISOString(),
-      status: 'pending',
-    };
-
-    applicationsRegistry.push(application);
+    });
 
     return NextResponse.json({
       success: true,
-      application,
+      application: result.application,
       message: 'Eğitmenlik başvurunuz başarıyla alındı ve incelemeye iletildi.',
     });
   } catch (error) {
@@ -44,9 +36,10 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
+  const status = InstructorRegistry.getStatus('user_local');
   return NextResponse.json({
     status: 'ok',
-    totalApplications: applicationsRegistry.length,
+    currentInstructorStatus: status,
     service: 'LifeOS Education Instructor Registry',
   });
 }

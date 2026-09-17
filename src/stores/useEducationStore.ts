@@ -12,6 +12,9 @@ import type {
   CreditLedgerEntry,
   BigBlueButtonJoinResult,
   LiveClassHealthResult,
+  Exam,
+  ExamAttempt,
+  ClassroomGroup,
 } from '@/types/education';
 
 interface EducationStoreState {
@@ -23,14 +26,32 @@ interface EducationStoreState {
   activeSection: EducationSectionKey | null;
   setActiveSection: (section: EducationSectionKey | null) => void;
 
-  // Instructor Application & Profile
+  // Instructor Application & Profile (Server Authoritative)
   instructorApplication: InstructorApplication | null;
   instructorProfile: InstructorProfile | null;
+  activeInstructorTab: 'courses' | 'live_sessions' | 'exams' | 'students' | 'classrooms' | 'profile' | 'earnings';
+  setActiveInstructorTab: (
+    tab: 'courses' | 'live_sessions' | 'exams' | 'students' | 'classrooms' | 'profile' | 'earnings'
+  ) => void;
+  fetchInstructorStatus: () => Promise<void>;
   submitInstructorApplication: (
     data: Omit<InstructorApplication, 'id' | 'submittedAt' | 'status'>
   ) => Promise<boolean>;
   verifyInstructorDemo: () => void;
   revertToLearnerDemo: () => void;
+
+  // Instructor Students & Classrooms
+  instructorStudents: Array<{
+    id: string;
+    name: string;
+    enrolledCoursesCount: number;
+    liveSessionsAttended: number;
+    lastActiveAt: string;
+    status: string;
+  }>;
+  fetchInstructorStudents: () => Promise<void>;
+  instructorClassrooms: ClassroomGroup[];
+  fetchInstructorClassrooms: () => Promise<void>;
 
   // Instructor Course Drafts
   courseDrafts: CourseDraft[];
@@ -69,6 +90,41 @@ interface EducationStoreState {
   joinLiveSession: (
     sessionId: string
   ) => Promise<BigBlueButtonJoinResult>;
+  // Timed Exams Infrastructure
+  exams: Exam[];
+  activeExam: Exam | null;
+  activeAttempt: ExamAttempt | null;
+  isTakingExam: boolean;
+  fetchExams: () => Promise<void>;
+  createExam: (
+    data: {
+      courseId: string;
+      courseTitle: string;
+      title: string;
+      description: string;
+      scheduledAt: string;
+      durationMinutes: number;
+      passScorePercent: number;
+      questions: Array<{
+        questionText: string;
+        options: Array<{ id: string; text: string }>;
+        correctOptionIndex: number;
+        points: number;
+        explanation?: string;
+      }>;
+    }
+  ) => Promise<{ success: boolean; message?: string; exam?: Exam }>;
+  startExamAttempt: (
+    examId: string
+  ) => Promise<{ success: boolean; attempt?: ExamAttempt; exam?: Exam; error?: string }>;
+  saveExamAnswer: (
+    questionId: string,
+    selectedOptionIndex: number
+  ) => Promise<{ success: boolean; error?: string }>;
+  submitExamAttempt: (
+    isAutoSubmit?: boolean
+  ) => Promise<{ success: boolean; message?: string; attempt?: ExamAttempt }>;
+  closeExamTaker: () => void;
 }
 
 const INITIAL_LIVE_SESSIONS: LiveSession[] = [
@@ -135,51 +191,83 @@ export const useEducationStore = create<EducationStoreState>()(
 
       instructorApplication: null,
       instructorProfile: null,
+      activeInstructorTab: 'courses',
+      setActiveInstructorTab: (tab) => set({ activeInstructorTab: tab }),
 
-      submitInstructorApplication: async (data) => {
-        const application: InstructorApplication = {
-          ...data,
-          id: `app_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-          submittedAt: new Date().toISOString(),
-          status: 'pending',
-        };
-
-        set({
-          instructorApplication: application,
-          role: 'instructor_applicant',
-        });
-
+      fetchInstructorStatus: async () => {
         try {
-          fetch('/api/education/instructor/apply', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(application),
-          }).catch(() => {});
+          const res = await fetch('/api/education/instructor/status?userId=user_local');
+          const data = await res.json();
+          if (data.success) {
+            set({
+              role: data.role,
+              instructorApplication: data.application,
+              instructorProfile: data.profile,
+            });
+          }
         } catch {}
-
-        return true;
       },
 
-      verifyInstructorDemo: () => {
-        const app = get().instructorApplication;
-        const profile: InstructorProfile = {
-          id: 'inst_verified_1',
-          lifeosId: app?.applicantLifeosId || 'local_user',
-          displayName: app?.fullName || 'Doğrulanmış Eğitmen',
-          avatarEmoji: '👨‍🏫',
-          expertiseArea: app?.expertiseArea || 'Yazılım ve Yapay Zeka',
-          educationLevel: app?.educationLevel || 'master',
-          bio: app?.bio || 'LifeOS platformunda aktif eğitmen.',
-          teachingCategories: app?.teachingCategories || ['Yazılım', 'Bilim'],
-          isVerified: true,
-          verifiedAt: new Date().toISOString(),
-          revenueSharePercent: 70,
-        };
+      instructorStudents: [],
+      fetchInstructorStudents: async () => {
+        try {
+          const res = await fetch('/api/education/instructor/students?instructorId=user_local');
+          const data = await res.json();
+          if (data.success && Array.isArray(data.students)) {
+            set({ instructorStudents: data.students });
+          }
+        } catch {}
+      },
 
-        set({
-          role: 'instructor_verified',
-          instructorProfile: profile,
-        });
+      instructorClassrooms: [],
+      fetchInstructorClassrooms: async () => {
+        try {
+          const res = await fetch('/api/education/instructor/classrooms?instructorId=user_local');
+          const data = await res.json();
+          if (data.success && Array.isArray(data.classrooms)) {
+            set({ instructorClassrooms: data.classrooms });
+          }
+        } catch {}
+      },
+
+      submitInstructorApplication: async (data) => {
+        try {
+          const res = await fetch('/api/education/instructor/apply', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              ...data,
+              applicantLifeosId: 'user_local',
+            }),
+          });
+          const resData = await res.json();
+          if (resData.success && resData.application) {
+            set({
+              instructorApplication: resData.application,
+              role: 'instructor_applicant',
+            });
+            return true;
+          }
+        } catch {}
+
+        return false;
+      },
+
+      verifyInstructorDemo: async () => {
+        try {
+          const res = await fetch('/api/education/instructor/status', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'verify', userId: 'user_local' }),
+          });
+          const data = await res.json();
+          if (data.success) {
+            set({
+              role: 'instructor_verified',
+              instructorProfile: data.profile,
+            });
+          }
+        } catch {}
       },
 
       revertToLearnerDemo: () => {
@@ -636,6 +724,167 @@ export const useEducationStore = create<EducationStoreState>()(
             message: 'Canlı ders sunucusuna bağlanılamadı.',
           };
         }
+      },
+
+      // -----------------------------------------------------------------------
+      // Timed Exams State & Actions
+      // -----------------------------------------------------------------------
+      exams: [],
+      activeExam: null,
+      activeAttempt: null,
+      isTakingExam: false,
+
+      fetchExams: async () => {
+        const state = get();
+        const isInst = state.role === 'instructor_verified';
+        const instId = state.instructorProfile?.id;
+        const url = `/api/education/exams?isInstructor=${isInst}${instId ? `&instructorId=${instId}` : ''}`;
+
+        try {
+          const res = await fetch(url);
+          const data = await res.json();
+          if (data.success && Array.isArray(data.exams)) {
+            set({ exams: data.exams });
+          }
+        } catch {}
+      },
+
+      createExam: async (data) => {
+        const state = get();
+        try {
+          const res = await fetch('/api/education/exams', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              ...data,
+              role: state.role,
+              instructorId: state.instructorProfile?.id || 'inst_verified_1',
+              instructorName: state.instructorProfile?.displayName || 'Doğrulanmış Eğitmen',
+            }),
+          });
+          const resData = await res.json();
+          if (resData.success && resData.exam) {
+            set((s) => ({ exams: [resData.exam, ...s.exams] }));
+            return { success: true, message: 'Sınav başarıyla oluşturuldu.', exam: resData.exam };
+          }
+          return { success: false, message: resData.error || 'Sınav oluşturulamadı.' };
+        } catch {
+          return { success: false, message: 'Sunucuya bağlanılamadı.' };
+        }
+      },
+
+      startExamAttempt: async (examId: string) => {
+        const state = get();
+        const learnerId = 'user_local';
+        const learnerName = state.role === 'instructor_verified'
+          ? state.instructorProfile?.displayName || 'Eğitmen'
+          : 'Furkan Turhan';
+
+        try {
+          const res = await fetch('/api/education/exams/attempt/start', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              examId,
+              learnerId,
+              learnerName,
+            }),
+          });
+          const data = await res.json();
+          if (data.success && data.attempt && data.exam) {
+            set({
+              activeAttempt: data.attempt,
+              activeExam: data.exam,
+              isTakingExam: true,
+            });
+            return {
+              success: true,
+              attempt: data.attempt,
+              exam: data.exam,
+            };
+          }
+          return { success: false, error: data.error || 'Sınav başlatılamadı.' };
+        } catch {
+          return { success: false, error: 'Sunucu bağlantı hatası.' };
+        }
+      },
+
+      saveExamAnswer: async (questionId: string, selectedOptionIndex: number) => {
+        const state = get();
+        const attempt = state.activeAttempt;
+        if (!attempt) return { success: false, error: 'Aktif sınav bulunamadı.' };
+
+        // Optimistically update local attempt answers
+        const updatedAnswers = {
+          ...attempt.answers,
+          [questionId]: selectedOptionIndex,
+        };
+        set({
+          activeAttempt: {
+            ...attempt,
+            answers: updatedAnswers,
+          },
+        });
+
+        try {
+          const res = await fetch('/api/education/exams/attempt/answer', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              attemptId: attempt.id,
+              learnerId: attempt.learnerId,
+              questionId,
+              selectedOptionIndex,
+            }),
+          });
+          const data = await res.json();
+          if (!data.success) {
+            return { success: false, error: data.error || 'Cevap kaydedilemedi.' };
+          }
+          return { success: true };
+        } catch {
+          return { success: false, error: 'Ağ hatası.' };
+        }
+      },
+
+      submitExamAttempt: async (isAutoSubmit?: boolean) => {
+        const state = get();
+        const attempt = state.activeAttempt;
+        if (!attempt) return { success: false, message: 'Aktif sınav bulunamadı.' };
+
+        try {
+          const res = await fetch('/api/education/exams/attempt/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              attemptId: attempt.id,
+              learnerId: attempt.learnerId,
+              isAutoSubmit: Boolean(isAutoSubmit),
+            }),
+          });
+          const data = await res.json();
+          if (data.success && data.attempt) {
+            set({
+              activeAttempt: data.attempt,
+            });
+            return {
+              success: true,
+              message: data.message || 'Sınavınız öğretmeninize teslim edildi.',
+              attempt: data.attempt,
+            };
+          }
+          return { success: false, message: data.error || 'Sınav teslim edilemedi.' };
+        } catch {
+          return { success: false, message: 'Bağlantı hatası.' };
+        }
+      },
+
+      closeExamTaker: () => {
+        set({
+          isTakingExam: false,
+          activeExam: null,
+          activeAttempt: null,
+        });
       },
     }),
     {

@@ -10,11 +10,17 @@ import { MyCoursesView } from './MyCoursesView';
 import { LiveSessionsView } from './LiveSessionsView';
 import { MyExamsView } from './MyExamsView';
 import { InstructorHubView } from './InstructorHubView';
+import { ExamTakerScreen } from './ExamTakerScreen';
 import { Dock } from '@/components/os/Dock';
 import { useEducationStore } from '@/stores/useEducationStore';
 
 export function EducationScreen() {
-  const { activeSection, setActiveSection } = useEducationStore();
+  const { activeSection, setActiveSection, isTakingExam } = useEducationStore();
+
+  // Active Exam Taker takes full screen priority
+  if (isTakingExam) {
+    return <ExamTakerScreen />;
+  }
 
   // Active View Routing
   if (activeSection === 'explore') {

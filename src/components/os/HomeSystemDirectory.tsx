@@ -58,16 +58,9 @@ const SYSTEM_TOOLS: SystemTool[] = [
     icon: Stethoscope,
   },
   {
-    id: 'energy',
-    name: 'Enerji & Tüketim',
-    description: 'Ev tüketimi izleme ve tasarruf asistanı',
-    category: 'health_home',
-    icon: Zap,
-  },
-  {
     id: 'smart-home',
-    name: 'Akıllı Ev',
-    description: 'Cihaz kontrolü ve otomasyon senaryoları',
+    name: 'Akıllı Ev & Enerji',
+    description: 'İnverter, solar sistem, ısı pompası, kamera, kW güç ve ev aletleri',
     category: 'health_home',
     icon: Home,
   },

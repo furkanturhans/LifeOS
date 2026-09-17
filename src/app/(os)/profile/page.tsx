@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
@@ -21,6 +22,7 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { useThemeStore } from '@/stores/useThemeStore';
 import { createClient } from '@/lib/supabase/client';
 import { cn, formatLifeOSId, clearSessionCookie } from '@/lib/utils';
+import { AdminKeyUnlockModal } from '@/components/admin/AdminKeyUnlockModal';
 
 interface ProfileRowProps {
   icon: React.ReactNode;
@@ -80,6 +82,16 @@ export default function ProfilePage() {
   const router = useRouter();
   const { user, logout } = useAuthStore();
   const { locale, resetBackground } = useThemeStore();
+  const [isAdminUnlockOpen, setIsAdminUnlockOpen] = useState(false);
+
+  // Strictly check if current logged in user is the master owner
+  const isMasterOwner =
+    user?.lifeosId === 'user_local' ||
+    user?.id === 'user_local' ||
+    user?.email === 'admin@lifeos.internal' ||
+    user?.email?.toLowerCase().trim() === 'furkan@lifeos.internal' ||
+    user?.lifeosId?.toLowerCase().includes('furkan') ||
+    user?.displayName?.toLowerCase().includes('furkan');
 
   async function handleLogout() {
     try {
@@ -155,6 +167,45 @@ export default function ProfilePage() {
           </div>
         </motion.div>
 
+        {/* SADECE VE SADECE SİZE ÖZEL YÖNETİCİ KASASI (DİĞER HİÇBİR KULLANICI GÖREMEZ) */}
+        {isMasterOwner && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: 0.08 }}
+            className="mx-4 mt-4 overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-500/15 via-purple-500/10 to-transparent p-4.5 shadow-sm"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/20 text-amber-500 border border-amber-500/30 text-xl font-bold shadow-xs">
+                  🛡️
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-sm font-bold text-foreground">
+                      Yönetim Paneli
+                    </h3>
+                    <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 bg-amber-500/15 px-2 py-0.2 rounded-full border border-amber-500/25">
+                      22-Key 2FA
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    Başvurular, denetim kayıtları ve sistem yetkileri
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setIsAdminUnlockOpen(true)}
+                className="px-3.5 py-2 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-xs font-bold shadow-md shadow-amber-500/20 transition-all active:scale-95 flex items-center gap-1.5"
+              >
+                <span>Kasayı Aç</span>
+                <span>→</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+
         {/* Account Section */}
         <ProfileSection title={t.account}>
           <ProfileRow
@@ -228,7 +279,18 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      {/* Dock */}
       <Dock />
+
+      {/* 22-Key Admin Key Unlock Modal */}
+      <AdminKeyUnlockModal
+        isOpen={isAdminUnlockOpen}
+        onClose={() => setIsAdminUnlockOpen(false)}
+        onSuccess={() => {
+          setIsAdminUnlockOpen(false);
+          router.push('/admin');
+        }}
+      />
     </div>
   );
 }

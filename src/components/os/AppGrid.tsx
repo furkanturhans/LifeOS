@@ -213,6 +213,10 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
         router.push('/services/craftsman');
         return;
       }
+      if (moduleId === 'smart-home' || moduleId === 'smarthome') {
+        router.push('/smarthome');
+        return;
+      }
       if (
         moduleId === 'family' ||
         moduleId === 'finance' ||
