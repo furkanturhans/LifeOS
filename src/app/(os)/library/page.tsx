@@ -32,25 +32,29 @@ const CATEGORIES: ModuleCategory[] = [
 
 export default function LibraryPage() {
   const { locale } = useThemeStore();
-  const { addModuleToHomescreen, isModuleOnHomescreen } = useHomescreenStore();
+  const {
+    addModuleToHomescreen,
+    removeModuleFromHomescreen,
+    removeModuleFromDock,
+    isModuleOnHomescreen,
+    isModuleInDock,
+  } = useHomescreenStore();
   const [activeCategory, setActiveCategory] = useState<ModuleCategory | 'all'>('all');
-  const [addedModules, setAddedModules] = useState<Set<string>>(new Set());
 
   const filtered =
     activeCategory === 'all'
       ? MODULE_REGISTRY
       : MODULE_REGISTRY.filter((m) => m.category === activeCategory);
 
-  function handleAdd(moduleId: string) {
-    addModuleToHomescreen(moduleId);
-    setAddedModules((prev) => new Set([...prev, moduleId]));
-    setTimeout(() => {
-      setAddedModules((prev) => {
-        const next = new Set(prev);
-        next.delete(moduleId);
-        return next;
-      });
-    }, 2000);
+  function handleToggle(moduleId: string, isOnHomescreen: boolean) {
+    if (isOnHomescreen) {
+      removeModuleFromHomescreen(moduleId);
+      if (isModuleInDock(moduleId)) {
+        removeModuleFromDock(moduleId);
+      }
+    } else {
+      addModuleToHomescreen(moduleId);
+    }
   }
 
   const title = locale === 'tr' ? 'LifeOS Kütüphanesi' : 'LifeOS Library';
@@ -110,8 +114,7 @@ export default function LibraryPage() {
           {filtered.map((module, index) => {
             const name = locale === 'tr' ? module.name : module.nameEn;
             const description = locale === 'tr' ? module.description : module.descriptionEn;
-            const onHomescreen = isModuleOnHomescreen(module.id);
-            const justAdded = addedModules.has(module.id);
+            const onHomescreen = isModuleOnHomescreen(module.id) || isModuleInDock(module.id);
 
             return (
               <motion.div
@@ -144,30 +147,34 @@ export default function LibraryPage() {
                   <p className="mt-0.5 text-xs text-muted-foreground truncate">{description}</p>
                 </div>
 
-                {/* Add/Added Button */}
+                {/* Add/Remove Button */}
                 <motion.button
-                  onClick={() => !onHomescreen && handleAdd(module.id)}
-                  whileTap={{ scale: 0.9 }}
+                  onClick={() => handleToggle(module.id, onHomescreen)}
+                  whileTap={{ scale: 0.95 }}
                   className={cn(
-                    'flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center transition-all duration-300',
-                    onHomescreen || justAdded
-                      ? 'bg-primary/15 text-primary'
-                      : 'bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground'
-                  )}
-                  title={
+                    'group flex-shrink-0 h-8 px-3 rounded-full flex items-center justify-center gap-1 text-xs font-semibold transition-all duration-200 border',
                     onHomescreen
-                      ? locale === 'tr'
-                        ? 'Ana ekranda'
-                        : 'On home screen'
-                      : locale === 'tr'
-                      ? 'Ana ekrana ekle'
-                      : 'Add to home screen'
-                  }
+                      ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20'
+                      : 'bg-muted text-muted-foreground border-transparent hover:bg-primary hover:text-primary-foreground'
+                  )}
                 >
-                  {onHomescreen || justAdded ? (
-                    <Check className="h-4 w-4" />
+                  {onHomescreen ? (
+                    <>
+                      {/* Normal state */}
+                      <span className="flex items-center gap-1 group-hover:hidden">
+                        <Check className="h-3.5 w-3.5" />
+                        <span>{locale === 'tr' ? 'Ana Ekranda' : 'On Home Screen'}</span>
+                      </span>
+                      {/* Hover state */}
+                      <span className="hidden group-hover:flex items-center gap-1 text-destructive">
+                        <span>{locale === 'tr' ? 'Ana Ekrandan Kaldır' : 'Remove from Home'}</span>
+                      </span>
+                    </>
                   ) : (
-                    <Plus className="h-4 w-4" />
+                    <>
+                      <Plus className="h-3.5 w-3.5" />
+                      <span>{locale === 'tr' ? 'Ana Ekrana Ekle' : 'Add to Home'}</span>
+                    </>
                   )}
                 </motion.button>
               </motion.div>

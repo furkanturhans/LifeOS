@@ -13,7 +13,7 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { useThemeStore } from '@/stores/useThemeStore';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { cleanLifeOSId } from '@/lib/utils';
+import { cleanLifeOSId, setSessionCookie, generateLocalUserId } from '@/lib/utils';
 
 const loginSchema = z.object({
   email: z.string().email('Geçerli bir e-posta adresi girin'),
@@ -86,9 +86,10 @@ export function LoginForm() {
       const finalUsername = userProfile?.lifeosId || cleanLifeOSId(supabaseUser?.user_metadata?.lifeos_id || data.email.split('@')[0]);
       const finalDisplayName = userProfile?.displayName || supabaseUser?.user_metadata?.display_name || data.email.split('@')[0];
 
+      const localId = generateLocalUserId();
       const fullUser = {
-        id: userProfile?.id || supabaseUser?.id || `local_user_${Date.now()}`,
-        supabaseId: supabaseUser?.id || userProfile?.supabaseId || `local_user_${Date.now()}`,
+        id: userProfile?.id || supabaseUser?.id || localId,
+        supabaseId: supabaseUser?.id || userProfile?.supabaseId || localId,
         lifeosId: finalUsername,
         email: data.email,
         displayName: finalDisplayName,
@@ -103,6 +104,7 @@ export function LoginForm() {
       };
 
       setUser(fullUser);
+      setSessionCookie(fullUser.supabaseId);
 
       // Sync user theme & background
       if (fullUser.backgroundType && fullUser.backgroundType !== 'default') {
@@ -120,9 +122,10 @@ export function LoginForm() {
     } catch (err: any) {
       console.error('Login process error:', err);
       const username = cleanLifeOSId(data.email.split('@')[0]);
+      const localSupabaseId = generateLocalUserId();
       setUser({
-        id: 'local_user_' + Date.now(),
-        supabaseId: 'local_user_' + Date.now(),
+        id: localSupabaseId,
+        supabaseId: localSupabaseId,
         lifeosId: username,
         email: data.email,
         displayName: username.charAt(0).toUpperCase() + username.slice(1),
@@ -135,6 +138,7 @@ export function LoginForm() {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       });
+      setSessionCookie(localSupabaseId);
       router.push('/home');
       router.refresh();
     }

@@ -12,7 +12,7 @@ import { createClient } from '@/lib/supabase/client';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { generateLifeOSId, cleanLifeOSId, formatLifeOSId } from '@/lib/utils';
+import { generateLifeOSId, cleanLifeOSId, formatLifeOSId, setSessionCookie } from '@/lib/utils';
 
 const registerSchema = z
   .object({
@@ -127,9 +127,10 @@ export function RegisterForm() {
       }
 
       // 3. Set local auth session
+      const finalSupabaseUserId = supabaseUserId;
       setUser({
-        id: dbUser?.id || supabaseUserId,
-        supabaseId: supabaseUserId,
+        id: dbUser?.id || finalSupabaseUserId,
+        supabaseId: finalSupabaseUserId,
         lifeosId: cleanedUsername,
         email: data.email,
         displayName: data.displayName.trim(),
@@ -142,6 +143,7 @@ export function RegisterForm() {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       });
+      setSessionCookie(finalSupabaseUserId);
 
       router.push('/home');
       router.refresh();

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { MobileProvider } from '@/components/providers/MobileProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -39,7 +40,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="tr" className={`${inter.variable} h-full`} suppressHydrationWarning>
       <body className="h-full font-sans antialiased no-select overflow-hidden">
         <ThemeProvider>
-          {children}
+          <MobileProvider>
+            {children}
+          </MobileProvider>
         </ThemeProvider>
       </body>
     </html>

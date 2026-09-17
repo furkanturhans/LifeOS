@@ -36,6 +36,8 @@ interface HomescreenState {
   removeModuleFromDock: (moduleId: string) => void;
   isModuleOnHomescreen: (moduleId: string) => boolean;
   isModuleInDock: (moduleId: string) => boolean;
+  fetchLayout: () => Promise<void>;
+  syncLayout: () => Promise<void>;
 }
 
 export const useHomescreenStore = create<HomescreenState>()((set, get) => ({
@@ -48,6 +50,36 @@ export const useHomescreenStore = create<HomescreenState>()((set, get) => ({
   setEditMode: (isEditMode) => set({ isEditMode }),
   setLoading: (isLoading) => set({ isLoading }),
   setActivePage: (activePageIndex) => set({ activePageIndex }),
+
+  fetchLayout: async () => {
+    set({ isLoading: true });
+    try {
+      const res = await fetch('/api/user/homescreen');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.layout) {
+          set({ layout: data.layout });
+        }
+      }
+    } catch (err) {
+      console.warn('Could not fetch homescreen layout:', err);
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
+  syncLayout: async () => {
+    const { layout } = get();
+    try {
+      await fetch('/api/user/homescreen', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ layout })
+      });
+    } catch (err) {
+      console.warn('Could not sync homescreen layout:', err);
+    }
+  },
 
   addModuleToHomescreen: (moduleId) => {
     const { layout } = get();
@@ -74,6 +106,8 @@ export const useHomescreenStore = create<HomescreenState>()((set, get) => ({
         pages: [updatedPage, ...layout.pages.slice(1)],
       },
     });
+
+    get().syncLayout();
   },
 
   removeModuleFromHomescreen: (moduleId) => {
@@ -85,6 +119,8 @@ export const useHomescreenStore = create<HomescreenState>()((set, get) => ({
         .map((item, index) => ({ ...item, position: index })),
     }));
     set({ layout: { ...layout, pages: updatedPages } });
+
+    get().syncLayout();
   },
 
   reorderModules: (pageIndex, items) => {
@@ -93,6 +129,8 @@ export const useHomescreenStore = create<HomescreenState>()((set, get) => ({
       i === pageIndex ? { ...page, items } : page
     );
     set({ layout: { ...layout, pages: updatedPages } });
+
+    get().syncLayout();
   },
 
   moveModuleToDock: (moduleId) => {
@@ -106,6 +144,8 @@ export const useHomescreenStore = create<HomescreenState>()((set, get) => ({
     };
 
     set({ layout: { ...layout, dockItems: [...layout.dockItems, newDockItem] } });
+
+    get().syncLayout();
   },
 
   removeModuleFromDock: (moduleId) => {
@@ -114,6 +154,8 @@ export const useHomescreenStore = create<HomescreenState>()((set, get) => ({
       .filter((item) => item.moduleId !== moduleId)
       .map((item, index) => ({ ...item, position: index }));
     set({ layout: { ...layout, dockItems: updatedDock } });
+
+    get().syncLayout();
   },
 
   isModuleOnHomescreen: (moduleId) => {

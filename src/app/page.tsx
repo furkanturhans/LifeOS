@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 
 export default async function RootPage() {
@@ -7,7 +8,13 @@ export default async function RootPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (user) {
+  let hasUser = !!user;
+  if (!hasUser) {
+    const cookieStore = await cookies();
+    hasUser = !!cookieStore.get('lifeos_session')?.value;
+  }
+
+  if (hasUser) {
     redirect('/home');
   } else {
     redirect('/login');

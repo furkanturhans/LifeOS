@@ -41,3 +41,13 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# local development logs
+next-server.log
+next-server-error.log
+
+
+# IDE and generated files
+.idea/
+src/generated/
+

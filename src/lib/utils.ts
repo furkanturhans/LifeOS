@@ -70,3 +70,19 @@ export function getInitials(name: string): string {
     .toUpperCase()
     .slice(0, 2);
 }
+
+export function setSessionCookie(supabaseId: string) {
+  if (typeof document !== 'undefined') {
+    document.cookie = `lifeos_session=${supabaseId}; path=/; max-age=${60 * 60 * 24 * 7}; sameSite=lax`;
+  }
+}
+
+export function clearSessionCookie() {
+  if (typeof document !== 'undefined') {
+    document.cookie = 'lifeos_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; sameSite=lax';
+  }
+}
+
+export function generateLocalUserId(): string {
+  return 'local_user_' + Date.now();
+}

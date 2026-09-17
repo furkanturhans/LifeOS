@@ -58,14 +58,32 @@ export async function POST(request: NextRequest) {
           backgroundType: 'default',
           homescreen: {
             create: {
-              pages: ['ai', 'chat', 'family', 'finance', 'medai', 'energy', 'camera', 'smart-home'],
-              dockItems: ['ai', 'files', 'cloud'],
+              pages: [
+                {
+                  page: 0,
+                  items: [
+                    { moduleId: 'ai', position: 0, size: 'small' },
+                    { moduleId: 'chat', position: 1, size: 'small' },
+                    { moduleId: 'family', position: 2, size: 'small' },
+                    { moduleId: 'finance', position: 3, size: 'small' },
+                    { moduleId: 'medai', position: 4, size: 'small' },
+                    { moduleId: 'energy', position: 5, size: 'small' },
+                    { moduleId: 'camera', position: 6, size: 'small' },
+                    { moduleId: 'smart-home', position: 7, size: 'small' }
+                  ]
+                }
+              ],
+              dockItems: [
+                { moduleId: 'ai', position: 0 },
+                { moduleId: 'files', position: 1 },
+                { moduleId: 'cloud', position: 2 }
+              ]
             },
           },
         },
       });
 
-      return NextResponse.json({
+      const response = NextResponse.json({
         success: true,
         user: {
           id: newUser.id,
@@ -83,13 +101,22 @@ export async function POST(request: NextRequest) {
           updatedAt: newUser.updatedAt.toISOString(),
         },
       });
+      response.cookies.set('lifeos_session', newUser.supabaseId, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+        sameSite: 'lax',
+        httpOnly: false,
+      });
+      return response;
     } catch (dbError) {
       console.warn('DB creation fallback to local:', dbError);
-      return NextResponse.json({
+      const finalSupabaseId = supabaseId || `sb_${Date.now()}`;
+
+      const response = NextResponse.json({
         success: true,
         user: {
           id: `local_${Date.now()}`,
-          supabaseId: supabaseId || `sb_${Date.now()}`,
+          supabaseId: finalSupabaseId,
           lifeosId,
           email,
           displayName,
@@ -103,6 +130,13 @@ export async function POST(request: NextRequest) {
           updatedAt: new Date().toISOString(),
         },
       });
+      response.cookies.set('lifeos_session', finalSupabaseId, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+        sameSite: 'lax',
+        httpOnly: false,
+      });
+      return response;
     }
   } catch (error: any) {
     console.error('Registration API error:', error);
