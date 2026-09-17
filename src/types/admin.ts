@@ -93,6 +93,7 @@ export type AdminTabKey =
   | 'instructors'
   | 'providers'
   | 'users'
+  | 'kids_content'
   | 'courses'
   | 'services'
   | 'complaints'

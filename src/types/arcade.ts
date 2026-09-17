@@ -4,8 +4,22 @@ export type ArcadeSectionKey =
   | 'achievements'
   | 'leaderboard';
 
-export type MiniGameId =
-  // 🧩 Zeka & Bulmaca (7 Oyun)
+export type AdultGameId =
+  // 🎲 Masa & Taş Oyunları
+  | 'tavla'
+  | 'satranc'
+  | 'okey_101'
+  // 🃏 Klasik Kart Oyunları
+  | 'poker'
+  | 'batak'
+  | 'pisti'
+  | 'solitaire'
+  // 🧠 Zihin & Bulmaca & Strateji
+  | 'sudoku_master'
+  | 'game_2048'
+  | 'kelime_bulmaca';
+
+export type LegacyKidsGameId =
   | 'bilmece'
   | 'kelime_avi'
   | 'kelime_yap'
@@ -13,7 +27,6 @@ export type MiniGameId =
   | 'cocuk_sudoku'
   | 'mantik_kareleri'
   | 'sayi_sekilleri'
-  // 🎨 Görsel & Şekil (8 Oyun)
   | 'memory_match'
   | 'tangram'
   | 'yapboz'
@@ -22,7 +35,6 @@ export type MiniGameId =
   | 'golge_eslestir'
   | 'desen_tamamla'
   | 'shape_counting'
-  // ⚡️ Hız & Refleks (8 Oyun)
   | 'simon_diyor'
   | 'hizli_dokun'
   | 'balon_patlat'
@@ -31,7 +43,6 @@ export type MiniGameId =
   | 'baloncuk_birlestir'
   | 'kule_yap'
   | 'mini_kosucu'
-  // 📚 Öğrenme & Bilgi (7 Oyun)
   | 'matematik_hizi'
   | 'hedef_sayi'
   | 'saat_ogren'
@@ -40,11 +51,17 @@ export type MiniGameId =
   | 'bayraklar'
   | 'color_pattern';
 
-// Backward compatibility alias
+export type MiniGameId = AdultGameId | LegacyKidsGameId;
+
+// Backward compatibility alias for any legacy references
 export type KidsGameId = MiniGameId;
 
 export type GameCatalogCategory =
   | 'all'
+  | 'board'
+  | 'cards'
+  | 'mind_puzzle'
+  | 'strategy'
   | 'puzzle'
   | 'visual'
   | 'reflex'
@@ -54,12 +71,14 @@ export interface MiniGameMeta {
   id: MiniGameId;
   title: string;
   subtitle: string;
-  ageRange: string;
   category: string;
   catalogCategory: GameCatalogCategory;
   iconEmoji: string;
   colorClass: string;
   isAvailable?: boolean;
+  playerCount?: string;
+  badge?: string;
+  ageRange?: string;
 }
 
 export type KidsGameMeta = MiniGameMeta;
@@ -73,6 +92,10 @@ export interface KidsGameScores {
   shapeCountingHighScore: number;
   colorPatternHighScore: number;
   [key: string]: any;
+}
+
+export interface ArcadeGameScores {
+  [gameId: string]: any;
 }
 
 export interface ArcadeSectionItem {
@@ -101,10 +124,12 @@ export interface GameSession {
 export type QuestType =
   | 'play_any_games'
   | 'reach_score'
+  | 'play_category_games'
+  | 'win_board_game'
+  | 'win_card_game'
   | 'complete_memory'
   | 'reach_color_level'
-  | 'play_distinct_games'
-  | 'play_category_games';
+  | 'play_distinct_games';
 
 export interface DailyQuest {
   id: string;
@@ -122,6 +147,10 @@ export interface DailyQuest {
 
 export type AchievementCategory =
   | 'general'
+  | 'board'
+  | 'cards'
+  | 'mind_puzzle'
+  | 'strategy'
   | 'puzzle'
   | 'visual'
   | 'reflex'

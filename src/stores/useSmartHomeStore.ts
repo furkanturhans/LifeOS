@@ -7,23 +7,9 @@ import type {
   SmartAutomation,
   SmartHomeAuditLog,
   SmartHomeRole,
-  SmartEnergyOverview,
-  SmartDeviceCategory,
-  SmartSolarSystem,
-  SmartHeatPumpSystem,
-  SmartCameraSystem,
-  SmartApplianceSystem,
-  SmartEnergyFlowOverview,
+  CandidateSmartDevice,
+  SupportedVendorAccount,
 } from '@/types/smarthome';
-
-export type SmartHomeTab =
-  | 'dashboard'
-  | 'solar'
-  | 'heatpump'
-  | 'cameras'
-  | 'appliances'
-  | 'powerflow'
-  | 'automations';
 
 interface SmartHomeState {
   home: SmartHomeHome | null;
@@ -34,86 +20,63 @@ interface SmartHomeState {
     activeAlarms: number;
     averageTemperature?: string;
     totalDevices: number;
+    totalRooms: number;
     securityMode: string;
     isBridgeConnected: boolean;
-    solarProductionKW?: number;
-    heatPumpStatus?: string;
-    liveHomePowerKW?: string;
   } | null;
   devices: SmartDevice[];
   rooms: SmartRoom[];
   scenes: SmartScene[];
   automations: SmartAutomation[];
   auditLogs: SmartHomeAuditLog[];
-  energy: SmartEnergyOverview | null;
-  solar: SmartSolarSystem | null;
-  heatPump: SmartHeatPumpSystem | null;
-  cameras: SmartCameraSystem[];
-  appliances: SmartApplianceSystem[];
-  energyFlow: SmartEnergyFlowOverview | null;
+  supportedVendors: SupportedVendorAccount[];
 
-  activeTab: SmartHomeTab;
   selectedRoom: string | 'all';
-  selectedCategory: SmartDeviceCategory | 'all';
   currentRole: SmartHomeRole;
   isLoading: boolean;
   isActionLoading: boolean;
-  isScanningWifi: boolean;
-  wifiScanDevices: Array<{
-    ip: string;
-    hostname: string;
-    type: string;
-    vendor: string;
-    model: string;
-    pingMs: number;
-    isConfigured: boolean;
-  }>;
   error: string | null;
 
-  setActiveTab: (tab: SmartHomeTab) => void;
   fetchSmartHomeStatus: () => Promise<void>;
   setCurrentRole: (role: SmartHomeRole) => void;
   setSelectedRoom: (room: string | 'all') => void;
-  setSelectedCategory: (category: SmartDeviceCategory | 'all') => void;
-  connectBridge: (url: string, token: string) => Promise<{ success: boolean; message: string }>;
-  disconnectBridge: () => Promise<{ success: boolean; message: string }>;
+
+  // Real Device Pairing Actions
+  commissionMatterDevice: (params: {
+    setupCode: string;
+    customName: string;
+    roomName?: string;
+  }) => Promise<{ success: boolean; message: string; device?: SmartDevice }>;
+
+  discoverHomeAssistantEntities: (params: {
+    url: string;
+    token: string;
+  }) => Promise<{ success: boolean; message: string; candidates: CandidateSmartDevice[] }>;
+
+  importHomeAssistantDevices: (params: {
+    url: string;
+    token: string;
+    selectedEntities: Array<{
+      candidate: CandidateSmartDevice;
+      customName?: string;
+      roomName?: string;
+    }>;
+  }) => Promise<{ success: boolean; message: string; addedCount: number }>;
+
+  // Device & Room Management
   controlDevice: (
     deviceId: string,
     command: 'turn_on' | 'turn_off' | 'toggle' | 'lock' | 'unlock' | 'set_brightness' | 'set_temperature',
     value?: number,
     securityPin?: string
-  ) => Promise<{ success: boolean; message: string }>;
+  ) => Promise<{ success: boolean; message: string; device?: SmartDevice }>;
+
+  removeDevice: (deviceId: string) => Promise<{ success: boolean; message: string }>;
+
+  createRoom: (name: string, icon?: string) => Promise<{ success: boolean; room?: SmartRoom }>;
+  deleteRoom: (roomId: string) => Promise<{ success: boolean }>;
+
   activateScene: (sceneId: string) => Promise<{ success: boolean; message: string }>;
-
-  // Specialized Control Actions
-  controlSolarInverter: (params: {
-    surplusAction?: 'battery_first' | 'ev_charge' | 'heat_pump_hotwater' | 'grid_export';
-    inverterStatus?: 'generating' | 'standby';
-  }) => Promise<{ success: boolean; message: string }>;
-
-  controlHeatPump: (params: {
-    mode?: 'heating' | 'cooling' | 'hot_water' | 'eco' | 'off';
-    targetTempC?: number;
-    hotWaterTankTargetTempC?: number;
-    silentMode?: boolean;
-    boostMode?: boolean;
-    solarSyncEnabled?: boolean;
-  }) => Promise<{ success: boolean; message: string }>;
-
-  controlCamera: (params: {
-    cameraId: string;
-    privacyMode?: boolean;
-    nightVision?: boolean;
-    ptzDirection?: 'up' | 'down' | 'left' | 'right';
-  }) => Promise<{ success: boolean; message: string }>;
-
-  controlAppliance: (params: {
-    applianceId: string;
-    command: 'start' | 'pause' | 'stop' | 'toggle_solar_sync';
-    programName?: string;
-  }) => Promise<{ success: boolean; message: string }>;
-
-  scanWifiNetwork: () => Promise<void>;
 }
 
 export const useSmartHomeStore = create<SmartHomeState>((set, get) => ({
@@ -124,24 +87,13 @@ export const useSmartHomeStore = create<SmartHomeState>((set, get) => ({
   scenes: [],
   automations: [],
   auditLogs: [],
-  energy: null,
-  solar: null,
-  heatPump: null,
-  cameras: [],
-  appliances: [],
-  energyFlow: null,
+  supportedVendors: [],
 
-  activeTab: 'dashboard',
   selectedRoom: 'all',
-  selectedCategory: 'all',
   currentRole: 'home_owner',
   isLoading: false,
   isActionLoading: false,
-  isScanningWifi: false,
-  wifiScanDevices: [],
   error: null,
-
-  setActiveTab: (tab: SmartHomeTab) => set({ activeTab: tab }),
 
   fetchSmartHomeStatus: async () => {
     const role = get().currentRole;
@@ -158,12 +110,7 @@ export const useSmartHomeStore = create<SmartHomeState>((set, get) => ({
           scenes: data.scenes || [],
           automations: data.automations || [],
           auditLogs: data.auditLogs || [],
-          energy: data.energy || null,
-          solar: data.solar || null,
-          heatPump: data.heatPump || null,
-          cameras: data.cameras || [],
-          appliances: data.appliances || [],
-          energyFlow: data.energyFlow || null,
+          supportedVendors: data.supportedVendors || [],
           isLoading: false,
         });
       } else {
@@ -183,17 +130,13 @@ export const useSmartHomeStore = create<SmartHomeState>((set, get) => ({
     set({ selectedRoom: room });
   },
 
-  setSelectedCategory: (category: SmartDeviceCategory | 'all') => {
-    set({ selectedCategory: category });
-  },
-
-  connectBridge: async (url: string, token: string) => {
+  commissionMatterDevice: async (params) => {
     set({ isActionLoading: true });
     try {
-      const res = await fetch('/api/smarthome/connect', {
+      const res = await fetch('/api/smarthome/matter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url, token, action: 'connect' }),
+        body: JSON.stringify(params),
       });
       const data = await res.json();
       if (data.success) {
@@ -203,17 +146,34 @@ export const useSmartHomeStore = create<SmartHomeState>((set, get) => ({
       return data;
     } catch {
       set({ isActionLoading: false });
-      return { success: false, message: 'Bağlantı isteği gönderilemedi.' };
+      return { success: false, message: 'Matter eşleştirme isteği gönderilemedi.' };
     }
   },
 
-  disconnectBridge: async () => {
+  discoverHomeAssistantEntities: async (params) => {
     set({ isActionLoading: true });
     try {
-      const res = await fetch('/api/smarthome/connect', {
+      const res = await fetch('/api/smarthome/ha/discover', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'disconnect' }),
+        body: JSON.stringify(params),
+      });
+      const data = await res.json();
+      set({ isActionLoading: false });
+      return data;
+    } catch {
+      set({ isActionLoading: false });
+      return { success: false, message: 'Home Assistant varlıkları taranamadı.', candidates: [] };
+    }
+  },
+
+  importHomeAssistantDevices: async (params) => {
+    set({ isActionLoading: true });
+    try {
+      const res = await fetch('/api/smarthome/ha/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(params),
       });
       const data = await res.json();
       if (data.success) {
@@ -223,7 +183,7 @@ export const useSmartHomeStore = create<SmartHomeState>((set, get) => ({
       return data;
     } catch {
       set({ isActionLoading: false });
-      return { success: false, message: 'Bağlantı kesme işlemi başarısız.' };
+      return { success: false, message: 'Cihazlar içe aktarılamadı.', addedCount: 0 };
     }
   },
 
@@ -243,7 +203,6 @@ export const useSmartHomeStore = create<SmartHomeState>((set, get) => ({
       });
       const data = await res.json();
       if (data.success) {
-        // Optimistically update device in state
         set((state) => ({
           devices: state.devices.map((d) => (d.id === deviceId ? data.device || d : d)),
         }));
@@ -252,6 +211,57 @@ export const useSmartHomeStore = create<SmartHomeState>((set, get) => ({
       return data;
     } catch {
       return { success: false, message: 'Cihaza komut iletilemedi.' };
+    }
+  },
+
+  removeDevice: async (deviceId: string) => {
+    try {
+      const res = await fetch('/api/smarthome/devices', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ deviceId }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        await get().fetchSmartHomeStatus();
+      }
+      return data;
+    } catch {
+      return { success: false, message: 'Cihaz silinemedi.' };
+    }
+  },
+
+  createRoom: async (name: string, icon = '🏠') => {
+    try {
+      const res = await fetch('/api/smarthome/rooms', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, icon }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        await get().fetchSmartHomeStatus();
+      }
+      return data;
+    } catch {
+      return { success: false };
+    }
+  },
+
+  deleteRoom: async (roomId: string) => {
+    try {
+      const res = await fetch('/api/smarthome/rooms', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ roomId }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        await get().fetchSmartHomeStatus();
+      }
+      return data;
+    } catch {
+      return { success: false };
     }
   },
 
@@ -273,94 +283,6 @@ export const useSmartHomeStore = create<SmartHomeState>((set, get) => ({
     } catch {
       set({ isActionLoading: false });
       return { success: false, message: 'Sahne etkinleştirilemedi.' };
-    }
-  },
-
-  controlSolarInverter: async (params) => {
-    try {
-      const res = await fetch('/api/smarthome/solar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(params),
-      });
-      const data = await res.json();
-      if (data.success && data.solar) {
-        set({ solar: data.solar });
-      }
-      return data;
-    } catch {
-      return { success: false, message: 'Solar ayarı iletilemedi.' };
-    }
-  },
-
-  controlHeatPump: async (params) => {
-    try {
-      const res = await fetch('/api/smarthome/heatpump', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(params),
-      });
-      const data = await res.json();
-      if (data.success && data.heatPump) {
-        set({ heatPump: data.heatPump });
-      }
-      return data;
-    } catch {
-      return { success: false, message: 'Isı pompası komutu iletilemedi.' };
-    }
-  },
-
-  controlCamera: async (params) => {
-    const role = get().currentRole;
-    try {
-      const res = await fetch('/api/smarthome/camera', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...params, userRole: role }),
-      });
-      const data = await res.json();
-      if (data.success && data.camera) {
-        set((state) => ({
-          cameras: state.cameras.map((c) => (c.id === params.cameraId ? data.camera : c)),
-        }));
-      }
-      return data;
-    } catch {
-      return { success: false, message: 'Kamera komutu iletilemedi.' };
-    }
-  },
-
-  controlAppliance: async (params) => {
-    try {
-      const res = await fetch('/api/smarthome/appliances', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(params),
-      });
-      const data = await res.json();
-      if (data.success && data.appliance) {
-        set((state) => ({
-          appliances: state.appliances.map((a) => (a.id === params.applianceId ? data.appliance : a)),
-        }));
-      }
-      return data;
-    } catch {
-      return { success: false, message: 'Ev aleti komutu iletilemedi.' };
-    }
-  },
-
-  scanWifiNetwork: async () => {
-    set({ isScanningWifi: true });
-    try {
-      const res = await fetch('/api/smarthome/scan-wifi');
-      const data = await res.json();
-      if (data.success) {
-        set({ wifiScanDevices: data.foundDevices || [], isScanningWifi: false });
-      } else {
-        set({ isScanningWifi: false });
-      }
-    } catch {
-      set({ isScanningWifi: false });
     }
   },
 }));

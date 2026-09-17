@@ -177,13 +177,16 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
           {[
             { id: 'all', label: 'Tüm Oyunlar' },
-            { id: 'memory_match', label: 'Hafıza' },
-            { id: 'bilmece', label: 'Bilmece' },
-            { id: 'simon_diyor', label: 'Simon Diyor' },
-            { id: 'hizli_dokun', label: 'Hızlı Dokun' },
-            { id: 'matematik_hizi', label: 'Matematik' },
-            { id: 'shape_counting', label: 'Şekil Sayma' },
-            { id: 'color_pattern', label: 'Renk & Desen' },
+            { id: 'tavla', label: 'Tavla' },
+            { id: 'satranc', label: 'Satranç' },
+            { id: 'okey_101', label: '101 Okey' },
+            { id: 'poker', label: 'Poker' },
+            { id: 'batak', label: 'Batak' },
+            { id: 'pisti', label: 'Pişti' },
+            { id: 'solitaire', label: 'Solitaire' },
+            { id: 'sudoku_master', label: 'Sudoku' },
+            { id: 'game_2048', label: '2048' },
+            { id: 'kelime_bulmaca', label: 'Kelime Bulmaca' },
           ].map((gf) => (
             <button
               key={gf.id}

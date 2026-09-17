@@ -135,9 +135,9 @@ export const MODULE_REGISTRY: ModuleDefinition[] = [
     color: '#84cc16',
     gradient: 'from-lime-400 to-green-500',
     category: 'entertainment',
-    status: 'COMING_SOON',
-    description: 'Çocuklar için güvenli alan',
-    descriptionEn: 'Safe space for kids',
+    status: 'ACTIVE',
+    description: 'Çocuklar için güvenli mini oyunlar, çizgi filmler, masallar ve eğitici dersler',
+    descriptionEn: 'Safe mini games, cartoons, stories and study space for kids',
     version: '1.0.0',
     sortOrder: 10,
   },
@@ -390,9 +390,8 @@ export function searchModules(query: string, locale: string = 'tr'): ModuleDefin
 
 export const DEFAULT_HOMESCREEN_MODULES = [
   'courses', 'services', 'family', 'finance', 'arcade',
-  'explore', 'ai', 'chat', 'medai',
-  'smart-home', 'camera', 'files', 'cloud',
-  'store', 'documents', 'rewards',
+  'kids', 'smart-home', 'ai', 'chat', 'medai',
+  'files', 'store', 'rewards',
 ];
 
 export const DEFAULT_DOCK_MODULES = [

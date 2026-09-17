@@ -6,7 +6,8 @@ import { GameShell, type Difficulty } from '../engine/GameShell';
 import { useArcadeStore } from '@/stores/useArcadeStore';
 import { kidsSound } from '@/lib/arcade/kidsSound';
 import { cn } from '@/lib/utils';
-import { CheckCircle2, XCircle, Sparkles, HelpCircle } from 'lucide-react';
+import { CheckCircle2, XCircle, Sparkles, HelpCircle, Volume2 } from 'lucide-react';
+import { kidsSpeech } from '@/services/kidsSpeechService';
 
 // =============================================================================
 // 1. BİLMECE (RIDDLE GAME)
@@ -122,7 +123,15 @@ export function BilmeceGame({ onBack }: { onBack: () => void }) {
     >
       <div className="w-full max-w-md space-y-4">
         {/* Question card */}
-        <div className="rounded-3xl border border-border bg-card/80 p-5 text-center shadow-xs">
+        <div className="rounded-3xl border border-border bg-card/80 p-5 text-center shadow-xs relative">
+          <button
+            type="button"
+            onClick={() => kidsSpeech.speak(current.question)}
+            className="absolute right-4 top-4 flex h-8 items-center gap-1 px-2.5 rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-bold hover:bg-indigo-500/20 transition-all"
+            title="Bilmeciyi Sesli Dinle"
+          >
+            <Volume2 className="h-3.5 w-3.5" /> Dinle
+          </button>
           <span className="text-4xl block mb-2">{current.emoji}</span>
           <p className="text-base font-bold text-foreground leading-relaxed">
             &ldquo;{current.question}&rdquo;

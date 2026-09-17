@@ -78,25 +78,25 @@ export function HomeActiveModules() {
           </Card>
         </Link>
 
-        {/* Explore Card */}
-        <Link href="/explore" className="group">
+        {/* Kids Card */}
+        <Link href="/kids" className="group">
           <Card hover className="h-full border-border bg-card p-5 transition-all shadow-xs hover:shadow-md">
             <div className="flex items-start justify-between gap-3 mb-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500 border border-blue-500/20 group-hover:scale-105 transition-transform">
-                <Compass className="h-5 w-5" />
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-lime-500/10 text-lime-500 border border-lime-500/20 group-hover:scale-105 transition-transform">
+                <span className="text-xl">🧒</span>
               </div>
               <StatusBadge status="active" label="Aktif" size="sm" />
             </div>
 
             <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
-              Keşfet & Topluluk
+              Kids & Güvenli Çocuk Alanı
             </h3>
             <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-              Güvenli ilgi grupları, yerel öneriler ve aile dostu içerik akışı.
+              Eğitici mini oyunlar, masallar, çizgi filmler, boyama ve ebeveyn kontrolü.
             </p>
 
             <div className="mt-4 pt-3 border-t border-border/50 flex items-center justify-between text-xs font-semibold text-primary">
-              <span>Akışı İncele</span>
+              <span>Çocuk Alanını Aç</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </Card>

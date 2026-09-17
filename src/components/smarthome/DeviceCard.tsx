@@ -19,10 +19,11 @@ import {
   ChevronRight,
   ShieldCheck,
   CheckCircle2,
-  Sun,
-  WashingMachine,
-  Zap,
-  BatteryCharging,
+  Trash2,
+  Sliders,
+  QrCode,
+  Globe,
+  Home,
 } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import type { SmartDevice, SmartHomeRole } from '@/types/smarthome';
@@ -32,11 +33,19 @@ interface DeviceCardProps {
   device: SmartDevice;
   onToggle: (device: SmartDevice) => void;
   onRequestPin?: (device: SmartDevice) => void;
-  onOpenDetail?: (device: SmartDevice) => void;
+  onRemove?: (device: SmartDevice) => void;
   userRole?: SmartHomeRole;
 }
 
-export function DeviceCard({ device, onToggle, onRequestPin, onOpenDetail, userRole = 'home_owner' }: DeviceCardProps) {
+export function DeviceCard({
+  device,
+  onToggle,
+  onRequestPin,
+  onRemove,
+  userRole = 'home_owner',
+}: DeviceCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   const getCategoryIcon = () => {
     switch (device.category) {
       case 'light':
@@ -45,14 +54,6 @@ export function DeviceCard({ device, onToggle, onRequestPin, onOpenDetail, userR
         return <Power className="h-5 w-5" />;
       case 'climate':
         return <Thermometer className="h-5 w-5" />;
-      case 'solar_inverter':
-        return <Sun className="h-5 w-5 text-amber-500" />;
-      case 'heat_pump':
-        return <Flame className="h-5 w-5 text-sky-500" />;
-      case 'battery_storage':
-        return <BatteryCharging className="h-5 w-5 text-emerald-500" />;
-      case 'appliance':
-        return <WashingMachine className="h-5 w-5 text-purple-500" />;
       case 'lock':
         return device.state === 'locked' ? <Lock className="h-5 w-5" /> : <Unlock className="h-5 w-5" />;
       case 'camera':
@@ -67,16 +68,40 @@ export function DeviceCard({ device, onToggle, onRequestPin, onOpenDetail, userR
         ) : (
           <Flame className="h-5 w-5 text-rose-500" />
         );
-      case 'media_player':
-        return <Tv className="h-5 w-5" />;
-      case 'vacuum':
-        return <Wind className="h-5 w-5" />;
       default:
         return <Layers className="h-5 w-5" />;
     }
   };
 
-  const isActive = device.state === 'on' || device.state === 'open' || device.state === 'alarm' || device.state === 'generating' || device.state === 'heating' || device.state === 'running';
+  const getSourceBadge = () => {
+    switch (device.source) {
+      case 'matter':
+        return (
+          <span className="flex items-center gap-1 rounded bg-emerald-500/10 px-1.5 py-0.2 text-[9px] font-bold text-emerald-600 border border-emerald-500/20">
+            <QrCode className="h-2.5 w-2.5" />
+            Matter
+          </span>
+        );
+      case 'home_assistant':
+        return (
+          <span className="flex items-center gap-1 rounded bg-sky-500/10 px-1.5 py-0.2 text-[9px] font-bold text-sky-600 border border-sky-500/20">
+            <Home className="h-2.5 w-2.5" />
+            Home Assistant
+          </span>
+        );
+      case 'vendor_oauth':
+        return (
+          <span className="flex items-center gap-1 rounded bg-purple-500/10 px-1.5 py-0.2 text-[9px] font-bold text-purple-600 border border-purple-500/20">
+            <Globe className="h-2.5 w-2.5" />
+            {device.vendorName || 'Resmi Hesap'}
+          </span>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const isActive = device.state === 'on' || device.state === 'open' || device.state === 'alarm';
   const isLocked = device.state === 'locked';
   const isAlarm = device.state === 'alarm';
 
@@ -90,8 +115,10 @@ export function DeviceCard({ device, onToggle, onRequestPin, onOpenDetail, userR
 
   return (
     <Card
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        'p-4 rounded-3xl border transition-all duration-200 select-none flex flex-col justify-between h-40 relative overflow-hidden',
+        'p-4 rounded-3xl border transition-all duration-200 select-none flex flex-col justify-between min-h-[148px] relative overflow-hidden',
         isAlarm
           ? 'border-rose-500 bg-rose-500/10 ring-2 ring-rose-500/50 animate-pulse'
           : isActive || (device.category === 'lock' && isLocked)
@@ -99,12 +126,12 @@ export function DeviceCard({ device, onToggle, onRequestPin, onOpenDetail, userR
           : 'border-border/70 bg-card/60 opacity-85 hover:opacity-100 hover:border-border'
       )}
     >
-      {/* Top row: Icon, Category Badge & Action Button */}
+      {/* Top Row: Icon, Device Info & Controls */}
       <div className="flex items-start justify-between gap-2">
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-start gap-2.5">
           <div
             className={cn(
-              'flex h-10 w-10 items-center justify-center rounded-2xl border transition-all',
+              'flex h-10 w-10 items-center justify-center rounded-2xl border transition-all shrink-0',
               isAlarm
                 ? 'bg-rose-500/20 text-rose-500 border-rose-500/40'
                 : isActive
@@ -118,88 +145,100 @@ export function DeviceCard({ device, onToggle, onRequestPin, onOpenDetail, userR
           </div>
 
           <div className="min-w-0">
-            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block truncate">
-              {device.room}
-            </span>
-            <span className="text-xs font-bold text-foreground truncate block max-w-[130px]">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {getSourceBadge()}
+              {device.room && (
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
+                  {device.room}
+                </span>
+              )}
+            </div>
+
+            <span className="text-xs font-bold text-foreground truncate block max-w-[130px] mt-0.5">
               {device.name}
             </span>
           </div>
         </div>
 
-        {/* Quick Toggle / Control Button */}
-        {device.category === 'light' || device.category === 'switch' ? (
-          <button
-            type="button"
-            onClick={handleAction}
-            aria-label="Cihazı aç/kapat"
-            className={cn(
-              'h-8 w-14 rounded-full transition-all flex items-center p-1 relative shadow-inner',
-              isActive ? 'bg-primary justify-end' : 'bg-muted justify-start'
-            )}
-          >
-            <div className="h-6 w-6 rounded-full bg-white shadow-md flex items-center justify-center text-[10px] font-bold text-foreground">
-              <Power className={cn('h-3 w-3', isActive ? 'text-primary' : 'text-muted-foreground')} />
-            </div>
-          </button>
-        ) : device.category === 'lock' ? (
-          <button
-            type="button"
-            onClick={handleAction}
-            className={cn(
-              'px-2.5 py-1 rounded-xl text-[11px] font-bold border transition-all flex items-center gap-1',
-              isLocked
-                ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/30'
-                : 'bg-amber-500/10 text-amber-600 border-amber-500/30'
-            )}
-          >
-            {isLocked ? <Lock className="h-3 w-3" /> : <Unlock className="h-3 w-3" />}
-            <span>{isLocked ? 'Kilitli' : 'Açık'}</span>
-          </button>
-        ) : (
-          <span
-            className={cn(
-              'px-2 py-0.5 rounded-full text-[10px] font-bold',
-              isAlarm
-                ? 'bg-rose-500 text-white'
-                : 'bg-muted text-muted-foreground'
-            )}
-          >
-            {isAlarm ? 'ALARM' : device.state.toUpperCase()}
-          </span>
-        )}
+        {/* Action Buttons */}
+        <div className="flex items-center gap-1.5">
+          {device.category === 'light' || device.category === 'switch' ? (
+            <button
+              type="button"
+              onClick={handleAction}
+              aria-label="Cihazı aç/kapat"
+              className={cn(
+                'h-8 w-14 rounded-full transition-all flex items-center p-1 relative shadow-inner',
+                isActive ? 'bg-primary justify-end' : 'bg-muted justify-start'
+              )}
+            >
+              <div className="h-6 w-6 rounded-full bg-white shadow-md flex items-center justify-center text-[10px] font-bold text-foreground">
+                <Power className={cn('h-3 w-3', isActive ? 'text-primary' : 'text-muted-foreground')} />
+              </div>
+            </button>
+          ) : device.category === 'lock' ? (
+            <button
+              type="button"
+              onClick={handleAction}
+              className={cn(
+                'px-2.5 py-1 rounded-xl text-[11px] font-bold border transition-all flex items-center gap-1',
+                isLocked
+                  ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/30'
+                  : 'bg-amber-500/10 text-amber-600 border-amber-500/30'
+              )}
+            >
+              {isLocked ? <Lock className="h-3 w-3" /> : <Unlock className="h-3 w-3" />}
+              <span>{isLocked ? 'Kilitli' : 'Açık'}</span>
+            </button>
+          ) : (
+            <span
+              className={cn(
+                'px-2 py-0.5 rounded-full text-[10px] font-bold',
+                isAlarm ? 'bg-rose-500 text-white' : 'bg-muted text-muted-foreground'
+              )}
+            >
+              {isAlarm ? 'ALARM' : device.state.toUpperCase()}
+            </span>
+          )}
+
+          {/* Delete Device Button (Available on Hover or Owner) */}
+          {onRemove && isHovered && userRole === 'home_owner' && (
+            <button
+              type="button"
+              onClick={() => onRemove(device)}
+              title="Cihazı Kaldır"
+              className="p-1 rounded-lg hover:bg-rose-500/10 text-muted-foreground hover:text-rose-600 transition-colors"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+            </button>
+          )}
+        </div>
       </div>
 
-      {/* Bottom row: Attributes / Live Info */}
-      <div className="pt-2 border-t border-border/40 flex items-center justify-between text-xs">
+      {/* Bottom Row: STRICTLY REAL Verified Capabilities Only */}
+      <div className="pt-2 border-t border-border/40 flex items-center justify-between text-xs mt-2">
         <div className="text-[11px] text-muted-foreground truncate">
-          {device.category === 'solar_inverter' ? (
-            <span className="font-bold text-amber-500">
-              ☀️ {device.attributes.solarProductionKW || 4.85} kW Üretim
-            </span>
-          ) : device.category === 'heat_pump' ? (
-            <span className="font-bold text-sky-500">
-              🔥 Su: {device.attributes.waterFlowTempC || 44.5}°C • COP {device.attributes.copEfficiency || 4.65}
-            </span>
-          ) : device.category === 'appliance' ? (
+          {/* Temperature sensor */}
+          {device.capabilities.hasTemperature && device.attributes.currentTemperature !== undefined ? (
             <span className="font-semibold text-foreground">
-              🧺 {device.attributes.programName || 'Pamuklu Eko'} ({device.attributes.remainingMinutes || 38} dk)
+              {device.attributes.currentTemperature}°C
+              {device.attributes.targetTemperature !== undefined && ` • Hedef: ${device.attributes.targetTemperature}°C`}
             </span>
-          ) : device.category === 'climate' && device.attributes.currentTemperature ? (
+          ) : device.capabilities.hasHumidity && device.attributes.humidity !== undefined ? (
             <span className="font-semibold text-foreground">
-              {device.attributes.currentTemperature}°C • Hedef: {device.attributes.targetTemperature || 22}°C
+              %{device.attributes.humidity} Nem
             </span>
-          ) : device.category === 'sensor' && device.attributes.currentTemperature ? (
-            <span className="font-semibold text-foreground">
-              {device.attributes.currentTemperature}°C • %{device.attributes.humidity || 45} Nem
-            </span>
-          ) : device.category === 'switch' && device.attributes.powerWatt ? (
+          ) : device.capabilities.hasPowerMeasurement && device.attributes.powerWatt !== undefined ? (
             <span className="font-semibold text-foreground font-mono">
               ⚡ {device.attributes.powerWatt} W
             </span>
-          ) : device.category === 'safety_sensor' ? (
-            <span className={cn('font-bold', isAlarm ? 'text-rose-500' : 'text-emerald-500')}>
-              {isAlarm ? 'Kritik Uyarı Algılandı!' : 'Normal Durum'}
+          ) : device.category === 'door_window' ? (
+            <span className={cn('font-bold', device.state === 'open' ? 'text-amber-500' : 'text-emerald-500')}>
+              {device.state === 'open' ? 'Açık' : 'Kapalı'}
+            </span>
+          ) : device.category === 'motion' ? (
+            <span className={cn('font-bold', device.state === 'on' ? 'text-amber-500' : 'text-muted-foreground')}>
+              {device.state === 'on' ? 'Hareket Algılandı' : 'Sakin'}
             </span>
           ) : (
             <span>
@@ -208,7 +247,8 @@ export function DeviceCard({ device, onToggle, onRequestPin, onOpenDetail, userR
           )}
         </div>
 
-        {device.attributes.batteryLevel !== undefined && (
+        {/* Battery level if supported */}
+        {device.capabilities.hasBattery && device.attributes.batteryLevel !== undefined && (
           <span className="text-[10px] font-mono text-muted-foreground font-semibold">
             🔋 %{device.attributes.batteryLevel}
           </span>

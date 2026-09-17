@@ -19,6 +19,7 @@ import {
   ArrowLeft,
   Sun,
   Moon,
+  Film,
 } from 'lucide-react';
 import { useAdminStore } from '@/stores/useAdminStore';
 import { useThemeStore } from '@/stores/useThemeStore';
@@ -28,6 +29,7 @@ import { AdminApplicationsView } from './AdminApplicationsView';
 import { AdminInstructorsView } from './AdminInstructorsView';
 import { AdminProvidersView } from './AdminProvidersView';
 import { AdminUsersView } from './AdminUsersView';
+import { AdminKidsMoviesView } from './AdminKidsMoviesView';
 import { AdminComplaintsView } from './AdminComplaintsView';
 import { AdminAuditLogsView } from './AdminAuditLogsView';
 import { cn } from '@/lib/utils';
@@ -44,6 +46,7 @@ const ADMIN_MENU_ITEMS: {
   { id: 'instructors', label: 'Eğitmenler', icon: GraduationCap },
   { id: 'providers', label: 'Hizmet Sağlayıcılar', icon: Truck },
   { id: 'users', label: 'Kullanıcılar', icon: Users },
+  { id: 'kids_content', label: 'Kids Video & İçerik', icon: Film },
   { id: 'courses', label: 'Dersler & Canlı Sınıflar', icon: BookOpen },
   { id: 'services', label: 'Hizmet İlanları', icon: Briefcase },
   { id: 'complaints', label: 'Şikâyetler & Güvenlik', icon: AlertCircle },
@@ -326,6 +329,7 @@ export function AdminLayout() {
           {activeTab === 'instructors' && <AdminInstructorsView />}
           {activeTab === 'providers' && <AdminProvidersView />}
           {activeTab === 'users' && <AdminUsersView />}
+          {activeTab === 'kids_content' && <AdminKidsMoviesView />}
           {activeTab === 'complaints' && <AdminComplaintsView />}
           {activeTab === 'audit_logs' && <AdminAuditLogsView />}
 

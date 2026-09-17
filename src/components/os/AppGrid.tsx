@@ -221,9 +221,9 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
         moduleId === 'family' ||
         moduleId === 'finance' ||
         moduleId === 'arcade' ||
-        moduleId === 'explore' ||
+        moduleId === 'kids' ||
         moduleId === 'services' ||
-        module.status === 'ACTIVE'
+        (module.status === 'ACTIVE' && moduleId !== 'explore')
       ) {
         router.push(`/${moduleId}`);
         return;

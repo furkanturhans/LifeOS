@@ -6,7 +6,7 @@ import type {
   GameSession,
   DailyQuest,
   Achievement,
-  KidsGameScores,
+  ArcadeGameScores,
 } from '@/types/arcade';
 
 function getTodayDateString(): string {
@@ -16,49 +16,49 @@ function getTodayDateString(): string {
 const DEFAULT_DAILY_QUESTS: DailyQuest[] = [
   {
     id: 'quest_play_any',
-    title: 'Günün Isınma Turları',
-    description: 'Herhangi 3 mini oyunu oyna ve tamamla',
+    title: 'Günün Oyun Seansı',
+    description: 'Herhangi 2 oyunu oyna ve tamamla',
     iconEmoji: '🎮',
-    targetValue: 3,
+    targetValue: 2,
     currentValue: 0,
     xpReward: 50,
     isCompleted: false,
     questType: 'play_any_games',
   },
   {
-    id: 'quest_puzzle_play',
-    title: 'Zeka & Bulmaca Ustası',
-    description: 'Zeka veya bulmaca kategorisinden bir oyun tamamla',
-    iconEmoji: '🧩',
+    id: 'quest_board_play',
+    title: 'Masa & Taş Ustası',
+    description: 'Tavla, Satranç veya 101 Okey oyunundan birini oyna',
+    iconEmoji: '🎲',
     targetValue: 1,
     currentValue: 0,
     xpReward: 40,
     isCompleted: false,
     questType: 'play_category_games',
-    targetCategory: 'puzzle',
+    targetCategory: 'board',
   },
   {
-    id: 'quest_reflex_score',
-    title: 'Hızlı Parmaklar',
-    description: 'Refleks veya hız oyunlarında en az 40 puan topla',
-    iconEmoji: '⚡️',
-    targetValue: 40,
+    id: 'quest_cards_play',
+    title: 'Kart Stratejisti',
+    description: 'Batak, Pişti, Solitaire veya Poker oyununda skor üret',
+    iconEmoji: '🃏',
+    targetValue: 30,
     currentValue: 0,
     xpReward: 60,
     isCompleted: false,
     questType: 'reach_score',
   },
   {
-    id: 'quest_learning_play',
-    title: 'Bilgi Kaşifi',
-    description: 'Öğrenme veya bilgi kategorisinden bir oyun tamamla',
-    iconEmoji: '📚',
+    id: 'quest_puzzle_play',
+    title: 'Zihin Egzersizi',
+    description: 'Sudoku Master, 2048 veya Kelime Bulmaca tamamla',
+    iconEmoji: '🧠',
     targetValue: 1,
     currentValue: 0,
     xpReward: 50,
     isCompleted: false,
     questType: 'play_category_games',
-    targetCategory: 'learning',
+    targetCategory: 'mind_puzzle',
   },
 ];
 
@@ -67,7 +67,7 @@ const DEFAULT_ACHIEVEMENTS: Achievement[] = [
   {
     id: 'ach_first_game',
     title: 'İlk Adım',
-    description: 'Herhangi bir mini oyunu ilk kez oyna ve tamamla',
+    description: 'Herhangi bir oyunu ilk kez oyna ve tamamla',
     iconEmoji: '🌱',
     category: 'general',
     points: 20,
@@ -77,84 +77,69 @@ const DEFAULT_ACHIEVEMENTS: Achievement[] = [
   {
     id: 'ach_distinct_games',
     title: 'Çok Yönlü Oyuncu',
-    description: '5 farklı mini oyunu en az birer kez oyna',
+    description: '4 farklı oyunu en az birer kez oyna',
     iconEmoji: '🌟',
     category: 'general',
     points: 50,
     isUnlocked: false,
-    progress: { current: 0, max: 5 },
+    progress: { current: 0, max: 4 },
   },
   {
     id: 'ach_arcade_veteran',
     title: 'Arcade Tutkunu',
-    description: 'Toplam 15 mini oyun oturumunu tamamla',
+    description: 'Toplam 10 oyun oturumunu tamamla',
     iconEmoji: '🎖️',
     category: 'general',
     points: 100,
     isUnlocked: false,
-    progress: { current: 0, max: 15 },
+    progress: { current: 0, max: 10 },
   },
 
-  // Zeka & Bulmaca
+  // Masa & Taş Oyunları
   {
-    id: 'ach_puzzle_master',
-    title: 'Bulmaca Dehası',
-    description: 'Zeka ve bulmaca kategorisinde 3 farklı oyunu tamamla',
+    id: 'ach_board_master',
+    title: 'Masa Dehası',
+    description: 'Masa oyunları kategorisinde 2 farklı oyunu tamamla',
+    iconEmoji: '🎲',
+    category: 'board',
+    points: 50,
+    isUnlocked: false,
+    progress: { current: 0, max: 2 },
+  },
+
+  // Klasik Kart Oyunları
+  {
+    id: 'ach_cards_expert',
+    title: 'İskambil Ustası',
+    description: 'Kart oyunlarında toplam 3 oyun tamamla',
+    iconEmoji: '🃏',
+    category: 'cards',
+    points: 50,
+    isUnlocked: false,
+    progress: { current: 0, max: 3 },
+  },
+
+  // Zihin & Bulmaca
+  {
+    id: 'ach_mind_champion',
+    title: 'Zihin Şampiyonu',
+    description: 'Bulmaca ve zihin oyunlarında 2 farklı oyunu tamamla',
     iconEmoji: '🧠',
-    category: 'puzzle',
-    points: 50,
-    isUnlocked: false,
-    progress: { current: 0, max: 3 },
-  },
-
-  // Görsel & Şekil
-  {
-    id: 'ach_visual_expert',
-    title: 'Görsel Usta',
-    description: 'Görsel ve şekil kategorisinde 3 farklı oyunu tamamla',
-    iconEmoji: '🎨',
-    category: 'visual',
-    points: 50,
-    isUnlocked: false,
-    progress: { current: 0, max: 3 },
-  },
-
-  // Hız & Refleks
-  {
-    id: 'ach_reflex_champion',
-    title: 'Refleks Şampiyonu',
-    description: 'Refleks oyunlarında toplam 5 oyun tamamla',
-    iconEmoji: '⚡️',
-    category: 'reflex',
+    category: 'mind_puzzle',
     points: 60,
     isUnlocked: false,
-    progress: { current: 0, max: 5 },
-  },
-
-  // Öğrenme & Bilgi
-  {
-    id: 'ach_knowledge_guru',
-    title: 'Bilgi Gurusu',
-    description: 'Öğrenme ve bilgi oyunlarında 3 farklı oyunu tamamla',
-    iconEmoji: '📚',
-    category: 'learning',
-    points: 50,
-    isUnlocked: false,
-    progress: { current: 0, max: 3 },
+    progress: { current: 0, max: 2 },
   },
 ];
 
-// Helper to determine category of a game
-const PUZZLE_GAMES: MiniGameId[] = ['bilmece', 'kelime_avi', 'kelime_yap', 'anagram', 'cocuk_sudoku', 'mantik_kareleri', 'sayi_sekilleri'];
-const VISUAL_GAMES: MiniGameId[] = ['memory_match', 'tangram', 'yapboz', 'labirent', 'fark_bul', 'golge_eslestir', 'desen_tamamla', 'shape_counting'];
-const REFLEX_GAMES: MiniGameId[] = ['simon_diyor', 'hizli_dokun', 'balon_patlat', 'meyve_yakala', 'renk_kosusu', 'baloncuk_birlestir', 'kule_yap', 'mini_kosucu'];
-const LEARNING_GAMES: MiniGameId[] = ['matematik_hizi', 'hedef_sayi', 'saat_ogren', 'yazim_oyunu', 'hayvan_bilgisi', 'bayraklar', 'color_pattern'];
+const BOARD_GAMES: MiniGameId[] = ['tavla', 'satranc', 'okey_101'];
+const CARDS_GAMES: MiniGameId[] = ['poker', 'batak', 'pisti', 'solitaire'];
+const MIND_GAMES: MiniGameId[] = ['sudoku_master', 'game_2048', 'kelime_bulmaca'];
 
 function getGameCategory(id: MiniGameId): string {
-  if (PUZZLE_GAMES.includes(id)) return 'puzzle';
-  if (VISUAL_GAMES.includes(id)) return 'visual';
-  if (REFLEX_GAMES.includes(id)) return 'reflex';
-  if (LEARNING_GAMES.includes(id)) return 'learning';
+  if (BOARD_GAMES.includes(id)) return 'board';
+  if (CARDS_GAMES.includes(id)) return 'cards';
+  if (MIND_GAMES.includes(id)) return 'mind_puzzle';
   return 'general';
 }
 
@@ -177,7 +162,7 @@ interface ArcadeStoreState {
 
   achievements: Achievement[];
   gameSessions: GameSession[];
-  scores: KidsGameScores;
+  scores: ArcadeGameScores;
   totalXp: number;
 
   recordGameSession: (session: Omit<GameSession, 'sessionId' | 'completedAt'>) => void;
@@ -204,11 +189,7 @@ export const useArcadeStore = create<ArcadeStoreState>()(
       achievements: DEFAULT_ACHIEVEMENTS,
 
       gameSessions: [],
-      scores: {
-        memoryMatchBest: {},
-        shapeCountingHighScore: 0,
-        colorPatternHighScore: 0,
-      },
+      scores: {},
       totalXp: 0,
 
       checkAndResetDailyQuests: () => {
@@ -242,22 +223,9 @@ export const useArcadeStore = create<ArcadeStoreState>()(
         let additionalXp = 0;
 
         // 1. Update Best Scores
-        if (fullSession.gameId === 'memory_match' && fullSession.difficulty && fullSession.moves) {
-          const diffKey =
-            fullSession.difficulty === 'easy'
-              ? 'easyMoves'
-              : fullSession.difficulty === 'medium'
-              ? 'mediumMoves'
-              : 'hardMoves';
-          const prevBest = currentScores.memoryMatchBest[diffKey];
-          if (!prevBest || fullSession.moves < prevBest) {
-            currentScores.memoryMatchBest[diffKey] = fullSession.moves;
-          }
-        } else {
-          const gameKey = `${fullSession.gameId}_high`;
-          if (fullSession.score > (currentScores[gameKey] || 0)) {
-            currentScores[gameKey] = fullSession.score;
-          }
+        const gameKey = `${fullSession.gameId}_high`;
+        if (fullSession.score > (currentScores[gameKey] || 0)) {
+          currentScores[gameKey] = fullSession.score;
         }
 
         const gameCat = getGameCategory(fullSession.gameId);
@@ -293,10 +261,9 @@ export const useArcadeStore = create<ArcadeStoreState>()(
 
         // 3. Update Achievements
         const playedGameIds = new Set(currentSessions.map((s) => s.gameId));
-        const playedPuzzleCount = new Set(currentSessions.filter((s) => PUZZLE_GAMES.includes(s.gameId)).map((s) => s.gameId)).size;
-        const playedVisualCount = new Set(currentSessions.filter((s) => VISUAL_GAMES.includes(s.gameId)).map((s) => s.gameId)).size;
-        const playedReflexSessions = currentSessions.filter((s) => REFLEX_GAMES.includes(s.gameId)).length;
-        const playedLearningCount = new Set(currentSessions.filter((s) => LEARNING_GAMES.includes(s.gameId)).map((s) => s.gameId)).size;
+        const playedBoardCount = new Set(currentSessions.filter((s) => BOARD_GAMES.includes(s.gameId)).map((s) => s.gameId)).size;
+        const playedCardsCount = new Set(currentSessions.filter((s) => CARDS_GAMES.includes(s.gameId)).map((s) => s.gameId)).size;
+        const playedMindCount = new Set(currentSessions.filter((s) => MIND_GAMES.includes(s.gameId)).map((s) => s.gameId)).size;
 
         const updatedAchievements = get().achievements.map((ach) => {
           if (ach.isUnlocked) return ach;
@@ -310,28 +277,24 @@ export const useArcadeStore = create<ArcadeStoreState>()(
               unlockNow = currentProg >= 1;
               break;
             case 'ach_distinct_games':
-              currentProg = Math.min(5, playedGameIds.size);
-              unlockNow = currentProg >= 5;
+              currentProg = Math.min(4, playedGameIds.size);
+              unlockNow = currentProg >= 4;
               break;
             case 'ach_arcade_veteran':
-              currentProg = Math.min(15, currentSessions.length);
-              unlockNow = currentProg >= 15;
+              currentProg = Math.min(10, currentSessions.length);
+              unlockNow = currentProg >= 10;
               break;
-            case 'ach_puzzle_master':
-              currentProg = Math.min(3, playedPuzzleCount);
+            case 'ach_board_master':
+              currentProg = Math.min(2, playedBoardCount);
+              unlockNow = currentProg >= 2;
+              break;
+            case 'ach_cards_expert':
+              currentProg = Math.min(3, currentSessions.filter((s) => CARDS_GAMES.includes(s.gameId)).length);
               unlockNow = currentProg >= 3;
               break;
-            case 'ach_visual_expert':
-              currentProg = Math.min(3, playedVisualCount);
-              unlockNow = currentProg >= 3;
-              break;
-            case 'ach_reflex_champion':
-              currentProg = Math.min(5, playedReflexSessions);
-              unlockNow = currentProg >= 5;
-              break;
-            case 'ach_knowledge_guru':
-              currentProg = Math.min(3, playedLearningCount);
-              unlockNow = currentProg >= 3;
+            case 'ach_mind_champion':
+              currentProg = Math.min(2, playedMindCount);
+              unlockNow = currentProg >= 2;
               break;
             default:
               break;
@@ -378,11 +341,7 @@ export const useArcadeStore = create<ArcadeStoreState>()(
       resetAllProgress: () => {
         set({
           gameSessions: [],
-          scores: {
-            memoryMatchBest: {},
-            shapeCountingHighScore: 0,
-            colorPatternHighScore: 0,
-          },
+          scores: {},
           dailyQuests: DEFAULT_DAILY_QUESTS.map((q) => ({
             ...q,
             currentValue: 0,

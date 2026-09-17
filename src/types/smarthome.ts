@@ -36,6 +36,8 @@ export type SmartDeviceState =
   | 'standby'
   | 'unavailable';
 
+export type SmartDeviceSource = 'matter' | 'home_assistant' | 'vendor_oauth';
+
 export type SmartHomeRole =
   | 'home_owner'
   | 'admin'
@@ -45,13 +47,48 @@ export type SmartHomeRole =
 
 export type SecurityMode = 'disarmed' | 'armed_home' | 'armed_away' | 'alarm_triggered';
 
-export interface SmartDevice {
-  id: string; // e.g., 'light.salon_tavan', 'inverter.solar_main', 'heatpump.home'
-  externalEntityId: string; // Home Assistant entity_id
+export interface SmartDeviceCapabilities {
+  canDim?: boolean;
+  hasColor?: boolean;
+  hasEnergyMonitoring?: boolean;
+  hasPowerMeasurement?: boolean;
+  hasTemperature?: boolean;
+  hasHumidity?: boolean;
+  hasBattery?: boolean;
+  isCriticalSecurity?: boolean;
+  isLock?: boolean;
+  isCamera?: boolean;
+  canPTZ?: boolean;
+  isHeatPump?: boolean;
+  isSolarInverter?: boolean;
+  isAppliance?: boolean;
+  supportedModes?: string[];
+}
+
+export interface CandidateSmartDevice {
+  providerDeviceId: string;
+  source: SmartDeviceSource;
+  vendorName?: string;
   name: string;
-  room: string; // e.g., 'Salon', 'Mutfak', 'Çatı & Enerji Odası', 'Kazan Dairesi'
+  suggestedRoom?: string;
   category: SmartDeviceCategory;
   state: SmartDeviceState;
+  capabilities: SmartDeviceCapabilities;
+  attributes: Record<string, any>;
+  isOnline: boolean;
+}
+
+export interface SmartDevice {
+  id: string; // Internal LifeOS unique ID
+  providerDeviceId: string; // ID from Matter/HA/Vendor
+  source: SmartDeviceSource;
+  vendorName?: string;
+  name: string;
+  room?: string; // Optional user-assigned room
+  roomId?: string;
+  category: SmartDeviceCategory;
+  state: SmartDeviceState;
+  capabilities: SmartDeviceCapabilities;
   attributes: {
     brightness?: number; // 0-100%
     colorTemp?: number;
@@ -59,29 +96,29 @@ export interface SmartDevice {
     currentTemperature?: number;
     humidity?: number;
     batteryLevel?: number;
-    powerWatt?: number; // Live power draw in Watts
-    powerKW?: number; // Live power in kW
-    energyKWh?: number; // Cumulative kWh
+    powerWatt?: number; // Live power draw in Watts (only if hasPowerMeasurement)
+    powerKW?: number;
+    energyKWh?: number; // Cumulative kWh (only if hasEnergyMonitoring)
     isCriticalSecurity?: boolean; // Requires PIN / Owner permission
     cameraStreamUrl?: string;
     isAlarmActive?: boolean;
     alarmType?: 'water_leak' | 'smoke' | 'gas' | 'motion' | 'door_breach';
     speedLevel?: number;
     volumeLevel?: number;
-    // Solar & Inverter specific attributes
+    // Solar & Inverter specific attributes (only if isSolarInverter)
     solarProductionKW?: number;
     batteryStoragePercent?: number;
     gridFeedInKW?: number;
     gridDrawKW?: number;
     inverterEfficiencyPercent?: number;
-    // Heat pump specific attributes
+    // Heat pump specific attributes (only if isHeatPump)
     waterFlowTempC?: number;
     waterReturnTempC?: number;
     hotWaterTankTempC?: number;
     copEfficiency?: number;
     compressorLoadPercent?: number;
     heatPumpMode?: 'heating' | 'cooling' | 'hot_water' | 'eco';
-    // Appliance specific attributes
+    // Appliance specific attributes (only if isAppliance)
     applianceType?: 'washing_machine' | 'dishwasher' | 'oven' | 'dryer' | 'robot_vacuum' | 'refrigerator' | 'coffee_maker';
     programName?: string;
     remainingMinutes?: number;
@@ -90,24 +127,25 @@ export interface SmartDevice {
     ecoSolarAutoStart?: boolean;
   };
   isOnline: boolean;
-  lastUpdated: string; // ISO
+  dateAdded: string; // ISO
+  lastSyncedAt: string; // ISO
 }
 
 export interface SmartRoom {
   id: string;
   name: string;
-  icon: string;
+  icon?: string;
   deviceCount: number;
-  activeSummary: string; // e.g., '2 ışık açık • 22.4°C'
+  activeSummary?: string;
 }
 
 export interface SmartHomeHome {
   id: string;
-  name: string; // 'Ev', 'Yazlık', 'Ofis'
+  name: string;
   address?: string;
   isBridgeConnected: boolean;
-  bridgeType: 'home_assistant' | 'matter_hub' | 'disabled';
-  bridgeUrl?: string; // Server side only, masked for client
+  bridgeType: 'home_assistant' | 'matter_hub' | 'vendor_oauth' | 'disabled';
+  bridgeUrl?: string;
   securityMode: SecurityMode;
   roomCount: number;
   deviceCount: number;
@@ -148,113 +186,24 @@ export interface SmartHomeAuditLog {
   requiresPin?: boolean;
 }
 
-// Inverter & Solar System detailed model
-export interface SmartSolarSystem {
-  solarProductionKW: number;
-  dailySolarKWh: number;
-  monthlySolarKWh: number;
-  inverterStatus: 'generating' | 'standby' | 'fault' | 'grid_sync';
-  inverterEfficiency: number; // e.g. 98.4%
-  inverterTempC: number;
-  inverterModel: string;
-  batteryLevelPercent: number;
-  batteryPowerKW: number; // Positive = Charging, Negative = Discharging
-  batteryCapacityKWh: number;
-  batteryHealthPercent: number;
-  gridDrawKW: number;
-  gridFeedInKW: number;
-  homeConsumptionKW: number;
-  selfSufficiencyPercent: number; // e.g. 91%
-  co2SavedKg: number;
-  solarSurplusAutoAction: 'battery_first' | 'ev_charge' | 'heat_pump_hotwater' | 'grid_export';
+// Matter Commissioning Payload
+export interface MatterCommissionRequest {
+  setupCode: string; // QR payload or 11/21 digit manual pairing code
+  deviceName: string;
+  roomName?: string;
+  discriminator?: number;
 }
 
-// Heat Pump system detailed model
-export interface SmartHeatPumpSystem {
+// Vendor Account OAuth Definition
+export interface SupportedVendorAccount {
   id: string;
   name: string;
-  mode: 'heating' | 'cooling' | 'hot_water' | 'eco' | 'off';
-  targetTempC: number;
-  currentRoomTempC: number;
-  waterFlowTempC: number;
-  waterReturnTempC: number;
-  hotWaterTankTempC: number;
-  hotWaterTankTargetTempC: number;
-  outdoorAmbientTempC: number;
-  copEfficiency: number; // e.g. 4.7
-  compressorPowerKW: number; // e.g. 1.85 kW
-  compressorFrequencyHz: number;
-  silentMode: boolean;
-  boostMode: boolean;
-  solarSyncEnabled: boolean; // Overheat water tank during peak solar hours
-  dailyHeatingKWh: number;
-}
-
-// Smart Camera detailed model
-export interface SmartCameraSystem {
-  id: string;
-  name: string;
-  room: string;
-  streamUrl: string;
-  rtspUrl?: string;
-  isLive: boolean;
-  motionDetected: boolean;
-  privacyMode: boolean;
-  nightVision: boolean;
-  recordingStatus: 'continuous' | 'event_only' | 'off';
-  resolution: string;
-  ptzCapable: boolean;
-  batteryPercent?: number;
-  lastMotionAt?: string;
-}
-
-// Smart Household Appliance model
-export interface SmartApplianceSystem {
-  id: string;
-  name: string;
-  type: 'washing_machine' | 'dishwasher' | 'oven' | 'dryer' | 'robot_vacuum' | 'refrigerator' | 'coffee_maker';
-  room: string;
-  state: 'running' | 'idle' | 'paused' | 'delayed_start' | 'completed' | 'cleaning' | 'standby';
-  programName: string;
-  remainingMinutes: number;
-  progressPercent: number;
-  doorOpen: boolean;
-  currentPowerWatt: number;
-  ecoMode: boolean;
-  waterConsumptionLiters?: number;
-  solarEcoStartSchedule: boolean; // Automatically start when solar power exceeds 2.5 kW
-  energyRating: string; // 'A+++', 'A'
-}
-
-// Real-time kW Power & Energy Flow Overview
-export interface SmartEnergyFlowOverview {
-  currentTotalPowerKW: number;
-  solarProductionKW: number;
-  gridPowerKW: number; // Positive = Draw from grid, Negative = Feed to grid
-  batteryPowerKW: number; // Positive = Charging, Negative = Discharging
-  batteryPercent: number;
-  homeConsumptionKW: number;
-  heatPumpKW: number;
-  appliancesKW: number;
-  lightsAndPlugsKW: number;
-  dailyTotalSolarKWh: number;
-  dailyTotalConsumedKWh: number;
-  dailyGridImportKWh: number;
-  dailyGridExportKWh: number;
-  selfConsumptionPercent: number;
-  efficiencyScore: number; // 0 - 100
-  estimatedDailyCostTL: number;
-  estimatedDailySavedTL: number;
-  topConsumers: Array<{
-    deviceId: string;
-    deviceName: string;
-    room: string;
-    category: string;
-    currentKW: number;
-    dailyKWh: number;
-    percentage: number;
-  }>;
-  smartSavingsTips: string[];
+  brandIcon: string;
+  description: string;
+  isSupported: boolean;
+  authType: 'oauth2' | 'token' | 'unsupported';
+  oauthUrl?: string;
+  statusNotice?: string;
 }
 
 export interface SmartEnergyOverview {

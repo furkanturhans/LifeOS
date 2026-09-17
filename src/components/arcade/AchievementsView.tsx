@@ -24,10 +24,9 @@ interface AchievementsViewProps {
 const CATEGORY_TABS: { id: 'all' | AchievementCategory; label: string }[] = [
   { id: 'all', label: 'Tümü' },
   { id: 'general', label: 'Genel' },
-  { id: 'puzzle', label: 'Zeka & Bulmaca' },
-  { id: 'visual', label: 'Görsel & Şekil' },
-  { id: 'reflex', label: 'Hız & Refleks' },
-  { id: 'learning', label: 'Öğrenme & Bilgi' },
+  { id: 'board', label: 'Masa & Taş' },
+  { id: 'cards', label: 'Kart Oyunları' },
+  { id: 'mind_puzzle', label: 'Zihin & Bulmaca' },
 ];
 
 export function AchievementsView({ onBackToArcade }: AchievementsViewProps) {

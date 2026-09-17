@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { SmartHomeEngine } from '@/lib/smarthome/SmartHomeEngine';
-import { getSmartHomeProvider } from '@/lib/smarthome/SmartHomeProvider';
 import type { SmartHomeRole } from '@/types/smarthome';
 
 export async function GET(request: Request) {
@@ -14,14 +13,7 @@ export async function GET(request: Request) {
   const scenes = SmartHomeEngine.getScenes();
   const automations = SmartHomeEngine.getAutomations();
   const auditLogs = SmartHomeEngine.getAuditLogs();
-  const solar = SmartHomeEngine.getSolarSystem();
-  const heatPump = SmartHomeEngine.getHeatPumpSystem();
-  const cameras = SmartHomeEngine.getCameras(role);
-  const appliances = SmartHomeEngine.getAppliances();
-  const energyFlow = SmartHomeEngine.getEnergyFlow();
-
-  const provider = getSmartHomeProvider();
-  const energy = await provider.getEnergyData();
+  const supportedVendors = SmartHomeEngine.getSupportedVendors();
 
   return NextResponse.json({
     success: true,
@@ -32,11 +24,6 @@ export async function GET(request: Request) {
     scenes,
     automations,
     auditLogs,
-    energy,
-    solar,
-    heatPump,
-    cameras,
-    appliances,
-    energyFlow,
+    supportedVendors,
   });
 }
