@@ -5,17 +5,20 @@ import { cleanLifeOSId, isValidLifeOSId } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/server';
 import { getLocalUser, saveLocalUser, isLocalUsernameUnique } from '@/lib/localDb';
 
+const localDevelopmentAuth=()=>process.env.NODE_ENV!=='production'&&(!process.env.NEXT_PUBLIC_SUPABASE_URL||/placeholder|your[_-]/.test(process.env.NEXT_PUBLIC_SUPABASE_URL));
+
 export async function GET(request: NextRequest) {
   try {
     const supabase = await createClient();
     const { data: { user: sbUser } } = await supabase.auth.getUser();
 
     let verifiedSupabaseId = sbUser?.id;
-    if (!verifiedSupabaseId) {
+    if (!verifiedSupabaseId && localDevelopmentAuth()) {
       const cookieStore = await cookies();
       verifiedSupabaseId = cookieStore.get('lifeos_session')?.value;
     }
 
+    if(!verifiedSupabaseId)return NextResponse.json({error:'SIGN_IN'},{status:401});
     let dbUser = null;
 
     // Prioritize authenticated session ID to retrieve the profile securely
@@ -39,7 +42,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Fallback/Legacy query parameters (if no session or for public queries)
-    if (!dbUser) {
+    if (!dbUser && localDevelopmentAuth()) {
       const { searchParams } = new URL(request.url);
       const userId = searchParams.get('userId');
       const email = searchParams.get('email');
@@ -109,7 +112,7 @@ export async function PATCH(request: NextRequest) {
     const { data: { user: sbUser } } = await supabase.auth.getUser();
 
     let verifiedSupabaseId = sbUser?.id;
-    if (!verifiedSupabaseId) {
+    if (!verifiedSupabaseId && localDevelopmentAuth()) {
       const cookieStore = await cookies();
       verifiedSupabaseId = cookieStore.get('lifeos_session')?.value;
     }
@@ -286,6 +289,7 @@ export async function PATCH(request: NextRequest) {
         },
       });
     } catch (dbError: any) {
+      if(!localDevelopmentAuth())return NextResponse.json({error:'UNAVAILABLE'},{status:503});
       // DB is offline — apply changes only to local fallback store
       console.warn('DB offline (PATCH profile), using local fallback:', dbError);
 

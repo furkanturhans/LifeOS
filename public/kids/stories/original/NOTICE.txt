@@ -1,0 +1,1 @@
+Original stories and scene compositions: LifeOS. Character illustrations adapted from Google Noto Emoji, Copyright 2013 Google, Inc., Apache 2.0. Original source https://github.com/googlefonts/noto-emoji/tree/main/2D/svg. Modifications: scale, layout and scene composition.

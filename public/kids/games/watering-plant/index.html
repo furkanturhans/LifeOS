@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob: data:; connect-src 'none'; base-uri 'none'; form-action 'none'"><script>const lifeosGameStorage=(()=>{const data=new Map();return{getItem:k=>data.get(k)??null,setItem:(k,v)=>data.set(k,String(v)),removeItem:k=>data.delete(k),clear:()=>data.clear()}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Bitki Sulama · LifeOS</title>
+  <style>
+    :root {
+      --bg-top: #81d4fa;
+      --bg-mid: #aed581;
+      --bg-bottom: #558b2f;
+      --accent: #4caf50;
+      --water: #29b6f6;
+      --text: #1b3a2b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100vh; height: 100dvh;
+      overflow: hidden;
+      touch-action: manipulation;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
+      color: var(--text);
+    }
+    .wrap {
+      width: 100%; max-width: 480px;
+      height: 100vh; height: 100dvh;
+      display: flex; flex-direction: column;
+      padding: 10px 12px 8px; gap: 8px;
+      margin: 0 auto;
+      position: relative;
+    }
+    h1 {
+      font-size: clamp(24px, 6vw, 32px);
+      text-align: center;
+      text-shadow: 0 2px 6px rgba(255,255,255,0.8), 0 0 15px rgba(255,255,255,0.5);
+      font-weight: 900;
+      color: #1b5e20;
+    }
+    .hud {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 16px; padding: 12px 20px;
+      font-size: 16px; font-weight: 800;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      border: 2px solid rgba(255,255,255,0.9);
+    }
+    .hud .round { color: #2e7d32; }
+    .hud .score { color: #ef6c00; font-size: 18px; }
+    .hud .best { color: #558b2f; font-size: 14px; }
+    
+    #gameArea {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(129,199,132,0.4) 100%);
+      overflow: hidden;
+      padding-bottom: 20px;
+      box-shadow: inset 0 0 30px rgba(76,175,80,0.2);
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+    
+    #sun {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 48px;
+      animation: pulseSun 3s infinite alternate ease-in-out;
+      filter: drop-shadow(0 0 15px rgba(255,235,59,0.8));
+    }
+    @keyframes pulseSun {
+      0% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1.15) rotate(15deg); }
+    }
+
+    #wateringCan {
+      position: absolute;
+      top: 30%; right: 10%;
+      font-size: 60px;
+      transform-origin: 20% 80%;
+      transition: transform 0.2s ease-out;
+      z-index: 10;
+      opacity: 0.8;
+      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+    }
+    #wateringCan.pouring {
+      transform: rotate(-35deg) scale(1.1);
+      opacity: 1;
+      filter: drop-shadow(2px 6px 10px rgba(0,0,0,0.3));
+    }
+
+    /* Water drops */
+    .drop {
+      position: absolute;
+      width: 6px; height: 12px;
+      background: var(--water);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.8;
+      z-index: 5;
+    }
+    
+    /* Sparkles */
+    .sparkle {
+      position: absolute;
+      font-size: 24px;
+      pointer-events: none;
+      z-index: 20;
+      animation: pop 0.6s ease-out forwards;
+    }
+    @keyframes pop {
+      0% { transform: scale(0) translateY(0); opacity: 1; }
+      50% { transform: scale(1.5) translateY(-30px); opacity: 1; }
+      100% { transform: scale(1) translateY(-50px); opacity: 0; }
+    }
+
+    #plantStage {
+      font-size: clamp(70px, 25vw, 130px);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none; -webkit-user-select: none;
+      z-index: 15;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.25));
+    }
+    #plantStage.grow { animation: growPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    @keyframes growPop {
+      0% { transform: scale(0.7) translateY(20px); }
+      50% { transform: scale(1.2) translateY(-10px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+    #plantStage.wilt { animation: wiltShake 0.6s ease; filter: grayscale(0.6) sepia(0.3) drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
+    @keyframes wiltShake {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      20% { transform: rotate(-12deg) scale(0.9); }
+      40% { transform: rotate(10deg) scale(0.9); }
+      60% { transform: rotate(-8deg) scale(0.85); }
+      80% { transform: rotate(6deg) scale(0.85); }
+    }
+    
+    .gauge-wrap {
+      width: 90%;
+      max-width: 400px;
+      margin-top: 15px;
+      background: rgba(255,255,255,0.7);
+      padding: 10px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .gauge-label {
+      font-size: 15px; font-weight: 900; margin-bottom: 8px;
+      display: flex; justify-content: space-between;
+      color: #1b5e20;
+    }
+    
+    /* Target area indicator */
+    .gauge-container {
+      position: relative;
+      height: 28px;
+      background: #e0e0e0;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .target-zone {
+      position: absolute;
+      height: 100%;
+      background: rgba(102, 187, 106, 0.4);
+      left: 45%; width: 20%;
+      border-left: 2px dashed #2e7d32;
+      border-right: 2px dashed #2e7d32;
+      z-index: 1;
+    }
+    .gauge-fill {
+      position: absolute;
+      height: 100%;
+      width: 40%;
+      background: linear-gradient(90deg, #4fc3f7, #0288d1);
+      box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2), inset 0 2px 5px rgba(255,255,255,0.4);
+      z-index: 2;
+      border-radius: 14px;
+      /* removed transition to make it snappier during requestAnimationFrame */
+    }
+    .gauge-fill.danger { background: linear-gradient(90deg, #ff7043, #d84315); }
+    .gauge-fill.perfect { background: linear-gradient(90deg, #66bb6a, #2e7d32); }
+
+    #canBtn {
+      margin-top: 16px;
+      width: 100%;
+      max-width: 400px;
+      min-height: 64px;
+      background: linear-gradient(135deg, #29b6f6, #0277bd);
+      color: white; border: none; border-radius: 20px;
+      font-size: 22px; font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #01579b, 0 10px 20px rgba(2,119,189,0.5);
+      transition: all 0.1s;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    #canBtn:active { 
+      transform: translateY(6px); 
+      box-shadow: 0 0 0 #01579b, 0 2px 10px rgba(2,119,189,0.5);
+    }
+    
+    footer {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 4px 0;
+    }
+    footer small { font-size: 13px; opacity: 0.9; font-weight: 600; color: #1b5e20; }
+    .home-link {
+      color: #ffffff; text-decoration: none;
+      font-size: 14px; font-weight: bold;
+      background: #43a047;
+      padding: 8px 16px; border-radius: 12px;
+      min-height: 44px; display: flex; align-items: center;
+      box-shadow: 0 4px 8px rgba(27,94,32,0.3);
+    }
+    .home-link:active { background: #2e7d32; }
+    
+    .overlay {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(27,58,43,0.8);
+      backdrop-filter: blur(5px);
+      z-index: 100;
+    }
+    .overlay.hidden { display: none; }
+    .overlay-card {
+      background: linear-gradient(135deg, #ffffff, #e8f5e9);
+      border: 4px solid var(--accent);
+      border-radius: 24px;
+      padding: 32px 24px;
+      text-align: center;
+      max-width: 340px; width: 90%;
+      color: #1b3a2b;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+    .overlay-card h2 { font-size: 30px; margin-bottom: 12px; color: #2e7d32; }
+    .overlay-card p { font-size: 16px; line-height: 1.6; margin-bottom: 24px; font-weight: 500; }
+    .result-score { font-size: 56px; font-weight: 900; color: #f57c00; margin: 12px 0; text-shadow: 0 2px 5px rgba(245,124,0,0.3); }
+    .btn-start {
+      background: linear-gradient(135deg, #66bb6a, #388e3c);
+      color: white; border: none; border-radius: 16px;
+      font-size: 22px; font-weight: 900;
+      padding: 16px 32px; cursor: pointer;
+      min-height: 56px; width: 100%;
+      box-shadow: 0 6px 0 #1b5e20, 0 10px 20px rgba(46,125,50,0.5);
+      transition: all 0.1s;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .btn-start:active { transform: translateY(6px); box-shadow: 0 0 0 #1b5e20, 0 2px 10px rgba(46,125,50,0.5); }
+  </style>
+<!-- jangyoon-s-game catalog metadata -->
+
+
+
+</head>
+<body>
+  <div class="wrap">
+    <h1>Bitki Sulama</h1>
+
+    <div class="hud">
+      <span class="round">🌼 Tur<span id="roundDisplay">1</span>/<span id="roundTotal">6</span></span>
+      <span class="score">🏆 <span id="scoreDisplay">0</span>nokta</span>
+      <span class="best">en iyi<span id="bestDisplay">0</span></span>
+    </div>
+
+    <div id="gameArea">
+      <div id="sun">☀️</div>
+      <div id="wateringCan">🚰</div>
+      <div id="plantStage">🌰</div>
+      
+      <div class="gauge-wrap">
+        <div class="gauge-label">
+          <span>💧Su miktarını ayarlayın!</span>
+          <span id="gaugeText">40%</span>
+        </div>
+        <div class="gauge-container">
+          <div class="target-zone" id="targetZone"></div>
+          <div class="gauge-fill" id="gaugeFill"></div>
+        </div>
+      </div>
+      <button id="canBtn">💦Suya sıkıca bastırın</button>
+    </div>
+
+    <footer>
+      <small>Yeşil noktalı çizgiyi suyla doldurun!</small>
+      
+    </footer>
+  </div>
+
+  <div class="overlay" id="startOverlay">
+    <div class="overlay-card">
+      <h2>🌱Bitki yetiştirmek</h2>
+      <p><strong>💦 Sulama</strong>Düğmeyi basılı tutun<br>su göstergesi<strong>yeşil alan</strong>Ayarlayın!<br><br>Çok az veya çok fazla varsa<br>Bitkiler soluyor.<br>6 tur boyunca güzelce büyütelim!</p>
+      <button class="btn-start" id="startBtn">Başlayın!</button>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="endOverlay">
+    <div class="overlay-card">
+      <h2>🎉 Bahçe işlerini bitirdim!</h2>
+      <div class="result-score" id="finalScore">0</div>
+      <p id="resultMsg"></p>
+      <button class="btn-start" id="restartBtn">yeniden büyümek</button>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+    const CONFIG = {
+      TOTAL_ROUNDS: 6,
+      STORAGE_KEY: 'watering-plant_best',
+      STAGES: ['🌰', '🌱', '🌿', '🪴', '🌻', '🌸'],
+      TARGET_MIN: 45,
+      TARGET_MAX: 65,
+      FILL_SPEED: 0.9, 
+    };
+
+    let state = {
+      round: 1, score: 0, gauge: 0,
+      stageIndex: 0, filling: false, fillRAF: null, waterRAF: null,
+      gameActive: false,
+    };
+
+    const $ = id => document.getElementById(id);
+    const plantStage = $('plantStage');
+    const gaugeFill = $('gaugeFill');
+    const gaugeText = $('gaugeText');
+    const targetZone = $('targetZone');
+    const canBtn = $('canBtn');
+    const wateringCan = $('wateringCan');
+    const gameArea = $('gameArea');
+
+    // Dynamic Target Zone Init
+    targetZone.style.left = CONFIG.TARGET_MIN + '%';
+    targetZone.style.width = (CONFIG.TARGET_MAX - CONFIG.TARGET_MIN) + '%';
+
+    function getBest() { return parseInt(lifeosGameStorage.getItem(CONFIG.STORAGE_KEY) || '0'); }
+    function saveBest(v) { lifeosGameStorage.setItem(CONFIG.STORAGE_KEY, v); }
+
+    function updateHUD() {
+      $('roundDisplay').textContent = state.round;
+      $('roundTotal').textContent = CONFIG.TOTAL_ROUNDS;
+      $('scoreDisplay').textContent = state.score;
+      $('bestDisplay').textContent = getBest();
+    }
+
+    function updateGauge() {
+      const g = Math.max(0, Math.min(100, state.gauge));
+      gaugeFill.style.width = g + '%';
+      gaugeText.textContent = Math.floor(g) + '%';
+      
+      const inTarget = g >= CONFIG.TARGET_MIN && g <= CONFIG.TARGET_MAX;
+      
+      gaugeFill.classList.remove('danger', 'perfect');
+      if (inTarget) {
+        gaugeFill.classList.add('perfect');
+      } else if (g < 15 || g > 85) {
+        gaugeFill.classList.add('danger');
+      }
+    }
+
+    function spawnWaterDrop() {
+      if (!state.filling) return;
+      const drop = document.createElement('div');
+      drop.className = 'drop';
+      
+      const canRect = wateringCan.getBoundingClientRect();
+      const areaRect = gameArea.getBoundingClientRect();
+      
+      const startX = canRect.left - areaRect.left + 15 + (Math.random() * 20);
+      const startY = canRect.bottom - areaRect.top - 20;
+      
+      drop.style.left = startX + 'px';
+      drop.style.top = startY + 'px';
+      gameArea.appendChild(drop);
+      
+      let y = startY;
+      let speed = 8 + Math.random() * 4;
+      
+      function fall() {
+        if (!state.gameActive) { drop.remove(); return; }
+        y += speed;
+        drop.style.top = y + 'px';
+        if (y > areaRect.height - 130) {
+          drop.remove();
+        } else {
+          requestAnimationFrame(fall);
+        }
+      }
+      requestAnimationFrame(fall);
+    }
+    
+    function spawnSparkle(count, isPerfect) {
+      const emojis = isPerfect ? ['✨', '🌟', '💖'] : ['✨', '🎵'];
+      const rect = plantStage.getBoundingClientRect();
+      const areaRect = gameArea.getBoundingClientRect();
+      
+      const cx = rect.left - areaRect.left + (rect.width/2);
+      const cy = rect.top - areaRect.top + (rect.height/2);
+      
+      for(let i=0; i<count; i++) {
+        const sp = document.createElement('div');
+        sp.className = 'sparkle';
+        sp.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        
+        const offsetX = (Math.random() - 0.5) * 120;
+        const offsetY = (Math.random() - 0.5) * 80;
+        
+        sp.style.left = (cx + offsetX - 15) + 'px';
+        sp.style.top = (cy + offsetY - 15) + 'px';
+        
+        gameArea.appendChild(sp);
+        setTimeout(() => sp.remove(), 600);
+      }
+    }
+
+    function startFill() {
+      if (!state.gameActive) return;
+      state.filling = true;
+      wateringCan.classList.add('pouring');
+      
+      let lastTime = performance.now();
+      
+      const tick = (now) => {
+        if (!state.filling) return;
+        const dt = now - lastTime;
+        lastTime = now;
+        
+        // frame rate independent growth
+        state.gauge += (CONFIG.FILL_SPEED * dt / 16);
+        if (state.gauge > 100) state.gauge = 100;
+        
+        updateGauge();
+        state.fillRAF = requestAnimationFrame(tick);
+      };
+      state.fillRAF = requestAnimationFrame(tick);
+      
+      const waterTick = () => {
+        if (!state.filling) return;
+        spawnWaterDrop();
+        setTimeout(waterTick, 40);
+      };
+      waterTick();
+    }
+
+    function stopFill() {
+      state.filling = false;
+      wateringCan.classList.remove('pouring');
+      if (state.fillRAF) cancelAnimationFrame(state.fillRAF);
+    }
+
+    function resetGaugeForRound() {
+      state.gauge = 15 + Math.random() * 15; // 15~30 시작
+      
+      // Randomize target zone slightly each round for more fun
+      const minStart = 35;
+      const maxStart = 75;
+      const newTarget = minStart + Math.random() * (maxStart - minStart);
+      const zoneWidth = 18 + Math.random() * 8; // 18~26 width
+      
+      CONFIG.TARGET_MIN = newTarget;
+      CONFIG.TARGET_MAX = Math.min(100, newTarget + zoneWidth);
+      
+      targetZone.style.left = CONFIG.TARGET_MIN + '%';
+      targetZone.style.width = (CONFIG.TARGET_MAX - CONFIG.TARGET_MIN) + '%';
+      
+      updateGauge();
+    }
+
+    function judgeRound() {
+      if (!state.gameActive) return;
+      const g = state.gauge;
+      const inTarget = g >= CONFIG.TARGET_MIN && g <= CONFIG.TARGET_MAX;
+      const distance = g < CONFIG.TARGET_MIN ? (CONFIG.TARGET_MIN - g) : (g > CONFIG.TARGET_MAX ? g - CONFIG.TARGET_MAX : 0);
+
+      plantStage.classList.remove('wilt', 'grow');
+      void plantStage.offsetWidth; // trigger reflow
+
+      if (inTarget) {
+        state.score += 20;
+        state.stageIndex = Math.min(state.stageIndex + 1, CONFIG.STAGES.length - 1);
+        plantStage.textContent = CONFIG.STAGES[state.stageIndex];
+        plantStage.classList.add('grow');
+        spawnSparkle(8, true);
+      } else if (distance <= 10) {
+        state.score += 10;
+        plantStage.classList.add('grow');
+        spawnSparkle(3, false);
+      } else {
+        plantStage.classList.add('wilt');
+        const sweat = document.createElement('div');
+        sweat.className = 'sparkle';
+        sweat.textContent = '💧';
+        const rect = plantStage.getBoundingClientRect();
+        const areaRect = gameArea.getBoundingClientRect();
+        sweat.style.left = (rect.left - areaRect.left + 10) + 'px';
+        sweat.style.top = (rect.top - areaRect.top + 10) + 'px';
+        gameArea.appendChild(sweat);
+        setTimeout(() => sweat.remove(), 600);
+      }
+
+      updateHUD();
+
+      if (state.round >= CONFIG.TOTAL_ROUNDS) {
+        setTimeout(endGame, 800);
+      } else {
+        state.round++;
+        setTimeout(() => {
+          resetGaugeForRound();
+          updateHUD();
+        }, 800);
+      }
+    }
+
+    function startGame() {
+      stopFill();
+      state = {
+        round: 1, score: 0, gauge: 20,
+        stageIndex: 0, filling: false, fillRAF: null,
+        gameActive: true,
+      };
+      plantStage.textContent = CONFIG.STAGES[0];
+      plantStage.classList.remove('grow', 'wilt');
+      $('startOverlay').classList.add('hidden');
+      $('endOverlay').classList.add('hidden');
+      resetGaugeForRound();
+      updateHUD();
+    }
+
+    function endGame() {
+      stopFill();
+      state.gameActive = false;
+      const best = getBest();
+      if (state.score > best) saveBest(state.score);
+      $('finalScore').textContent = state.score + "nokta";
+      const msgs = [
+        state.score >= 110 ? "🏆 Tanrı'nın Eli Bahçıvanı!" :
+        state.score >= 80 ? "🌻 Tam çiçek açmış, çok güzel!" :
+        state.score >= 50 ? "🌿İyi büyüdün!" : "🌱 Su kontrolünü tekrar uygulayın!",
+        `<br><small style="color:#558b2f">En yüksek puanlar:${Math.max(state.score, best)}Nokta</small>`
+      ];
+      $('resultMsg').innerHTML = msgs.join('<br>');
+      $('endOverlay').classList.remove('hidden');
+    }
+
+    canBtn.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      startFill();
+    });
+    canBtn.addEventListener('pointerup', () => {
+      if (state.filling) { stopFill(); judgeRound(); }
+    });
+    canBtn.addEventListener('pointerleave', () => {
+      if (state.filling) { stopFill(); judgeRound(); }
+    });
+    canBtn.addEventListener('pointercancel', () => {
+      if (state.filling) { stopFill(); judgeRound(); }
+    });
+    // For context menu block
+    canBtn.addEventListener('contextmenu', e => e.preventDefault());
+
+    $('startBtn').addEventListener('pointerdown', startGame);
+    $('restartBtn').addEventListener('pointerdown', startGame);
+    
+    updateHUD();
+    resetGaugeForRound();
+  })();
+  </script>
+</body>
+</html>

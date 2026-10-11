@@ -3,8 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Eye, Database, Lock, UserCheck, Shield } from 'lucide-react';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export default function PrivacySettingsPage() {
+  const localizeText = useLocaleRender();
   const [privacy, setPrivacy] = useState({
     profileVisibility: true,
     dataTelemetry: false,
@@ -25,8 +27,8 @@ export default function PrivacySettingsPage() {
           <ArrowLeft className="w-5 h-5" />
         </Link>
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-foreground">Gizlilik</h1>
-          <p className="text-xs text-muted-foreground">Veri paylaşımı ve görünürlük ayarları</p>
+          <h1 className="text-xl font-bold tracking-tight text-foreground">{localizeText("Gizlilik")}</h1>
+          <p className="text-xs text-muted-foreground">{localizeText("Veri paylaşımı ve görünürlük ayarları")}</p>
         </div>
       </div>
 
@@ -40,8 +42,8 @@ export default function PrivacySettingsPage() {
               <Eye className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-medium text-foreground">Arama ve Profil Görünürlüğü</h3>
-              <p className="text-xs text-muted-foreground mt-0.5">Diğer LifeOS kullanıcıları sizi @kullaniciadi ile bulabilir</p>
+              <h3 className="text-sm font-medium text-foreground">{localizeText("Arama ve Profil Görünürlüğü")}</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Diğer LifeOS kullanıcıları sizi @kullaniciadi ile bulabilir")}</p>
             </div>
           </div>
           <div
@@ -62,8 +64,8 @@ export default function PrivacySettingsPage() {
               <Shield className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-medium text-foreground">Aktivite ve Denetim Günlüğü</h3>
-              <p className="text-xs text-muted-foreground mt-0.5">Güvenlik için modül ve cihaz erişim günlüklerini yerel olarak tut</p>
+              <h3 className="text-sm font-medium text-foreground">{localizeText("Aktivite ve Denetim Günlüğü")}</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Güvenlik için modül ve cihaz erişim günlüklerini yerel olarak tut")}</p>
             </div>
           </div>
           <div
@@ -84,8 +86,8 @@ export default function PrivacySettingsPage() {
               <Database className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-medium text-foreground">Anonim Telemetri ve Hata Raporları</h3>
-              <p className="text-xs text-muted-foreground mt-0.5">Sistem kararlılığını artırmak için isimsiz çökme raporları gönder</p>
+              <h3 className="text-sm font-medium text-foreground">{localizeText("Anonim Telemetri ve Hata Raporları")}</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Sistem kararlılığını artırmak için isimsiz çökme raporları gönder")}</p>
             </div>
           </div>
           <div

@@ -17,10 +17,11 @@ import { useWalletStore } from '@/stores/useWalletStore';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { LIFEOS_CREDIT_RATE_TL } from '@/types/payment';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 function formatTL(kurus: number): string {
   const tl = kurus / 100;
-  return new Intl.NumberFormat('tr-TR', {
+  return new Intl.NumberFormat(getFormattingLocale(), {
     style: 'currency',
     currency: 'TRY',
     minimumFractionDigits: 2,
@@ -28,6 +29,7 @@ function formatTL(kurus: number): string {
 }
 
 export function UniversalCheckoutModal() {
+  const localizeText = useLocaleRender();
   const {
     isOpen,
     intent,
@@ -60,10 +62,9 @@ export function UniversalCheckoutModal() {
               <ShieldCheck className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-foreground">Güvenli Ödeme ve Onay</h3>
+              <h3 className="text-sm font-bold text-foreground">{localizeText("Güvenli Ödeme ve Onay")}</h3>
               <span className="text-[10px] text-muted-foreground flex items-center gap-1 font-medium">
-                <Lock className="h-3 w-3 text-emerald-500" /> 256-Bit Uçtan Uca Koruma
-              </span>
+                <Lock className="h-3 w-3 text-emerald-500" />{localizeText("256-Bit Uçtan Uca Koruma")}</span>
             </div>
           </div>
 
@@ -79,7 +80,7 @@ export function UniversalCheckoutModal() {
         {isCreatingIntent ? (
           <div className="py-12 flex flex-col items-center justify-center gap-3 text-muted-foreground">
             <RefreshCw className="h-8 w-8 animate-spin text-primary" />
-            <span className="text-xs font-semibold">Ödeme özeti hazırlanıyor...</span>
+            <span className="text-xs font-semibold">{localizeText("Ödeme özeti hazırlanıyor...")}</span>
           </div>
         ) : receipt ? (
           /* Receipt State */
@@ -88,33 +89,31 @@ export function UniversalCheckoutModal() {
               <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-emerald-500/15 text-emerald-500 border border-emerald-500/20 shadow-lg">
                 <CheckCircle2 className="h-8 w-8" />
               </div>
-              <h4 className="text-base font-black text-foreground">İşlem Başarıyla Tamamlandı!</h4>
-              <p className="text-xs text-muted-foreground max-w-xs">
-                Ödemeniz güvenle alındı ve erişiminiz anında aktif edildi.
-              </p>
+              <h4 className="text-base font-black text-foreground">{localizeText("İşlem Başarıyla Tamamlandı!")}</h4>
+              <p className="text-xs text-muted-foreground max-w-xs">{localizeText("Ödemeniz güvenle alındı ve erişiminiz anında aktif edildi.")}</p>
             </div>
 
             {/* Receipt Card */}
             <div className="rounded-2xl bg-muted/40 border border-border/70 p-4 space-y-2.5 text-xs">
               <div className="flex justify-between items-center text-[11px] text-muted-foreground pb-2 border-b border-border/60">
-                <span>İşlem Makbuz No:</span>
-                <span className="font-mono font-bold text-foreground">{receipt.transactionId}</span>
+                <span>{localizeText("İşlem Makbuz No:")}</span>
+                <span className="font-mono font-bold text-foreground">{localizeText(receipt.transactionId)}</span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-muted-foreground">Ürün / Hizmet:</span>
-                <span className="font-bold text-foreground truncate max-w-[220px]">{receipt.itemTitle}</span>
+                <span className="text-muted-foreground">{localizeText("Ürün / Hizmet:")}</span>
+                <span className="font-bold text-foreground truncate max-w-[220px]">{localizeText(receipt.itemTitle)}</span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-muted-foreground">Ödeme Yöntemi:</span>
-                <span className="font-semibold text-foreground">LifeOS Kredisi</span>
+                <span className="text-muted-foreground">{localizeText("Ödeme Yöntemi:")}</span>
+                <span className="font-semibold text-foreground">{localizeText("LifeOS Kredisi")}</span>
               </div>
 
               <div className="flex justify-between items-center pt-2 border-t border-border/60">
-                <span className="font-bold text-foreground">Kullanılan Kredi:</span>
+                <span className="font-bold text-foreground">{localizeText("Kullanılan Kredi:")}</span>
                 <span className="font-black font-mono text-emerald-500 text-sm">
-                  {receipt.creditsPaid ? `${receipt.creditsPaid} LifeOS Kredisi` : formatTL(receipt.amountPaidKurus)}
+                  {localizeText(receipt.creditsPaid ? `${receipt.creditsPaid} LifeOS Kredisi` : formatTL(receipt.amountPaidKurus))}
                 </span>
               </div>
             </div>
@@ -125,16 +124,12 @@ export function UniversalCheckoutModal() {
                 href="/finance"
                 onClick={closeCheckout}
                 className="flex-1 py-2.5 rounded-xl border border-border text-center text-xs font-bold text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              >
-                Cüzdanıma Git
-              </Link>
+              >{localizeText("Cüzdanıma Git")}</Link>
 
               <button
                 onClick={closeCheckout}
                 className="flex-1 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs font-bold shadow-xs hover:bg-primary/90 transition-colors"
-              >
-                Tamam
-              </button>
+              >{localizeText("Tamam")}</button>
             </div>
           </div>
         ) : intent ? (
@@ -143,34 +138,28 @@ export function UniversalCheckoutModal() {
             {/* Item Summary Card */}
             <div className="rounded-2xl bg-muted/40 border border-border/70 p-4 space-y-2">
               <span className="text-[10px] font-bold text-primary uppercase font-mono tracking-wider">
-                {intent.sourceModule.replace('_', ' ')}
+                {localizeText(intent.sourceModule.replace('_', ' '))}
               </span>
-              <h4 className="text-sm font-bold text-foreground">{intent.referenceItemTitle}</h4>
+              <h4 className="text-sm font-bold text-foreground">{localizeText(intent.referenceItemTitle)}</h4>
 
               {intent.sellerName && (
-                <p className="text-[11px] text-muted-foreground">
-                  Sağlayıcı / Eğitmen: <span className="font-semibold text-foreground">{intent.sellerName}</span>
+                <p className="text-[11px] text-muted-foreground">{localizeText("Sağlayıcı / Eğitmen:")}<span className="font-semibold text-foreground">{localizeText(intent.sellerName)}</span>
                 </p>
               )}
 
               <div className="pt-2 border-t border-border/50 flex items-center justify-between">
-                <span className="text-xs text-muted-foreground font-medium">Gerekli Bakiye:</span>
+                <span className="text-xs text-muted-foreground font-medium">{localizeText("Gerekli Bakiye:")}</span>
                 <div className="text-right">
                   <span className="text-base font-black font-mono text-foreground block">
-                    {creditsRequired} LifeOS Kredisi
-                  </span>
-                  <span className="text-[10px] text-muted-foreground">
-                    Yaklaşık: {totalAmountTL} TL (1 Kredi = 1,35 TL)
-                  </span>
+                    {localizeText(creditsRequired)}{localizeText(" LifeOS Kredisi")}</span>
+                  <span className="text-[10px] text-muted-foreground">{localizeText("Yaklaşık: ")}{localizeText(totalAmountTL)}{localizeText(" TL (1 Kredi = 1,35 TL)")}</span>
                 </div>
               </div>
             </div>
 
             {/* Payment Method Selector */}
             <div className="space-y-2">
-              <label className="text-xs font-bold text-foreground block">
-                Ödeme Yöntemi:
-              </label>
+              <label className="text-xs font-bold text-foreground block">{localizeText("Ödeme Yöntemi:")}</label>
 
               <div className="space-y-2">
                 {/* 1. LifeOS Credits */}
@@ -189,19 +178,17 @@ export function UniversalCheckoutModal() {
                       <Coins className="h-5 w-5" />
                     </div>
                     <div>
-                      <span className="text-xs font-bold text-foreground block">LifeOS Kredisi</span>
-                      <span className="text-[10px] text-muted-foreground">
-                        Cüzdanınızdaki Bakiye: <strong className="font-mono text-foreground">{creditBalance} Kredi</strong>
+                      <span className="text-xs font-bold text-foreground block">{localizeText("LifeOS Kredisi")}</span>
+                      <span className="text-[10px] text-muted-foreground">{localizeText("Cüzdanınızdaki Bakiye:")}<strong className="font-mono text-foreground">{localizeText(creditBalance)}{localizeText(" Kredi")}</strong>
                       </span>
                     </div>
                   </div>
 
                   <div className="text-right">
                     <span className="text-xs font-bold font-mono text-primary block">
-                      -{creditsRequired} Kredi
-                    </span>
+                      -{localizeText(creditsRequired)}{localizeText(" Kredi")}</span>
                     {!isCreditSufficient && (
-                      <span className="text-[10px] text-rose-500 font-bold">Yetersiz Kredi</span>
+                      <span className="text-[10px] text-rose-500 font-bold">{localizeText("Yetersiz Kredi")}</span>
                     )}
                   </div>
                 </button>
@@ -222,14 +209,12 @@ export function UniversalCheckoutModal() {
                       <CreditCard className="h-5 w-5" />
                     </div>
                     <div>
-                      <span className="text-xs font-bold text-foreground block">Kredi / Banka Kartı</span>
-                      <span className="text-[10px] text-muted-foreground">iyzico / PayTR Güvenli Ödeme</span>
+                      <span className="text-xs font-bold text-foreground block">{localizeText("Kredi / Banka Kartı")}</span>
+                      <span className="text-[10px] text-muted-foreground">{localizeText("iyzico / PayTR Güvenli Ödeme")}</span>
                     </div>
                   </div>
 
-                  <span className="text-[10px] font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded-md">
-                    Kart İle Öde
-                  </span>
+                  <span className="text-[10px] font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded-md">{localizeText("Kart İle Öde")}</span>
                 </button>
               </div>
             </div>
@@ -238,7 +223,7 @@ export function UniversalCheckoutModal() {
             {error && (
               <div className="p-3 rounded-2xl border border-rose-500/20 bg-rose-500/10 flex items-start gap-2.5 text-xs text-rose-600 dark:text-rose-400">
                 <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
-                <span className="leading-relaxed">{error}</span>
+                <span className="leading-relaxed">{localizeText(error)}</span>
               </div>
             )}
 
@@ -248,9 +233,7 @@ export function UniversalCheckoutModal() {
                 type="button"
                 onClick={closeCheckout}
                 className="px-4 py-2.5 rounded-xl border border-border text-xs font-semibold text-muted-foreground hover:bg-muted"
-              >
-                Vazgeç
-              </button>
+              >{localizeText("Vazgeç")}</button>
 
               <button
                 type="button"
@@ -264,11 +247,11 @@ export function UniversalCheckoutModal() {
                 {isProcessing ? (
                   <>
                     <RefreshCw className="h-3.5 w-3.5 animate-spin" />
-                    <span>İşleniyor...</span>
+                    <span>{localizeText("İşleniyor...")}</span>
                   </>
                 ) : (
                   <>
-                    <span>{creditsRequired} Kredi ile Onayla</span>
+                    <span>{localizeText(creditsRequired)}{localizeText(" Kredi ile Onayla")}</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </>
                 )}

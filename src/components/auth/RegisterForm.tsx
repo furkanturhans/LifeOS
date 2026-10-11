@@ -13,6 +13,7 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { generateLifeOSId, cleanLifeOSId, formatLifeOSId, setSessionCookie } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 const registerSchema = z
   .object({
@@ -39,6 +40,7 @@ const registerSchema = z
 type RegisterFormData = z.infer<typeof registerSchema>;
 
 export function RegisterForm() {
+  const localizeText = useLocaleRender();
   const router = useRouter();
   const { setUser } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
@@ -145,8 +147,7 @@ export function RegisterForm() {
       });
       setSessionCookie(finalSupabaseUserId);
 
-      router.push('/home');
-      router.refresh();
+      router.replace('/home');
     } catch (err: any) {
       console.error('Registration failed:', err);
       setError(err.message || 'Kayıt işlemi sırasında bir hata oluştu.');
@@ -171,8 +172,8 @@ export function RegisterForm() {
           <span className="text-3xl">⚡</span>
         </motion.div>
         <div className="text-center">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">LifeOS&apos;a Katıl</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">Kişisel dijital yaşam alanını oluştur</p>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">{localizeText("LifeOS'a Katıl")}</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">{localizeText("Kişisel dijital yaşam alanını oluştur")}</p>
         </div>
       </div>
 
@@ -187,9 +188,9 @@ export function RegisterForm() {
           <Input
             {...register('displayName')}
             onBlur={handleNameBlur}
-            label="Ad Soyad"
+            label={localizeText("Ad Soyad")}
             type="text"
-            placeholder="Furkan Yılmaz"
+            placeholder={localizeText("Furkan Yılmaz")}
             autoComplete="name"
             icon={<User className="h-4 w-4" />}
             error={errors.displayName?.message}
@@ -198,26 +199,25 @@ export function RegisterForm() {
           <div>
             <Input
               {...register('lifeosId')}
-              label="LifeOS ID (Kullanıcı Adı)"
+              label={localizeText("LifeOS ID (Kullanıcı Adı)")}
               type="text"
-              placeholder="furkan"
+              placeholder={localizeText("furkan")}
               autoComplete="username"
               autoCapitalize="off"
               icon={<AtSign className="h-4 w-4" />}
               error={errors.lifeosId?.message}
             />
             {rawLifeosId && (
-              <p className="text-[11px] text-muted-foreground mt-1 px-1">
-                Kullanılacak kimlik: <span className="font-semibold text-primary">{formatLifeOSId(rawLifeosId)}</span>
+              <p className="text-[11px] text-muted-foreground mt-1 px-1">{localizeText("Kullanılacak kimlik:")}<span className="font-semibold text-primary">{localizeText(formatLifeOSId(rawLifeosId))}</span>
               </p>
             )}
           </div>
 
           <Input
             {...register('email')}
-            label="E-posta"
+            label={localizeText("E-posta")}
             type="email"
-            placeholder="ornek@email.com"
+            placeholder={localizeText("ornek@email.com")}
             autoComplete="email"
             autoCapitalize="off"
             icon={<Mail className="h-4 w-4" />}
@@ -226,9 +226,9 @@ export function RegisterForm() {
 
           <Input
             {...register('password')}
-            label="Şifre"
+            label={localizeText("Şifre")}
             type={showPassword ? 'text' : 'password'}
-            placeholder="••••••••"
+            placeholder={localizeText("••••••••")}
             autoComplete="new-password"
             icon={<Lock className="h-4 w-4" />}
             rightIcon={
@@ -246,9 +246,9 @@ export function RegisterForm() {
 
           <Input
             {...register('confirmPassword')}
-            label="Şifre Tekrarı"
+            label={localizeText("Şifre Tekrarı")}
             type={showConfirm ? 'text' : 'password'}
-            placeholder="••••••••"
+            placeholder={localizeText("••••••••")}
             autoComplete="new-password"
             icon={<Lock className="h-4 w-4" />}
             rightIcon={
@@ -270,21 +270,16 @@ export function RegisterForm() {
               animate={{ opacity: 1, y: 0 }}
               className="rounded-xl bg-destructive/10 border border-destructive/20 px-4 py-3 text-sm text-destructive"
             >
-              {error}
+              {localizeText(error)}
             </motion.div>
           )}
 
-          <Button type="submit" size="lg" className="w-full" isLoading={isSubmitting}>
-            Hesap Oluştur
-          </Button>
+          <Button type="submit" size="lg" className="w-full" isLoading={isSubmitting}>{localizeText("Hesap Oluştur")}</Button>
         </form>
       </motion.div>
 
-      <p className="text-center text-sm text-muted-foreground">
-        Zaten hesabın var mı?{' '}
-        <Link href="/login" className="font-semibold text-primary hover:underline underline-offset-4">
-          Giriş yap
-        </Link>
+      <p className="text-center text-sm text-muted-foreground">{localizeText("Zaten hesabın var mı?")}{localizeText(' ')}
+        <Link href="/login" className="font-semibold text-primary hover:underline underline-offset-4">{localizeText("Giriş yap")}</Link>
       </p>
     </motion.div>
   );

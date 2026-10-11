@@ -1,0 +1,112 @@
+[
+  {
+    "id": "commons-130725032",
+    "provider": "commons",
+    "providerId": "130725032",
+    "title": "Butterfly on a flower",
+    "description": "Watch the butterfly on the flower. Can you spot its wings and antennae?",
+    "translations": {
+      "tr": {
+        "title": "Çiçekteki kelebek",
+        "description": "Çiçeğin üzerindeki kelebeği birlikte gözlemleyelim. Kanatlarını ve antenlerini bulabilir misin?"
+      },
+      "en": {
+        "title": "Butterfly on a flower",
+        "description": "Watch the butterfly on the flower. Can you spot its wings and antennae?"
+      },
+      "de": {
+        "title": "Schmetterling auf einer Blume",
+        "description": "Beobachte den Schmetterling. Findest du seine Flügel und Fühler?"
+      },
+      "fr": {
+        "title": "Un papillon sur une fleur",
+        "description": "Observons le papillon. Peux-tu trouver ses ailes et ses antennes ?"
+      },
+      "es": {
+        "title": "Una mariposa sobre una flor",
+        "description": "Observa la mariposa. ¿Puedes encontrar sus alas y antenas?"
+      },
+      "it": {
+        "title": "Una farfalla su un fiore",
+        "description": "Osserva la farfalla. Riesci a trovare le ali e le antenne?"
+      },
+      "pt": {
+        "title": "Uma borboleta na flor",
+        "description": "Observe a borboleta. Consegue encontrar suas asas e antenas?"
+      },
+      "ru": {
+        "title": "Бабочка на цветке",
+        "description": "Посмотри на бабочку. Найдёшь её крылья и усики?"
+      },
+      "ar": {
+        "title": "فراشة على زهرة",
+        "description": "لنراقب الفراشة معًا. هل يمكنك رؤية جناحيها وقرني الاستشعار؟"
+      },
+      "zh": {
+        "title": "花朵上的蝴蝶",
+        "description": "一起观察蝴蝶。你能找到它的翅膀和触角吗？"
+      },
+      "ja": {
+        "title": "花の上のチョウ",
+        "description": "チョウを観察しよう。羽と触角を見つけられるかな？"
+      },
+      "ko": {
+        "title": "꽃 위의 나비",
+        "description": "나비를 함께 관찰해요. 날개와 더듬이를 찾을 수 있나요?"
+      },
+      "nl": {
+        "title": "Een vlinder op een bloem",
+        "description": "Bekijk de vlinder. Kun je de vleugels en voelsprieten vinden?"
+      },
+      "pl": {
+        "title": "Motyl na kwiatku",
+        "description": "Obserwuj motyla. Czy znajdziesz jego skrzydła i czułki?"
+      },
+      "sv": {
+        "title": "En fjäril på en blomma",
+        "description": "Titta på fjärilen. Kan du hitta vingarna och antennerna?"
+      },
+      "az": {
+        "title": "Çiçəyin üzərində kəpənək",
+        "description": "Kəpənəyi birlikdə izləyək. Qanadlarını və bığcıqlarını tapa bilərsən?"
+      },
+      "hi": {
+        "title": "फूल पर तितली",
+        "description": "तितली को साथ देखें। क्या तुम उसके पंख और स्पर्शक ढूँढ सकते हो?"
+      },
+      "id": {
+        "title": "Kupu-kupu di atas bunga",
+        "description": "Amati kupu-kupu bersama. Bisakah kamu menemukan sayap dan antenanya?"
+      },
+      "uk": {
+        "title": "Метелик на квітці",
+        "description": "Поглянь на метелика. Чи знайдеш його крила та вусики?"
+      },
+      "el": {
+        "title": "Μια πεταλούδα σε ένα λουλούδι",
+        "description": "Παρατήρησε την πεταλούδα. Βρίσκεις τα φτερά και τις κεραίες της;"
+      }
+    },
+    "topic": "animals",
+    "ageMin": 3,
+    "ageMax": 7,
+    "durationSeconds": 8.298,
+    "sources": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/78/Butterfly_resting_on_flower.webm/Butterfly_resting_on_flower.webm.480p.vp9.webm",
+        "mime": "video/webm"
+      }
+    ],
+    "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Butterfly_resting_on_flower.webm/500px--Butterfly_resting_on_flower.webm.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo",
+    "audioLanguages": [],
+    "captions": [],
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Butterfly_resting_on_flower.webm",
+    "creator": "Bigmacthealmanac",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "8,3 saniyelik video tarayıcıda baştan sona görüntülendi. Kelebek ve çiçek gözlemi; kaynak eser sahibi ile CC BY-SA 4.0 lisansı korundu. Kaynak ses dili belirtilmemiş; Türkçe seslendirme veya altyazı varmış gibi sunulmaz. Uzman gelişim değerlendirmesi değildir.",
+    "languageChecked": true
+  }
+]

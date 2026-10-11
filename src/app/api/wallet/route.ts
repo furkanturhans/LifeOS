@@ -1,103 +1,13 @@
-import { NextResponse } from 'next/server';
-import { PaymentEngine } from '@/lib/payment/PaymentEngine';
-
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const userId = searchParams.get('userId') || 'user_local';
-
-  const wallet = PaymentEngine.getWallet(userId);
-  const ledger = PaymentEngine.getLedger(userId);
-  const refundRequests = PaymentEngine.getRefundRequests(userId);
-  const creditRate = PaymentEngine.getCreditRate();
-  const serviceRules = PaymentEngine.getServiceCreditRules();
-  const parental = PaymentEngine.getParentalControl(userId);
-
-  return NextResponse.json({
-    success: true,
-    wallet,
-    ledger,
-    refundRequests,
-    creditRate,
-    serviceRules,
-    parental,
-  });
+import { prisma } from '@/lib/prisma';
+import { academySession, academyFailure, AcademyError } from '@/lib/education/academy-server';
+import { platformJson } from '@/lib/platform/server';
+export async function GET(request:Request) {
+ try {
+  const {owner}=await academySession(request);
+  const account=await prisma.creditAccount.findUnique({where:{userId:owner.id}});
+  const balance=Number(account?.balanceMilli??0)/1000;
+  const purchases=await prisma.creditPurchase.aggregate({where:{userId:owner.id,status:'paid'},_sum:{credits:true}});
+  return platformJson({success:true,wallet:{userId:owner.id,creditBalance:balance,educationCreditBalance:balance,purchasedCredits:purchases._sum.credits??0,promoCredits:0,spentCredits:0,refundedCredits:0,pendingRefundCredits:0,cashBalanceKurus:0,pendingBalanceKurus:0,currency:'TRY',createdAt:owner.createdAt,updatedAt:account?.updatedAt??owner.updatedAt},ledger:[],refundRequests:[],creditRate:{kurusPerCredit:200,tlPerCredit:2,label:'1 LifeOS Kredisi = 2 TL'},serviceRules:[],parental:null});
+ }catch(error){return academyFailure(error);}
 }
-
-export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    const {
-      action,
-      userId = 'user_local',
-      creditCount,
-      paymentMethod,
-      idempotencyKey,
-      description,
-      reason,
-      originalPaymentMethod,
-      serviceModule,
-      referenceId,
-      referenceTitle,
-      amountKurus,
-      credits,
-    } = body;
-
-    // 1. Purchase LifeOS Credits
-    if (action === 'purchase_credits' || action === 'topup_credits' || action === 'topup_cash') {
-      const count = creditCount || credits || Math.floor((amountKurus || 0) / 135) || 100;
-      const result = await PaymentEngine.purchaseCredits({
-        userId,
-        creditCount: count,
-        paymentMethod: paymentMethod || 'gateway_card',
-        idempotencyKey,
-        description,
-      });
-      return NextResponse.json(result);
-    }
-
-    // 2. Request Credit Refund (Unused purchased credits)
-    if (action === 'request_refund') {
-      if (!creditCount || creditCount <= 0) {
-        return NextResponse.json(
-          { success: false, error: 'İade edilecek kredi adedi geçerli bir pozitif tam sayı olmalıdır.' },
-          { status: 400 }
-        );
-      }
-      const result = PaymentEngine.requestCreditRefund({
-        userId,
-        creditCount,
-        reason: reason || 'Kullanılmamış kredi iadesi talebi',
-        originalPaymentMethod,
-      });
-      return NextResponse.json(result);
-    }
-
-    // 3. Service Credit Spend (Taxi, Moving, Craftsman)
-    if (action === 'service_spend') {
-      if (!serviceModule || !referenceId) {
-        return NextResponse.json(
-          { success: false, error: 'Hizmet modülü ve referans ID zorunludur.' },
-          { status: 400 }
-        );
-      }
-      const result = PaymentEngine.spendCreditsForService({
-        providerId: userId,
-        serviceModule,
-        referenceId,
-        referenceTitle: referenceTitle || 'Tamamlanan Hizmet',
-        idempotencyKey,
-      });
-      return NextResponse.json(result);
-    }
-
-    return NextResponse.json(
-      { success: false, error: 'Bilinmeyen cüzdan işlemi.' },
-      { status: 400 }
-    );
-  } catch {
-    return NextResponse.json(
-      { success: false, error: 'Geçersiz istek gövdesi.' },
-      { status: 400 }
-    );
-  }
-}
+export async function POST(request:Request){try{await academySession(request);throw new AcademyError(503,'GATEWAY_NOT_CONFIGURED');}catch(error){return academyFailure(error);}}

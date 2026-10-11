@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { GraduationCap, ShieldCheck, Video, BookOpen, AlertTriangle } from 'lucide-react';
 import { useAdminStore } from '@/stores/useAdminStore';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 export function AdminInstructorsView() {
+  const localizeText = useLocaleRender();
   const { users, executeApplicationAction } = useAdminStore();
 
   const instructors = users.filter((u) => u.roles.isInstructorVerified);
@@ -16,8 +18,8 @@ export function AdminInstructorsView() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-sm font-bold text-foreground">Doğrulanmış Eğitmenler ({instructors.length})</h2>
-          <p className="text-xs text-muted-foreground">Kurs, canlı sınıf ve sınav açma yetkisine sahip aktif eğitmenler</p>
+          <h2 className="text-sm font-bold text-foreground">{localizeText("Doğrulanmış Eğitmenler (")}{localizeText(instructors.length)})</h2>
+          <p className="text-xs text-muted-foreground">{localizeText("Kurs, canlı sınıf ve sınav açma yetkisine sahip aktif eğitmenler")}</p>
         </div>
       </div>
 
@@ -31,15 +33,14 @@ export function AdminInstructorsView() {
               <div>
                 <div className="flex items-center gap-2">
                   <h4 className="text-xs font-bold text-foreground">{inst.displayName}</h4>
-                  <StatusBadge status="verified" label="Doğrulanmış" size="sm" />
+                  <StatusBadge status="verified" label={localizeText("Doğrulanmış")} size="sm" />
                 </div>
-                <p className="text-[11px] text-muted-foreground mt-0.5">
-                  ID: @{inst.lifeosId} • E-posta: {inst.maskedEmail} • Kayıt: {new Date(inst.createdAt).toLocaleDateString('tr-TR')}
+                <p className="text-[11px] text-muted-foreground mt-0.5">{localizeText("ID: @")}{localizeText(inst.lifeosId)}{localizeText("• E-posta: ")}{localizeText(inst.maskedEmail)}{localizeText("• Kayıt: ")}{localizeText(new Date(inst.createdAt).toLocaleDateString(getFormattingLocale()))}
                 </p>
                 <div className="mt-1 flex items-center gap-3 text-[10px] text-muted-foreground">
-                  <span className="text-emerald-500 font-semibold">%70 Gelir Paylaşımı</span>
+                  <span className="text-emerald-500 font-semibold">{localizeText("%70 Gelir Paylaşımı")}</span>
                   <span>•</span>
-                  <span>Canlı Sınıf & BBB Yetkisi Açık</span>
+                  <span>{localizeText("Canlı Sınıf & BBB Yetkisi Açık")}</span>
                 </div>
               </div>
             </div>
@@ -50,17 +51,13 @@ export function AdminInstructorsView() {
                 size="sm"
                 className="h-8 text-xs font-semibold text-destructive hover:bg-destructive/10 border-border"
               >
-                <AlertTriangle className="h-3.5 w-3.5 mr-1" />
-                Yetkiyi Askıya Al
-              </Button>
+                <AlertTriangle className="h-3.5 w-3.5 mr-1" />{localizeText("Yetkiyi Askıya Al")}</Button>
             </div>
           </Card>
         ))}
 
         {instructors.length === 0 && (
-          <div className="py-10 text-center text-xs text-muted-foreground border border-dashed border-border rounded-3xl">
-            Henüz onaylanmış eğitmen bulunmuyor. &ldquo;Başvurular&rdquo; sekmesinden bekleyen başvuruları onaylayabilirsiniz.
-          </div>
+          <div className="py-10 text-center text-xs text-muted-foreground border border-dashed border-border rounded-3xl">{localizeText("Henüz onaylanmış eğitmen bulunmuyor. “Başvurular” sekmesinden bekleyen başvuruları onaylayabilirsiniz.")}</div>
         )}
       </div>
     </div>

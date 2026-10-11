@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { ThemePreference, LocalePreference, BackgroundType, AccentColor } from '@/types/user';
+import { LANGUAGE_MAP } from '@/lib/i18n/languages';
 
 interface ThemeState {
   theme: ThemePreference;
@@ -32,13 +33,23 @@ export const useThemeStore = create<ThemeState>()(
       setTheme: (theme) => set({ theme }),
       setAccentColor: (accentColor) => set({ accentColor }),
       setReducedMotion: (reducedMotion) => set({ reducedMotion }),
-      setLocale: (locale) => set({ locale }),
+      setLocale: (locale) => {
+        if (LANGUAGE_MAP.has(locale)) set({ locale });
+      },
       setResolvedTheme: (resolvedTheme) => set({ resolvedTheme }),
       setBackground: (backgroundType, backgroundValue) => set({ backgroundType, backgroundValue }),
       resetBackground: () => set({ backgroundType: 'default', backgroundValue: null }),
     }),
     {
       name: 'lifeos-theme',
+      merge: (persisted, current) => {
+        const saved = persisted as Partial<ThemeState> | undefined;
+        return {
+          ...current,
+          ...saved,
+          locale: saved?.locale && LANGUAGE_MAP.has(saved.locale) ? saved.locale : current.locale,
+        };
+      },
     }
   )
 );

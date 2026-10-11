@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Lock, ShieldAlert, Key, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import type { SmartDevice } from '@/types/smarthome';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface SecurityConfirmModalProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface SecurityConfirmModalProps {
 }
 
 export function SecurityConfirmModal({ isOpen, onClose, device, onConfirm }: SecurityConfirmModalProps) {
+  const localizeText = useLocaleRender();
   const [pin, setPin] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,7 +57,7 @@ export function SecurityConfirmModal({ isOpen, onClose, device, onConfirm }: Sec
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-500/10 text-amber-500">
                 <ShieldAlert className="h-4 w-4" />
               </div>
-              <span className="text-xs font-bold text-foreground">Güvenlik Onayı Zorunlu</span>
+              <span className="text-xs font-bold text-foreground">{localizeText("Güvenlik Onayı Zorunlu")}</span>
             </div>
             <button onClick={onClose} className="text-muted-foreground hover:text-foreground">
               <X className="h-4 w-4" />
@@ -63,10 +65,8 @@ export function SecurityConfirmModal({ isOpen, onClose, device, onConfirm }: Sec
           </div>
 
           <div className="text-xs space-y-1">
-            <p className="font-bold text-foreground">{device.name}</p>
-            <p className="text-muted-foreground">
-              Kapı kilidini açmak veya güvenlik alarmını devre dışı bırakmak için lütfen ev güvenlik PIN kodunuzu giriniz.
-            </p>
+            <p className="font-bold text-foreground">{localizeText(device.name)}</p>
+            <p className="text-muted-foreground">{localizeText("Kapı kilidini açmak veya güvenlik alarmını devre dışı bırakmak için lütfen ev güvenlik PIN kodunuzu giriniz.")}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -78,7 +78,7 @@ export function SecurityConfirmModal({ isOpen, onClose, device, onConfirm }: Sec
                 autoFocus
                 value={pin}
                 onChange={(e) => setPin(e.target.value)}
-                placeholder="•••• (Örn: 1234)"
+                placeholder={localizeText("•••• (Örn: 1234)")}
                 className="w-full h-12 rounded-2xl border border-border bg-background px-4 text-center font-mono text-lg tracking-widest text-foreground focus:border-primary focus:outline-none"
               />
             </div>
@@ -86,14 +86,12 @@ export function SecurityConfirmModal({ isOpen, onClose, device, onConfirm }: Sec
             {error && (
               <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-xs text-rose-600 flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
-                <span>{error}</span>
+                <span>{localizeText(error)}</span>
               </div>
             )}
 
             <div className="flex gap-2">
-              <Button type="button" variant="ghost" size="sm" onClick={onClose} className="flex-1 text-xs">
-                Vazgeç
-              </Button>
+              <Button type="button" variant="ghost" size="sm" onClick={onClose} className="flex-1 text-xs">{localizeText("Vazgeç")}</Button>
               <Button
                 type="submit"
                 variant="primary"
@@ -101,7 +99,7 @@ export function SecurityConfirmModal({ isOpen, onClose, device, onConfirm }: Sec
                 disabled={isSubmitting || !pin}
                 className="flex-1 text-xs font-bold bg-amber-600 hover:bg-amber-700 text-white"
               >
-                {isSubmitting ? 'Doğrulanıyor...' : 'Kilidi Aç'}
+                {localizeText(isSubmitting ? 'Doğrulanıyor...' : 'Kilidi Aç')}
               </Button>
             </div>
           </form>

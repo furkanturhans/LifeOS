@@ -27,8 +27,10 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { useAdminStore } from '@/stores/useAdminStore';
 import type { AdminApplication, ApplicationType, ApplicationStatus } from '@/types/admin';
 import { cn } from '@/lib/utils';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 export function AdminApplicationsView() {
+  const localizeText = useLocaleRender();
   const {
     applications,
     selectedApplication,
@@ -71,19 +73,19 @@ export function AdminApplicationsView() {
   const getStatusBadge = (status: ApplicationStatus) => {
     switch (status) {
       case 'verified':
-        return <StatusBadge status="verified" label="Onaylandı" size="sm" />;
+        return <StatusBadge status="verified" label={localizeText("Onaylandı")} size="sm" />;
       case 'pending':
-        return <StatusBadge status="pending" label="Beklemede" size="sm" />;
+        return <StatusBadge status="pending" label={localizeText("Beklemede")} size="sm" />;
       case 'under_review':
-        return <StatusBadge status="bidding" label="İncelemede" size="sm" />;
+        return <StatusBadge status="bidding" label={localizeText("İncelemede")} size="sm" />;
       case 'need_more_info':
-        return <StatusBadge status="pending" label="Ek Bilgi Bekleniyor" size="sm" />;
+        return <StatusBadge status="pending" label={localizeText("Ek Bilgi Bekleniyor")} size="sm" />;
       case 'rejected':
-        return <StatusBadge status="rejected" label="Reddedildi" size="sm" />;
+        return <StatusBadge status="rejected" label={localizeText("Reddedildi")} size="sm" />;
       case 'suspended':
-        return <StatusBadge status="rejected" label="Askıya Alındı" size="sm" />;
+        return <StatusBadge status="rejected" label={localizeText("Askıya Alındı")} size="sm" />;
       default:
-        return <StatusBadge status="draft" label={status} size="sm" />;
+        return <StatusBadge status="draft" label={localizeText(status)} size="sm" />;
     }
   };
 
@@ -124,7 +126,7 @@ export function AdminApplicationsView() {
               type="text"
               value={applicationSearchQuery}
               onChange={(e) => setApplicationSearchQuery(e.target.value)}
-              placeholder="Başvuru sahibi, başlık veya uzmanlık alanı ara..."
+              placeholder={localizeText("Başvuru sahibi, başlık veya uzmanlık alanı ara...")}
               className="w-full h-9 rounded-xl border border-border bg-background pl-9 pr-3 text-xs font-semibold text-foreground focus:border-primary focus:outline-none"
             />
           </div>
@@ -135,12 +137,12 @@ export function AdminApplicationsView() {
             onChange={(e) => setApplicationTypeFilter(e.target.value as any)}
             className="h-9 rounded-xl border border-border bg-background px-3 text-xs font-semibold text-foreground focus:border-primary focus:outline-none shrink-0"
           >
-            <option value="all">Tüm Başvuru Türleri</option>
-            <option value="instructor">Eğitmen Başvuruları</option>
-            <option value="moving">Nakliye Başvuruları</option>
-            <option value="taxi">Taksi Başvuruları</option>
-            <option value="craftsman">Usta Başvuruları</option>
-            <option value="travel">Seyahat Başvuruları</option>
+            <option value="all">{localizeText("Tüm Başvuru Türleri")}</option>
+            <option value="instructor">{localizeText("Eğitmen Başvuruları")}</option>
+            <option value="moving">{localizeText("Nakliye Başvuruları")}</option>
+            <option value="taxi">{localizeText("Taksi Başvuruları")}</option>
+            <option value="craftsman">{localizeText("Usta Başvuruları")}</option>
+            <option value="travel">{localizeText("Seyahat Başvuruları")}</option>
           </select>
 
           {/* Status Filter */}
@@ -149,13 +151,13 @@ export function AdminApplicationsView() {
             onChange={(e) => setApplicationStatusFilter(e.target.value as any)}
             className="h-9 rounded-xl border border-border bg-background px-3 text-xs font-semibold text-foreground focus:border-primary focus:outline-none shrink-0"
           >
-            <option value="all">Tüm Durumlar</option>
-            <option value="pending">Beklemede</option>
-            <option value="under_review">İncelemede</option>
-            <option value="need_more_info">Ek Bilgi Bekleniyor</option>
-            <option value="verified">Onaylandı</option>
-            <option value="rejected">Reddedildi</option>
-            <option value="suspended">Askıya Alındı</option>
+            <option value="all">{localizeText("Tüm Durumlar")}</option>
+            <option value="pending">{localizeText("Beklemede")}</option>
+            <option value="under_review">{localizeText("İncelemede")}</option>
+            <option value="need_more_info">{localizeText("Ek Bilgi Bekleniyor")}</option>
+            <option value="verified">{localizeText("Onaylandı")}</option>
+            <option value="rejected">{localizeText("Reddedildi")}</option>
+            <option value="suspended">{localizeText("Askıya Alındı")}</option>
           </select>
         </div>
       </Card>
@@ -187,22 +189,22 @@ export function AdminApplicationsView() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <h4 className="text-xs font-bold text-foreground truncate">
-                        {app.applicantName}
+                        {localizeText(app.applicantName)}
                       </h4>
                       <span className="text-[11px] text-muted-foreground font-mono">
-                        ({app.applicantMaskedEmail || 'Gizli E-posta'})
+                        ({localizeText(app.applicantMaskedEmail || 'Gizli E-posta')})
                       </span>
-                      {getStatusBadge(app.status)}
+                      {localizeText(getStatusBadge(app.status))}
                     </div>
 
-                    <p className="mt-0.5 text-xs text-muted-foreground truncate">{app.title}</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground truncate">{localizeText(app.title)}</p>
 
                     <div className="mt-1.5 flex items-center gap-3 text-[11px] text-muted-foreground">
-                      <span>Kategori: <strong className="text-foreground font-semibold">{app.categoryOrExpertise}</strong></span>
+                      <span>{localizeText("Kategori:")}<strong className="text-foreground font-semibold">{localizeText(app.categoryOrExpertise)}</strong></span>
                       <span>•</span>
-                      <span>Belgeler: <strong className="text-foreground font-semibold">{verifiedDocsCount}/{app.documents.length} Onaylı</strong> {submittedDocsCount > 0 && `(${submittedDocsCount} bekliyor)`}</span>
+                      <span>{localizeText("Belgeler:")}<strong className="text-foreground font-semibold">{localizeText(verifiedDocsCount)}/{localizeText(app.documents.length)}{localizeText(" Onaylı")}</strong> {localizeText(submittedDocsCount > 0 && `(${submittedDocsCount} bekliyor)`)}</span>
                       <span>•</span>
-                      <span>Tarih: {new Date(app.submittedAt).toLocaleDateString('tr-TR')}</span>
+                      <span>{localizeText("Tarih: ")}{localizeText(new Date(app.submittedAt).toLocaleDateString(getFormattingLocale()))}</span>
                     </div>
                   </div>
                 </div>
@@ -214,17 +216,13 @@ export function AdminApplicationsView() {
                     onClick={() => setSelectedApplication(app)}
                     className="h-8 text-xs font-bold px-3 border-border hover:bg-muted"
                   >
-                    <Eye className="h-3.5 w-3.5 mr-1 text-primary" />
-                    İncele & İşlem Yap
-                  </Button>
+                    <Eye className="h-3.5 w-3.5 mr-1 text-primary" />{localizeText("İncele & İşlem Yap")}</Button>
                 </div>
               </Card>
             );
           })
         ) : (
-          <div className="py-12 text-center text-xs text-muted-foreground border border-dashed border-border rounded-3xl">
-            Seçilen filtrelere uygun başvuru bulunamadı.
-          </div>
+          <div className="py-12 text-center text-xs text-muted-foreground border border-dashed border-border rounded-3xl">{localizeText("Seçilen filtrelere uygun başvuru bulunamadı.")}</div>
         )}
       </div>
 
@@ -245,11 +243,9 @@ export function AdminApplicationsView() {
                     📋
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-foreground truncate">
-                      Başvuru Detayı: {selectedApplication.applicantName}
+                    <h3 className="text-sm font-bold text-foreground truncate">{localizeText("Başvuru Detayı: ")}{localizeText(selectedApplication.applicantName)}
                     </h3>
-                    <p className="text-[11px] text-muted-foreground">
-                      ID: #{selectedApplication.id} • Tür: {selectedApplication.applicationType.toUpperCase()}
+                    <p className="text-[11px] text-muted-foreground">{localizeText("ID: #")}{localizeText(selectedApplication.id)}{localizeText("• Tür: ")}{localizeText(selectedApplication.applicationType.toUpperCase())}
                     </p>
                   </div>
                 </div>
@@ -266,26 +262,26 @@ export function AdminApplicationsView() {
                 {/* Status & Category Bar */}
                 <div className="flex items-center justify-between p-3 rounded-2xl bg-muted/40 border border-border/60">
                   <div className="space-y-0.5">
-                    <span className="text-muted-foreground block text-[11px]">Mevcut Durum:</span>
-                    <div>{getStatusBadge(selectedApplication.status)}</div>
+                    <span className="text-muted-foreground block text-[11px]">{localizeText("Mevcut Durum:")}</span>
+                    <div>{localizeText(getStatusBadge(selectedApplication.status))}</div>
                   </div>
                   <div className="text-right space-y-0.5">
-                    <span className="text-muted-foreground block text-[11px]">Hizmet / Alan:</span>
-                    <span className="font-bold text-foreground">{selectedApplication.categoryOrExpertise}</span>
+                    <span className="text-muted-foreground block text-[11px]">{localizeText("Hizmet / Alan:")}</span>
+                    <span className="font-bold text-foreground">{localizeText(selectedApplication.categoryOrExpertise)}</span>
                   </div>
                 </div>
 
                 {/* Description & Statement */}
                 <div className="space-y-1">
-                  <span className="font-bold text-foreground block">Başvuru Açıklaması & Niyet:</span>
+                  <span className="font-bold text-foreground block">{localizeText("Başvuru Açıklaması & Niyet:")}</span>
                   <p className="p-3 rounded-xl bg-background border border-border leading-relaxed text-muted-foreground">
-                    {selectedApplication.description}
+                    {localizeText(selectedApplication.description)}
                   </p>
                 </div>
 
                 {/* Submitted Documents Checklist */}
                 <div className="space-y-2">
-                  <span className="font-bold text-foreground block">Yüklenen Belgeler ({selectedApplication.documents.length}):</span>
+                  <span className="font-bold text-foreground block">{localizeText("Yüklenen Belgeler (")}{localizeText(selectedApplication.documents.length)}):</span>
                   <div className="space-y-2">
                     {selectedApplication.documents.map((doc) => (
                       <div
@@ -295,13 +291,13 @@ export function AdminApplicationsView() {
                         <div className="flex items-center gap-2.5 min-w-0">
                           <FileText className="h-4 w-4 text-primary shrink-0" />
                           <div className="min-w-0">
-                            <h5 className="font-bold text-foreground truncate">{doc.titleTr}</h5>
-                            <p className="text-[11px] text-muted-foreground truncate">{doc.descriptionTr}</p>
+                            <h5 className="font-bold text-foreground truncate">{localizeText(doc.titleTr)}</h5>
+                            <p className="text-[11px] text-muted-foreground truncate">{localizeText(doc.descriptionTr)}</p>
                           </div>
                         </div>
 
                         <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-muted text-foreground">
-                          {doc.status === 'verified' ? '✓ Doğrulandı' : 'İnceleniyor'}
+                          {localizeText(doc.status === 'verified' ? '✓ Doğrulandı' : 'İnceleniyor')}
                         </span>
                       </div>
                     ))}
@@ -311,10 +307,8 @@ export function AdminApplicationsView() {
                 {/* Internal Admin Notes */}
                 {selectedApplication.internalAdminNotes && (
                   <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs">
-                    <strong className="text-amber-600 dark:text-amber-400 block mb-1">
-                      🔒 Yönetici İç Notu (Kullanıcıya Gösterilmez):
-                    </strong>
-                    <p className="text-foreground">{selectedApplication.internalAdminNotes}</p>
+                    <strong className="text-amber-600 dark:text-amber-400 block mb-1">{localizeText("🔒 Yönetici İç Notu (Kullanıcıya Gösterilmez):")}</strong>
+                    <p className="text-foreground">{localizeText(selectedApplication.internalAdminNotes)}</p>
                   </div>
                 )}
               </div>
@@ -328,18 +322,14 @@ export function AdminApplicationsView() {
                     onClick={() => setActionModalType('under_review')}
                     className="h-8 text-xs font-semibold"
                   >
-                    <Clock className="h-3.5 w-3.5 mr-1" />
-                    İncelemeye Al
-                  </Button>
+                    <Clock className="h-3.5 w-3.5 mr-1" />{localizeText("İncelemeye Al")}</Button>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => setActionModalType('need_info')}
                     className="h-8 text-xs font-semibold text-amber-600"
                   >
-                    <MessageSquare className="h-3.5 w-3.5 mr-1" />
-                    Ek Bilgi İste
-                  </Button>
+                    <MessageSquare className="h-3.5 w-3.5 mr-1" />{localizeText("Ek Bilgi İste")}</Button>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -349,18 +339,14 @@ export function AdminApplicationsView() {
                     onClick={() => setActionModalType('reject')}
                     className="h-8 text-xs font-bold"
                   >
-                    <XCircle className="h-3.5 w-3.5 mr-1" />
-                    Reddet
-                  </Button>
+                    <XCircle className="h-3.5 w-3.5 mr-1" />{localizeText("Reddet")}</Button>
                   <Button
                     variant="primary"
                     size="sm"
                     onClick={() => setActionModalType('approve')}
                     className="h-8 text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs"
                   >
-                    <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
-                    Başvuruyu Onayla
-                  </Button>
+                    <CheckCircle2 className="h-3.5 w-3.5 mr-1" />{localizeText("Başvuruyu Onayla")}</Button>
                 </div>
               </div>
             </motion.div>
@@ -382,10 +368,10 @@ export function AdminApplicationsView() {
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-primary" />
                   <h4 className="text-sm font-bold text-foreground">
-                    {actionModalType === 'approve' && 'Başvuruyu Onayla'}
-                    {actionModalType === 'reject' && 'Başvuruyu Reddet'}
-                    {actionModalType === 'need_info' && 'Ek Bilgi ve Belge İste'}
-                    {actionModalType === 'under_review' && 'İnceleme Durumuna Al'}
+                    {localizeText(actionModalType === 'approve' && 'Başvuruyu Onayla')}
+                    {localizeText(actionModalType === 'reject' && 'Başvuruyu Reddet')}
+                    {localizeText(actionModalType === 'need_info' && 'Ek Bilgi ve Belge İste')}
+                    {localizeText(actionModalType === 'under_review' && 'İnceleme Durumuna Al')}
                   </h4>
                 </div>
                 <button
@@ -398,40 +384,37 @@ export function AdminApplicationsView() {
 
               {feedbackMessage ? (
                 <div className="p-4 text-center text-xs font-bold text-emerald-500 bg-emerald-500/10 rounded-2xl">
-                  {feedbackMessage}
+                  {localizeText(feedbackMessage)}
                 </div>
               ) : (
                 <div className="space-y-3 text-xs">
                   <p className="text-muted-foreground leading-relaxed">
-                    <strong>{selectedApplication.applicantName}</strong> adlı kullanıcının{' '}
-                    <strong>{selectedApplication.title}</strong> başvurusu için işlem uygulanacaktır.
-                  </p>
+                    <strong>{localizeText(selectedApplication.applicantName)}</strong>{localizeText("adlı kullanıcının ")}{localizeText(' ')}
+                    <strong>{localizeText(selectedApplication.title)}</strong>{localizeText("başvurusu için işlem uygulanacaktır.")}</p>
 
                   {(actionModalType === 'reject' || actionModalType === 'need_info') && (
                     <div>
                       <label className="block font-bold text-foreground mb-1">
-                        {actionModalType === 'reject' ? 'Ret Gerekçesi (Kullanıcıya İletilir) *' : 'Talep Edilen Ek Bilgi Açıklaması *'}
+                        {localizeText(actionModalType === 'reject' ? 'Ret Gerekçesi (Kullanıcıya İletilir) *' : 'Talep Edilen Ek Bilgi Açıklaması *')}
                       </label>
                       <textarea
                         required
                         rows={3}
                         value={actionReason}
                         onChange={(e) => setActionReason(e.target.value)}
-                        placeholder="Kullanıcıya gönderilecek profesyonel gerekçe..."
+                        placeholder={localizeText("Kullanıcıya gönderilecek profesyonel gerekçe...")}
                         className="w-full rounded-xl border border-border bg-background p-2.5 text-xs text-foreground focus:border-primary focus:outline-none resize-none"
                       />
                     </div>
                   )}
 
                   <div>
-                    <label className="block font-bold text-foreground mb-1">
-                      Yönetici İç Notu (Opsiyonel / Gizli)
-                    </label>
+                    <label className="block font-bold text-foreground mb-1">{localizeText("Yönetici İç Notu (Opsiyonel / Gizli)")}</label>
                     <input
                       type="text"
                       value={internalNotes}
                       onChange={(e) => setInternalNotes(e.target.value)}
-                      placeholder="Yalnızca yöneticilerin göreceği denetim notu..."
+                      placeholder={localizeText("Yalnızca yöneticilerin göreceği denetim notu...")}
                       className="w-full h-9 rounded-xl border border-border bg-background px-3 text-xs text-foreground focus:border-primary focus:outline-none"
                     />
                   </div>
@@ -442,9 +425,7 @@ export function AdminApplicationsView() {
                       size="sm"
                       onClick={() => setActionModalType(null)}
                       className="text-xs"
-                    >
-                      Vazgeç
-                    </Button>
+                    >{localizeText("Vazgeç")}</Button>
                     <Button
                       variant={actionModalType === 'reject' ? 'destructive' : 'primary'}
                       size="sm"
@@ -458,7 +439,7 @@ export function AdminApplicationsView() {
                         actionModalType === 'approve' && 'bg-emerald-600 hover:bg-emerald-700 text-white'
                       )}
                     >
-                      {isProcessing ? 'İşleniyor...' : 'Onayla & Denetime İşle'}
+                      {localizeText(isProcessing ? 'İşleniyor...' : 'Onayla & Denetime İşle')}
                     </Button>
                   </div>
                 </div>

@@ -28,6 +28,7 @@ import { FinanceDigitalProductsView } from './FinanceDigitalProductsView';
 import { FinanceRefundsView } from './FinanceRefundsView';
 import { FinancePayoutsView } from './FinancePayoutsView';
 import { FinanceReportsView } from './FinanceReportsView';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 const FINANCE_TABS: {
   id: FinanceTabKey;
@@ -48,6 +49,7 @@ const FINANCE_TABS: {
 ];
 
 export function AdminFinanceHub() {
+  const localizeText = useLocaleRender();
   const { activeFinanceTab, setActiveFinanceTab } = useAdminFinanceStore();
 
   return (
@@ -70,7 +72,7 @@ export function AdminFinanceHub() {
               )}
             >
               <Icon className="h-3.5 w-3.5" />
-              <span>{tab.label}</span>
+              <span>{localizeText(tab.label)}</span>
             </button>
           );
         })}

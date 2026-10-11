@@ -25,6 +25,7 @@ import {
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface TravelPartnerApplicationModalProps {
   isOpen: boolean;
@@ -37,6 +38,7 @@ export function TravelPartnerApplicationModal({
   onClose,
   initialProduct = 'bus',
 }: TravelPartnerApplicationModalProps) {
+  const localizeText = useLocaleRender();
   const {
     applyForBusPartnership,
     applyForFlightPartnership,
@@ -164,12 +166,8 @@ export function TravelPartnerApplicationModal({
               <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-3xl shadow-lg shadow-blue-500/20 text-white">
                 🏢
               </div>
-              <h3 className="text-xl font-bold text-foreground">
-                Seyahat İş Ortağı Başvurusu
-              </h3>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Firmanızı ilgili seyahat kategorisinde LifeOS Seyahat Merkezi ağına dahil edin.
-              </p>
+              <h3 className="text-xl font-bold text-foreground">{localizeText("Seyahat İş Ortağı Başvurusu")}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{localizeText("Firmanızı ilgili seyahat kategorisinde LifeOS Seyahat Merkezi ağına dahil edin.")}</p>
             </div>
 
             {/* Product Category Selection */}
@@ -189,9 +187,9 @@ export function TravelPartnerApplicationModal({
                         : 'border-border/70 bg-muted/30 text-muted-foreground hover:text-foreground hover:bg-muted/50'
                     )}
                   >
-                    <span className="text-xl mb-1">{info.emoji}</span>
+                    <span className="text-xl mb-1">{localizeText(info.emoji)}</span>
                     <span className="text-[11px] font-bold leading-tight line-clamp-1">
-                      {info.labelTr.split(' ')[0]}
+                      {localizeText(info.labelTr.split(' ')[0])}
                     </span>
                   </button>
                 );
@@ -201,31 +199,31 @@ export function TravelPartnerApplicationModal({
             {error && (
               <div className="mb-4 flex items-center gap-2 rounded-2xl bg-destructive/15 border border-destructive/30 p-3 text-xs text-destructive">
                 <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                <span>{error}</span>
+                <span>{localizeText(error)}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Product Info Banner */}
               <div className="rounded-2xl border border-blue-500/30 bg-blue-500/10 p-3 text-xs flex items-center gap-2 text-foreground">
-                <span className="text-lg">{PRODUCT_LABELS[selectedProduct].emoji}</span>
+                <span className="text-lg">{localizeText(PRODUCT_LABELS[selectedProduct].emoji)}</span>
                 <div>
-                  <div className="font-bold">{PRODUCT_LABELS[selectedProduct].labelTr} Başvurusu</div>
-                  <div className="text-[11px] text-muted-foreground">{PRODUCT_LABELS[selectedProduct].descTr}</div>
+                  <div className="font-bold">{localizeText(PRODUCT_LABELS[selectedProduct].labelTr)}{localizeText(" Başvurusu")}</div>
+                  <div className="text-[11px] text-muted-foreground">{localizeText(PRODUCT_LABELS[selectedProduct].descTr)}</div>
                 </div>
               </div>
 
               {/* Company Name */}
               <Input
-                label="Firma Ticari Unvanı / Marka Adı *"
+                label={localizeText("Firma Ticari Unvanı / Marka Adı *")}
                 placeholder={
-                  selectedProduct === 'flight'
+                  localizeText(selectedProduct === 'flight'
                     ? 'Örn: LifeAir Havacılık ve Taşımacılık A.Ş.'
                     : selectedProduct === 'hotel'
                     ? 'Örn: Grand Life Turizm Otelcilik A.Ş.'
                     : selectedProduct === 'car_rental'
                     ? 'Örn: LifeCar Rent a Car A.Ş.'
-                    : 'Örn: Anadolu Turizm Seyahat A.Ş.'
+                    : 'Örn: Anadolu Turizm Seyahat A.Ş.')
                 }
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
@@ -236,8 +234,8 @@ export function TravelPartnerApplicationModal({
               {/* Authorized Person & Role */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <Input
-                  label="Yetkili Ad Soyad *"
-                  placeholder="Adınız Soyadınız"
+                  label={localizeText("Yetkili Ad Soyad *")}
+                  placeholder={localizeText("Adınız Soyadınız")}
                   value={authorizedPersonName}
                   onChange={(e) => setAuthorizedPersonName(e.target.value)}
                   icon={<UserCheck className="h-4 w-4 text-muted-foreground" />}
@@ -245,9 +243,7 @@ export function TravelPartnerApplicationModal({
                 />
 
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-foreground">
-                    Yetkili Rolü / Unvanı *
-                  </label>
+                  <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Yetkili Rolü / Unvanı *")}</label>
                   <select
                     value={authorizedRole}
                     onChange={(e) => setAuthorizedRole(e.target.value as PartnerAuthorizedRole)}
@@ -255,7 +251,7 @@ export function TravelPartnerApplicationModal({
                   >
                     {Object.entries(PARTNER_ROLE_LABELS).map(([key, label]) => (
                       <option key={key} value={key}>
-                        {label}
+                        {localizeText(label)}
                       </option>
                     ))}
                   </select>
@@ -266,15 +262,15 @@ export function TravelPartnerApplicationModal({
               {selectedProduct === 'bus' && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <Input
-                    label="D2 / B2 Yetki Belgesi No"
-                    placeholder="Örn: D2.34.19820"
+                    label={localizeText("D2 / B2 Yetki Belgesi No")}
+                    placeholder={localizeText("Örn: D2.34.19820")}
                     value={d2LicenseNumber}
                     onChange={(e) => setD2LicenseNumber(e.target.value)}
                     icon={<FileText className="h-4 w-4 text-muted-foreground" />}
                   />
                   <Input
-                    label="Vergi No (Opsiyonel)"
-                    placeholder="Örn: 1234567890"
+                    label={localizeText("Vergi No (Opsiyonel)")}
+                    placeholder={localizeText("Örn: 1234567890")}
                     value={taxNumber}
                     onChange={(e) => setTaxNumber(e.target.value)}
                   />
@@ -285,21 +281,21 @@ export function TravelPartnerApplicationModal({
                 <div className="space-y-2.5">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                     <Input
-                      label="SHGM Lisans No"
-                      placeholder="Örn: SHGM-TR-AOC-99"
+                      label={localizeText("SHGM Lisans No")}
+                      placeholder={localizeText("Örn: SHGM-TR-AOC-99")}
                       value={shgmLicenseNumber}
                       onChange={(e) => setShgmLicenseNumber(e.target.value)}
                       icon={<FileText className="h-4 w-4 text-muted-foreground" />}
                     />
                     <Input
-                      label="IATA Kodu (2 Harf)"
-                      placeholder="Örn: LF"
+                      label={localizeText("IATA Kodu (2 Harf)")}
+                      placeholder={localizeText("Örn: LF")}
                       value={iataCode}
                       onChange={(e) => setIataCode(e.target.value)}
                     />
                     <Input
-                      label="ICAO Kodu (3 Harf)"
-                      placeholder="Örn: LFA"
+                      label={localizeText("ICAO Kodu (3 Harf)")}
+                      placeholder={localizeText("Örn: LFA")}
                       value={icaoCode}
                       onChange={(e) => setIcaoCode(e.target.value)}
                     />
@@ -310,33 +306,31 @@ export function TravelPartnerApplicationModal({
               {selectedProduct === 'hotel' && (
                 <div className="space-y-2.5">
                   <Input
-                    label="Tesis Adı (Tabela Adı) *"
-                    placeholder="Örn: Grand Life Resort & Spa"
+                    label={localizeText("Tesis Adı (Tabela Adı) *")}
+                    placeholder={localizeText("Örn: Grand Life Resort & Spa")}
                     value={propertyName}
                     onChange={(e) => setPropertyName(e.target.value)}
                     icon={<Building className="h-4 w-4 text-muted-foreground" />}
                   />
                   <div className="grid grid-cols-2 gap-2.5">
                     <Input
-                      label="Turizm İşletme / Ruhsat No"
-                      placeholder="Örn: KTB-TR-2024-88"
+                      label={localizeText("Turizm İşletme / Ruhsat No")}
+                      placeholder={localizeText("Örn: KTB-TR-2024-88")}
                       value={tourismLicenseNumber}
                       onChange={(e) => setTourismLicenseNumber(e.target.value)}
                     />
                     <div>
-                      <label className="mb-1 block text-xs font-medium text-foreground">
-                        Tesis Türü
-                      </label>
+                      <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Tesis Türü")}</label>
                       <select
                         value={propertyType}
                         onChange={(e) => setPropertyType(e.target.value as any)}
                         className="w-full rounded-2xl border border-border bg-card p-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
                       >
-                        <option value="hotel">Otel</option>
-                        <option value="resort">Resort & Tatil Köyü</option>
-                        <option value="boutique">Butik Otel</option>
-                        <option value="apartment">Apart Otel</option>
-                        <option value="pension">Pansiyon</option>
+                        <option value="hotel">{localizeText("Otel")}</option>
+                        <option value="resort">{localizeText("Resort & Tatil Köyü")}</option>
+                        <option value="boutique">{localizeText("Butik Otel")}</option>
+                        <option value="apartment">{localizeText("Apart Otel")}</option>
+                        <option value="pension">{localizeText("Pansiyon")}</option>
                       </select>
                     </div>
                   </div>
@@ -346,16 +340,16 @@ export function TravelPartnerApplicationModal({
               {selectedProduct === 'car_rental' && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <Input
-                    label="KABİS Yetki / Kayıt No"
-                    placeholder="Örn: KABIS-34-2024-419"
+                    label={localizeText("KABİS Yetki / Kayıt No")}
+                    placeholder={localizeText("Örn: KABIS-34-2024-419")}
                     value={kabisNumber}
                     onChange={(e) => setKabisNumber(e.target.value)}
                     icon={<Car className="h-4 w-4 text-muted-foreground" />}
                   />
                   <Input
-                    label="Tahmini Filo Araç Sayısı"
+                    label={localizeText("Tahmini Filo Araç Sayısı")}
                     type="number"
-                    placeholder="Örn: 50"
+                    placeholder={localizeText("Örn: 50")}
                     value={fleetSize.toString()}
                     onChange={(e) => setFleetSize(parseInt(e.target.value) || 0)}
                   />
@@ -366,11 +360,9 @@ export function TravelPartnerApplicationModal({
               <div className="rounded-2xl border border-border/80 bg-muted/30 p-3 text-xs space-y-1">
                 <div className="font-semibold text-foreground flex items-center gap-1.5">
                   <ShieldCheck className="h-3.5 w-3.5 text-blue-500" />
-                  <span>Ürün Yetkilendirme İzolasyonu</span>
+                  <span>{localizeText("Ürün Yetkilendirme İzolasyonu")}</span>
                 </div>
-                <p className="text-[11px] text-muted-foreground leading-snug">
-                  Bu başvuru yalnızca seçili <strong>{PRODUCT_LABELS[selectedProduct].labelTr}</strong> alanında geçerlidir. Diğer seyahat ürünleri bağımsız başvuru gerektirir.
-                </p>
+                <p className="text-[11px] text-muted-foreground leading-snug">{localizeText("Bu başvuru yalnızca seçili")}<strong>{localizeText(PRODUCT_LABELS[selectedProduct].labelTr)}</strong>{localizeText("alanında geçerlidir. Diğer seyahat ürünleri bağımsız başvuru gerektirir.")}</p>
               </div>
 
               {/* Submit Button */}
@@ -381,8 +373,7 @@ export function TravelPartnerApplicationModal({
                   className="w-full rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 font-semibold text-white shadow-lg shadow-blue-500/25 hover:from-blue-600 hover:to-indigo-700"
                 >
                   <Sparkles className="mr-2 h-4 w-4" />
-                  {PRODUCT_LABELS[selectedProduct].labelTr} Başvurusunu Gönder
-                </Button>
+                  {localizeText(PRODUCT_LABELS[selectedProduct].labelTr)}{localizeText(" Başvurusunu Gönder")}</Button>
               </div>
             </form>
           </motion.div>

@@ -1,0 +1,3940 @@
+[
+  {
+    "id": "asb-0008",
+    "title": "Sen ne yapıyorsun?",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0008/01.jpg",
+    "pages": [
+      {
+        "text": "Şarkı söylüyorum.",
+        "image": "/kids/stories/0008/02.jpg"
+      },
+      {
+        "text": "O, el sallıyor.",
+        "image": "/kids/stories/0008/03.jpg"
+      },
+      {
+        "text": "El çırpıyorum.",
+        "image": "/kids/stories/0008/04.jpg"
+      },
+      {
+        "text": "O, esniyor.",
+        "image": "/kids/stories/0008/05.jpg"
+      },
+      {
+        "text": "O, sesleniyor.",
+        "image": "/kids/stories/0008/06.jpg"
+      },
+      {
+        "text": "Yanıt veriyorum.",
+        "image": "/kids/stories/0008/07.jpg"
+      },
+      {
+        "text": "O, dinliyor.",
+        "image": "/kids/stories/0008/08.jpg"
+      },
+      {
+        "text": "Sen ne yapıyorsun?",
+        "image": "/kids/stories/0008/09.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Nina Orange",
+    "illustrator": "Wiehan de Jager",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/what-are-you-doing",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0087",
+    "title": "Okumayı seviyorum!",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0087/01.jpg",
+    "pages": [
+      {
+        "text": "Okumayı seviyorum.",
+        "image": "/kids/stories/0087/03.jpg"
+      },
+      {
+        "text": "Kime okuyabilirim?",
+        "image": "/kids/stories/0087/04.jpg"
+      },
+      {
+        "text": "Kız kardeşim uyuyor.",
+        "image": "/kids/stories/0087/05.jpg"
+      },
+      {
+        "text": "Kime okuyabilirim?",
+        "image": "/kids/stories/0087/06.jpg"
+      },
+      {
+        "text": "Annemle büyükannem meşgul.",
+        "image": "/kids/stories/0087/07.jpg"
+      },
+      {
+        "text": "Kime okuyabilirim?",
+        "image": "/kids/stories/0087/08.jpg"
+      },
+      {
+        "text": "Babamla büyükbabam meşgul.",
+        "image": "/kids/stories/0087/09.jpg"
+      },
+      {
+        "text": "Kime okuyabilirim? Kendime okuyabilirim!",
+        "image": "/kids/stories/0087/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Letta Machoga",
+    "illustrator": "Wiehan de Jager",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/i-read",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0001",
+    "title": "Çok uzun bir adam",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0001/01.jpg",
+    "pages": [
+      {
+        "text": "Çapasının sapı çok kısaydı.",
+        "image": "/kids/stories/0001/02.jpg"
+      },
+      {
+        "text": "Kapısı çok alçaktı.",
+        "image": "/kids/stories/0001/03.jpg"
+      },
+      {
+        "text": "Yatağı çok kısaydı.",
+        "image": "/kids/stories/0001/04.jpg"
+      },
+      {
+        "text": "Bisikleti çok küçüktü.",
+        "image": "/kids/stories/0001/05.jpg"
+      },
+      {
+        "text": "Bu adamın boyu çok uzundu!",
+        "image": "/kids/stories/0001/06.jpg"
+      },
+      {
+        "text": "Çapasına uzun bir sap yaptı.",
+        "image": "/kids/stories/0001/07.jpg"
+      },
+      {
+        "text": "Kapısının çerçevesini yükseltti.",
+        "image": "/kids/stories/0001/08.jpg"
+      },
+      {
+        "text": "Kendine uzun bir yatak yaptı.",
+        "image": "/kids/stories/0001/09.jpg"
+      },
+      {
+        "text": "Büyük bir bisiklet aldı.",
+        "image": "/kids/stories/0001/10.jpg"
+      },
+      {
+        "text": "Yüksek bir sandalyeye oturdu. Uzun bir çatalla yemek yedi.",
+        "image": "/kids/stories/0001/11.jpg"
+      },
+      {
+        "text": "Sonra büyük bir ormana yerleşti. Orada uzun yıllar yaşadı.",
+        "image": "/kids/stories/0001/12.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Cornelius Gulere",
+    "illustrator": "Catherine Groenewald",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/very-tall-man",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0327",
+    "title": "Su başındaki hayvanlar",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0327/01.jpg",
+    "pages": [
+      {
+        "text": "Bir fil su içmeye gidiyor.",
+        "image": "/kids/stories/0327/03.jpg"
+      },
+      {
+        "text": "İki zürafa su içmeye gidiyor.",
+        "image": "/kids/stories/0327/04.jpg"
+      },
+      {
+        "text": "Üç manda ve dört kuş da su içmeye gidiyor.",
+        "image": "/kids/stories/0327/05.jpg"
+      },
+      {
+        "text": "Beş antilop ve altı yaban domuzu suya doğru yürüyor.",
+        "image": "/kids/stories/0327/06.jpg"
+      },
+      {
+        "text": "Yedi zebra suya doğru koşuyor.",
+        "image": "/kids/stories/0327/07.jpg"
+      },
+      {
+        "text": "Sekiz kurbağa ve dokuz balık suda yüzüyor.",
+        "image": "/kids/stories/0327/08.jpg"
+      },
+      {
+        "text": "Bir aslan kükrüyor. O da su içmek istiyor. Hayvanlar ona bakıyor.",
+        "image": "/kids/stories/0327/09.jpg"
+      },
+      {
+        "text": "Fil, aslanla birlikte su içiyor.",
+        "image": "/kids/stories/0327/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Zanele Buthelezi, Thembani Dladla, Clare Verbeek",
+    "illustrator": "Rob Owen",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/counting-animals",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0095",
+    "title": "Zama büyüyor",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0095/01.jpg",
+    "pages": [
+      {
+        "text": "Küçük kardeşim geç uyanır. Ben erkenden kalkarım!",
+        "image": "/kids/stories/0095/03.jpg"
+      },
+      {
+        "text": "Perdeyi açıp güneşi içeri alırım.",
+        "image": "/kids/stories/0095/04.jpg"
+      },
+      {
+        "text": "Annem bana, “Sabah yıldızım,” der.",
+        "image": "/kids/stories/0095/05.jpg"
+      },
+      {
+        "text": "Yıkanırken yapabildiklerimi kendim denerim.",
+        "image": "/kids/stories/0095/06.jpg"
+      },
+      {
+        "text": "Suya ve mavi sabunuma alışırım.",
+        "image": "/kids/stories/0095/07.jpg"
+      },
+      {
+        "text": "Annem, “Dişlerini unutma!” der. Ben, “Unutmam!” diye yanıtlarım.",
+        "image": "/kids/stories/0095/08.jpg"
+      },
+      {
+        "text": "Büyükbabamla teyzeme selam verir, güzel bir gün dilerim.",
+        "image": "/kids/stories/0095/09.jpg"
+      },
+      {
+        "text": "Giyinirim. “Büyüyorum anne!” derim.",
+        "image": "/kids/stories/0095/10.jpg"
+      },
+      {
+        "text": "Düğmelerimi ilikler, ayakkabılarımı bağlarım.",
+        "image": "/kids/stories/0095/11.jpg"
+      },
+      {
+        "text": "Kardeşime okuldaki haberleri anlatırım.",
+        "image": "/kids/stories/0095/12.jpg"
+      },
+      {
+        "text": "Sınıfta elimden geleni yaparım.",
+        "image": "/kids/stories/0095/13.jpg"
+      },
+      {
+        "text": "Her gün pek çok şey öğrenirim. En çok da oyun oynamayı severim!",
+        "image": "/kids/stories/0095/14.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Michael Oguttu",
+    "illustrator": "Vusi Malindi",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/zama-great",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0296",
+    "title": "Tom ve muz tezgâhı",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0296/01.jpg",
+    "pages": [
+      {
+        "text": "Tom olgun muzları tepsisine koyar.",
+        "image": "/kids/stories/0296/02.jpg"
+      },
+      {
+        "text": "Muzlarını satmak için pazara gider.",
+        "image": "/kids/stories/0296/03.jpg"
+      },
+      {
+        "text": "Pazardakiler meyve alır.",
+        "image": "/kids/stories/0296/04.jpg"
+      },
+      {
+        "text": "Ama başlangıçta kimse Tom’un muzlarını almaz. Alıştıkları satıcılara giderler.",
+        "image": "/kids/stories/0296/05.jpg"
+      },
+      {
+        "text": "“Biz meyve tezgâhlarında hep kadınları görürdük,” diye konuşurlar. Tom’un da meyve satabileceğini henüz düşünmemişlerdir.",
+        "image": "/kids/stories/0296/06.jpg"
+      },
+      {
+        "text": "Tom pes etmez. “Olgun, tatlı muzlarım var!” diye seslenir.",
+        "image": "/kids/stories/0296/07.jpg"
+      },
+      {
+        "text": "Bir kadın muzları alıp dikkatle inceler.",
+        "image": "/kids/stories/0296/08.jpg"
+      },
+      {
+        "text": "Sonra bir demet satın alır.",
+        "image": "/kids/stories/0296/09.jpg"
+      },
+      {
+        "text": "Tezgâha başka insanlar da gelir. Tom’un muzlarını alırlar.",
+        "image": "/kids/stories/0296/10.jpg"
+      },
+      {
+        "text": "Az sonra tepsi boşalır. Tom kazandığı parayı sayar.",
+        "image": "/kids/stories/0296/11.jpg"
+      },
+      {
+        "text": "Sabun, şeker ve ekmek alıp tepsisine koyar.",
+        "image": "/kids/stories/0296/12.jpg"
+      },
+      {
+        "text": "Tom tepsisini başında dengeler ve evine döner.",
+        "image": "/kids/stories/0296/13.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Humphreys Odunga",
+    "illustrator": "Zablon Alex Nguku",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/tom-banana-seller",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0089",
+    "title": "Khalai bitkilerle konuşuyor",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0089/01.jpg",
+    "pages": [
+      {
+        "text": "Bu, yedi yaşındaki Khalai. Adı, konuştuğu Lubukusu dilinde “iyi olan” demek.",
+        "image": "/kids/stories/0089/03.jpg"
+      },
+      {
+        "text": "Khalai uyanınca portakal ağacına seslenir: “Büyü güzel ağaç, bize olgun portakallar ver!”",
+        "image": "/kids/stories/0089/04.jpg"
+      },
+      {
+        "text": "Okula giderken çimenlere konuşur: “Yeşil kalın çimenler!”",
+        "image": "/kids/stories/0089/05.jpg"
+      },
+      {
+        "text": "Çiçeklerin yanından geçerken, “Çiçek açmaya devam edin!” der.",
+        "image": "/kids/stories/0089/06.jpg"
+      },
+      {
+        "text": "Okuldaki ağaca, “Dalların büyüsün, gölgende kitap okuyalım!” der.",
+        "image": "/kids/stories/0089/07.jpg"
+      },
+      {
+        "text": "Okulun çevresindeki çite, “Gür büyü, bahçemizi koru!” diye seslenir.",
+        "image": "/kids/stories/0089/08.jpg"
+      },
+      {
+        "text": "Eve dönünce portakal ağacına sorar: “Meyvelerin olgunlaştı mı?”",
+        "image": "/kids/stories/0089/09.jpg"
+      },
+      {
+        "text": "Portakallar hâlâ yeşildir. Khalai, “Yarın yine bakarım. Belki o zaman bir portakalın olgunlaşır!” der.",
+        "image": "/kids/stories/0089/10.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Ursula Nafula",
+    "illustrator": "Jesse Pietersen",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/khalai-talks-plants",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0212",
+    "title": "Küçük keçimin paltosu",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0212/01.jpg",
+    "pages": [
+      {
+        "text": "Nereye gidiyorsun küçük keçim?",
+        "image": "/kids/stories/0212/03.jpg"
+      },
+      {
+        "text": "Yeni bir palto almak için pazara gidiyorum.",
+        "image": "/kids/stories/0212/04.jpg"
+      },
+      {
+        "text": "Bir keçiye palto mu?",
+        "image": "/kids/stories/0212/05.jpg"
+      },
+      {
+        "text": "Bir keçi palto giyebilir mi?",
+        "image": "/kids/stories/0212/06.jpg"
+      },
+      {
+        "text": "Paltolu bir keçi görünce insanlar gülümseyecek!",
+        "image": "/kids/stories/0212/07.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Bukheye Mulongo",
+    "illustrator": "Marion Drew, Rob Owen, Catherine Groenewald, Magriet Brink",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/my-little-goat-colour",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0126",
+    "title": "Bulutları seviyorum",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0126/01.jpg",
+    "pages": [
+      {
+        "text": "Bulutlar yağmur getirebilir. Bulutları seviyorum.",
+        "image": "/kids/stories/0126/03.jpg"
+      },
+      {
+        "text": "Bulutlar kar getirebilir. Bulutları seviyorum.",
+        "image": "/kids/stories/0126/04.jpg"
+      },
+      {
+        "text": "Bulutlar güneşi örtebilir. Bulutları seviyorum.",
+        "image": "/kids/stories/0126/05.jpg"
+      },
+      {
+        "text": "Bulutlar yıldızları örtebilir. Bulutları seviyorum.",
+        "image": "/kids/stories/0126/06.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Clark Ness",
+    "illustrator": "Microsoft Clip Art",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/clouds",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0151",
+    "title": "Bugün hava nasıl?",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0151/01.jpg",
+    "pages": [
+      {
+        "text": "Gökyüzünde bulutlar var. Acaba yağmur yağacak mı?",
+        "image": "/kids/stories/0151/03.jpg"
+      },
+      {
+        "text": "Bugün hava çok sıcak. Neden acaba?",
+        "image": "/kids/stories/0151/04.jpg"
+      },
+      {
+        "text": "Bulutlar güneşi örtebilir. Bulutları seviyorum.",
+        "image": "/kids/stories/0151/05.jpg"
+      },
+      {
+        "text": "Öğretmen Nabune, “Dışarıda yağmur yağıyor mu?” diye soruyor.",
+        "image": "/kids/stories/0151/06.jpg"
+      },
+      {
+        "text": "Rüzgâr esiyor mu?",
+        "image": "/kids/stories/0151/07.jpg"
+      },
+      {
+        "text": "Hava hakkında başka neler fark ettin?",
+        "image": "/kids/stories/0151/08.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Clark Ness",
+    "illustrator": "Microsoft Clip Art, Jesse Breytenbach, Wiehan de Jager, Rijuta Ghate, Vusi Malindi",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/weather-0",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0248",
+    "title": "Hayvanat bahçesine gittim",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0248/01.jpg",
+    "pages": [
+      {
+        "text": "Bugün hayvanat bahçesine gittim.",
+        "image": "/kids/stories/0248/03.jpg"
+      },
+      {
+        "text": "Birçok hayvan gördüm. Bir aslan gördüm.",
+        "image": "/kids/stories/0248/04.jpg"
+      },
+      {
+        "text": "Bir fil gördüm.",
+        "image": "/kids/stories/0248/05.jpg"
+      },
+      {
+        "text": "Bir timsah gördüm.",
+        "image": "/kids/stories/0248/06.jpg"
+      },
+      {
+        "text": "Bir zürafa gördüm.",
+        "image": "/kids/stories/0248/07.jpg"
+      },
+      {
+        "text": "Birçok zebra gördüm.",
+        "image": "/kids/stories/0248/08.jpg"
+      },
+      {
+        "text": "Hatta bir inek bile gördüm.",
+        "image": "/kids/stories/0248/09.jpg"
+      },
+      {
+        "text": "Güzel bir gündü. Sonra babamla eve döndük.",
+        "image": "/kids/stories/0248/10.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Mmapule Nkuna",
+    "illustrator": "Melany Pietersen, Rob Owen, Catherine Groenewald",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/my-trip-zoo",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0057",
+    "title": "Sane pazarda",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0057/01.jpg",
+    "pages": [
+      {
+        "text": "Sane evde.",
+        "image": "/kids/stories/0057/03.jpg"
+      },
+      {
+        "text": "Bugün Sane’nin doğum günü.",
+        "image": "/kids/stories/0057/04.jpg"
+      },
+      {
+        "text": "Sane annesiyle durakta bekliyor.",
+        "image": "/kids/stories/0057/05.jpg"
+      },
+      {
+        "text": "Sane annesiyle otobüste.",
+        "image": "/kids/stories/0057/06.jpg"
+      },
+      {
+        "text": "Sane pazara geldi.",
+        "image": "/kids/stories/0057/07.jpg"
+      },
+      {
+        "text": "Ne çok meyve var!",
+        "image": "/kids/stories/0057/08.jpg"
+      },
+      {
+        "text": "Tatlı elmalar var.",
+        "image": "/kids/stories/0057/09.jpg"
+      },
+      {
+        "text": "Sane annesine bakınıyor: “Anne, nereye gittin?”",
+        "image": "/kids/stories/0057/10.jpg"
+      },
+      {
+        "text": "Annesi yanında: “Sana doğum günü hediyesi aldım.”",
+        "image": "/kids/stories/0057/11.jpg"
+      },
+      {
+        "text": "Teşekkür ederim anne!",
+        "image": "/kids/stories/0057/12.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Alice Kapolondo",
+    "illustrator": "Felicity Bell, Wiehan de Jager, Cathy Feek, Melany Pietersen",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/sane-market",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0331",
+    "title": "Yağmur",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0331/01.jpg",
+    "pages": [
+      {
+        "text": "Suyu seviyorum.",
+        "image": "/kids/stories/0331/03.jpg"
+      },
+      {
+        "text": "Suyla oynamak hoşuma gidiyor.",
+        "image": "/kids/stories/0331/04.jpg"
+      },
+      {
+        "text": "Yağmur yağıyor.",
+        "image": "/kids/stories/0331/05.jpg"
+      },
+      {
+        "text": "Yağmur bize su getiriyor.",
+        "image": "/kids/stories/0331/06.jpg"
+      },
+      {
+        "text": "Dışarıda oynamayı seviyorum.",
+        "image": "/kids/stories/0331/07.jpg"
+      },
+      {
+        "text": "Ama şimdi yağmur yağıyor.",
+        "image": "/kids/stories/0331/08.jpg"
+      },
+      {
+        "text": "Babamla yağmurda kısa bir oyun oynuyoruz.",
+        "image": "/kids/stories/0331/09.jpg"
+      },
+      {
+        "text": "Saçım ıslandı. Babam saçımı kurulayıp düzeltiyor.",
+        "image": "/kids/stories/0331/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Letta Machoga",
+    "illustrator": "Marleen Visser",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/rain",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0086",
+    "title": "Okuldaki günüm",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0086/01.jpg",
+    "pages": [
+      {
+        "text": "Arkadaşlarımla kitap okuyorum.",
+        "image": "/kids/stories/0086/03.jpg"
+      },
+      {
+        "text": "Sayı yazmayı öğreniyorum.",
+        "image": "/kids/stories/0086/04.jpg"
+      },
+      {
+        "text": "Harf yazmayı öğreniyorum.",
+        "image": "/kids/stories/0086/05.jpg"
+      },
+      {
+        "text": "Arkadaşlarımla oyun oynuyorum.",
+        "image": "/kids/stories/0086/06.jpg"
+      },
+      {
+        "text": "Okulda şarkı söylüyorum.",
+        "image": "/kids/stories/0086/07.jpg"
+      },
+      {
+        "text": "Dans da edebiliyorum.",
+        "image": "/kids/stories/0086/08.jpg"
+      },
+      {
+        "text": "Öğretmenim ve arkadaşlarımla bahçeye çıkıyorum.",
+        "image": "/kids/stories/0086/09.jpg"
+      },
+      {
+        "text": "Öğretmenimiz dinlenirken bize ninni söylüyor.",
+        "image": "/kids/stories/0086/10.jpg"
+      },
+      {
+        "text": "Sen okulda neler yapıyorsun?",
+        "image": "/kids/stories/0086/11.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Ivan Higenyi",
+    "illustrator": "Wiehan de Jager, Karlien de Villiers, Alice Toich, Kathy Arbuckle, Jano Strydom, Vusi Malindi, Catherine Groenewald, Candace di Talamo",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/things-i-do-school-0",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0306",
+    "title": "Polar’ın hikâyesi",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0306/01.jpg",
+    "pages": [
+      {
+        "text": "Bu, kızım Polar.",
+        "image": "/kids/stories/0306/03.jpg"
+      },
+      {
+        "text": "Polar meraklı bir çocuk.",
+        "image": "/kids/stories/0306/04.jpg"
+      },
+      {
+        "text": "Hikâye anlatmayı seviyor.",
+        "image": "/kids/stories/0306/05.jpg"
+      },
+      {
+        "text": "Annesi ona hikâyeler anlatıyor.",
+        "image": "/kids/stories/0306/06.jpg"
+      },
+      {
+        "text": "Polar da arkadaşlarına anlatıyor.",
+        "image": "/kids/stories/0306/07.jpg"
+      },
+      {
+        "text": "Bir gün Polar güzel bir hikâye anlattı.",
+        "image": "/kids/stories/0306/08.jpg"
+      },
+      {
+        "text": "Hikâye yemek yapmakla ilgiliydi.",
+        "image": "/kids/stories/0306/09.jpg"
+      },
+      {
+        "text": "Öğretmeni ve arkadaşları onu dinledi. Sonra birlikte bir kutlama yaptılar.",
+        "image": "/kids/stories/0306/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Cissy Namugerwa",
+    "illustrator": "Vusi Malindi",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/my-daughter-polar",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0172",
+    "title": "Meyve zamanı",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0172/01.jpg",
+    "pages": [
+      {
+        "text": "Meyveler, meyveler!",
+        "image": "/kids/stories/0172/03.jpg"
+      },
+      {
+        "text": "Meyve yemek güzel.",
+        "image": "/kids/stories/0172/04.jpg"
+      },
+      {
+        "text": "İnsanlar farklı meyveler sever.",
+        "image": "/kids/stories/0172/05.jpg"
+      },
+      {
+        "text": "Biri mango, diğeri ananas yer.",
+        "image": "/kids/stories/0172/06.jpg"
+      },
+      {
+        "text": "Portakal da severiz.",
+        "image": "/kids/stories/0172/07.jpg"
+      },
+      {
+        "text": "Çocuklar elma sever.",
+        "image": "/kids/stories/0172/08.jpg"
+      },
+      {
+        "text": "Kuşlar mısır tanelerini sever.",
+        "image": "/kids/stories/0172/09.jpg"
+      },
+      {
+        "text": "İnsanlar ve hayvanlar çeşit çeşit yiyecekle beslenir. Meyvelerin renkleri ve tatları çok farklıdır.",
+        "image": "/kids/stories/0172/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Ritah Katetemera",
+    "illustrator": "Wiehan de Jager, Catherine Groenewald",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/fruits",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0316",
+    "title": "Yapmayı sevdiklerim",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0316/01.jpg",
+    "pages": [
+      {
+        "text": "Arkadaşımla ip atlamayı seviyorum.",
+        "image": "/kids/stories/0316/02.jpg"
+      },
+      {
+        "text": "Tahtada harf yazmayı seviyorum.",
+        "image": "/kids/stories/0316/03.jpg"
+      },
+      {
+        "text": "Resimli kitapları okumayı seviyorum.",
+        "image": "/kids/stories/0316/04.jpg"
+      },
+      {
+        "text": "Farklı meyveleri yemeyi seviyorum.",
+        "image": "/kids/stories/0316/05.jpg"
+      },
+      {
+        "text": "Evde yardım etmeyi seviyorum.",
+        "image": "/kids/stories/0316/06.jpg"
+      },
+      {
+        "text": "Annemin hikâyelerini dinlemeyi seviyorum.",
+        "image": "/kids/stories/0316/07.jpg"
+      },
+      {
+        "text": "Büyük yatağımda uyumayı seviyorum.",
+        "image": "/kids/stories/0316/08.jpg"
+      },
+      {
+        "text": "Bunları yapmaktan hoşlanıyorum. Sen neler yapmayı seversin?",
+        "image": "/kids/stories/0316/09.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Ursula Nafula",
+    "illustrator": "Wiehan de Jager",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/reader.php?id=15575&amp;d=0&amp;a=1",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0060",
+    "title": "Nakitto okulda",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0060/01.jpg",
+    "pages": [
+      {
+        "text": "Nakitto geçen pazartesi okula başladı.",
+        "image": "/kids/stories/0060/03.jpg"
+      },
+      {
+        "text": "Yeni sınıfına girdi ve arkadaşlarla tanıştı.",
+        "image": "/kids/stories/0060/04.jpg"
+      },
+      {
+        "text": "Nakitto resimli kitapları sever.",
+        "image": "/kids/stories/0060/05.jpg"
+      },
+      {
+        "text": "Birlikte dışarı çıkıp keşfettiler.",
+        "image": "/kids/stories/0060/06.jpg"
+      },
+      {
+        "text": "Harflerin seslerini öğrendiler.",
+        "image": "/kids/stories/0060/07.jpg"
+      },
+      {
+        "text": "Etkinliklerden sonra dinlendiler. Nakitto öğretmeninin yakınında uyudu.",
+        "image": "/kids/stories/0060/08.jpg"
+      },
+      {
+        "text": "Birlikte gezilere çıktılar.",
+        "image": "/kids/stories/0060/09.jpg"
+      },
+      {
+        "text": "Nakitto evde annesiyle kitap okudu.",
+        "image": "/kids/stories/0060/10.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Annet Ssebaggala",
+    "illustrator": "Genevieve Terblanche, Wiehan de Jager, Vusi Malindi, Karlien de Villiers",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/nakitto-school",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0143",
+    "title": "Kırmızı topum",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0143/01.jpg",
+    "pages": [
+      {
+        "text": "Bir top.",
+        "image": "/kids/stories/0143/02.jpg"
+      },
+      {
+        "text": "Benim topum.",
+        "image": "/kids/stories/0143/03.jpg"
+      },
+      {
+        "text": "Kırmızı topum.",
+        "image": "/kids/stories/0143/04.jpg"
+      },
+      {
+        "text": "Büyük kırmızı topum.",
+        "image": "/kids/stories/0143/05.jpg"
+      },
+      {
+        "text": "Vuruyorum.",
+        "image": "/kids/stories/0143/06.jpg"
+      },
+      {
+        "text": "Topuma vuruyorum.",
+        "image": "/kids/stories/0143/07.jpg"
+      },
+      {
+        "text": "Kırmızı topuma vuruyorum.",
+        "image": "/kids/stories/0143/08.jpg"
+      },
+      {
+        "text": "Kırmızı topuma hızlıca vuruyorum!",
+        "image": "/kids/stories/0143/09.jpg"
+      },
+      {
+        "text": "Nerede?",
+        "image": "/kids/stories/0143/10.jpg"
+      },
+      {
+        "text": "Topum nerede?",
+        "image": "/kids/stories/0143/11.jpg"
+      },
+      {
+        "text": "Topum şimdi nerede?",
+        "image": "/kids/stories/0143/12.jpg"
+      },
+      {
+        "text": "Kırmızı topum şimdi nerede?",
+        "image": "/kids/stories/0143/13.jpg"
+      },
+      {
+        "text": "Yukarıda.",
+        "image": "/kids/stories/0143/14.jpg"
+      },
+      {
+        "text": "Çok yukarıda.",
+        "image": "/kids/stories/0143/15.jpg"
+      },
+      {
+        "text": "Gökyüzünde çok yukarıda.",
+        "image": "/kids/stories/0143/16.jpg"
+      },
+      {
+        "text": "Hayalimde topum Ay’ın bile üstüne çıktı. Gözden kayboldu!",
+        "image": "/kids/stories/0143/17.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Marion Drew",
+    "illustrator": "Marion Drew",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/my-red-ball",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0064",
+    "title": "Joy okula gidiyor",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0064/01.jpg",
+    "pages": [
+      {
+        "text": "Joy gün boyu oyun oynadı.",
+        "image": "/kids/stories/0064/03.jpg"
+      },
+      {
+        "text": "Annesi yıkanma zamanını hatırlattı.",
+        "image": "/kids/stories/0064/04.jpg"
+      },
+      {
+        "text": "Joy diş fırçasını aldı.",
+        "image": "/kids/stories/0064/05.jpg"
+      },
+      {
+        "text": "Annesi leğene su koydu.",
+        "image": "/kids/stories/0064/06.jpg"
+      },
+      {
+        "text": "Joy yüzünü kuruladı.",
+        "image": "/kids/stories/0064/07.jpg"
+      },
+      {
+        "text": "Kız kardeşiyle uyumaya gitti.",
+        "image": "/kids/stories/0064/08.jpg"
+      },
+      {
+        "text": "Sabah dişlerini fırçaladı.",
+        "image": "/kids/stories/0064/09.jpg"
+      },
+      {
+        "text": "Annesi giyinmesine yardım etti.",
+        "image": "/kids/stories/0064/10.jpg"
+      },
+      {
+        "text": "Ayakkabılarını bağladı.",
+        "image": "/kids/stories/0064/11.jpg"
+      },
+      {
+        "text": "Joy okula gidiyor.",
+        "image": "/kids/stories/0064/12.jpg"
+      },
+      {
+        "text": "Joy şimdi sınıfında.",
+        "image": "/kids/stories/0064/13.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Augustine Napagi",
+    "illustrator": "Vusi Malindi",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/joy-goes-school",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0163",
+    "title": "Sevgili köpek",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0163/01.jpg",
+    "pages": [
+      {
+        "text": "Bir adamın çok sevdiği bir köpeği vardı.",
+        "image": "/kids/stories/0163/03.jpg"
+      },
+      {
+        "text": "Köpeğini çok severdi.",
+        "image": "/kids/stories/0163/04.jpg"
+      },
+      {
+        "text": "Bu masalda köpek pazara gidip et bile alabiliyordu.",
+        "image": "/kids/stories/0163/05.jpg"
+      },
+      {
+        "text": "Kuyudan su getiriyordu.",
+        "image": "/kids/stories/0163/06.jpg"
+      },
+      {
+        "text": "Evin etrafını gözetiyordu.",
+        "image": "/kids/stories/0163/07.jpg"
+      },
+      {
+        "text": "Bir gün adam, köpeğine sevgisini özel bir biçimde gösterdi.",
+        "image": "/kids/stories/0163/08.jpg"
+      },
+      {
+        "text": "Köpek çok mutlu oldu. Birlikte güzel günler geçirdiler.",
+        "image": "/kids/stories/0163/09.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Ritah Katetemera",
+    "illustrator": "Catherine Groenewald, Wiehan de Jager, Jean Fullalove, Ursula Nafula, Sandy Campbell",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/dog",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0265",
+    "title": "Mutlu mu, üzgün mü?",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0265/01.jpg",
+    "pages": [
+      {
+        "text": "Bebek neden ağlıyor olabilir?",
+        "image": "/kids/stories/0265/02.jpg"
+      },
+      {
+        "text": "Belki acıkmıştır.",
+        "image": "/kids/stories/0265/03.jpg"
+      },
+      {
+        "text": "Çocuk neden üzgün olabilir?",
+        "image": "/kids/stories/0265/04.jpg"
+      },
+      {
+        "text": "Belki babasını özlemiştir.",
+        "image": "/kids/stories/0265/05.jpg"
+      },
+      {
+        "text": "Kız neden mutlu olabilir?",
+        "image": "/kids/stories/0265/06.jpg"
+      },
+      {
+        "text": "Yeni bir elbisesi var.",
+        "image": "/kids/stories/0265/07.jpg"
+      },
+      {
+        "text": "Yaşlı adam neden gülüyor olabilir?",
+        "image": "/kids/stories/0265/08.jpg"
+      },
+      {
+        "text": "Komik bir şey okumuş.",
+        "image": "/kids/stories/0265/09.jpg"
+      },
+      {
+        "text": "Kadın neden gülümsüyor olabilir?",
+        "image": "/kids/stories/0265/10.jpg"
+      },
+      {
+        "text": "Çocukları sakince kitap okuyor.",
+        "image": "/kids/stories/0265/11.jpg"
+      },
+      {
+        "text": "Bu kadın ne hissediyor olabilir?",
+        "image": "/kids/stories/0265/12.jpg"
+      },
+      {
+        "text": "Belki biraz çekiniyordur.",
+        "image": "/kids/stories/0265/13.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Madhav Chavan",
+    "illustrator": "Rijuta Ghate",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/happy-and-sad",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0295",
+    "title": "Gökkuşağı evim",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0295/01.jpg",
+    "pages": [
+      {
+        "text": "Gökkuşağını seviyorum.",
+        "image": "/kids/stories/0295/03.jpg"
+      },
+      {
+        "text": "Gökkuşağının bütün renklerini seviyorum.",
+        "image": "/kids/stories/0295/04.jpg"
+      },
+      {
+        "text": "Gökkuşağı renklerinde bir evim olsa!",
+        "image": "/kids/stories/0295/05.jpg"
+      },
+      {
+        "text": "Çatısı kırmızı olabilir.",
+        "image": "/kids/stories/0295/06.jpg"
+      },
+      {
+        "text": "Pencereleri mavi olabilir.",
+        "image": "/kids/stories/0295/07.jpg"
+      },
+      {
+        "text": "Dışını sarıya boyayabilirim.",
+        "image": "/kids/stories/0295/08.jpg"
+      },
+      {
+        "text": "İç duvarları mor olabilir.",
+        "image": "/kids/stories/0295/09.jpg"
+      },
+      {
+        "text": "Turuncu çiçekleri olabilir.",
+        "image": "/kids/stories/0295/10.jpg"
+      },
+      {
+        "text": "Çivit mavisi bir yatağım olabilir.",
+        "image": "/kids/stories/0295/11.jpg"
+      },
+      {
+        "text": "Yeşil bir bahçesi olabilir.",
+        "image": "/kids/stories/0295/12.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Jane Tsharane, Mmapule Nkuna",
+    "illustrator": "Natalie Propa, Jesse Breytenbach, Wiehan de Jager, Marleen Visser, Maya Marshak, Benjamin Mitchley, Magriet Brink, Michael Nakuwa",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/rainbow-0",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0113",
+    "title": "Yeni kedi dostumuz",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0113/01.jpg",
+    "pages": [
+      {
+        "text": "Prosy bir kedi dost istiyordu.",
+        "image": "/kids/stories/0113/02.jpg"
+      },
+      {
+        "text": "Ailesiyle kedileri görmeye gitti.",
+        "image": "/kids/stories/0113/03.jpg"
+      },
+      {
+        "text": "Prosy bu kediyi sevdi. Ama kedi ona çok büyük geldi.",
+        "image": "/kids/stories/0113/04.jpg"
+      },
+      {
+        "text": "Tim bu yavruyu sevdi. Ama yavru çok küçüktü.",
+        "image": "/kids/stories/0113/05.jpg"
+      },
+      {
+        "text": "Anne bu yavruyu sevdi. Ama yavru çok hareketliydi.",
+        "image": "/kids/stories/0113/06.jpg"
+      },
+      {
+        "text": "Herkes bu yavru kediyi sevdi.",
+        "image": "/kids/stories/0113/07.jpg"
+      },
+      {
+        "text": "Yavruyu sahiplendiler.",
+        "image": "/kids/stories/0113/08.jpg"
+      },
+      {
+        "text": "Ailenin yeni kedi dostu herkesi mutlu etti.",
+        "image": "/kids/stories/0113/09.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Ritah Katetemera",
+    "illustrator": "Marleen Visser",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/new-pussy-cat",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0240",
+    "title": "İneğimiz Pendo",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0240/01.jpg",
+    "pages": [
+      {
+        "text": "Bu, Ndalo.",
+        "image": "/kids/stories/0240/03.jpg"
+      },
+      {
+        "text": "Ndalo kitap okumayı sever.",
+        "image": "/kids/stories/0240/04.jpg"
+      },
+      {
+        "text": "Bu, Pendo.",
+        "image": "/kids/stories/0240/05.jpg"
+      },
+      {
+        "text": "Pendo havuç yemeyi sever.",
+        "image": "/kids/stories/0240/06.jpg"
+      },
+      {
+        "text": "Ndalo okuldan sonra Pendo’yu otlatır.",
+        "image": "/kids/stories/0240/07.jpg"
+      },
+      {
+        "text": "Ona taze su verir.",
+        "image": "/kids/stories/0240/08.jpg"
+      },
+      {
+        "text": "Babası Pendo’ya yem verir.",
+        "image": "/kids/stories/0240/09.jpg"
+      },
+      {
+        "text": "Babası Pendo’yu her gün sağar.",
+        "image": "/kids/stories/0240/10.jpg"
+      },
+      {
+        "text": "Pendo bol süt verir.",
+        "image": "/kids/stories/0240/11.jpg"
+      },
+      {
+        "text": "Babası sütü satar.",
+        "image": "/kids/stories/0240/12.jpg"
+      },
+      {
+        "text": "Ndalo her gün evde hazırlanmış süt içer.",
+        "image": "/kids/stories/0240/13.jpg"
+      },
+      {
+        "text": "“Teşekkür ederim Pendo!” der.",
+        "image": "/kids/stories/0240/14.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Ruth Odondi",
+    "illustrator": "Rob Owen",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/pendo-our-cow",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0050",
+    "title": "Hayvanların dişleri",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0050/01.jpg",
+    "pages": [
+      {
+        "text": "Timsahın sivri dişleri vardır.",
+        "image": "/kids/stories/0050/03.jpg"
+      },
+      {
+        "text": "Aslanın da sivri dişleri vardır.",
+        "image": "/kids/stories/0050/04.jpg"
+      },
+      {
+        "text": "Köpekbalığının dişleri çok sivridir. Acaba bazı hayvanların dişleri neden sivridir?",
+        "image": "/kids/stories/0050/05.jpg"
+      },
+      {
+        "text": "İneğin yiyecekleri öğüten güçlü dişleri vardır.",
+        "image": "/kids/stories/0050/06.jpg"
+      },
+      {
+        "text": "Kuşların dişi yoktur. Kuşlar nasıl yemek yer?",
+        "image": "/kids/stories/0050/07.jpg"
+      },
+      {
+        "text": "Farelerin büyük ön dişleri vardır.",
+        "image": "/kids/stories/0050/08.jpg"
+      },
+      {
+        "text": "Benim de ön dişlerim vardı.",
+        "image": "/kids/stories/0050/09.jpg"
+      },
+      {
+        "text": "Süt dişlerim düştü! Senin kaç dişin var?",
+        "image": "/kids/stories/0050/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Zanele Buthelezi, Thembani Dladla, Clare Verbeek, Abu Enock, Dudu Mary, Ajuru Florence",
+    "illustrator": "Rob Owen",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/what-type-teeth",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0058",
+    "title": "Futbol sürprizi",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0058/01.jpg",
+    "pages": [
+      {
+        "text": "Futbolu seviyoruz.",
+        "image": "/kids/stories/0058/03.jpg"
+      },
+      {
+        "text": "Moloko bize futbol öğretiyor.",
+        "image": "/kids/stories/0058/04.jpg"
+      },
+      {
+        "text": "Birlikte futbol oynuyoruz.",
+        "image": "/kids/stories/0058/05.jpg"
+      },
+      {
+        "text": "Moloko sabırlı bir öğretmen!",
+        "image": "/kids/stories/0058/06.jpg"
+      },
+      {
+        "text": "Oyundan sonra bize bir sürprizi olduğunu söyledi.",
+        "image": "/kids/stories/0058/07.jpg"
+      },
+      {
+        "text": "Ama sürprizi yarın gösterecekmiş.",
+        "image": "/kids/stories/0058/08.jpg"
+      },
+      {
+        "text": "Ertesi gün sahaya erkenden geldik. Sürprizleri seviyoruz.",
+        "image": "/kids/stories/0058/09.jpg"
+      },
+      {
+        "text": "Moloko hepimize yeni formalar ve toplar getirmiş! Ne güzel sürpriz!",
+        "image": "/kids/stories/0058/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Letta Machoga",
+    "illustrator": "Vusi Malindi",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/soccer-game",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0160",
+    "title": "Herkesin yapabildikleri var",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0160/01.jpg",
+    "pages": [
+      {
+        "text": "Bu, öğretmenim Agnes.",
+        "image": "/kids/stories/0160/02.jpg"
+      },
+      {
+        "text": "Agnes yürürken koltuk değneklerini kullanır.",
+        "image": "/kids/stories/0160/03.jpg"
+      },
+      {
+        "text": "Bu, severek dinlediğim radyo sunucusu Metobo.",
+        "image": "/kids/stories/0160/04.jpg"
+      },
+      {
+        "text": "Metobo görme güçlüğü yaşar.",
+        "image": "/kids/stories/0160/05.jpg"
+      },
+      {
+        "text": "Bu, komşum Moraa. Moraa bir çiftçi.",
+        "image": "/kids/stories/0160/06.jpg"
+      },
+      {
+        "text": "Moraa işitmez. İşaret diliyle konuşur.",
+        "image": "/kids/stories/0160/07.jpg"
+      },
+      {
+        "text": "Bu, okulumuzdaki futbolcu Osero.",
+        "image": "/kids/stories/0160/08.jpg"
+      },
+      {
+        "text": "Osero’nun elleri yok. Ama takımımız için birçok gol atar!",
+        "image": "/kids/stories/0160/09.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Agnes Mabururu",
+    "illustrator": "Wiehan de Jager",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/disability-not-inability",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0109",
+    "title": "Lekishon ve inekler",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0109/01.jpg",
+    "pages": [
+      {
+        "text": "Bu, Lekishon. Köpeğine sesleniyor.",
+        "image": "/kids/stories/0109/03.jpg"
+      },
+      {
+        "text": "Lekishon ve köpeği hayvanları otlatmaya gidiyor. Güneş çok sıcak.",
+        "image": "/kids/stories/0109/04.jpg"
+      },
+      {
+        "text": "Lekishon ve köpeği acıkıyor, susuyor.",
+        "image": "/kids/stories/0109/05.jpg"
+      },
+      {
+        "text": "Su aramaya gidiyorlar.",
+        "image": "/kids/stories/0109/06.jpg"
+      },
+      {
+        "text": "Lekishon ineklerin yerini göremiyor.",
+        "image": "/kids/stories/0109/07.jpg"
+      },
+      {
+        "text": "Biraz üzülüyor.",
+        "image": "/kids/stories/0109/08.jpg"
+      },
+      {
+        "text": "Köpeğiyle eve dönmeye karar veriyor.",
+        "image": "/kids/stories/0109/09.jpg"
+      },
+      {
+        "text": "İnekler eve giden yolu bulmuş! Lekishon ve köpeği çok seviniyor.",
+        "image": "/kids/stories/0109/10.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Paul Maseri",
+    "illustrator": "Wiehan de Jager",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/lekishon-and-cows",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0356",
+    "title": "Sopam nerede?",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0356/01.jpg",
+    "pages": [
+      {
+        "text": "Oyun sopamı kaybettim. Bulamıyorum.",
+        "image": "/kids/stories/0356/02.jpg"
+      },
+      {
+        "text": "Kapının arkasına baktım. Orada değildi.",
+        "image": "/kids/stories/0356/03.jpg"
+      },
+      {
+        "text": "Rafa baktım. Orada da bulamadım.",
+        "image": "/kids/stories/0356/04.jpg"
+      },
+      {
+        "text": "Yatağın altına baktım. Orada da yoktu.",
+        "image": "/kids/stories/0356/05.jpg"
+      },
+      {
+        "text": "Kutunun içine baktım. Orada değildi.",
+        "image": "/kids/stories/0356/06.jpg"
+      },
+      {
+        "text": "Tavan arasına baktım. Orada da yoktu.",
+        "image": "/kids/stories/0356/07.jpg"
+      },
+      {
+        "text": "Buraya, oraya, her yere baktım. Bir türlü bulamadım.",
+        "image": "/kids/stories/0356/08.jpg"
+      },
+      {
+        "text": "Resme dikkatlice bakalım. Sopayı sen görebiliyor musun?",
+        "image": "/kids/stories/0356/09.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Meera Tendolkar, Madhav Chavan",
+    "illustrator": "Rijuta Ghate",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/where-my-bat",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0079",
+    "title": "Jojo ve ineği",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0079/01.jpg",
+    "pages": [
+      {
+        "text": "Jojo küçük bir çocuk.",
+        "image": "/kids/stories/0079/03.jpg"
+      },
+      {
+        "text": "Annesi ve inekleriyle yaşar.",
+        "image": "/kids/stories/0079/04.jpg"
+      },
+      {
+        "text": "Jojo ineğini sever.",
+        "image": "/kids/stories/0079/05.jpg"
+      },
+      {
+        "text": "Annesi her sabah ineği sağar.",
+        "image": "/kids/stories/0079/06.jpg"
+      },
+      {
+        "text": "Jojo evde hazırlanmış sütünü içer.",
+        "image": "/kids/stories/0079/07.jpg"
+      },
+      {
+        "text": "İneği otlatmaya götürür.",
+        "image": "/kids/stories/0079/08.jpg"
+      },
+      {
+        "text": "İneğe su verir.",
+        "image": "/kids/stories/0079/09.jpg"
+      },
+      {
+        "text": "Annesi yemek pişirir.",
+        "image": "/kids/stories/0079/10.jpg"
+      },
+      {
+        "text": "Jojo yemeğini yer.",
+        "image": "/kids/stories/0079/11.jpg"
+      },
+      {
+        "text": "Arkadaşıyla top oynar.",
+        "image": "/kids/stories/0079/12.jpg"
+      },
+      {
+        "text": "Kitabını okur.",
+        "image": "/kids/stories/0079/13.jpg"
+      },
+      {
+        "text": "İneğine iyi geceler der ve uyumaya gider.",
+        "image": "/kids/stories/0079/14.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Isiira Patrick",
+    "illustrator": "Rob Owen, Catherine Groenewald",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/jojo-and-cow",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0245",
+    "title": "Hayvanat bahçesinde bir gün",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0245/01.jpg",
+    "pages": [
+      {
+        "text": "Bugün hayvanat bahçesine gidiyoruz.",
+        "image": "/kids/stories/0245/02.jpg"
+      },
+      {
+        "text": "Babamızın arabasıyla gidiyoruz.",
+        "image": "/kids/stories/0245/03.jpg"
+      },
+      {
+        "text": "Hayvanları göreceğiz.",
+        "image": "/kids/stories/0245/04.jpg"
+      },
+      {
+        "text": "Bak, bir fil! Bak, bir aslan!",
+        "image": "/kids/stories/0245/05.jpg"
+      },
+      {
+        "text": "Bahçeyi birlikte geziyoruz.",
+        "image": "/kids/stories/0245/06.jpg"
+      },
+      {
+        "text": "Dondurma ve yiyecek tezgâhları var.",
+        "image": "/kids/stories/0245/07.jpg"
+      },
+      {
+        "text": "Balonları olan bir palyaço da var.",
+        "image": "/kids/stories/0245/08.jpg"
+      },
+      {
+        "text": "Babamız bize küçük sürprizler alıyor.",
+        "image": "/kids/stories/0245/09.jpg"
+      },
+      {
+        "text": "Artık eve gitme zamanı.",
+        "image": "/kids/stories/0245/10.jpg"
+      },
+      {
+        "text": "Bugün birçok hayvan gördük!",
+        "image": "/kids/stories/0245/11.jpg"
+      },
+      {
+        "text": "Hem mutluyuz hem yorgunuz.",
+        "image": "/kids/stories/0245/12.jpg"
+      },
+      {
+        "text": "Bugünkü gezimizi çok sevdim!",
+        "image": "/kids/stories/0245/13.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Zimbili Dlamini, Hlengiwe Zondi",
+    "illustrator": "Melany Pietersen",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/our-day-zoo",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0208",
+    "title": "Inyang ve kuş",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0208/01.jpg",
+    "pages": [
+      {
+        "text": "Inyang hayvanlara bakardı.",
+        "image": "/kids/stories/0208/03.jpg"
+      },
+      {
+        "text": "Bir gün...",
+        "image": "/kids/stories/0208/04.jpg"
+      },
+      {
+        "text": "...çok acıktı.",
+        "image": "/kids/stories/0208/05.jpg"
+      },
+      {
+        "text": "Bir kuşla konuştu...",
+        "image": "/kids/stories/0208/06.jpg"
+      },
+      {
+        "text": "...onu evine gönderdi.",
+        "image": "/kids/stories/0208/07.jpg"
+      },
+      {
+        "text": "Kuş uçtu...",
+        "image": "/kids/stories/0208/08.jpg"
+      },
+      {
+        "text": "...ve evin üstüne kondu.",
+        "image": "/kids/stories/0208/09.jpg"
+      },
+      {
+        "text": "Evdekiler kuşun sesini duydu.",
+        "image": "/kids/stories/0208/10.jpg"
+      },
+      {
+        "text": "Yemek hazırladılar.",
+        "image": "/kids/stories/0208/11.jpg"
+      },
+      {
+        "text": "Yemeği alıp yola çıktılar...",
+        "image": "/kids/stories/0208/12.jpg"
+      },
+      {
+        "text": "...Inyang’ı ağacın altında buldular.",
+        "image": "/kids/stories/0208/13.jpg"
+      },
+      {
+        "text": "İnekler biraz uzağa gitmişti.",
+        "image": "/kids/stories/0208/14.jpg"
+      },
+      {
+        "text": "Inyang’a yemek verdiler.",
+        "image": "/kids/stories/0208/15.jpg"
+      },
+      {
+        "text": "Babası inekleri getirdi.",
+        "image": "/kids/stories/0208/16.jpg"
+      },
+      {
+        "text": "Inyang doydu.",
+        "image": "/kids/stories/0208/17.jpg"
+      },
+      {
+        "text": "Inyang ve inekler eve döndü.",
+        "image": "/kids/stories/0208/18.jpg"
+      },
+      {
+        "text": "Kuş, Inyang’a yardım etmişti!",
+        "image": "/kids/stories/0208/19.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Simon Ipoo",
+    "illustrator": "Catherine Groenewald, Wiehan de Jager, Kathy Arbuckle, Rijuta Ghate, Jemma Kahn",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/inyang-and-bird",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0217",
+    "title": "Sevgili öğretmenim",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0217/01.jpg",
+    "pages": [
+      {
+        "text": "Öğretmenimi seviyorum.",
+        "image": "/kids/stories/0217/03.jpg"
+      },
+      {
+        "text": "O, nazik ve sabırlı bir öğretmen.",
+        "image": "/kids/stories/0217/04.jpg"
+      },
+      {
+        "text": "Bugün saçını güzelce örmüş.",
+        "image": "/kids/stories/0217/05.jpg"
+      },
+      {
+        "text": "Saçında renkli boncuklar var.",
+        "image": "/kids/stories/0217/06.jpg"
+      },
+      {
+        "text": "Boncukları yeşil, beyaz, kırmızı ve sarı.",
+        "image": "/kids/stories/0217/07.jpg"
+      },
+      {
+        "text": "Anne, benim saçımı da öğretmeniminki gibi örer misin?",
+        "image": "/kids/stories/0217/08.jpg"
+      },
+      {
+        "text": "Büyüyünce ben de saçımda boncuklar kullanabilirim.",
+        "image": "/kids/stories/0217/09.jpg"
+      },
+      {
+        "text": "Belki ben de öğretmen olurum!",
+        "image": "/kids/stories/0217/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Zimbili Dlamini, Hlengiwe Zondi",
+    "illustrator": "Jesse Pietersen",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/my-teacher",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0090",
+    "title": "Köyümüzdeki evler",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0090/01.jpg",
+    "pages": [
+      {
+        "text": "Bu evler direk, ot ve çamur kullanılarak yapılır.",
+        "image": "/kids/stories/0090/03.jpg"
+      },
+      {
+        "text": "Bir kapısı ve iki penceresi vardır.",
+        "image": "/kids/stories/0090/04.jpg"
+      },
+      {
+        "text": "Hava kuruyken içleri serin olur.",
+        "image": "/kids/stories/0090/05.jpg"
+      },
+      {
+        "text": "Yağmurda çatıdan yumuşak sesler gelir.",
+        "image": "/kids/stories/0090/06.jpg"
+      },
+      {
+        "text": "Köydeki ustalar bu evleri yapmayı bilir.",
+        "image": "/kids/stories/0090/07.jpg"
+      },
+      {
+        "text": "Uganda’daki pek çok köyde böyle evler vardır.",
+        "image": "/kids/stories/0090/08.jpg"
+      },
+      {
+        "text": "Biz Nandahabi köyündeki evlerimizi çok severiz.",
+        "image": "/kids/stories/0090/09.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Yusuf, Yvonne, Desire, Arafat, Judith, Susan",
+    "illustrator": "Magriet Brink, Rob Owen, Danica Strydom, Wiehan de Jager, Kathy Arbuckle",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/huts-our-village",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0012",
+    "title": "Benim köyüm",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0012/01.jpg",
+    "pages": [
+      {
+        "text": "Uganda’daki Kiwangala köyünde yaşıyorum. Köyümü seviyorum.",
+        "image": "/kids/stories/0012/03.jpg"
+      },
+      {
+        "text": "Köyümüzdeki çocuklar okula gider. Öğretmenlerimizi severiz.",
+        "image": "/kids/stories/0012/04.jpg"
+      },
+      {
+        "text": "Okulda okur, sayıları öğreniriz. Bir, iki, üç, dört, beş!",
+        "image": "/kids/stories/0012/05.jpg"
+      },
+      {
+        "text": "Arkadaşlarımızla top oynarız.",
+        "image": "/kids/stories/0012/06.jpg"
+      },
+      {
+        "text": "Köyümüzde muz yemeyi severiz.",
+        "image": "/kids/stories/0012/07.jpg"
+      },
+      {
+        "text": "Domuzları uzaktan izleriz.",
+        "image": "/kids/stories/0012/08.jpg"
+      },
+      {
+        "text": "Arkadaşlarımızla oyun oynamayı severiz.",
+        "image": "/kids/stories/0012/09.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Wendy Parry",
+    "illustrator": "Vusi Malindi, Mario Kart, Laura Libertore, Wiehan de Jager, Catherine Groenewald",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/my-village-3",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0119",
+    "title": "Hangi renkleri seversin?",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0119/01.jpg",
+    "pages": [
+      {
+        "text": "Dinah mor elbisesini sever.",
+        "image": "/kids/stories/0119/03.jpg"
+      },
+      {
+        "text": "Teyzem turuncu elbisesini sever. Babam ona hediye etmişti.",
+        "image": "/kids/stories/0119/04.jpg"
+      },
+      {
+        "text": "Büyükannem mavi elbisesini sever.",
+        "image": "/kids/stories/0119/05.jpg"
+      },
+      {
+        "text": "Dan kırmızı arabasını sever.",
+        "image": "/kids/stories/0119/06.jpg"
+      },
+      {
+        "text": "Bebek sarı sandalyesini sever.",
+        "image": "/kids/stories/0119/07.jpg"
+      },
+      {
+        "text": "Pazardakiler kırmızı domatesleri sever.",
+        "image": "/kids/stories/0119/08.jpg"
+      },
+      {
+        "text": "Okuldaki çocuklar mavi oyun giysilerini sever.",
+        "image": "/kids/stories/0119/09.jpg"
+      },
+      {
+        "text": "Kız kardeşim sarı bluzunu sever.",
+        "image": "/kids/stories/0119/10.jpg"
+      },
+      {
+        "text": "Jane pembe elbisesini sever.",
+        "image": "/kids/stories/0119/11.jpg"
+      },
+      {
+        "text": "Komşum sarı evini sever. Ne güzel görünüyor!",
+        "image": "/kids/stories/0119/12.jpg"
+      },
+      {
+        "text": "Böcekler yeşil yerleri sever.",
+        "image": "/kids/stories/0119/13.jpg"
+      },
+      {
+        "text": "Arkadaşım ve ben yeşil elmayı severiz.",
+        "image": "/kids/stories/0119/14.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Annet Ssebaggala",
+    "illustrator": "Sandy Lightly, Catherine Groenewald, Wiehan de Jager, Sue Kramer, Rijuta Ghate, Amir Bachir António Necas",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/what-colors-do-you-0",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0069",
+    "title": "Yeni arkadaşlarım",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0069/01.jpg",
+    "pages": [
+      {
+        "text": "Benim adım Simo.",
+        "image": "/kids/stories/0069/03.jpg"
+      },
+      {
+        "text": "Yeni arkadaşlarımla tanış!",
+        "image": "/kids/stories/0069/04.jpg"
+      },
+      {
+        "text": "Zizo, Lele, Sisa ve Ayanda.",
+        "image": "/kids/stories/0069/05.jpg"
+      },
+      {
+        "text": "Zizo futbolu sever.",
+        "image": "/kids/stories/0069/06.jpg"
+      },
+      {
+        "text": "Lele yüzmeyi sever.",
+        "image": "/kids/stories/0069/07.jpg"
+      },
+      {
+        "text": "Sisa saklambaç oynamayı sever.",
+        "image": "/kids/stories/0069/08.jpg"
+      },
+      {
+        "text": "Ayanda kitap okumayı sever.",
+        "image": "/kids/stories/0069/09.jpg"
+      },
+      {
+        "text": "Arkadaşlarımın sevdiği şeyleri birlikte denemeyi severim.",
+        "image": "/kids/stories/0069/10.jpg"
+      },
+      {
+        "text": "Zizo ile futbol oynarım.",
+        "image": "/kids/stories/0069/11.jpg"
+      },
+      {
+        "text": "Bazen Lele ile yetişkin gözetiminde yüzerim.",
+        "image": "/kids/stories/0069/12.jpg"
+      },
+      {
+        "text": "Sisa ile saklambaç oynarım.",
+        "image": "/kids/stories/0069/13.jpg"
+      },
+      {
+        "text": "Yeni arkadaşlarla tanışmak güzel!",
+        "image": "/kids/stories/0069/14.jpg"
+      },
+      {
+        "text": "Birlikte futbol oynayabiliriz.",
+        "image": "/kids/stories/0069/15.jpg"
+      },
+      {
+        "text": "Yetişkin gözetiminde yüzebiliriz.",
+        "image": "/kids/stories/0069/16.jpg"
+      },
+      {
+        "text": "Birlikte saklambaç oynayabiliriz.",
+        "image": "/kids/stories/0069/17.jpg"
+      },
+      {
+        "text": "Birlikte kitap okuyabiliriz.",
+        "image": "/kids/stories/0069/18.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Zimbili Dlamini, Hlengiwe Zondi",
+    "illustrator": "Catherine Groenewald",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/my-new-friends",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0268",
+    "title": "Kendine ev yapan usta",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0268/01.jpg",
+    "pages": [
+      {
+        "text": "Kabubbu köyünde bir yapı ustası yaşardı.",
+        "image": "/kids/stories/0268/03.jpg"
+      },
+      {
+        "text": "Köyde pek çok ev yaptı.",
+        "image": "/kids/stories/0268/04.jpg"
+      },
+      {
+        "text": "Ama kendi evi bakıma ihtiyaç duyuyordu.",
+        "image": "/kids/stories/0268/05.jpg"
+      },
+      {
+        "text": "Köylüler onun için konuşurdu.",
+        "image": "/kids/stories/0268/06.jpg"
+      },
+      {
+        "text": "Bir gün yeterince para biriktirdi.",
+        "image": "/kids/stories/0268/07.jpg"
+      },
+      {
+        "text": "Çimento, kum, çatı malzemesi, tuğla ve çivi aldı.",
+        "image": "/kids/stories/0268/08.jpg"
+      },
+      {
+        "text": "Çevresinde çiti olan güzel bir ev yaptı.",
+        "image": "/kids/stories/0268/09.jpg"
+      },
+      {
+        "text": "Arkadaşları onunla sevindi.",
+        "image": "/kids/stories/0268/10.jpg"
+      },
+      {
+        "text": "Bir kutlama hazırladı. Arkadaşlarıyla yemek yiyip dans etti.",
+        "image": "/kids/stories/0268/11.jpg"
+      },
+      {
+        "text": "Arkadaşları ona hediyeler getirdi.",
+        "image": "/kids/stories/0268/12.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Remedial class (Kabubbu community Library)",
+    "illustrator": "Rob Owen, Marleen Visser, Wiehan de Jager, Alex Zablon, Jano Strydom, Kathy Arbuckle, Magriet Brink",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/man-who-built-his-own-house",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0061",
+    "title": "Çiçekleri seven Namagunga",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0061/01.jpg",
+    "pages": [
+      {
+        "text": "Busolwe köyünde Namagunga adında bir çocuk yaşardı.",
+        "image": "/kids/stories/0061/03.jpg"
+      },
+      {
+        "text": "Çiçekleri çok severdi. Bir gün ailesiyle su almaya gittiler.",
+        "image": "/kids/stories/0061/04.jpg"
+      },
+      {
+        "text": "Yolda güzel çiçekler gördü. “Ne güzeller!” dedi.",
+        "image": "/kids/stories/0061/05.jpg"
+      },
+      {
+        "text": "Eve dönünce annesine, “Biz de çiçek yetiştirelim,” dedi. Çünkü...",
+        "image": "/kids/stories/0061/06.jpg"
+      },
+      {
+        "text": "Çiçekler pek çok yeri güzelleştirir.",
+        "image": "/kids/stories/0061/07.jpg"
+      },
+      {
+        "text": "Elbiselerimizde çiçek desenleri görürüz.",
+        "image": "/kids/stories/0061/08.jpg"
+      },
+      {
+        "text": "Ayakkabılarımızda da çiçek desenleri olabilir.",
+        "image": "/kids/stories/0061/09.jpg"
+      },
+      {
+        "text": "Çiçekleri seyrederken gülümseriz.",
+        "image": "/kids/stories/0061/10.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Rashida, Joy, Jovia, Zulu, Phionah",
+    "illustrator": "Jonathan Field, Rob Owen, Wiehan de Jager",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/flowers-1",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0147",
+    "title": "Hayalimdeki dostlarım",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0147/01.jpg",
+    "pages": [
+      {
+        "text": "Hayalimde dinozorumla gökyüzündeki kuşları izliyorum.",
+        "image": "/kids/stories/0147/03.jpg"
+      },
+      {
+        "text": "Kuşlarla ağaçtaki şempanzeyle tanışıyorum.",
+        "image": "/kids/stories/0147/04.jpg"
+      },
+      {
+        "text": "Şempanzeyle tepede zürafalarla oyun oynuyorum.",
+        "image": "/kids/stories/0147/05.jpg"
+      },
+      {
+        "text": "Zürafalarla kilden oyun topları yapıyorum.",
+        "image": "/kids/stories/0147/06.jpg"
+      },
+      {
+        "text": "Maymun ve gorille muz yiyorum.",
+        "image": "/kids/stories/0147/07.jpg"
+      },
+      {
+        "text": "Goril ve maymun kaplumbağayı görünce şaşırıyor.",
+        "image": "/kids/stories/0147/08.jpg"
+      },
+      {
+        "text": "Kaplumbağa ve yılanla yavaşça eve gidiyorum.",
+        "image": "/kids/stories/0147/09.jpg"
+      },
+      {
+        "text": "Yılanla göl kenarında tıslayıp şarkı söylüyoruz.",
+        "image": "/kids/stories/0147/10.jpg"
+      },
+      {
+        "text": "Hayalimdeki bütün dostlarımla mutluluk içinde yaşıyoruz!",
+        "image": "/kids/stories/0147/11.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Waako Joshua, Cornelius Gulere",
+    "illustrator": "Wiehan de Jager",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/my-family-and-i",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0032",
+    "title": "Fare nerede?",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0032/01.jpg",
+    "pages": [
+      {
+        "text": "Fare nerede?",
+        "image": "/kids/stories/0032/02.jpg"
+      },
+      {
+        "text": "Kovanın içindeki fareyi bul.",
+        "image": "/kids/stories/0032/03.jpg"
+      },
+      {
+        "text": "Nerede?",
+        "image": "/kids/stories/0032/04.jpg"
+      },
+      {
+        "text": "Bak, yatağın altında!",
+        "image": "/kids/stories/0032/05.jpg"
+      },
+      {
+        "text": "Neredesin? Kapının arkasında mısın? Hayır, orada değilsin.",
+        "image": "/kids/stories/0032/06.jpg"
+      },
+      {
+        "text": "Çantanın içinde misin? Hayır, orada değilsin.",
+        "image": "/kids/stories/0032/07.jpg"
+      },
+      {
+        "text": "Tencerenin içinde misin? Hayır, orada değilsin.",
+        "image": "/kids/stories/0032/08.jpg"
+      },
+      {
+        "text": "Dolabın içinde olabilir misin?",
+        "image": "/kids/stories/0032/09.jpg"
+      },
+      {
+        "text": "Nerede, nerede? Seni bulamıyorum.",
+        "image": "/kids/stories/0032/10.jpg"
+      },
+      {
+        "text": "Paspasın altında mısın? Hayır.",
+        "image": "/kids/stories/0032/11.jpg"
+      },
+      {
+        "text": "Valizin içinde! Evet, valizdeki fareyi gördüm.",
+        "image": "/kids/stories/0032/12.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Ritah Katetemera",
+    "illustrator": "Michael Nakuwa, Benjamin Mitchley, Wiehan de Jager, Bronwen Heath, Catherine Groenewald, Rijuta Ghate",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/where-rat",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0144",
+    "title": "Zanzibar gezisi",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0144/01.jpg",
+    "pages": [
+      {
+        "text": "Zanzibar’da yürürken ne görürsün? Dar sokaklarda yiyecek satan dükkânlar.",
+        "image": "/kids/stories/0144/03.jpg"
+      },
+      {
+        "text": "Zanzibar’da denize bakarken ne görürsün? Changu, Kibua, Tasi, Pono, Jodari ve Kambisi denen balıklar.",
+        "image": "/kids/stories/0144/04.jpg"
+      },
+      {
+        "text": "Zanzibar’da araçla gezerken ne görürsün? Ormanda etrafı izleyen hayvanlar.",
+        "image": "/kids/stories/0144/05.jpg"
+      },
+      {
+        "text": "Zanzibar’da dans ederken ne görürsün? Farklı dilleri konuşan insanlar, Taarab müziğiyle dans eder.",
+        "image": "/kids/stories/0144/06.jpg"
+      },
+      {
+        "text": "Zanzibar’da içeceklerde neler görürsün? Şeker kamışı ve Hindistan cevizi suyu; büyükler için çay ve kahve.",
+        "image": "/kids/stories/0144/07.jpg"
+      },
+      {
+        "text": "Zanzibar’a gitsen bir daha dönmek ister misin?",
+        "image": "/kids/stories/0144/08.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Barke Ramadhan",
+    "illustrator": "Wiehan de Jager, Laura Libertore, Catherine Groenewald, Rijuta Ghate",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/trip-zanzibar",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0100",
+    "title": "Balıkçı Jaaka",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0100/01.jpg",
+    "pages": [
+      {
+        "text": "Bu, Naminya’da yaşayan balıkçı Jaaka.",
+        "image": "/kids/stories/0100/03.jpg"
+      },
+      {
+        "text": "Nil Nehri’nde balık tutar.",
+        "image": "/kids/stories/0100/04.jpg"
+      },
+      {
+        "text": "Bir teknesi, ağı ve oltası vardır.",
+        "image": "/kids/stories/0100/05.jpg"
+      },
+      {
+        "text": "Sabah erkenden kalkıp Nil levreği tutmaya gider.",
+        "image": "/kids/stories/0100/06.jpg"
+      },
+      {
+        "text": "Sonra tuttuğu balıkları Jinja pazarında satar.",
+        "image": "/kids/stories/0100/07.jpg"
+      },
+      {
+        "text": "Bugün biraz üzgün görünüyor. “Jaaka, ne oldu?” diye soruyorlar.",
+        "image": "/kids/stories/0100/08.jpg"
+      },
+      {
+        "text": "“Rüzgâr yüzünden balık tutamadım. Üstelik oltamı da kaybettim,” diyor.",
+        "image": "/kids/stories/0100/09.jpg"
+      },
+      {
+        "text": "“Ama yeni bir olta aldım. Yarın yeniden deneyebilirim,” diye ekliyor.",
+        "image": "/kids/stories/0100/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Tom Sabwa, Children's Development Center at Masese",
+    "illustrator": "Zablon Alex Nguku",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/jaaka-fisherman",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0146",
+    "title": "Kampala’ya ilk gezim",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0146/01.jpg",
+    "pages": [
+      {
+        "text": "Kampala’da yürürken ne görürsün? Kalabalık sokaklarda giysi dükkânları.",
+        "image": "/kids/stories/0146/03.jpg"
+      },
+      {
+        "text": "Nakivuubo’da ne görürsün? Owino pazarı, duraklar, oyun alanı ve dükkânlar.",
+        "image": "/kids/stories/0146/04.jpg"
+      },
+      {
+        "text": "Kampala’da araçla gezerken ne görürsün? Yüksek binalar, çeşit çeşit arabalar.",
+        "image": "/kids/stories/0146/05.jpg"
+      },
+      {
+        "text": "Kampala’da hangi dilleri duyarsın? Luganda, Svahili, İngilizce ve Lunyankole.",
+        "image": "/kids/stories/0146/06.jpg"
+      },
+      {
+        "text": "Kampala’da kahvaltıda ne görürsün? Muzlar ve farklı içecekler.",
+        "image": "/kids/stories/0146/07.jpg"
+      },
+      {
+        "text": "Kampala’yı bir daha görmek ister misin?",
+        "image": "/kids/stories/0146/08.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Barke Ramadhan",
+    "illustrator": "Wiehan de Jager, Laura Libertore, Catherine Groenewald, Rijuta Ghate, Jemma Kahn",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/my-first-trip-kampala",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0099",
+    "title": "Oyuncağım Azizi",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0099/01.jpg",
+    "pages": [
+      {
+        "text": "Bu, Azizi. Azizi benim oyuncak bebeğim.",
+        "image": "/kids/stories/0099/03.jpg"
+      },
+      {
+        "text": "Azizi’yi seviyorum, çünkü hep gülümsüyor.",
+        "image": "/kids/stories/0099/04.jpg"
+      },
+      {
+        "text": "Uyanınca yüzümü yıkar, sonra Azizi’yi bulurum.",
+        "image": "/kids/stories/0099/05.jpg"
+      },
+      {
+        "text": "Saçını tararım.",
+        "image": "/kids/stories/0099/06.jpg"
+      },
+      {
+        "text": "Kahvaltıda ona da oyun yemeği hazırlarım.",
+        "image": "/kids/stories/0099/07.jpg"
+      },
+      {
+        "text": "Bir atıştırmalık yediğimde oyunda ona da pay ayırırım.",
+        "image": "/kids/stories/0099/08.jpg"
+      },
+      {
+        "text": "Ama Azizi hiç yemek yemez. Çünkü o bir oyuncak!",
+        "image": "/kids/stories/0099/09.jpg"
+      },
+      {
+        "text": "Bahçede çiçekleri seyrederim.",
+        "image": "/kids/stories/0099/10.jpg"
+      },
+      {
+        "text": "Azizi’ye bir çiçek gösteririm. O konuşmaz ama ben onunla konuşabilirim.",
+        "image": "/kids/stories/0099/11.jpg"
+      },
+      {
+        "text": "Annem beni yıkamadan önce Azizi’yi temizlerim.",
+        "image": "/kids/stories/0099/12.jpg"
+      },
+      {
+        "text": "Azizi’ye kırmızı giydiririm. Kırmızıyı severim.",
+        "image": "/kids/stories/0099/13.jpg"
+      },
+      {
+        "text": "Uyku vakti Azizi’yi yanıma koyarım.",
+        "image": "/kids/stories/0099/14.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Lawrence A. Konjuro",
+    "illustrator": "Natalie Propa",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/azizi-doll",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0174",
+    "title": "Kim daha büyük?",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0174/01.jpg",
+    "pages": [
+      {
+        "text": "Karınca küçük bitkilere ve taşlara baktı. “Ben büyüğüm!” dedi.",
+        "image": "/kids/stories/0174/03.jpg"
+      },
+      {
+        "text": "Sincap, “Sana göre ben daha büyüğüm!” dedi.",
+        "image": "/kids/stories/0174/04.jpg"
+      },
+      {
+        "text": "Kedi, “Sincaba göre ben daha büyüğüm!” dedi.",
+        "image": "/kids/stories/0174/05.jpg"
+      },
+      {
+        "text": "Sırtlan, “Kediye göre ben daha büyüğüm!” dedi.",
+        "image": "/kids/stories/0174/06.jpg"
+      },
+      {
+        "text": "Gergedan, “Sırtlana göre ben daha büyüğüm!” dedi.",
+        "image": "/kids/stories/0174/07.jpg"
+      },
+      {
+        "text": "Fil, “Gergedana göre ben daha büyüğüm!” dedi.",
+        "image": "/kids/stories/0174/08.jpg"
+      },
+      {
+        "text": "Fil yıldızlı gökyüzüne baktı. Gökyüzü her yöne uzanıyordu. “Gökyüzünün yanında hepimiz küçüğüz!” dedi.",
+        "image": "/kids/stories/0174/09.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Sara Saunders",
+    "illustrator": "Wiehan de Jager, blackmoondev.com, Karen Lilje",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/who-big",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0350",
+    "title": "Fareye bir yuva",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0350/01.jpg",
+    "pages": [
+      {
+        "text": "Fare kendine yeni bir ev arıyordu.",
+        "image": "/kids/stories/0350/02.jpg"
+      },
+      {
+        "text": "“Burası güzel bir eve benziyor,” dedi.",
+        "image": "/kids/stories/0350/03.jpg"
+      },
+      {
+        "text": "Yavru köpek, “Benimle kalabilirsin,” dedi. Fare teşekkür etti.",
+        "image": "/kids/stories/0350/04.jpg"
+      },
+      {
+        "text": "O gece fare rüyasında zıpladı, çamurda oynadı.",
+        "image": "/kids/stories/0350/05.jpg"
+      },
+      {
+        "text": "Papağan, “Benimle kalabilirsin,” dedi. Fare teşekkür etti.",
+        "image": "/kids/stories/0350/06.jpg"
+      },
+      {
+        "text": "O gece farenin rüyaları gürültülü ve hareketliydi.",
+        "image": "/kids/stories/0350/07.jpg"
+      },
+      {
+        "text": "Balık, “Benimle kalabilirsin,” dedi. Fare teşekkür etti.",
+        "image": "/kids/stories/0350/08.jpg"
+      },
+      {
+        "text": "O gece farenin rüyaları soğuk ve ıslaktı.",
+        "image": "/kids/stories/0350/09.jpg"
+      },
+      {
+        "text": "Fare sıcak ve kuru bir yer arıyordu.",
+        "image": "/kids/stories/0350/10.jpg"
+      },
+      {
+        "text": "Etrafına bakıp düşünmeye devam etti.",
+        "image": "/kids/stories/0350/11.jpg"
+      },
+      {
+        "text": "Yakında bir kitaplık buldu.",
+        "image": "/kids/stories/0350/12.jpg"
+      },
+      {
+        "text": "O gece sıcak, rahat rüyalar gördü. İyi geceler fare!",
+        "image": "/kids/stories/0350/13.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Michele Fry",
+    "illustrator": "Amy Uzzell",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/house-mouse",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0136",
+    "title": "Hamisi’nin yeni gömleği",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0136/01.jpg",
+    "pages": [
+      {
+        "text": "Hamisi’nin okul giysisine ihtiyacı vardı. Babası onu pazara götürdü.",
+        "image": "/kids/stories/0136/03.jpg"
+      },
+      {
+        "text": "Hamisi güzel gömlekli bir çocuk gördü. “Ne güzel gömlek!” diye düşündü.",
+        "image": "/kids/stories/0136/04.jpg"
+      },
+      {
+        "text": "“Benim de böyle bir gömleğim olsa,” dedi.",
+        "image": "/kids/stories/0136/05.jpg"
+      },
+      {
+        "text": "Bir tezgahta aynı gömlekleri gördü. “Baba, bir tane alabilir miyiz?” diye sordu.",
+        "image": "/kids/stories/0136/06.jpg"
+      },
+      {
+        "text": "Babası, “Önce okul giysini almalıyız,” dedi.",
+        "image": "/kids/stories/0136/07.jpg"
+      },
+      {
+        "text": "“Gömlek için yeterli paramız kalmayabilir,” diye açıkladı.",
+        "image": "/kids/stories/0136/08.jpg"
+      },
+      {
+        "text": "Okul giysisini aldıktan sonra para üstünü saydılar. Bir gömlek için de yeterli para kalmıştı!",
+        "image": "/kids/stories/0136/09.jpg"
+      },
+      {
+        "text": "Hamisi sevindi. Acaba hangi gömleği seçecek?",
+        "image": "/kids/stories/0136/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Adelheid Marie Bwire",
+    "illustrator": "Rob Owen",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/hamisis-lucky-day",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0021",
+    "title": "Dembe’nin dükkânı",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0021/01.jpg",
+    "pages": [
+      {
+        "text": "Köyümüzde Dembe adlı bir dükkân sahibi var.",
+        "image": "/kids/stories/0021/03.jpg"
+      },
+      {
+        "text": "Dembe’nin büyük bir dükkânı var.",
+        "image": "/kids/stories/0021/04.jpg"
+      },
+      {
+        "text": "Dükkânda un, şeker, pirinç, fasulye ve başka yiyecekler satılıyor.",
+        "image": "/kids/stories/0021/05.jpg"
+      },
+      {
+        "text": "Dembe ve eşinin üç çocuğu var. Dükkâna birlikte bakıyorlar.",
+        "image": "/kids/stories/0021/06.jpg"
+      },
+      {
+        "text": "Çocuklar tatilde anne babalarını izliyor, para saymayı öğreniyor.",
+        "image": "/kids/stories/0021/07.jpg"
+      },
+      {
+        "text": "Dembe yaptığı işleri her gün bir deftere yazıyor.",
+        "image": "/kids/stories/0021/08.jpg"
+      },
+      {
+        "text": "Ailesiyle bir evde yaşıyor. Bir arabaları da var.",
+        "image": "/kids/stories/0021/09.jpg"
+      },
+      {
+        "text": "Keçileri, inekleri, tavukları ve tavşanları var.",
+        "image": "/kids/stories/0021/10.jpg"
+      },
+      {
+        "text": "Dembe ve eşi çocuklarının okula gitmesine destek oluyor.",
+        "image": "/kids/stories/0021/11.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Annet Ssebaggala",
+    "illustrator": "Zablon Alex Nguku",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/dembe-shopkeeper",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0257",
+    "title": "Gökkuşağının renkleri",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0257/01.jpg",
+    "pages": [
+      {
+        "text": "Gökkuşağında pek çok renk birbirine geçer. Genellikle yedi ana renk sayarız.",
+        "image": "/kids/stories/0257/02.jpg"
+      },
+      {
+        "text": "İlk renk kırmızı.",
+        "image": "/kids/stories/0257/03.jpg"
+      },
+      {
+        "text": "Kewyu kırmızı gömlek giyiyor.",
+        "image": "/kids/stories/0257/04.jpg"
+      },
+      {
+        "text": "İkinci renk turuncu.",
+        "image": "/kids/stories/0257/05.jpg"
+      },
+      {
+        "text": "Bu, bir portakal. Başka turuncu ne görebiliyorsun?",
+        "image": "/kids/stories/0257/06.jpg"
+      },
+      {
+        "text": "Üçüncü renk sarı.",
+        "image": "/kids/stories/0257/07.jpg"
+      },
+      {
+        "text": "Yumurtanın içi sarı. Başka sarı ne görüyorsun?",
+        "image": "/kids/stories/0257/08.jpg"
+      },
+      {
+        "text": "Dördüncü renk yeşil.",
+        "image": "/kids/stories/0257/09.jpg"
+      },
+      {
+        "text": "Muz bahçemiz yeşil.",
+        "image": "/kids/stories/0257/10.jpg"
+      },
+      {
+        "text": "Beşinci renk mavi.",
+        "image": "/kids/stories/0257/11.jpg"
+      },
+      {
+        "text": "Gökyüzü mavi.",
+        "image": "/kids/stories/0257/12.jpg"
+      },
+      {
+        "text": "Altıncı renk çivit mavisi.",
+        "image": "/kids/stories/0257/13.jpg"
+      },
+      {
+        "text": "Bu meyveler çivit mavisi.",
+        "image": "/kids/stories/0257/14.jpg"
+      },
+      {
+        "text": "Yedinci renk mor.",
+        "image": "/kids/stories/0257/15.jpg"
+      },
+      {
+        "text": "Elbisem mor. Moru çok seviyorum! Sen hangi rengi seversin?",
+        "image": "/kids/stories/0257/16.jpg"
+      },
+      {
+        "text": "Gökkuşağında hangi renkleri bulabiliyorsun?",
+        "image": "/kids/stories/0257/17.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Caren Echesa",
+    "illustrator": "Jesse Breytenbach",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/colours-rainbow",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0191",
+    "title": "Nasıl yolculuk yapabilirim?",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0191/01.jpg",
+    "pages": [
+      {
+        "text": "Yolculuk yapmak için birçok araç var. Hangisi olabilir?",
+        "image": "/kids/stories/0191/03.jpg"
+      },
+      {
+        "text": "Uçak olabilir mi?",
+        "image": "/kids/stories/0191/04.jpg"
+      },
+      {
+        "text": "Uçaklar çok yüksekte uçar. Önce uçuşu öğrenmek isterim.",
+        "image": "/kids/stories/0191/05.jpg"
+      },
+      {
+        "text": "Helikopter olabilir mi?",
+        "image": "/kids/stories/0191/06.jpg"
+      },
+      {
+        "text": "Helikopter de uçar, ama uçaktan farklıdır.",
+        "image": "/kids/stories/0191/07.jpg"
+      },
+      {
+        "text": "Tren olabilir mi?",
+        "image": "/kids/stories/0191/08.jpg"
+      },
+      {
+        "text": "Tren istasyonu çok uzakta.",
+        "image": "/kids/stories/0191/09.jpg"
+      },
+      {
+        "text": "Otobüs olabilir mi?",
+        "image": "/kids/stories/0191/10.jpg"
+      },
+      {
+        "text": "Köyümüzde bir otobüs var.",
+        "image": "/kids/stories/0191/11.jpg"
+      },
+      {
+        "text": "Kamyon olabilir mi?",
+        "image": "/kids/stories/0191/12.jpg"
+      },
+      {
+        "text": "Kamyonlar ağır yük taşır. Yolcu için uygun bir araç seçmeliyiz.",
+        "image": "/kids/stories/0191/13.jpg"
+      },
+      {
+        "text": "Bisiklet olabilir mi?",
+        "image": "/kids/stories/0191/14.jpg"
+      },
+      {
+        "text": "Babamla güvenli bir bisiklet gezisi yapabiliriz.",
+        "image": "/kids/stories/0191/15.jpg"
+      },
+      {
+        "text": "Tekne olabilir mi?",
+        "image": "/kids/stories/0191/16.jpg"
+      },
+      {
+        "text": "Tekneye yetişkinle ve can yeleğiyle binilir.",
+        "image": "/kids/stories/0191/17.jpg"
+      },
+      {
+        "text": "Bir traktör gördüm! Onu babam kullanır; ben bugün ailemle yolcu aracına bineceğim.",
+        "image": "/kids/stories/0191/18.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Ursula Nafula",
+    "illustrator": "Catherine Groenewald, Rob Owen, Louwrisa Blaauw, Jesse Breytenbach, Vusi Malindi, Marion Drew, Mango Tree, Jano Strydom, Sue Kramer, Natalie Propa, Wiehan de Jager",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/what-shall-i-use-travel",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0188",
+    "title": "Ailemizin bahçeleri",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0188/01.jpg",
+    "pages": [
+      {
+        "text": "Annem küçük bir bahçeye bezelye ekti.",
+        "image": "/kids/stories/0188/03.jpg"
+      },
+      {
+        "text": "Babam küçük bir bahçeye çiçek ekti.",
+        "image": "/kids/stories/0188/04.jpg"
+      },
+      {
+        "text": "Annem iki bahçedeki yabani otları ayıkladı.",
+        "image": "/kids/stories/0188/05.jpg"
+      },
+      {
+        "text": "Babam iki bahçeyi suladı.",
+        "image": "/kids/stories/0188/06.jpg"
+      },
+      {
+        "text": "Ailemle bahçelere baktık. Kız kardeşimle çiçek ve bezelyeleri topladık.",
+        "image": "/kids/stories/0188/07.jpg"
+      },
+      {
+        "text": "Bezelye bahçesi bezelyelerle, çiçek bahçesi çiçeklerle doldu.",
+        "image": "/kids/stories/0188/08.jpg"
+      },
+      {
+        "text": "Annem bu kez daha büyük bir bezelye bahçesi hazırladı.",
+        "image": "/kids/stories/0188/09.jpg"
+      },
+      {
+        "text": "Babam da daha büyük bir çiçek bahçesi hazırladı.",
+        "image": "/kids/stories/0188/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Tom Sabwa",
+    "illustrator": "Jonathan Field",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/my-mother-planted-0",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0014",
+    "title": "Norah ve Selah",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0014/01.jpg",
+    "pages": [
+      {
+        "text": "Bu, Norah. Oyuncak bebeğinin adı Selah.",
+        "image": "/kids/stories/0014/03.jpg"
+      },
+      {
+        "text": "Norah Selah’yı çok sever. Onunla oynar, geceleri yanında uyur.",
+        "image": "/kids/stories/0014/04.jpg"
+      },
+      {
+        "text": "Bir gün Selah’yı bulamadı. Her yere baktı ve endişelendi.",
+        "image": "/kids/stories/0014/05.jpg"
+      },
+      {
+        "text": "Annesinin Selah’yı yıkayıp kurumaya bıraktığını bilmiyordu.",
+        "image": "/kids/stories/0014/06.jpg"
+      },
+      {
+        "text": "“Bebeğimi bulamıyorum,” dedi. Annesi, “Birlikte buluruz,” diye yanıtladı.",
+        "image": "/kids/stories/0014/07.jpg"
+      },
+      {
+        "text": "Akşam annesi Selah’yı getirdi. Tertemizdi, yeni gibi görünüyordu!",
+        "image": "/kids/stories/0014/08.jpg"
+      },
+      {
+        "text": "Norah çok sevindi. Zıpladı, dans etti, güldü.",
+        "image": "/kids/stories/0014/09.jpg"
+      },
+      {
+        "text": "Annesine teşekkür etti.",
+        "image": "/kids/stories/0014/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Annet Ssebaggala",
+    "illustrator": "Melany Pietersen",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/girl-called-norah-0",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0149",
+    "title": "Ay ve şapka",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0149/01.jpg",
+    "pages": [
+      {
+        "text": "Hep birlikte şenliğe gittik.",
+        "image": "/kids/stories/0149/02.jpg"
+      },
+      {
+        "text": "Babam kardeşime eğlenceli gözlük aldı. Annem bana mavi bir şapka aldı.",
+        "image": "/kids/stories/0149/03.jpg"
+      },
+      {
+        "text": "Eve dönerken rüzgâr şapkamı uçurdu.",
+        "image": "/kids/stories/0149/04.jpg"
+      },
+      {
+        "text": "Şapkam büyük ağacın dalına takıldı.",
+        "image": "/kids/stories/0149/05.jpg"
+      },
+      {
+        "text": "Şapkamı özledim ve biraz üzüldüm.",
+        "image": "/kids/stories/0149/06.jpg"
+      },
+      {
+        "text": "O gece Ay yükseldi. Dalın üstündeki şapkaya baktı.",
+        "image": "/kids/stories/0149/07.jpg"
+      },
+      {
+        "text": "Hayalimde Ay şapkamı takıp gülümsedi. Ben de gülümsedim.",
+        "image": "/kids/stories/0149/08.jpg"
+      },
+      {
+        "text": "Ertesi gün annem kırmızı bir şapka getirdi. Gülerek, “Ay’dan bir sürpriz,” dedi.",
+        "image": "/kids/stories/0149/09.jpg"
+      },
+      {
+        "text": "O gece Ay da ben de hayalimizde şapkalarımızla gülümsedik.",
+        "image": "/kids/stories/0149/10.jpg"
+      },
+      {
+        "text": "Sence Güneş’in de şapkası olur mu?",
+        "image": "/kids/stories/0149/11.jpg"
+      },
+      {
+        "text": "Bugün hangi şapkamı taktığımı tahmin et!",
+        "image": "/kids/stories/0149/12.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Noni",
+    "illustrator": "Angie & Upesh",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/moon-and-cap",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0033",
+    "title": "Sulu mango",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0033/01.jpg",
+    "pages": [
+      {
+        "text": "Minicik bir filiz görünür. Küçük bir bitki büyümeye başlar.",
+        "image": "/kids/stories/0033/03.jpg"
+      },
+      {
+        "text": "Güneş ışığına doğru uzar, yavaş yavaş büyür.",
+        "image": "/kids/stories/0033/04.jpg"
+      },
+      {
+        "text": "Artık yaprakları yeşil, büyük bir ağaçtır. Dalları etrafa uzanır.",
+        "image": "/kids/stories/0033/05.jpg"
+      },
+      {
+        "text": "Dalları güçlenir. Meyve zamanı yaklaşır.",
+        "image": "/kids/stories/0033/06.jpg"
+      },
+      {
+        "text": "Önce çiçekler açar. Arılar çiçeklere gelir. Sonra meyveler büyür.",
+        "image": "/kids/stories/0033/07.jpg"
+      },
+      {
+        "text": "Mangolar toplanıp sepetlere konur. Ailem onları yıkayıp hazırlar.",
+        "image": "/kids/stories/0033/08.jpg"
+      },
+      {
+        "text": "Bu kırmızı mango taze görünüyor. Kabuğunun altında sarı meyvesi var.",
+        "image": "/kids/stories/0033/09.jpg"
+      },
+      {
+        "text": "Hazırlanmış mangodan bir lokma alırım. Tatlı ve sulu!",
+        "image": "/kids/stories/0033/10.jpg"
+      },
+      {
+        "text": "Mangomu afiyetle yerim. Bu güzel tadı hatırlarım.",
+        "image": "/kids/stories/0033/11.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Katelyn Mostert",
+    "illustrator": "Catherine Groenewald, Wiehan de Jager",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/big-juicy-mango-1",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0181",
+    "title": "Pazar günü parkta",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0181/01.jpg",
+    "pages": [
+      {
+        "text": "Cape Town’da tatildeyiz. Annem ve babam bizi deniz kenarındaki parka götürüyor.",
+        "image": "/kids/stories/0181/03.jpg"
+      },
+      {
+        "text": "Uzun kaydırağa bak! Annemle güvenli sırayı bekliyorum.",
+        "image": "/kids/stories/0181/04.jpg"
+      },
+      {
+        "text": "Kardeşimle tahterevalliye binmek istiyoruz. Birlikte dengeleniyoruz.",
+        "image": "/kids/stories/0181/05.jpg"
+      },
+      {
+        "text": "Annemle babam salıncağa yardım ediyor. Kendi rahat ettiğim hızda sallanıyorum.",
+        "image": "/kids/stories/0181/06.jpg"
+      },
+      {
+        "text": "Beyaz atlara bak! Bunlar heykel.",
+        "image": "/kids/stories/0181/07.jpg"
+      },
+      {
+        "text": "Atların yanındaki açıklamayı birlikte okuyoruz.",
+        "image": "/kids/stories/0181/08.jpg"
+      },
+      {
+        "text": "Deniz fenerini geziyoruz. Annemle babam onun çok eski olduğunu söylüyor.",
+        "image": "/kids/stories/0181/09.jpg"
+      },
+      {
+        "text": "Deniz fenerleri gece ve siste gemilere yol gösterir. Kayalıkları fark etmelerine yardım eder.",
+        "image": "/kids/stories/0181/10.jpg"
+      },
+      {
+        "text": "Parkta güzel vakit geçirdik. Şimdi otobüsle eve dönüyoruz.",
+        "image": "/kids/stories/0181/11.jpg"
+      },
+      {
+        "text": "Teşekkür ederiz anne ve baba! Biraz yorgun, çok mutluyuz.",
+        "image": "/kids/stories/0181/12.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Neo",
+    "illustrator": "Neo",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/sunday-park",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0051",
+    "title": "Gökkuşağını gördüğümüz gün",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0051/01.jpg",
+    "pages": [
+      {
+        "text": "Ben Kobole. Küçük bir köyde yaşıyorum.",
+        "image": "/kids/stories/0051/03.jpg"
+      },
+      {
+        "text": "Meyve toplarken ilk kez gördüğüm bir şey fark ettim.",
+        "image": "/kids/stories/0051/04.jpg"
+      },
+      {
+        "text": "Gökyüzünde renkli çizgiler vardı.",
+        "image": "/kids/stories/0051/05.jpg"
+      },
+      {
+        "text": "Evdekilere haber verdim.",
+        "image": "/kids/stories/0051/06.jpg"
+      },
+      {
+        "text": "Herkes dışarıda şaşkınlıkla bakıyordu.",
+        "image": "/kids/stories/0051/07.jpg"
+      },
+      {
+        "text": "“Gökyüzünden sarkan güzel bir örtü gibi,” dedim. Neno, “Boya gibi!” dedi.",
+        "image": "/kids/stories/0051/08.jpg"
+      },
+      {
+        "text": "Her birimiz gördüğümüzü farklı anlattık.",
+        "image": "/kids/stories/0051/09.jpg"
+      },
+      {
+        "text": "Başka bir köyden gelen biri bize gülümsedi.",
+        "image": "/kids/stories/0051/10.jpg"
+      },
+      {
+        "text": "“Bu nedir?” diye sorduk.",
+        "image": "/kids/stories/0051/11.jpg"
+      },
+      {
+        "text": "“Bu bir gökkuşağı,” dedi.",
+        "image": "/kids/stories/0051/12.jpg"
+      },
+      {
+        "text": "“Gökkuşağı nasıl olur?” diye sorduk.",
+        "image": "/kids/stories/0051/13.jpg"
+      },
+      {
+        "text": "Merakımız sürüyordu. Renkler kaybolunca sorularımızı araştırmaya karar verdik.",
+        "image": "/kids/stories/0051/14.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Ursula Nafula",
+    "illustrator": "Wiehan de Jager",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/day-we-saw-rainbow",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0344",
+    "title": "Tembe’nin bir günü",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0344/01.jpg",
+    "pages": [
+      {
+        "text": "Tembe sabah uyanır. Yüzünü yıkar, dişlerini fırçalar ve okul giysisini giyer.",
+        "image": "/kids/stories/0344/03.jpg"
+      },
+      {
+        "text": "Ağabeyi onu okula götürür. Yolda sohbet ederler.",
+        "image": "/kids/stories/0344/04.jpg"
+      },
+      {
+        "text": "Tembe sınıfına girip güne hazırlanır.",
+        "image": "/kids/stories/0344/05.jpg"
+      },
+      {
+        "text": "Aralarda arkadaşlarıyla oynar, dinlenir.",
+        "image": "/kids/stories/0344/06.jpg"
+      },
+      {
+        "text": "Sınıfta soru sorar ve etkinliklere katılır.",
+        "image": "/kids/stories/0344/07.jpg"
+      },
+      {
+        "text": "Öğretmenleri dinlenme zamanı ayırır. Tembe rahat bir yerde uzanır.",
+        "image": "/kids/stories/0344/08.jpg"
+      },
+      {
+        "text": "Eve dönüşte öğretmenleri güvenli geçişe yardımcı olur.",
+        "image": "/kids/stories/0344/09.jpg"
+      },
+      {
+        "text": "Tembe evde ailesiyle zaman geçirir.",
+        "image": "/kids/stories/0344/10.jpg"
+      },
+      {
+        "text": "Yemekten sonra yıkanır, pijamasını giyer ve uyumaya hazırlanır.",
+        "image": "/kids/stories/0344/11.jpg"
+      },
+      {
+        "text": "Senin günün nasıl geçer?",
+        "image": "/kids/stories/0344/12.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Espen Stranger-Johannessen",
+    "illustrator": "Sue Kramer, Cathy Feek, Angie & Upesh, Jesse Pietersen, Wiehan de Jager, Eden Daniels, Magriet Brink, Bronwen Heath, Mango Tree, Rob Owen, Jesse Breytenbach, Vusi Malindi, Marion Drew",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/how-namuhungo-spends-her-day-life",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0177",
+    "title": "Küçük köpek ve kedi",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0177/01.jpg",
+    "pages": [
+      {
+        "text": "Küçük köpek topla oynuyordu.",
+        "image": "/kids/stories/0177/03.jpg"
+      },
+      {
+        "text": "Bir kedi gördü. “Birlikte oynayabilir miyiz?” diye sordu. Kedi, “Topunu paylaşır mısın?” dedi.",
+        "image": "/kids/stories/0177/04.jpg"
+      },
+      {
+        "text": "“Elbette! Topu sana yuvarlayayım, sen de bana gönder,” dedi köpek.",
+        "image": "/kids/stories/0177/05.jpg"
+      },
+      {
+        "text": "İki dost oynamaya başladı. Köpek, “Birlikte oynamak güzel!” dedi.",
+        "image": "/kids/stories/0177/06.jpg"
+      },
+      {
+        "text": "Top duvarın öte yanına gitti. Kedi üzüldü.",
+        "image": "/kids/stories/0177/07.jpg"
+      },
+      {
+        "text": "“Topumuzu özledim,” dedi.",
+        "image": "/kids/stories/0177/08.jpg"
+      },
+      {
+        "text": "Köpek, “Birlikte güvenli yoldan alabiliriz,” dedi.",
+        "image": "/kids/stories/0177/09.jpg"
+      },
+      {
+        "text": "Az sonra top geri geldi. İki dost sevindi ve yeniden oynadı.",
+        "image": "/kids/stories/0177/10.jpg"
+      },
+      {
+        "text": "Sonra bir resimli kitap açtılar. Kitapta bir köpekle bir kedi top oynuyordu!",
+        "image": "/kids/stories/0177/11.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Val Morris",
+    "illustrator": "Heslia Schon",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/little-dog",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0283",
+    "title": "Öğretmen Akinyi",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0283/01.jpg",
+    "pages": [
+      {
+        "text": "Bu, öğretmenim Akinyi. Bize sevgiyle davranır.",
+        "image": "/kids/stories/0283/01.jpg"
+      },
+      {
+        "text": "Bize harfleri ve sesleri öğretir. Sesleri birlikte deneriz.",
+        "image": "/kids/stories/0283/02.jpg"
+      },
+      {
+        "text": "Kırmızı, mavi, yeşil, sarı ve siyahı tanıtır.",
+        "image": "/kids/stories/0283/03.jpg"
+      },
+      {
+        "text": "Dinlenme zamanı bize ninni söyler.",
+        "image": "/kids/stories/0283/04.jpg"
+      },
+      {
+        "text": "Ninnisi şöyle der: “Gözlerin dinlensin, güzel rüyalar gelsin. Uyandığında bir gülümseme seni beklesin.”",
+        "image": "/kids/stories/0283/05.jpg"
+      },
+      {
+        "text": "Öğretmen Akinyi pek çok hikâye bilir. Her gün başka bir hikâye anlatır.",
+        "image": "/kids/stories/0283/06.jpg"
+      },
+      {
+        "text": "Pazartesi farklı insanların hikâyelerini dinleriz.",
+        "image": "/kids/stories/0283/07.jpg"
+      },
+      {
+        "text": "Salı yeni insanların hikâyelerini dinleriz.",
+        "image": "/kids/stories/0283/08.jpg"
+      },
+      {
+        "text": "Çarşamba yolculuk ve araçları keşfederiz.",
+        "image": "/kids/stories/0283/09.jpg"
+      },
+      {
+        "text": "Perşembe bahçelerde yetişenleri konuşuruz.",
+        "image": "/kids/stories/0283/10.jpg"
+      },
+      {
+        "text": "Cuma kendi hikâyelerimizi sınıfa anlatırız.",
+        "image": "/kids/stories/0283/11.jpg"
+      },
+      {
+        "text": "Öğretmenimizi severiz! Büyüyünce ben de başkalarıyla öğrendiklerimi paylaşmak isterim.",
+        "image": "/kids/stories/0283/12.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Lawrence A. Konjuro",
+    "illustrator": "Vusi Malindi",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/teacher-akinyi-0",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0220",
+    "title": "Hayvanların bakım yuvası",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0220/01.jpg",
+    "pages": [
+      {
+        "text": "Bu, hayvanlara bakan Keeper ve arkadaşlarının yuvası.",
+        "image": "/kids/stories/0220/10.jpg"
+      },
+      {
+        "text": "Geçen ay bir yaşındaki Nomsa geldi. Bakım ve dinlenmeye ihtiyacı vardı.",
+        "image": "/kids/stories/0220/11.jpg"
+      },
+      {
+        "text": "Kısa süre sonra güçlendi, diğer hayvanlarla oynamaya başladı.",
+        "image": "/kids/stories/0220/12.jpg"
+      },
+      {
+        "text": "Bir başka gün yuvaya bir helikopter geldi.",
+        "image": "/kids/stories/0220/13.jpg"
+      },
+      {
+        "text": "İçinde battaniyeye sarılmış küçük fil Ndiwa vardı.",
+        "image": "/kids/stories/0220/14.jpg"
+      },
+      {
+        "text": "Ndiwa henüz beş günlüktü. Keeper ona uygun sütünü verdi.",
+        "image": "/kids/stories/0220/15.jpg"
+      },
+      {
+        "text": "Bir gece zürafa Ambia yuvaya geldi.",
+        "image": "/kids/stories/0220/16.jpg"
+      },
+      {
+        "text": "Ambia beş aylıktı. Uzun yolculuktan sonra dinlendi.",
+        "image": "/kids/stories/0220/17.jpg"
+      },
+      {
+        "text": "Boynu uzun olduğu için Keeper biberonu yukarıda tutuyordu.",
+        "image": "/kids/stories/0220/18.jpg"
+      },
+      {
+        "text": "Sonra üç yavru daha geldi: Kopi, Kepi ve Keji.",
+        "image": "/kids/stories/0220/19.jpg"
+      },
+      {
+        "text": "Keeper ve arkadaşları bütün hayvanlara sevgiyle baktı.",
+        "image": "/kids/stories/0220/20.jpg"
+      },
+      {
+        "text": "Hayvanların güçlenmesini ve büyüdüklerinde doğal yaşamlarına dönebilmesini istediler.",
+        "image": "/kids/stories/0220/21.jpg"
+      }
+    ],
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Ursula Nafula, Nina Orange",
+    "illustrator": "Magriet Brink",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/keeper-and-his-special-nursery-0",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0018",
+    "title": "Yayeri’nin günü",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0018/01.jpg",
+    "pages": [
+      {
+        "text": "Yayeri her sabah erkenden uyanır. “Bugün ne yapacak?” diye düşünürüz.",
+        "image": "/kids/stories/0018/03.jpg"
+      },
+      {
+        "text": "Yeni güne gülümser. “Bugün ne yapacak?”",
+        "image": "/kids/stories/0018/04.jpg"
+      },
+      {
+        "text": "Yatağını düzenler. “Sonra ne yapacak?”",
+        "image": "/kids/stories/0018/05.jpg"
+      },
+      {
+        "text": "Ailesine günaydın der. “Sonra ne yapacak?”",
+        "image": "/kids/stories/0018/06.jpg"
+      },
+      {
+        "text": "Yüzünü sabunla temizler. “Sonra ne yapacak?”",
+        "image": "/kids/stories/0018/07.jpg"
+      },
+      {
+        "text": "Dişlerini fırçalar. “Sonra ne yapacak?”",
+        "image": "/kids/stories/0018/08.jpg"
+      },
+      {
+        "text": "Yıkanır ve hazırlanır. “Sonra ne yapacak?”",
+        "image": "/kids/stories/0018/09.jpg"
+      },
+      {
+        "text": "Turuncu okul giysisini giyer. “Sonra ne yapacak?”",
+        "image": "/kids/stories/0018/10.jpg"
+      },
+      {
+        "text": "Siyah ayakkabılarını giyer. “Sonra ne yapacak?”",
+        "image": "/kids/stories/0018/11.jpg"
+      },
+      {
+        "text": "Mbala’daki okuluna gider. “Orada ne yapacak?”",
+        "image": "/kids/stories/0018/12.jpg"
+      },
+      {
+        "text": "Bilim, çevre ve sayılarla tanışır. “Başka ne yapacak?”",
+        "image": "/kids/stories/0018/13.jpg"
+      },
+      {
+        "text": "Şarkı söyler, dans eder ve futbol oynar. Yayeri’nin günü çeşit çeşit keşifle geçer!",
+        "image": "/kids/stories/0018/14.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Michael Oguttu",
+    "illustrator": "Vusi Malindi",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/why-yayeri-great",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0219",
+    "title": "Nomvula ve yağmur",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0219/01.jpg",
+    "pages": [
+      {
+        "text": "“Nomvula, suyu dikkatli kullanalım,” dedi annesi. Nomvula, “Hava sıcak, serinlemek istiyorum,” dedi.",
+        "image": "/kids/stories/0219/03.jpg"
+      },
+      {
+        "text": "Annesi, “Önce içme suyumuzu ayıralım,” dedi. Nomvula soğuk su içti.",
+        "image": "/kids/stories/0219/04.jpg"
+      },
+      {
+        "text": "Yağmur başladı. Bahçeye su geldi. Nomvula dışarı çıkmak için bekledi.",
+        "image": "/kids/stories/0219/05.jpg"
+      },
+      {
+        "text": "Sebzeler yeşerdi. Kovalar yağmur suyuyla doldu.",
+        "image": "/kids/stories/0219/06.jpg"
+      },
+      {
+        "text": "Yağmur durdu. Gökyüzü açıldı, bahçe yeşillendi. Şimdi oyun zamanıydı!",
+        "image": "/kids/stories/0219/07.jpg"
+      },
+      {
+        "text": "Sonra yine hafif yağmur başladı. “Ne zaman oynayacağız?” dedi Nomvula.",
+        "image": "/kids/stories/0219/08.jpg"
+      },
+      {
+        "text": "Annesiyle birlikte yağmurun sesini dinledi, kısa bir oyun oynadı: “Şıp şıp şıp!”",
+        "image": "/kids/stories/0219/09.jpg"
+      },
+      {
+        "text": "Annesi saçını kuruladı ve taradı. Birlikte yağmur şarkısını söylediler: “Şıp şıp şıp!”",
+        "image": "/kids/stories/0219/10.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Letta Machoga",
+    "illustrator": "Marleen Visser",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/rain-nomvula",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "id": "asb-0232",
+    "title": "Uykucu bay tembel hayvan",
+    "description": "Resimli kısa hikâye · Birlikte okuma",
+    "category": "story",
+    "ageMin": 3,
+    "ageMax": 7,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Kaynak metin ve eser lisansı incelendi; savaş, şiddet, tehdit ve ürkütücü olay içeren adaylar elendi. Birlikte okuma için seçildi. Türkçe uyarlamada bazı ifadeler sadeleştirildi ve değiştirildi; uzman gelişim değerlendirmesi değildir.",
+    "image": "/kids/stories/0232/01.jpg",
+    "pages": [
+      {
+        "text": "Bir gün bay tembel hayvan geldi. “Uykum var! Dinlenecek bir dal arıyorum,” dedi.",
+        "image": "/kids/stories/0232/02.jpg"
+      },
+      {
+        "text": "“Tırmanmayı ve sallanmayı severim. Ama en çok uyumayı severim!”",
+        "image": "/kids/stories/0232/03.jpg"
+      },
+      {
+        "text": "“Bu dal güzel. Burada uyuyabilirim!”",
+        "image": "/kids/stories/0232/04.jpg"
+      },
+      {
+        "text": "“Orada zürafa yaprak yiyor. Başka bir dala bakalım,” dedi dostları.",
+        "image": "/kids/stories/0232/05.jpg"
+      },
+      {
+        "text": "“Bu dal güzel. Burada uyuyabilirim!”",
+        "image": "/kids/stories/0232/06.jpg"
+      },
+      {
+        "text": "“Burada arılar vızıldıyor. Daha sakin bir dal bulalım,” dediler.",
+        "image": "/kids/stories/0232/07.jpg"
+      },
+      {
+        "text": "“Bu dal güzel. Burada uyuyabilirim!”",
+        "image": "/kids/stories/0232/08.jpg"
+      },
+      {
+        "text": "“Bu bir dal değil, ağacımızdaki yılan dostumuz!” dediler.",
+        "image": "/kids/stories/0232/09.jpg"
+      },
+      {
+        "text": "“Bu dal güzel. Burada uyuyabilirim!”",
+        "image": "/kids/stories/0232/10.jpg"
+      },
+      {
+        "text": "“Burada kuş şarkı söylüyor. Başka bir dal deneyelim,” dediler.",
+        "image": "/kids/stories/0232/11.jpg"
+      },
+      {
+        "text": "Bir dal daha yukarı çıktılar. İşte tam uygun, sakin bir yer!",
+        "image": "/kids/stories/0232/12.jpg"
+      },
+      {
+        "text": "Kuş, yılan, zürafa ve arılar gülümsedi. Bay tembel hayvan ağacında rahatça dinlendi.",
+        "image": "/kids/stories/0232/13.jpg"
+      }
+    ],
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "author": "Paul Kennedy",
+    "illustrator": "Graham Paterson",
+    "translator": "LifeOS · Türkçe uyarlama (bazı ifadeler sadeleştirildi ve güvenli örneklere uyarlandı)",
+    "source": "https://africanstorybook.org/stories/sleepy-mr-sloth",
+    "sourceCommit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  }
+]

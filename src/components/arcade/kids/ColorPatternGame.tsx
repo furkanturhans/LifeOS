@@ -16,6 +16,7 @@ import { Modal } from '@/components/ui/Modal';
 import { kidsSound } from '@/lib/arcade/kidsSound';
 import { useArcadeStore } from '@/stores/useArcadeStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 type GameMode = 'sequence' | 'pattern';
 
@@ -39,6 +40,7 @@ interface ColorPatternGameProps {
 }
 
 export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
+  const localizeText = useLocaleRender();
   const { isMuted, toggleMute, scores, recordGameSession } = useArcadeStore();
 
   const [mode, setMode] = useState<GameMode>('sequence');
@@ -223,9 +225,9 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
             className="h-9 px-2.5 text-xs font-semibold"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
-            <span className="hidden sm:inline">Oyunlar</span>
+            <span className="hidden sm:inline">{localizeText("Oyunlar")}</span>
           </Button>
-          <span className="font-bold text-sm text-foreground">Renk & Desen</span>
+          <span className="font-bold text-sm text-foreground">{localizeText("Renk & Desen")}</span>
         </div>
 
         {/* Mode Selector Switch */}
@@ -238,9 +240,7 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
                 ? 'bg-primary text-primary-foreground shadow-xs'
                 : 'text-muted-foreground hover:text-foreground'
             )}
-          >
-            Renk Sırası
-          </button>
+          >{localizeText("Renk Sırası")}</button>
           <button
             onClick={() => setMode('pattern')}
             className={cn(
@@ -249,9 +249,7 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
                 ? 'bg-primary text-primary-foreground shadow-xs'
                 : 'text-muted-foreground hover:text-foreground'
             )}
-          >
-            Desen Bul
-          </button>
+          >{localizeText("Desen Bul")}</button>
         </div>
 
         {/* Action icons */}
@@ -259,7 +257,7 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
           <button
             onClick={toggleMute}
             className="h-9 w-9 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title={isMuted ? 'Sesi Aç' : 'Sesi Kapat'}
+            title={localizeText(isMuted ? 'Sesi Aç' : 'Sesi Kapat')}
           >
             {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4 text-primary" />}
           </button>
@@ -267,7 +265,7 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
           <button
             onClick={() => setIsPaused(true)}
             className="h-9 w-9 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title="Duraklat"
+            title={localizeText("Duraklat")}
           >
             <Pause className="h-4 w-4" />
           </button>
@@ -275,7 +273,7 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
           <button
             onClick={handleRestart}
             className="h-9 w-9 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title="Yeniden Başlat"
+            title={localizeText("Yeniden Başlat")}
           >
             <RotateCcw className="h-4 w-4" />
           </button>
@@ -285,17 +283,17 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
       {/* Stats Bar */}
       <div className="grid grid-cols-3 gap-2 px-4 py-2 max-w-md mx-auto w-full text-center">
         <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-          <span className="block text-[10px] uppercase font-bold text-muted-foreground">Seviye</span>
-          <span className="text-base font-extrabold text-foreground">{level}</span>
+          <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Seviye")}</span>
+          <span className="text-base font-extrabold text-foreground">{localizeText(level)}</span>
         </div>
         <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-          <span className="block text-[10px] uppercase font-bold text-muted-foreground">Puan</span>
-          <span className="text-base font-extrabold text-foreground">{score}</span>
+          <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Puan")}</span>
+          <span className="text-base font-extrabold text-foreground">{localizeText(score)}</span>
         </div>
         <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-          <span className="block text-[10px] uppercase font-bold text-muted-foreground">En Yüksek</span>
+          <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("En Yüksek")}</span>
           <span className="text-base font-extrabold text-primary">
-            {bestScore > 0 ? `${bestScore}` : '-'}
+            {localizeText(bestScore > 0 ? `${bestScore}` : '-')}
           </span>
         </div>
       </div>
@@ -307,7 +305,7 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
           <div className="w-full flex flex-col items-center space-y-4">
             <div className="text-center">
               <span className="text-xs font-bold text-muted-foreground">
-                {isPlayingSequence ? '👀 Sırayı dikkatle izleyin...' : '🎯 Sıradaki renkleri dokunarak tekrarlayın!'}
+                {localizeText(isPlayingSequence ? '👀 Sırayı dikkatle izleyin...' : '🎯 Sıradaki renkleri dokunarak tekrarlayın!')}
               </span>
             </div>
 
@@ -324,7 +322,7 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
                     activePadId === pad.id ? pad.activeClass : 'opacity-85 hover:opacity-100'
                   )}
                 >
-                  <span className="text-3xl filter drop-shadow">{pad.emoji}</span>
+                  <span className="text-3xl filter drop-shadow">{localizeText(pad.emoji)}</span>
                 </motion.button>
               ))}
             </div>
@@ -333,16 +331,14 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
           /* PATTERN COMPLETION GAME */
           <div className="w-full flex flex-col items-center space-y-6">
             <div className="text-center">
-              <span className="text-xs font-bold text-muted-foreground">
-                Sıradaki şekil hangisi olmalı? Soru işaretine dokunun!
-              </span>
+              <span className="text-xs font-bold text-muted-foreground">{localizeText("Sıradaki şekil hangisi olmalı? Soru işaretine dokunun!")}</span>
             </div>
 
             {/* Pattern Strip Display */}
             <div className="flex items-center justify-center gap-2 p-4 rounded-3xl border border-border bg-card/80 shadow-sm w-full max-w-sm flex-wrap">
               {currentPattern.pattern.map((item, idx) => (
                 <span key={idx} className="text-3xl sm:text-4xl animate-in fade-in zoom-in-75 duration-200">
-                  {item}
+                  {localizeText(item)}
                 </span>
               ))}
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl border-2 border-dashed border-primary bg-primary/10 text-primary text-xl font-extrabold animate-pulse">
@@ -354,13 +350,10 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
             <div className="h-6">
               {feedbackState === 'correct' && (
                 <span className="text-emerald-500 font-extrabold text-sm flex items-center gap-1">
-                  <CheckCircle2 className="h-4 w-4" /> Doğru Desen!
-                </span>
+                  <CheckCircle2 className="h-4 w-4" />{localizeText("Doğru Desen!")}</span>
               )}
               {feedbackState === 'wrong' && (
-                <span className="text-rose-500 font-extrabold text-sm">
-                  Tekrar Deneyin!
-                </span>
+                <span className="text-rose-500 font-extrabold text-sm">{localizeText("Tekrar Deneyin!")}</span>
               )}
             </div>
 
@@ -374,7 +367,7 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
                   disabled={feedbackState !== 'idle'}
                   className="h-16 rounded-2xl border border-border bg-card hover:border-primary flex items-center justify-center text-3xl shadow-xs transition-all"
                 >
-                  {opt}
+                  {localizeText(opt)}
                 </motion.button>
               ))}
             </div>
@@ -386,8 +379,8 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
       <Modal
         isOpen={isPaused}
         onClose={() => setIsPaused(false)}
-        title="Oyun Duraklatıldı"
-        description="Mola verdiniz. Hazır olduğunuzda devam edin."
+        title={localizeText("Oyun Duraklatıldı")}
+        description={localizeText("Mola verdiniz. Hazır olduğunuzda devam edin.")}
         size="sm"
       >
         <div className="space-y-3 pt-2">
@@ -396,24 +389,18 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
             onClick={() => setIsPaused(false)}
             className="w-full font-bold h-11 text-sm"
           >
-            <Play className="h-4 w-4 mr-1.5" />
-            Devam Et
-          </Button>
+            <Play className="h-4 w-4 mr-1.5" />{localizeText("Devam Et")}</Button>
           <Button
             variant="outline"
             onClick={handleRestart}
             className="w-full font-semibold text-xs"
           >
-            <RotateCcw className="h-3.5 w-3.5 mr-1.5" />
-            Yeniden Başlat
-          </Button>
+            <RotateCcw className="h-3.5 w-3.5 mr-1.5" />{localizeText("Yeniden Başlat")}</Button>
           <Button
             variant="ghost"
             onClick={onBack}
             className="w-full text-xs text-muted-foreground"
-          >
-            Oyunlardan Çık
-          </Button>
+          >{localizeText("Oyunlardan Çık")}</Button>
         </div>
       </Modal>
 
@@ -421,17 +408,17 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
       <Modal
         isOpen={isGameOver}
         onClose={handleRestart}
-        title={score > 30 ? 'Harika Performans! 🏆' : 'Oyun Bitti'}
-        description="Oyununuz tamamlandı."
+        title={localizeText(score > 30 ? 'Harika Performans! 🏆' : 'Oyun Bitti')}
+        description={localizeText("Oyununuz tamamlandı.")}
         size="sm"
       >
         <div className="text-center py-2 space-y-4">
           <div className="text-4xl">🎨</div>
 
           <div className="rounded-2xl border border-border bg-muted/30 p-4">
-            <span className="text-xs text-muted-foreground block mb-1">Skorunuz</span>
-            <span className="text-3xl font-extrabold text-primary">{score} Puan</span>
-            <span className="text-[11px] text-muted-foreground block mt-1">Ulaşılan Seviye: {level}</span>
+            <span className="text-xs text-muted-foreground block mb-1">{localizeText("Skorunuz")}</span>
+            <span className="text-3xl font-extrabold text-primary">{localizeText(score)}{localizeText(" Puan")}</span>
+            <span className="text-[11px] text-muted-foreground block mt-1">{localizeText("Ulaşılan Seviye: ")}{localizeText(level)}</span>
           </div>
 
           <div className="space-y-2 pt-2">
@@ -440,16 +427,12 @@ export function ColorPatternGame({ onBack }: ColorPatternGameProps) {
               onClick={handleRestart}
               className="w-full font-bold h-11 text-sm"
             >
-              <RotateCcw className="h-4 w-4 mr-1.5" />
-              Tekrar Oyna
-            </Button>
+              <RotateCcw className="h-4 w-4 mr-1.5" />{localizeText("Tekrar Oyna")}</Button>
             <Button
               variant="outline"
               onClick={onBack}
               className="w-full text-xs font-semibold"
-            >
-              Diğer Oyunlara Dön
-            </Button>
+            >{localizeText("Diğer Oyunlara Dön")}</Button>
           </div>
         </div>
       </Modal>

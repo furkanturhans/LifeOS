@@ -5,25 +5,27 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Shield, Key, Smartphone, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { Dock } from '@/components/os/Dock';
-import { useThemeStore } from '@/stores/useThemeStore';
+import { useTranslation } from '@/lib/i18n';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export default function SecurityPage() {
+  const localizeText = useLocaleRender();
   const router = useRouter();
-  const { locale } = useThemeStore();
+  const { t: tr } = useTranslation();
 
   const t = {
-    title: locale === 'tr' ? 'Güvenlik' : 'Security',
-    changePassword: locale === 'tr' ? 'Şifre Değiştir' : 'Change Password',
-    changePasswordDesc: locale === 'tr' ? 'Hesap şifreni güncelle' : 'Update your account password',
-    twoFactor: locale === 'tr' ? 'İki Faktörlü Doğrulama' : 'Two-Factor Authentication',
-    twoFactorDesc: locale === 'tr' ? 'Yakında kullanıma girecek' : 'Coming soon',
-    passkey: locale === 'tr' ? 'Passkey (Şifresiz Giriş)' : 'Passkey (Passwordless)',
-    passkeyDesc: locale === 'tr' ? 'Yakında kullanıma girecek' : 'Coming soon',
-    sessions: locale === 'tr' ? 'Aktif Oturumlar' : 'Active Sessions',
-    sessionsDesc: locale === 'tr' ? 'Cihazlarını ve oturumlarını yönet' : 'Manage your devices and sessions',
-    loginHistory: locale === 'tr' ? 'Giriş Geçmişi' : 'Login History',
-    loginHistoryDesc: locale === 'tr' ? 'Son giriş aktivitelerini gör' : 'View recent login activity',
-    comingSoon: locale === 'tr' ? 'Yakında' : 'Coming Soon',
+    title: tr.settings.security,
+    changePassword: tr.settings.changePassword,
+    changePasswordDesc: tr.settings.changePasswordDesc,
+    twoFactor: tr.settings.twoFactor,
+    twoFactorDesc: tr.settings.twoFactorDesc,
+    passkey: tr.settings.passkey,
+    passkeyDesc: tr.settings.passkeyDesc,
+    sessions: tr.settings.sessions,
+    sessionsDesc: tr.settings.sessionsDesc,
+    loginHistory: tr.settings.loginHistory,
+    loginHistoryDesc: tr.settings.loginHistoryDesc,
+    comingSoon: tr.common.soon,
   };
 
   return (
@@ -41,7 +43,7 @@ export default function SecurityPage() {
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
-          <h1 className="text-2xl font-bold text-foreground">{t.title}</h1>
+          <h1 className="text-2xl font-bold text-foreground">{localizeText(t.title)}</h1>
         </motion.div>
 
         {/* Security options */}
@@ -59,11 +61,11 @@ export default function SecurityPage() {
                 <item.icon className="h-5 w-5 text-muted-foreground" />
               </div>
               <div className="flex-1">
-                <div className="text-sm font-medium text-foreground">{item.label}</div>
-                <div className="text-xs text-muted-foreground">{item.desc}</div>
+                <div className="text-sm font-medium text-foreground">{localizeText(item.label)}</div>
+                <div className="text-xs text-muted-foreground">{localizeText(item.desc)}</div>
               </div>
               {!item.available && (
-                <span className="text-xs text-blue-400 flex-shrink-0">{t.comingSoon}</span>
+                <span className="text-xs text-blue-400 flex-shrink-0">{localizeText(t.comingSoon)}</span>
               )}
             </div>
           ))}
@@ -79,18 +81,16 @@ export default function SecurityPage() {
                 <item.icon className="h-5 w-5 text-muted-foreground" />
               </div>
               <div className="flex-1">
-                <div className="text-sm font-medium text-foreground">{item.label}</div>
-                <div className="text-xs text-muted-foreground">{item.desc}</div>
+                <div className="text-sm font-medium text-foreground">{localizeText(item.label)}</div>
+                <div className="text-xs text-muted-foreground">{localizeText(item.desc)}</div>
               </div>
-              <span className="text-xs text-blue-400 flex-shrink-0">{t.comingSoon}</span>
+              <span className="text-xs text-blue-400 flex-shrink-0">{localizeText(t.comingSoon)}</span>
             </div>
           ))}
         </div>
 
         <p className="mt-4 px-6 text-xs text-muted-foreground">
-          {locale === 'tr'
-            ? '2FA, Passkey ve oturum yönetimi yakında LifeOS\'a gelecek.'
-            : '2FA, Passkey and session management are coming to LifeOS soon.'}
+          {localizeText('2FA, Passkey ve oturum yönetimi yakında LifeOS\'a gelecek.')}
         </p>
       </div>
       <Dock />

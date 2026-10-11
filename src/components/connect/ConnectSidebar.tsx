@@ -15,8 +15,10 @@ import {
 } from 'lucide-react';
 import { useConnectStore } from '@/stores/useConnectStore';
 import type { ConnectScope, UserRole } from '@/types/connect';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function ConnectSidebar() {
+  const localizeText = useLocaleRender();
   const {
     activeScope,
     setActiveScope,
@@ -68,7 +70,7 @@ export function ConnectSidebar() {
                 }`}
               >
                 <Icon className={`h-4 w-4 ${isActive ? s.color : 'text-muted-foreground'}`} />
-                <span>{s.label}</span>
+                <span>{localizeText(s.label)}</span>
               </button>
             );
           })}
@@ -83,14 +85,14 @@ export function ConnectSidebar() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Konuşmalarda ara..."
+            placeholder={localizeText("Konuşmalarda ara...")}
             className="w-full rounded-lg border border-border bg-background/50 pl-8 pr-3 py-1.5 text-xs text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
           />
         </div>
         <button
           onClick={() => setNewChatModalOpen(true)}
           className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
-          title="Yeni Sohbet Başlat"
+          title={localizeText("Yeni Sohbet Başlat")}
         >
           <Plus className="h-4 w-4" />
         </button>
@@ -100,13 +102,11 @@ export function ConnectSidebar() {
       <div className="flex-1 overflow-y-auto divide-y divide-border/30">
         {filteredConversations.length === 0 ? (
           <div className="flex flex-col items-center justify-center p-8 text-center text-muted-foreground">
-            <p className="text-xs">Bu alanda henüz bir konuşma yok.</p>
+            <p className="text-xs">{localizeText("Bu alanda henüz bir konuşma yok.")}</p>
             <button
               onClick={() => setNewChatModalOpen(true)}
               className="mt-3 text-xs font-semibold text-primary hover:underline"
-            >
-              + Yeni Sohbet Başlat
-            </button>
+            >{localizeText("+ Yeni Sohbet Başlat")}</button>
           </div>
         ) : (
           filteredConversations.map((conv) => {
@@ -130,25 +130,25 @@ export function ConnectSidebar() {
               >
                 {/* Avatar Icon */}
                 <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-muted border border-border text-xs font-bold text-foreground">
-                  {conv.title.slice(0, 2).toUpperCase()}
+                  {localizeText(conv.title.slice(0, 2).toUpperCase())}
                 </div>
 
                 {/* Info */}
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-1">
                     <h4 className="text-xs font-bold text-foreground truncate">
-                      {conv.title}
+                      {localizeText(conv.title)}
                     </h4>
                     <span className="text-[10px] text-muted-foreground flex-shrink-0">
-                      {formattedTime}
+                      {localizeText(formattedTime)}
                     </span>
                   </div>
 
                   {/* Last message snippet */}
                   <p className="mt-0.5 text-[11px] text-muted-foreground truncate">
-                    {conv.lastMessage
+                    {localizeText(conv.lastMessage
                       ? `${conv.lastMessage.senderName}: ${conv.lastMessage.content}`
-                      : 'Henüz mesaj yok.'}
+                      : 'Henüz mesaj yok.')}
                   </p>
 
                   {/* Badges / Icons row */}
@@ -157,7 +157,7 @@ export function ConnectSidebar() {
                     {conv.isMuted && <VolumeX className="h-3 w-3 text-muted-foreground" />}
                     {conv.unreadCount > 0 && (
                       <span className="ml-auto rounded-full bg-primary px-1.5 py-0.2 text-[9px] font-bold text-primary-foreground">
-                        {conv.unreadCount}
+                        {localizeText(conv.unreadCount)}
                       </span>
                     )}
                   </div>
@@ -174,8 +174,8 @@ export function ConnectSidebar() {
           <div className="flex items-center gap-2">
             <ShieldCheck className="h-4 w-4 text-emerald-400" />
             <div className="text-[11px]">
-              <span className="font-semibold text-foreground">{currentUser.name}</span>
-              <span className="text-muted-foreground ml-1">({currentUser.role})</span>
+              <span className="font-semibold text-foreground">{localizeText(currentUser.name)}</span>
+              <span className="text-muted-foreground ml-1">({localizeText(currentUser.role)})</span>
             </div>
           </div>
 
@@ -184,12 +184,12 @@ export function ConnectSidebar() {
             value={currentUser.role}
             onChange={(e) => setCurrentUserRole(e.target.value as UserRole)}
             className="rounded border border-border bg-background px-1.5 py-1 text-[10px] text-foreground focus:outline-none"
-            title="Rol Değiştir (Test)"
+            title={localizeText("Rol Değiştir (Test)")}
           >
-            <option value="user">Kullanıcı</option>
-            <option value="guardian">Veli</option>
-            <option value="child">Çocuk (Korumalı)</option>
-            <option value="instructor">Eğitmen</option>
+            <option value="user">{localizeText("Kullanıcı")}</option>
+            <option value="guardian">{localizeText("Veli")}</option>
+            <option value="child">{localizeText("Çocuk (Korumalı)")}</option>
+            <option value="instructor">{localizeText("Eğitmen")}</option>
           </select>
         </div>
       </div>

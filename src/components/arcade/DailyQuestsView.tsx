@@ -18,12 +18,14 @@ import { Card } from '@/components/ui/Card';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { useArcadeStore } from '@/stores/useArcadeStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface DailyQuestsViewProps {
   onBackToArcade: () => void;
 }
 
 export function DailyQuestsView({ onBackToArcade }: DailyQuestsViewProps) {
+  const localizeText = useLocaleRender();
   const {
     dailyQuests,
     totalXp,
@@ -56,7 +58,7 @@ export function DailyQuestsView({ onBackToArcade }: DailyQuestsViewProps) {
             type="button"
             onClick={onBackToArcade}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Arcade'e Dön"
+            aria-label={localizeText("Arcade'e Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -67,25 +69,21 @@ export function DailyQuestsView({ onBackToArcade }: DailyQuestsViewProps) {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Günlük Görevler
-              </h1>
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Günlük Görevler")}</h1>
               <StatusBadge
                 status={completedCount === totalQuests ? 'completed' : 'pending'}
-                label={`${completedCount}/${totalQuests} Tamamlandı`}
+                label={localizeText(`${completedCount}/${totalQuests} Tamamlandı`)}
                 size="sm"
               />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Her gece yarısı yenilenen günlük hedefler
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Her gece yarısı yenilenen günlük hedefler")}</p>
           </div>
         </div>
 
         {/* Total XP badge */}
         <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 font-extrabold text-xs">
           <Sparkles className="h-3.5 w-3.5" />
-          <span>{totalXp} XP</span>
+          <span>{localizeText(totalXp)}{localizeText(" XP")}</span>
         </div>
       </div>
 
@@ -95,16 +93,13 @@ export function DailyQuestsView({ onBackToArcade }: DailyQuestsViewProps) {
         <Card className="p-4 border-border bg-gradient-to-br from-amber-500/10 via-card to-card shadow-2xs">
           <div className="flex items-center justify-between mb-3">
             <div>
-              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider block">
-                Bugünün İlerlemesi
-              </span>
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider block">{localizeText("Bugünün İlerlemesi")}</span>
               <span className="text-lg font-extrabold text-foreground">
-                %{progressPercent} Tamamlandı
-              </span>
+                %{localizeText(progressPercent)}{localizeText(" Tamamlandı")}</span>
             </div>
             <div className="flex items-center gap-1 text-xs text-muted-foreground">
               <Clock className="h-3.5 w-3.5 text-amber-500" />
-              <span>Gece 00:00&apos;da sıfırlanır</span>
+              <span>{localizeText("Gece 00:00'da sıfırlanır")}</span>
             </div>
           </div>
 
@@ -122,12 +117,9 @@ export function DailyQuestsView({ onBackToArcade }: DailyQuestsViewProps) {
         {/* Quests List */}
         <div className="space-y-3">
           <div className="px-1 flex items-center justify-between">
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Aktif Görevler
-            </h2>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Aktif Görevler")}</h2>
             <span className="text-xs text-muted-foreground font-medium">
-              {totalQuests} Görev
-            </span>
+              {localizeText(totalQuests)}{localizeText(" Görev")}</span>
           </div>
 
           {dailyQuests.map((quest, index) => {
@@ -154,23 +146,22 @@ export function DailyQuestsView({ onBackToArcade }: DailyQuestsViewProps) {
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-start gap-3 min-w-0">
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-border bg-muted/60 text-2xl shadow-2xs">
-                        {quest.iconEmoji}
+                        {localizeText(quest.iconEmoji)}
                       </div>
 
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
                           <h3 className="text-sm font-bold text-foreground truncate">
-                            {quest.title}
+                            {localizeText(quest.title)}
                           </h3>
                           {quest.isCompleted && (
                             <span className="inline-flex items-center gap-0.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">
-                              <CheckCircle2 className="h-3 w-3" /> Tamamlandı
-                            </span>
+                              <CheckCircle2 className="h-3 w-3" />{localizeText("Tamamlandı")}</span>
                           )}
                         </div>
 
                         <p className="mt-0.5 text-xs text-muted-foreground leading-snug">
-                          {quest.description}
+                          {localizeText(quest.description)}
                         </p>
 
                         {/* Progress Bar & Value */}
@@ -185,7 +176,7 @@ export function DailyQuestsView({ onBackToArcade }: DailyQuestsViewProps) {
                             />
                           </div>
                           <span className="text-xs font-bold text-muted-foreground shrink-0">
-                            {quest.currentValue} / {quest.targetValue}
+                            {localizeText(quest.currentValue)} / {localizeText(quest.targetValue)}
                           </span>
                         </div>
                       </div>
@@ -194,8 +185,7 @@ export function DailyQuestsView({ onBackToArcade }: DailyQuestsViewProps) {
                     {/* Reward badge / Action button */}
                     <div className="flex flex-col items-end gap-2 shrink-0">
                       <span className="inline-flex items-center gap-1 text-xs font-extrabold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-xl border border-amber-500/20">
-                        +{quest.xpReward} XP
-                      </span>
+                        +{localizeText(quest.xpReward)}{localizeText(" XP")}</span>
 
                       {!quest.isCompleted && (
                         <Button
@@ -203,8 +193,7 @@ export function DailyQuestsView({ onBackToArcade }: DailyQuestsViewProps) {
                           size="sm"
                           onClick={() => handleStartQuestGame(quest.targetGameId)}
                           className="h-7 text-[11px] font-semibold px-2.5"
-                        >
-                          Oyna <ChevronRight className="h-3 w-3 ml-0.5" />
+                        >{localizeText("Oyna")}<ChevronRight className="h-3 w-3 ml-0.5" />
                         </Button>
                       )}
                     </div>

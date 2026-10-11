@@ -23,10 +23,12 @@ import { Badge } from '@/components/ui/Badge';
 import { Input } from '@/components/ui/Input';
 import { cn } from '@/lib/utils';
 import { PARTNER_ROLE_LABELS } from '@/types/travelPartner';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 type HotelTab = 'properties' | 'room_types' | 'rooms' | 'rate_plans' | 'calendar';
 
 export function HotelPartnerDashboard() {
+  const localizeText = useLocaleRender();
   const {
     hotelProfile,
     properties,
@@ -141,20 +143,18 @@ export function HotelPartnerDashboard() {
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-base font-bold text-foreground">
-                {hotelProfile?.propertyName || 'Grand Life Resort & Spa'}
+                {localizeText(hotelProfile?.propertyName || 'Grand Life Resort & Spa')}
               </h2>
-              <Badge variant="success" className="text-[10px] py-0 px-2">
-                ✓ Turizm İşletme Belgeli
-              </Badge>
+              <Badge variant="success" className="text-[10px] py-0 px-2">{localizeText("✓ Turizm İşletme Belgeli")}</Badge>
             </div>
             <p className="text-xs text-muted-foreground">
-              {hotelProfile?.city} / {hotelProfile?.district} • {hotelProfile?.starRating || 5} Yıldız • Yetkili: {hotelProfile?.authorizedPersonName}
+              {localizeText(hotelProfile?.city)} / {localizeText(hotelProfile?.district)} • {localizeText(hotelProfile?.starRating || 5)}{localizeText(" Yıldız • Yetkili: ")}{localizeText(hotelProfile?.authorizedPersonName)}
             </p>
           </div>
         </div>
 
         <Badge variant="outline" className="text-xs py-1 px-3 self-start sm:self-center font-mono">
-          {hotelProfile?.tourismLicenseNumber || 'KTB-TR-2024-88'}
+          {localizeText(hotelProfile?.tourismLicenseNumber || 'KTB-TR-2024-88')}
         </Badge>
       </div>
 
@@ -181,7 +181,7 @@ export function HotelPartnerDashboard() {
               )}
             >
               <Icon className="h-3.5 w-3.5" />
-              <span>{tab.label}</span>
+              <span>{localizeText(tab.label)}</span>
             </button>
           );
         })}
@@ -193,24 +193,20 @@ export function HotelPartnerDashboard() {
       {activeTab === 'properties' && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-foreground">Kayıtlı Tesis / Otel</h3>
+            <h3 className="text-sm font-bold text-foreground">{localizeText("Kayıtlı Tesis / Otel")}</h3>
             <Button
               onClick={() => setIsPropertyModalOpen(true)}
               size="sm"
               className="rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold"
             >
-              <Plus className="h-3.5 w-3.5 mr-1" />
-              Tesis Ekle
-            </Button>
+              <Plus className="h-3.5 w-3.5 mr-1" />{localizeText("Tesis Ekle")}</Button>
           </div>
 
           {properties.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border/80 bg-card/50 p-8 text-center">
               <Building className="mx-auto h-8 w-8 text-muted-foreground/50 mb-2" />
-              <div className="text-sm font-bold text-foreground">Tanımlı tesis bulunamadı</div>
-              <p className="text-xs text-muted-foreground mt-1">
-                Tesis adı, adres ve olanaklar tanımlayarak otelinizi oluşturun.
-              </p>
+              <div className="text-sm font-bold text-foreground">{localizeText("Tanımlı tesis bulunamadı")}</div>
+              <p className="text-xs text-muted-foreground mt-1">{localizeText("Tesis adı, adres ve olanaklar tanımlayarak otelinizi oluşturun.")}</p>
             </div>
           ) : (
             <div className="space-y-2.5">
@@ -218,15 +214,14 @@ export function HotelPartnerDashboard() {
                 <div key={p.id} className="rounded-2xl border border-border/80 bg-card p-4 shadow-sm relative">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="font-bold text-sm text-foreground">{p.name}</div>
-                      <div className="text-xs text-muted-foreground">{p.city} / {p.district} • {p.starRating} Yıldız ({p.propertyType})</div>
+                      <div className="font-bold text-sm text-foreground">{localizeText(p.name)}</div>
+                      <div className="text-xs text-muted-foreground">{localizeText(p.city)} / {localizeText(p.district)} • {localizeText(p.starRating)}{localizeText(" Yıldız (")}{localizeText(p.propertyType)})</div>
                     </div>
                     <button onClick={() => deleteDraftProperty(p.id)} className="p-1.5 text-muted-foreground hover:text-destructive">
                       <Trash2 className="h-3.5 w-3.5" />
                     </button>
                   </div>
-                  <div className="mt-2 text-[11px] text-muted-foreground">
-                    Adres: {p.address} • Giriş/Çıkış: {p.checkInTime} / {p.checkOutTime}
+                  <div className="mt-2 text-[11px] text-muted-foreground">{localizeText("Adres: ")}{localizeText(p.address)}{localizeText("• Giriş/Çıkış: ")}{localizeText(p.checkInTime)} / {localizeText(p.checkOutTime)}
                   </div>
                 </div>
               ))}
@@ -241,38 +236,33 @@ export function HotelPartnerDashboard() {
       {activeTab === 'room_types' && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-foreground">Oda Tipleri & Konfigürasyonları</h3>
+            <h3 className="text-sm font-bold text-foreground">{localizeText("Oda Tipleri & Konfigürasyonları")}</h3>
             <Button
               onClick={() => setIsRoomTypeModalOpen(true)}
               size="sm"
               className="rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold"
             >
-              <Plus className="h-3.5 w-3.5 mr-1" />
-              Oda Tipi Ekle
-            </Button>
+              <Plus className="h-3.5 w-3.5 mr-1" />{localizeText("Oda Tipi Ekle")}</Button>
           </div>
 
           {roomTypes.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border/80 bg-card/50 p-8 text-center">
               <Bed className="mx-auto h-8 w-8 text-muted-foreground/50 mb-2" />
-              <div className="text-sm font-bold text-foreground">Tanımlı oda tipi yok</div>
-              <p className="text-xs text-muted-foreground mt-1">
-                Standart, Deluxe, Suit gibi oda kategorilerini ve yatak kapasitelerini tanımlayın.
-              </p>
+              <div className="text-sm font-bold text-foreground">{localizeText("Tanımlı oda tipi yok")}</div>
+              <p className="text-xs text-muted-foreground mt-1">{localizeText("Standart, Deluxe, Suit gibi oda kategorilerini ve yatak kapasitelerini tanımlayın.")}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {roomTypes.map((rt) => (
                 <div key={rt.id} className="rounded-2xl border border-border/80 bg-card p-4 shadow-sm relative">
                   <div className="flex items-center justify-between">
-                    <div className="font-bold text-xs text-foreground">{rt.title}</div>
+                    <div className="font-bold text-xs text-foreground">{localizeText(rt.title)}</div>
                     <button onClick={() => deleteDraftRoomType(rt.id)} className="p-1 text-muted-foreground hover:text-destructive">
                       <Trash2 className="h-3.5 w-3.5" />
                     </button>
                   </div>
                   <div className="mt-1 text-xs text-muted-foreground">
-                    {rt.bedConfig} • {rt.maxGuests} Misafir Kapasitesi • {rt.sizeSqMeters} m²
-                  </div>
+                    {localizeText(rt.bedConfig)} • {localizeText(rt.maxGuests)}{localizeText(" Misafir Kapasitesi •")}{localizeText(rt.sizeSqMeters)}{localizeText(" m²")}</div>
                 </div>
               ))}
             </div>
@@ -286,32 +276,28 @@ export function HotelPartnerDashboard() {
       {activeTab === 'rooms' && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-foreground">Oda Numaraları / Envanter</h3>
+            <h3 className="text-sm font-bold text-foreground">{localizeText("Oda Numaraları / Envanter")}</h3>
             <Button
               onClick={() => setIsRoomModalOpen(true)}
               size="sm"
               className="rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold"
             >
-              <Plus className="h-3.5 w-3.5 mr-1" />
-              Oda Ekle
-            </Button>
+              <Plus className="h-3.5 w-3.5 mr-1" />{localizeText("Oda Ekle")}</Button>
           </div>
 
           {rooms.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border/80 bg-card/50 p-8 text-center">
               <DoorClosed className="mx-auto h-8 w-8 text-muted-foreground/50 mb-2" />
-              <div className="text-sm font-bold text-foreground">Tanımlı oda numarası yok</div>
-              <p className="text-xs text-muted-foreground mt-1">
-                Kat ve kapı numaralarını ekleyerek oda envanterinizi yönetin.
-              </p>
+              <div className="text-sm font-bold text-foreground">{localizeText("Tanımlı oda numarası yok")}</div>
+              <p className="text-xs text-muted-foreground mt-1">{localizeText("Kat ve kapı numaralarını ekleyerek oda envanterinizi yönetin.")}</p>
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               {rooms.map((r) => (
                 <div key={r.id} className="flex items-center justify-between rounded-2xl border border-border/80 bg-card p-3 text-xs">
                   <div>
-                    <div className="font-bold text-foreground">Oda #{r.roomNumber}</div>
-                    <div className="text-[10px] text-muted-foreground">{r.floor}. Kat</div>
+                    <div className="font-bold text-foreground">{localizeText("Oda #")}{localizeText(r.roomNumber)}</div>
+                    <div className="text-[10px] text-muted-foreground">{localizeText(r.floor)}{localizeText(". Kat")}</div>
                   </div>
                   <button onClick={() => deleteDraftRoom(r.id)} className="text-muted-foreground hover:text-destructive">
                     <Trash2 className="h-3.5 w-3.5" />
@@ -329,33 +315,28 @@ export function HotelPartnerDashboard() {
       {activeTab === 'rate_plans' && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-foreground">Pansiyon & Fiyat Planları</h3>
+            <h3 className="text-sm font-bold text-foreground">{localizeText("Pansiyon & Fiyat Planları")}</h3>
             <Button
               onClick={() => setIsRatePlanModalOpen(true)}
               size="sm"
               className="rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold"
             >
-              <Plus className="h-3.5 w-3.5 mr-1" />
-              Fiyat Planı Ekle
-            </Button>
+              <Plus className="h-3.5 w-3.5 mr-1" />{localizeText("Fiyat Planı Ekle")}</Button>
           </div>
 
           {ratePlans.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border/80 bg-card/50 p-8 text-center">
               <DollarSign className="mx-auto h-8 w-8 text-muted-foreground/50 mb-2" />
-              <div className="text-sm font-bold text-foreground">Fiyat planı tanımlanmadı</div>
-              <p className="text-xs text-muted-foreground mt-1">
-                Oda Kahvaltı, Her Şey Dahil gibi pansiyon türleri ve gecelik taban fiyatları ekleyin.
-              </p>
+              <div className="text-sm font-bold text-foreground">{localizeText("Fiyat planı tanımlanmadı")}</div>
+              <p className="text-xs text-muted-foreground mt-1">{localizeText("Oda Kahvaltı, Her Şey Dahil gibi pansiyon türleri ve gecelik taban fiyatları ekleyin.")}</p>
             </div>
           ) : (
             <div className="space-y-2.5">
               {ratePlans.map((rp) => (
                 <div key={rp.id} className="flex items-center justify-between rounded-2xl border border-border/80 bg-card p-4 shadow-sm">
                   <div>
-                    <div className="font-bold text-xs text-foreground">{rp.planName}</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">
-                      Gecelik: <span className="font-bold text-blue-500">{rp.basePricePerNight} TL</span> • {rp.cancellationPolicy === 'free_cancellation' ? 'Ücretsiz İptal' : 'İadesiz'}
+                    <div className="font-bold text-xs text-foreground">{localizeText(rp.planName)}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">{localizeText("Gecelik:")}<span className="font-bold text-blue-500">{localizeText(rp.basePricePerNight)}{localizeText(" TL")}</span> • {localizeText(rp.cancellationPolicy === 'free_cancellation' ? 'Ücretsiz İptal' : 'İadesiz')}
                     </div>
                   </div>
                   <button onClick={() => deleteDraftRatePlan(rp.id)} className="p-1 text-muted-foreground hover:text-destructive">
@@ -373,13 +354,9 @@ export function HotelPartnerDashboard() {
       {/* ----------------------------------------------------------------- */}
       {activeTab === 'calendar' && (
         <div className="rounded-3xl border border-border/80 bg-card p-5 space-y-3">
-          <h3 className="text-sm font-bold text-foreground">Oda Müsaitlik & Doluluk Takvimi</h3>
-          <p className="text-xs text-muted-foreground">
-            Oda tiplerine göre günlük kontenjan ve dinamik gecelik fiyatlandırma takvimi.
-          </p>
-          <div className="rounded-2xl border border-border bg-muted/20 p-4 text-center text-xs text-muted-foreground">
-            Tüm oda envanteri ve fiyat planları taslak olarak kaydedilmiştir; henüz yolcu aramalarına açılmamıştır.
-          </div>
+          <h3 className="text-sm font-bold text-foreground">{localizeText("Oda Müsaitlik & Doluluk Takvimi")}</h3>
+          <p className="text-xs text-muted-foreground">{localizeText("Oda tiplerine göre günlük kontenjan ve dinamik gecelik fiyatlandırma takvimi.")}</p>
+          <div className="rounded-2xl border border-border bg-muted/20 p-4 text-center text-xs text-muted-foreground">{localizeText("Tüm oda envanteri ve fiyat planları taslak olarak kaydedilmiştir; henüz yolcu aramalarına açılmamıştır.")}</div>
         </div>
       )}
 
@@ -389,18 +366,18 @@ export function HotelPartnerDashboard() {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="w-full max-w-md rounded-3xl bg-card p-6 border border-border shadow-xl">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-base text-foreground">Tesis Tanımla</h3>
+                <h3 className="font-bold text-base text-foreground">{localizeText("Tesis Tanımla")}</h3>
                 <button onClick={() => setIsPropertyModalOpen(false)}><X className="h-4 w-4" /></button>
               </div>
               <form onSubmit={handleCreateProperty} className="space-y-3">
-                <Input label="Tesis Adı *" value={propName} onChange={(e) => setPropName(e.target.value)} required />
+                <Input label={localizeText("Tesis Adı *")} value={propName} onChange={(e) => setPropName(e.target.value)} required />
                 <div className="grid grid-cols-2 gap-2.5">
-                  <Input label="Şehir *" value={propCity} onChange={(e) => setPropCity(e.target.value)} required />
-                  <Input label="İlçe / Belde *" value={propDistrict} onChange={(e) => setPropDistrict(e.target.value)} required />
+                  <Input label={localizeText("Şehir *")} value={propCity} onChange={(e) => setPropCity(e.target.value)} required />
+                  <Input label={localizeText("İlçe / Belde *")} value={propDistrict} onChange={(e) => setPropDistrict(e.target.value)} required />
                 </div>
-                <Input label="Açık Adres *" value={propAddress} onChange={(e) => setPropAddress(e.target.value)} required />
+                <Input label={localizeText("Açık Adres *")} value={propAddress} onChange={(e) => setPropAddress(e.target.value)} required />
                 <div className="pt-2">
-                  <Button type="submit" className="w-full rounded-2xl bg-blue-500 hover:bg-blue-600 text-white">Kaydet</Button>
+                  <Button type="submit" className="w-full rounded-2xl bg-blue-500 hover:bg-blue-600 text-white">{localizeText("Kaydet")}</Button>
                 </div>
               </form>
             </motion.div>
@@ -414,18 +391,18 @@ export function HotelPartnerDashboard() {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="w-full max-w-md rounded-3xl bg-card p-6 border border-border shadow-xl">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-base text-foreground">Oda Tipi Tanımla</h3>
+                <h3 className="font-bold text-base text-foreground">{localizeText("Oda Tipi Tanımla")}</h3>
                 <button onClick={() => setIsRoomTypeModalOpen(false)}><X className="h-4 w-4" /></button>
               </div>
               <form onSubmit={handleCreateRoomType} className="space-y-3">
-                <Input label="Oda Başlığı / Tipi *" value={roomTypeTitle} onChange={(e) => setRoomTypeTitle(e.target.value)} required />
-                <Input label="Yatak Konfigürasyonu *" value={bedConfig} onChange={(e) => setBedConfig(e.target.value)} required />
+                <Input label={localizeText("Oda Başlığı / Tipi *")} value={roomTypeTitle} onChange={(e) => setRoomTypeTitle(e.target.value)} required />
+                <Input label={localizeText("Yatak Konfigürasyonu *")} value={bedConfig} onChange={(e) => setBedConfig(e.target.value)} required />
                 <div className="grid grid-cols-2 gap-2.5">
-                  <Input label="Maksimum Misafir" type="number" value={maxGuests.toString()} onChange={(e) => setMaxGuests(parseInt(e.target.value) || 2)} required />
-                  <Input label="Oda Alanı (m²)" type="number" value={sizeSqMeters.toString()} onChange={(e) => setSizeSqMeters(parseInt(e.target.value) || 30)} required />
+                  <Input label={localizeText("Maksimum Misafir")} type="number" value={maxGuests.toString()} onChange={(e) => setMaxGuests(parseInt(e.target.value) || 2)} required />
+                  <Input label={localizeText("Oda Alanı (m²)")} type="number" value={sizeSqMeters.toString()} onChange={(e) => setSizeSqMeters(parseInt(e.target.value) || 30)} required />
                 </div>
                 <div className="pt-2">
-                  <Button type="submit" className="w-full rounded-2xl bg-blue-500 hover:bg-blue-600 text-white">Kaydet</Button>
+                  <Button type="submit" className="w-full rounded-2xl bg-blue-500 hover:bg-blue-600 text-white">{localizeText("Kaydet")}</Button>
                 </div>
               </form>
             </motion.div>
@@ -439,16 +416,16 @@ export function HotelPartnerDashboard() {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="w-full max-w-md rounded-3xl bg-card p-6 border border-border shadow-xl">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-base text-foreground">Oda Numarası Ekle</h3>
+                <h3 className="font-bold text-base text-foreground">{localizeText("Oda Numarası Ekle")}</h3>
                 <button onClick={() => setIsRoomModalOpen(false)}><X className="h-4 w-4" /></button>
               </div>
               <form onSubmit={handleCreateRoom} className="space-y-3">
                 <div className="grid grid-cols-2 gap-2.5">
-                  <Input label="Oda No *" placeholder="Örn: 301" value={roomNumber} onChange={(e) => setRoomNumber(e.target.value)} required />
-                  <Input label="Bulunduğu Kat" type="number" value={roomFloor.toString()} onChange={(e) => setRoomFloor(parseInt(e.target.value) || 1)} required />
+                  <Input label={localizeText("Oda No *")} placeholder={localizeText("Örn: 301")} value={roomNumber} onChange={(e) => setRoomNumber(e.target.value)} required />
+                  <Input label={localizeText("Bulunduğu Kat")} type="number" value={roomFloor.toString()} onChange={(e) => setRoomFloor(parseInt(e.target.value) || 1)} required />
                 </div>
                 <div className="pt-2">
-                  <Button type="submit" className="w-full rounded-2xl bg-blue-500 hover:bg-blue-600 text-white">Odayı Ekle</Button>
+                  <Button type="submit" className="w-full rounded-2xl bg-blue-500 hover:bg-blue-600 text-white">{localizeText("Odayı Ekle")}</Button>
                 </div>
               </form>
             </motion.div>
@@ -462,14 +439,14 @@ export function HotelPartnerDashboard() {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="w-full max-w-md rounded-3xl bg-card p-6 border border-border shadow-xl">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-base text-foreground">Fiyat Planı Ekle</h3>
+                <h3 className="font-bold text-base text-foreground">{localizeText("Fiyat Planı Ekle")}</h3>
                 <button onClick={() => setIsRatePlanModalOpen(false)}><X className="h-4 w-4" /></button>
               </div>
               <form onSubmit={handleCreateRatePlan} className="space-y-3">
-                <Input label="Plan Adı *" value={planName} onChange={(e) => setPlanName(e.target.value)} required />
-                <Input label="Gecelik Taban Fiyat (TL) *" type="number" value={basePricePerNight.toString()} onChange={(e) => setBasePricePerNight(parseFloat(e.target.value) || 0)} required />
+                <Input label={localizeText("Plan Adı *")} value={planName} onChange={(e) => setPlanName(e.target.value)} required />
+                <Input label={localizeText("Gecelik Taban Fiyat (TL) *")} type="number" value={basePricePerNight.toString()} onChange={(e) => setBasePricePerNight(parseFloat(e.target.value) || 0)} required />
                 <div className="pt-2">
-                  <Button type="submit" className="w-full rounded-2xl bg-blue-500 hover:bg-blue-600 text-white">Planı Kaydet</Button>
+                  <Button type="submit" className="w-full rounded-2xl bg-blue-500 hover:bg-blue-600 text-white">{localizeText("Planı Kaydet")}</Button>
                 </div>
               </form>
             </motion.div>

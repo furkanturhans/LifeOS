@@ -5,8 +5,10 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeft, Wrench } from 'lucide-react';
 import { useCraftsmanStore } from '@/stores/useCraftsmanStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function CraftsmanHeader() {
+  const localizeText = useLocaleRender();
   const router = useRouter();
   const { currentRole, setCurrentRole } = useCraftsmanStore();
 
@@ -19,7 +21,7 @@ export function CraftsmanHeader() {
             type="button"
             onClick={() => router.push('/services')}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Hizmetlere Dön"
+            aria-label={localizeText("Hizmetlere Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -30,16 +32,10 @@ export function CraftsmanHeader() {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Usta
-              </h1>
-              <span className="hidden sm:inline-block rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
-                Doğrulanmış
-              </span>
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Usta")}</h1>
+              <span className="hidden sm:inline-block rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">{localizeText("Doğrulanmış")}</span>
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Ev Bakım, Onarım ve Montaj Hizmetleri
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Ev Bakım, Onarım ve Montaj Hizmetleri")}</p>
           </div>
         </div>
 
@@ -54,9 +50,7 @@ export function CraftsmanHeader() {
                 ? 'bg-card text-foreground shadow-xs'
                 : 'text-muted-foreground hover:text-foreground'
             )}
-          >
-            Müşteri
-          </button>
+          >{localizeText("Müşteri")}</button>
           <button
             type="button"
             onClick={() => setCurrentRole('provider')}
@@ -66,9 +60,7 @@ export function CraftsmanHeader() {
                 ? 'bg-card text-foreground shadow-xs'
                 : 'text-muted-foreground hover:text-foreground'
             )}
-          >
-            Usta
-          </button>
+          >{localizeText("Usta")}</button>
         </div>
       </div>
     </div>

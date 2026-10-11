@@ -23,6 +23,7 @@ import { useThemeStore } from '@/stores/useThemeStore';
 import { createClient } from '@/lib/supabase/client';
 import { cn, formatLifeOSId, clearSessionCookie } from '@/lib/utils';
 import { AdminKeyUnlockModal } from '@/components/admin/AdminKeyUnlockModal';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 interface ProfileRowProps {
   icon: React.ReactNode;
@@ -34,6 +35,7 @@ interface ProfileRowProps {
 }
 
 function ProfileRow({ icon, label, value, href, onClick, danger }: ProfileRowProps) {
+  const localizeText = useLocaleRender();
   const content = (
     <div
       className={cn(
@@ -44,11 +46,11 @@ function ProfileRow({ icon, label, value, href, onClick, danger }: ProfileRowPro
       <div className={cn('h-9 w-9 rounded-xl flex items-center justify-center flex-shrink-0',
         danger ? 'bg-destructive/10 text-destructive' : 'bg-muted text-muted-foreground'
       )}>
-        {icon}
+        {localizeText(icon)}
       </div>
       <div className="flex-1 min-w-0">
         <div className={cn('text-sm font-medium', danger ? 'text-destructive' : 'text-foreground')}>
-          {label}
+          {localizeText(label)}
         </div>
         {value && (
           <div className="text-xs text-muted-foreground truncate">{value}</div>
@@ -59,17 +61,18 @@ function ProfileRow({ icon, label, value, href, onClick, danger }: ProfileRowPro
   );
 
   if (href) {
-    return <Link href={href}>{content}</Link>;
+    return <Link href={href}>{localizeText(content)}</Link>;
   }
 
-  return <div onClick={onClick}>{content}</div>;
+  return <div onClick={onClick}>{localizeText(content)}</div>;
 }
 
 function ProfileSection({ title, children }: { title: string; children: React.ReactNode }) {
+  const localizeText = useLocaleRender();
   return (
     <div className="mt-4">
       <p className="px-6 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        {title}
+        {localizeText(title)}
       </p>
       <div className="mx-4 overflow-hidden rounded-2xl border border-border bg-card divide-y divide-border">
         {children}
@@ -79,9 +82,10 @@ function ProfileSection({ title, children }: { title: string; children: React.Re
 }
 
 export default function ProfilePage() {
+  const localizeText = useLocaleRender();
   const router = useRouter();
   const { user, logout } = useAuthStore();
-  const { locale, resetBackground } = useThemeStore();
+  const { resetBackground } = useThemeStore();
   const [isAdminUnlockOpen, setIsAdminUnlockOpen] = useState(false);
 
   // Strictly check if current logged in user is the master owner
@@ -105,23 +109,23 @@ export default function ProfilePage() {
   }
 
   const t = {
-    profile: locale === 'tr' ? 'Profil' : 'Profile',
-    account: locale === 'tr' ? 'Hesap' : 'Account',
-    appearance: locale === 'tr' ? 'Görünüm' : 'Appearance',
-    language: locale === 'tr' ? 'Dil' : 'Language',
-    notifications: locale === 'tr' ? 'Bildirimler' : 'Notifications',
-    security: locale === 'tr' ? 'Güvenlik' : 'Security',
-    privacy: locale === 'tr' ? 'Gizlilik' : 'Privacy',
-    logout: locale === 'tr' ? 'Çıkış Yap' : 'Log Out',
-    settings: locale === 'tr' ? 'Ayarlar' : 'Settings',
-    name: locale === 'tr' ? 'Ad Soyad' : 'Full Name',
-    email: locale === 'tr' ? 'E-posta' : 'Email',
-    lifeosId: locale === 'tr' ? 'LifeOS ID' : 'LifeOS ID',
-    memberSince: locale === 'tr' ? 'Üye olma tarihi' : 'Member since',
+    profile: 'Profil',
+    account: 'Hesap',
+    appearance: 'Görünüm',
+    language: 'Dil',
+    notifications: 'Bildirimler',
+    security: 'Güvenlik',
+    privacy: 'Gizlilik',
+    logout: 'Çıkış Yap',
+    settings: 'Ayarlar',
+    name: 'Ad Soyad',
+    email: 'E-posta',
+    lifeosId: 'LifeOS ID',
+    memberSince: 'Üye olma tarihi',
   };
 
   const memberSince = user?.createdAt
-    ? new Date(user.createdAt).toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US', {
+    ? new Date(user.createdAt).toLocaleDateString(getFormattingLocale(), {
         month: 'long',
         year: 'numeric',
       })
@@ -137,7 +141,7 @@ export default function ProfilePage() {
           transition={{ duration: 0.3 }}
           className="px-6 pt-12 pb-2"
         >
-          <h1 className="text-2xl font-bold text-foreground">{t.profile}</h1>
+          <h1 className="text-2xl font-bold text-foreground">{localizeText(t.profile)}</h1>
         </motion.div>
 
         {/* Avatar & Identity */}
@@ -155,18 +159,19 @@ export default function ProfilePage() {
             />
             <div className="flex-1 min-w-0">
               <h2 className="text-lg font-bold text-foreground truncate">
-                {user?.displayName ?? 'LifeOS Kullanıcısı'}
+                {user?.displayName ?? localizeText('LifeOS Kullanıcısı')}
               </h2>
-              <p className="text-sm text-primary font-medium">{formatLifeOSId(user?.lifeosId)}</p>
+              <p className="text-sm text-primary font-medium">{localizeText(formatLifeOSId(user?.lifeosId))}</p>
               {memberSince && (
                 <p className="text-xs text-muted-foreground mt-1">
-                  {t.memberSince}: {memberSince}
+                  {localizeText(t.memberSince)}: {localizeText(memberSince)}
                 </p>
               )}
             </div>
           </div>
         </motion.div>
 
+        <button onClick={()=>router.push('/profile/professions')} className="mx-4 mt-4 flex min-h-16 items-center justify-between rounded-2xl border border-border bg-card px-5 text-start"><span className="flex items-center gap-3"><Shield className="h-5 w-5 text-primary"/><span><span className="block text-sm font-semibold">{localizeText('Meslek ve Yetkilerim')}</span><span className="block text-xs text-muted-foreground">{localizeText('Belgeler')} · {localizeText('Doğrulama')}</span></span></span><ChevronRight className="h-4 w-4"/></button>
         {/* SADECE VE SADECE SİZE ÖZEL YÖNETİCİ KASASI (DİĞER HİÇBİR KULLANICI GÖREMEZ) */}
         {isMasterOwner && (
           <motion.div
@@ -182,16 +187,10 @@ export default function ProfilePage() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-bold text-foreground">
-                      Yönetim Paneli
-                    </h3>
-                    <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 bg-amber-500/15 px-2 py-0.2 rounded-full border border-amber-500/25">
-                      22-Key 2FA
-                    </span>
+                    <h3 className="text-sm font-bold text-foreground">{localizeText("Yönetim Paneli")}</h3>
+                    <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 bg-amber-500/15 px-2 py-0.2 rounded-full border border-amber-500/25">{localizeText("22-Key 2FA")}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    Başvurular, denetim kayıtları ve sistem yetkileri
-                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Başvurular, denetim kayıtları ve sistem yetkileri")}</p>
                 </div>
               </div>
 
@@ -199,7 +198,7 @@ export default function ProfilePage() {
                 onClick={() => setIsAdminUnlockOpen(true)}
                 className="px-3.5 py-2 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-xs font-bold shadow-md shadow-amber-500/20 transition-all active:scale-95 flex items-center gap-1.5"
               >
-                <span>Kasayı Aç</span>
+                <span>{localizeText("Kasayı Aç")}</span>
                 <span>→</span>
               </button>
             </div>
@@ -207,16 +206,16 @@ export default function ProfilePage() {
         )}
 
         {/* Account Section */}
-        <ProfileSection title={t.account}>
+        <ProfileSection title={localizeText(t.account)}>
           <ProfileRow
             icon={<User className="h-4 w-4" />}
-            label={t.name}
+            label={localizeText(t.name)}
             value={user?.displayName}
             href="/settings/account"
           />
           <ProfileRow
             icon={<AtSign className="h-4 w-4" />}
-            label={t.lifeosId}
+            label={localizeText(t.lifeosId)}
             value={formatLifeOSId(user?.lifeosId)}
             href="/settings/account"
           />
@@ -229,34 +228,34 @@ export default function ProfilePage() {
         </ProfileSection>
 
         {/* Preferences Section */}
-        <ProfileSection title={t.settings}>
+        <ProfileSection title={localizeText(t.settings)}>
           <ProfileRow
             icon={<Palette className="h-4 w-4" />}
-            label={t.appearance}
+            label={localizeText(t.appearance)}
             href="/settings/appearance"
           />
           <ProfileRow
             icon={<Globe className="h-4 w-4" />}
-            label={t.language}
+            label={localizeText(t.language)}
             href="/settings/language"
           />
           <ProfileRow
             icon={<Bell className="h-4 w-4" />}
-            label={t.notifications}
+            label={localizeText(t.notifications)}
             href="/settings/notifications"
           />
         </ProfileSection>
 
         {/* Security Section */}
-        <ProfileSection title={locale === 'tr' ? 'Güvenlik & Gizlilik' : 'Security & Privacy'}>
+        <ProfileSection title={localizeText('Güvenlik & Gizlilik')}>
           <ProfileRow
             icon={<Shield className="h-4 w-4" />}
-            label={t.security}
+            label={localizeText(t.security)}
             href="/settings/security"
           />
           <ProfileRow
             icon={<Lock className="h-4 w-4" />}
-            label={t.privacy}
+            label={localizeText(t.privacy)}
             href="/settings/privacy"
           />
         </ProfileSection>
@@ -266,7 +265,7 @@ export default function ProfilePage() {
           <div className="overflow-hidden rounded-2xl border border-destructive/20 bg-card">
             <ProfileRow
               icon={<LogOut className="h-4 w-4" />}
-              label={t.logout}
+              label={localizeText(t.logout)}
               onClick={handleLogout}
               danger
             />
@@ -275,7 +274,7 @@ export default function ProfilePage() {
 
         {/* Footer */}
         <div className="mt-8 pb-4 text-center">
-          <p className="text-xs text-muted-foreground">LifeOS v0.1.0 — Phase 1</p>
+          <p className="text-xs text-muted-foreground">{localizeText("LifeOS v0.1.0 — Phase 1")}</p>
         </div>
       </div>
 

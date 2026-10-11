@@ -1,0 +1,27 @@
+[
+  {
+    "folder": ".tmp-kids-games",
+    "remote": "https://github.com/shinjaehyun20/jangyoon-s-game.git",
+    "commit": "68b145eefad483d9a412c034beedcd53893bf462"
+  },
+  {
+    "folder": ".tmp-kids-story-source",
+    "remote": "https://github.com/global-asp/asp-source.git",
+    "commit": "b5c3d5b2266ad936e5f20fa878e839b32b02b4ba"
+  },
+  {
+    "folder": ".tmp-kids-stories",
+    "remote": "https://github.com/global-asp/global-asp.git",
+    "commit": "65c924ee281dd470ecefe3acc23cb27426db5cfc"
+  },
+  {
+    "folder": ".tmp-kids-images",
+    "remote": "https://github.com/global-asp/asp-imagebank.git",
+    "commit": "a56e6dbe7aeeb8ea3e53d9941664416e2e7356ad"
+  },
+  {
+    "folder": ".tmp-kids-drawings",
+    "remote": "https://github.com/googlefonts/noto-emoji.git",
+    "commit": "e20cbc2bbec1926686be9f9bee7d1d2cfa1fea0e"
+  }
+]

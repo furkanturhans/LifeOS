@@ -11,6 +11,11 @@ import {
 } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { StatusBadge } from '@/components/ui/StatusBadge';
+import { useLocaleRender } from '@/lib/i18n/runtime';
+import { AppArtwork } from '@/components/ui/AppArtwork';
+import { getModuleById, getLocalizedModuleName } from '@/modules/registry';
+import { SERVICE_LINKS } from '@/modules/service-links';
+import { useTranslation } from '@/lib/i18n';
 
 const SERVICE_ITEMS = [
   {
@@ -52,29 +57,33 @@ const SERVICE_ITEMS = [
 ];
 
 export function ServicesHubGrid() {
+  const localizeText = useLocaleRender();
+  const { locale } = useTranslation();
   return (
     <div className="px-4 mt-4 sm:px-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
         {SERVICE_ITEMS.map((item) => {
           const Icon = item.icon;
+          const serviceModule = getModuleById(item.id);
           return (
-            <Link key={item.id} href={item.href} className="group block">
+            <Link key={item.id} href={SERVICE_LINKS[item.id]} className="group block">
               <Card className="flex items-center justify-between p-4 border-border bg-card hover:border-primary/40 hover:bg-muted/30 transition-all duration-150 shadow-2xs group-active:scale-[0.99]">
                 <div className="flex items-center gap-3.5 min-w-0">
                   <div
                     className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${item.color} shadow-xs transition-transform group-hover:scale-105`}
                   >
-                    <Icon className="h-5 w-5" />
+                    <AppArtwork id={item.id} className="h-9 w-9 text-2xl"
+                      fallback={serviceModule?.icon ?? <Icon className="h-5 w-5" />} />
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
-                        {item.title}
+                        {serviceModule ? getLocalizedModuleName(serviceModule, locale) : localizeText(item.title)}
                       </h3>
-                      <StatusBadge status="active" label={item.status} size="sm" />
+                      <StatusBadge status="active" label={localizeText(item.status)} size="sm" />
                     </div>
                     <p className="text-xs text-muted-foreground truncate mt-0.5">
-                      {item.subtitle}
+                      {localizeText(item.subtitle)}
                     </p>
                   </div>
                 </div>

@@ -14,6 +14,7 @@ import type {
 } from '@/types/assistant';
 import { ASSISTANT_PERMISSION_SCOPES } from '@/types/assistant';
 import { LocalDeterministicAssistantAdapter } from '@/services/assistant/MockAssistantAdapter';
+import { useThemeStore } from '@/stores/useThemeStore';
 
 const taskAdapter = new LocalDeterministicAssistantAdapter();
 
@@ -285,6 +286,7 @@ export const useAssistantStore = create<AssistantStoreState>()(
               conversationId: convId,
               messages: allMsgs,
               permissionScopes: effectiveScopes,
+              contextData: { locale: useThemeStore.getState().locale },
               attachedPhoto: attachedPhoto
                 ? {
                     fileName: attachedPhoto.fileName,

@@ -7,6 +7,7 @@ import { useArcadeStore } from '@/stores/useArcadeStore';
 import { kidsSound } from '@/lib/arcade/kidsSound';
 import { cn } from '@/lib/utils';
 import { CheckCircle2, Sparkles } from 'lucide-react';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 // =============================================================================
 // 1. ÇOCUK SUDOKU (4x4 Mini Sudoku with Fruit / Number Symbols)
@@ -28,6 +29,7 @@ const SUDOKU_SOLUTION = [
 ];
 
 export function CocukSudokuGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [board, setBoard] = useState<number[][]>(SUDOKU_PUZZLE.map((r) => [...r]));
   const [selectedCell, setSelectedCell] = useState<{ r: number; c: number } | null>(null);
@@ -83,7 +85,7 @@ export function CocukSudokuGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Çocuk Sudoku"
+      title={localizeText("Çocuk Sudoku")}
       iconEmoji="🧩"
       onBack={onBack}
       onRestart={handleRestart}
@@ -113,7 +115,7 @@ export function CocukSudokuGame({ onBack }: { onBack: () => void }) {
                       : 'border-dashed border-primary/40 bg-card hover:bg-muted/40 cursor-pointer'
                   )}
                 >
-                  {val > 0 ? FRUITS[val - 1] : ''}
+                  {localizeText(val > 0 ? FRUITS[val - 1] : '')}
                 </motion.button>
               );
             })
@@ -130,7 +132,7 @@ export function CocukSudokuGame({ onBack }: { onBack: () => void }) {
               disabled={!selectedCell}
               className="h-12 w-12 rounded-2xl border border-border bg-card hover:border-primary text-2xl flex items-center justify-center shadow-xs disabled:opacity-40"
             >
-              {fruit}
+              {localizeText(fruit)}
             </motion.button>
           ))}
         </div>
@@ -161,6 +163,7 @@ const LOGIC_PUZZLES = [
 ];
 
 export function MantikKareleriGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [levelIdx, setLevelIdx] = useState(0);
   const [score, setScore] = useState(0);
@@ -209,7 +212,7 @@ export function MantikKareleriGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Mantık Kareleri"
+      title={localizeText("Mantık Kareleri")}
       iconEmoji="🧠"
       onBack={onBack}
       onRestart={handleRestart}
@@ -224,8 +227,8 @@ export function MantikKareleriGame({ onBack }: { onBack: () => void }) {
     >
       <div className="w-full max-w-xs space-y-4 text-center">
         <div className="rounded-3xl border border-border bg-card/80 p-4 shadow-xs">
-          <span className="text-xs font-bold text-muted-foreground block mb-1">İpucu</span>
-          <p className="text-sm font-extrabold text-foreground">&ldquo;{current.clue}&rdquo;</p>
+          <span className="text-xs font-bold text-muted-foreground block mb-1">{localizeText("İpucu")}</span>
+          <p className="text-sm font-extrabold text-foreground">{localizeText("“")}{localizeText(current.clue)}{localizeText("”")}</p>
         </div>
 
         <div className="grid grid-cols-3 gap-2.5 p-3 rounded-3xl border border-border bg-card/80">
@@ -247,7 +250,7 @@ export function MantikKareleriGame({ onBack }: { onBack: () => void }) {
                       : 'border-border bg-muted/40 hover:bg-muted'
                   )}
                 >
-                  {isHit && isStar ? '⭐️' : isHit && !isStar ? '❌' : '?'}
+                  {localizeText(isHit && isStar ? '⭐️' : isHit && !isStar ? '❌' : '?')}
                 </motion.button>
               );
             })
@@ -269,6 +272,7 @@ const SHAPE_NUMBER_LEVELS = [
 ];
 
 export function SayiSekilleriGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -311,7 +315,7 @@ export function SayiSekilleriGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Sayı Şekilleri"
+      title={localizeText("Sayı Şekilleri")}
       iconEmoji="🔢"
       onBack={onBack}
       onRestart={handleRestart}
@@ -328,7 +332,7 @@ export function SayiSekilleriGame({ onBack }: { onBack: () => void }) {
         <div className="rounded-3xl border border-border bg-card/80 p-5 shadow-xs flex flex-wrap items-center justify-center gap-2 min-h-[110px]">
           {Array.from({ length: current.targetCount }).map((_, i) => (
             <span key={i} className="text-3xl animate-in zoom-in-75 duration-150">
-              {current.shapeEmoji}
+              {localizeText(current.shapeEmoji)}
             </span>
           ))}
         </div>
@@ -341,7 +345,7 @@ export function SayiSekilleriGame({ onBack }: { onBack: () => void }) {
               onClick={() => handleChoose(opt)}
               className="h-14 rounded-2xl border border-border bg-card hover:border-primary text-2xl font-extrabold shadow-xs"
             >
-              {opt}
+              {localizeText(opt)}
             </motion.button>
           ))}
         </div>
@@ -361,6 +365,7 @@ const TARGET_NUMBER_LEVELS = [
 ];
 
 export function HedefSayiGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -415,7 +420,7 @@ export function HedefSayiGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Hedef Sayı"
+      title={localizeText("Hedef Sayı")}
       iconEmoji="🎯"
       onBack={onBack}
       onRestart={handleRestart}
@@ -433,8 +438,8 @@ export function HedefSayiGame({ onBack }: { onBack: () => void }) {
       <div className="w-full max-w-xs space-y-4 text-center">
         {/* Target Prompt */}
         <div className="rounded-3xl border border-primary/30 bg-primary/10 p-4 shadow-xs">
-          <span className="text-xs font-bold text-muted-foreground block mb-0.5">Hedef Sayı</span>
-          <span className="text-4xl font-extrabold text-primary">{current.target}</span>
+          <span className="text-xs font-bold text-muted-foreground block mb-0.5">{localizeText("Hedef Sayı")}</span>
+          <span className="text-4xl font-extrabold text-primary">{localizeText(current.target)}</span>
         </div>
 
         {/* 4 Cards */}
@@ -453,7 +458,7 @@ export function HedefSayiGame({ onBack }: { onBack: () => void }) {
                     : 'border-border bg-card hover:border-primary/50 text-foreground'
                 )}
               >
-                {c}
+                {localizeText(c)}
               </motion.button>
             );
           })}

@@ -1,7 +1,8 @@
 import type { FinanceSourceModule, TransactionStatus } from './finance';
 
-export const LIFEOS_CREDIT_RATE_KURUS = 135; // 1 LifeOS Kredisi = 1.35 TL = 135 Kuruş
-export const LIFEOS_CREDIT_RATE_TL = 1.35;
+export const LIFEOS_CREDIT_RATE_KURUS = 200;
+export const LIFEOS_CREDIT_RATE_TL = 2;
+export const LIFEOS_CREDIT_PURCHASE_COMMISSION_PERCENT = 10;
 
 export type CreditTransactionType =
   | 'purchased'

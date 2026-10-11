@@ -14,6 +14,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface AdminKeyUnlockModalProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ export function AdminKeyUnlockModal({
   onClose,
   onSuccess,
 }: AdminKeyUnlockModalProps) {
+  const localizeText = useLocaleRender();
   const [securityKey, setSecurityKey] = useState('');
   const [showKey, setShowKey] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -97,14 +99,10 @@ export function AdminKeyUnlockModal({
               </div>
               <div>
                 <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
-                  <span>Yönetici Güvenlik Kasası</span>
-                  <span className="text-[10px] font-bold text-amber-500 bg-amber-500/10 px-2 py-0.2 rounded-full border border-amber-500/20">
-                    22-Key 2FA
-                  </span>
+                  <span>{localizeText("Yönetici Güvenlik Kasası")}</span>
+                  <span className="text-[10px] font-bold text-amber-500 bg-amber-500/10 px-2 py-0.2 rounded-full border border-amber-500/20">{localizeText("22-Key 2FA")}</span>
                 </h3>
-                <p className="text-[11px] text-muted-foreground">
-                  Yalnızca size özel 22 haneli master şifre koruması
-                </p>
+                <p className="text-[11px] text-muted-foreground">{localizeText("Yalnızca size özel 22 haneli master şifre koruması")}</p>
               </div>
             </div>
 
@@ -123,23 +121,21 @@ export function AdminKeyUnlockModal({
                 <CheckCircle2 className="h-8 w-8" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-foreground">Kasa Kilidi Açıldı</h4>
-                <p className="text-xs text-muted-foreground mt-0.5">Yönetim paneline yönlendiriliyorsunuz...</p>
+                <h4 className="text-sm font-bold text-foreground">{localizeText("Kasa Kilidi Açıldı")}</h4>
+                <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Yönetim paneline yönlendiriliyorsunuz...")}</p>
               </div>
             </div>
           ) : (
             <form onSubmit={handleVerify} className="space-y-4">
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs">
-                  <label className="font-bold text-foreground">
-                    22 Haneli Master Anahtar:
-                  </label>
+                  <label className="font-bold text-foreground">{localizeText("22 Haneli Master Anahtar:")}</label>
                   <span
                     className={`font-mono text-[11px] font-bold ${
                       currentLength === 22 ? 'text-emerald-500' : 'text-muted-foreground'
                     }`}
                   >
-                    {currentLength} / 22
+                    {localizeText(currentLength)} / 22
                   </span>
                 </div>
 
@@ -151,7 +147,7 @@ export function AdminKeyUnlockModal({
                       setSecurityKey(e.target.value);
                       setErrorMessage(null);
                     }}
-                    placeholder="LIFEOS-ADMIN-2026-KEY22"
+                    placeholder={localizeText("LIFEOS-ADMIN-2026-KEY22")}
                     maxLength={32}
                     autoFocus
                     required
@@ -161,7 +157,7 @@ export function AdminKeyUnlockModal({
                     type="button"
                     onClick={() => setShowKey(!showKey)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                    title={showKey ? 'Gizle' : 'Göster'}
+                    title={localizeText(showKey ? 'Gizle' : 'Göster')}
                   >
                     {showKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
@@ -172,7 +168,7 @@ export function AdminKeyUnlockModal({
               {errorMessage && (
                 <div className="p-3 rounded-2xl bg-destructive/10 border border-destructive/20 text-xs text-destructive flex items-start gap-2">
                   <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
-                  <span className="leading-snug">{errorMessage}</span>
+                  <span className="leading-snug">{localizeText(errorMessage)}</span>
                 </div>
               )}
 
@@ -180,11 +176,9 @@ export function AdminKeyUnlockModal({
               <div className="p-3 rounded-2xl bg-muted/40 border border-border/50 text-[11px] text-muted-foreground space-y-1">
                 <div className="flex items-center gap-1.5 font-semibold text-foreground">
                   <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-                  <span>Kriptografik Koruma & İki Aşamalı Kilit</span>
+                  <span>{localizeText("Kriptografik Koruma & İki Aşamalı Kilit")}</span>
                 </div>
-                <p>
-                  Yönetim panelindeki hassas onay ve kullanıcı kısıtlama yetkileri bu anahtar doğrulanmadan çalıştırılamaz.
-                </p>
+                <p>{localizeText("Yönetim panelindeki hassas onay ve kullanıcı kısıtlama yetkileri bu anahtar doğrulanmadan çalıştırılamaz.")}</p>
               </div>
 
               {/* Action Buttons */}
@@ -195,9 +189,7 @@ export function AdminKeyUnlockModal({
                   size="sm"
                   onClick={onClose}
                   className="text-xs"
-                >
-                  Vazgeç
-                </Button>
+                >{localizeText("Vazgeç")}</Button>
                 <Button
                   type="submit"
                   variant="primary"
@@ -205,7 +197,7 @@ export function AdminKeyUnlockModal({
                   disabled={isLoading || !securityKey.trim()}
                   className="h-10 px-5 text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white shadow-md shadow-amber-500/20"
                 >
-                  {isLoading ? 'Doğrulanıyor...' : 'Kilidi Aç & Panele Gir'}
+                  {localizeText(isLoading ? 'Doğrulanıyor...' : 'Kilidi Aç & Panele Gir')}
                 </Button>
               </div>
             </form>

@@ -30,8 +30,10 @@ import { useProviderAuthStore } from '@/stores/useProviderAuthStore';
 import { MOVING_STATUS_LABELS, type MovingRequest } from '@/types/moving';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 export function MovingScreen() {
+  const localizeText = useLocaleRender();
   const {
     currentRole,
     config,
@@ -73,17 +75,17 @@ export function MovingScreen() {
             <div className="flex-1 pr-2">
               <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                 <ShieldCheck className="h-3.5 w-3.5" />
-                <span>Gizli Teklif & Güvenli Nakliye</span>
+                <span>{localizeText("Gizli Teklif & Güvenli Nakliye")}</span>
               </div>
               <h2 className="mt-1 text-base font-bold text-foreground">
-                {currentRole === 'customer'
+                {localizeText(currentRole === 'customer'
                   ? 'Taşıma Talepleri & Teklif Yönetimi'
-                  : 'Nakliyeci Pazar Yeri & Açık İlanlar'}
+                  : 'Nakliyeci Pazar Yeri & Açık İlanlar')}
               </h2>
               <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                {currentRole === 'customer'
+                {localizeText(currentRole === 'customer'
                   ? 'Taşıma talebinizi oluşturun, onaylı taşıyıcılardan fiyat toplayın. Numaranız ve açık adresiniz gizli tutulur.'
-                  : 'Açık taşıma ilanlarını inceleyin, doğrudan fiyat teklifi iletin. Diğer nakliyecilerin teklifleri gizlidir.'}
+                  : 'Açık taşıma ilanlarını inceleyin, doğrudan fiyat teklifi iletin. Diğer nakliyecilerin teklifleri gizlidir.')}
               </p>
             </div>
             <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-emerald-500/15 text-2xl shadow-sm">
@@ -94,12 +96,12 @@ export function MovingScreen() {
           <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-border/40">
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-              <span>Numara Gizleme Garantisi</span>
+              <span>{localizeText("Numara Gizleme Garantisi")}</span>
             </div>
             <span className="text-muted-foreground/40">•</span>
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <Coins className="h-3.5 w-3.5 text-amber-500" />
-              <span>Teklif Kredisi: {config.bidCreditFee} {config.currency}</span>
+              <span>{localizeText("Teklif Kredisi: ")}{localizeText(config.bidCreditFee)} {localizeText(config.currency)}</span>
             </div>
           </div>
         </motion.div>
@@ -122,12 +124,8 @@ export function MovingScreen() {
                       <PackagePlus className="h-6 w-6" />
                     </div>
                     <div>
-                      <h3 className="text-base font-bold text-foreground">
-                        Taşıma Talebi Oluştur
-                      </h3>
-                      <p className="text-xs text-muted-foreground">
-                        Evden eve, parça eşya veya şehirlerarası
-                      </p>
+                      <h3 className="text-base font-bold text-foreground">{localizeText("Taşıma Talebi Oluştur")}</h3>
+                      <p className="text-xs text-muted-foreground">{localizeText("Evden eve, parça eşya veya şehirlerarası")}</p>
                     </div>
                   </div>
                   <Button
@@ -135,9 +133,7 @@ export function MovingScreen() {
                     size="sm"
                     className="rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs shadow-md shadow-emerald-500/20"
                   >
-                    <Plus className="h-3.5 w-3.5 mr-1" />
-                    Yeni Talep
-                  </Button>
+                    <Plus className="h-3.5 w-3.5 mr-1" />{localizeText("Yeni Talep")}</Button>
                 </div>
               </motion.div>
             </div>
@@ -145,12 +141,9 @@ export function MovingScreen() {
             {/* 2. My Requests Section */}
             <div className="px-4">
               <div className="mb-3 px-2 flex items-center justify-between">
-                <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  Taleplerim & Gelen Teklifler
-                </h2>
+                <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Taleplerim & Gelen Teklifler")}</h2>
                 <span className="text-[11px] font-medium text-emerald-500">
-                  {deduplicatedMyRequests.length} Talep
-                </span>
+                  {localizeText(deduplicatedMyRequests.length)}{localizeText(" Talep")}</span>
               </div>
 
               {deduplicatedMyRequests.length === 0 ? (
@@ -158,12 +151,8 @@ export function MovingScreen() {
                   <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
                     <Inbox className="h-6 w-6" />
                   </div>
-                  <h4 className="text-sm font-semibold text-foreground">
-                    Henüz Bir Taşıma Talebiniz Yok
-                  </h4>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Yukarıdaki butona basarak ilk taşıma talebinizi anonim olarak yayınlayabilirsiniz.
-                  </p>
+                  <h4 className="text-sm font-semibold text-foreground">{localizeText("Henüz Bir Taşıma Talebiniz Yok")}</h4>
+                  <p className="mt-1 text-xs text-muted-foreground">{localizeText("Yukarıdaki butona basarak ilk taşıma talebinizi anonim olarak yayınlayabilirsiniz.")}</p>
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -181,34 +170,33 @@ export function MovingScreen() {
                           <div>
                             <div className="flex items-center gap-2">
                               <span className="font-mono text-xs font-semibold text-emerald-500">
-                                #{req.id}
+                                #{localizeText(req.id)}
                               </span>
                               <Badge variant={statusInfo.badgeVariant} className="text-[10px] py-0 px-2">
-                                {statusInfo.tr}
+                                {localizeText(statusInfo.tr)}
                               </Badge>
                             </div>
                             <h3 className="text-sm font-bold text-foreground mt-1">
-                              {req.fromCity} → {req.toCity}
+                              {localizeText(req.fromCity)} → {localizeText(req.toCity)}
                             </h3>
                             <p className="mt-1 text-xs text-muted-foreground line-clamp-1">
-                              {req.loadDescription}
+                              {localizeText(req.loadDescription)}
                             </p>
                           </div>
 
                           <div className="text-right">
                             <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                              {reqBids.length} Teklif
-                            </span>
+                              {localizeText(reqBids.length)}{localizeText(" Teklif")}</span>
                           </div>
                         </div>
 
                         <div className="mt-3 pt-2.5 border-t border-border/40 flex items-center justify-between text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <Calendar className="h-3.5 w-3.5" />
-                            {req.requestedDate}
+                            {localizeText(req.requestedDate)}
                           </span>
                           <span className="font-semibold text-emerald-500 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                            <span>Detayları ve Teklifleri Gör</span>
+                            <span>{localizeText("Detayları ve Teklifleri Gör")}</span>
                             <ChevronRight className="h-3.5 w-3.5" />
                           </span>
                         </div>
@@ -235,18 +223,13 @@ export function MovingScreen() {
                 {/* Open Marketplace Requests */}
                 <div>
                   <div className="mb-3 px-2 flex items-center justify-between">
-                    <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      Açık Taşıma İlanları (Pazar Yeri)
-                    </h2>
+                    <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Açık Taşıma İlanları (Pazar Yeri)")}</h2>
                     <span className="text-[11px] font-medium text-emerald-500">
-                      {providerMarketplaceRequests.length} İlan
-                    </span>
+                      {localizeText(providerMarketplaceRequests.length)}{localizeText(" İlan")}</span>
                   </div>
 
                   {providerMarketplaceRequests.length === 0 ? (
-                    <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">
-                      Şu anda teklif verilebilecek açık ilan bulunmuyor.
-                    </div>
+                    <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">{localizeText("Şu anda teklif verilebilecek açık ilan bulunmuyor.")}</div>
                   ) : (
                     <div className="space-y-3">
                       {providerMarketplaceRequests.map((req) => {
@@ -262,44 +245,40 @@ export function MovingScreen() {
                             <div className="flex items-start justify-between gap-2">
                               <div>
                                 <div className="flex items-center gap-2">
-                                  <span className="font-mono text-xs font-semibold text-emerald-500">
-                                    İlan #{req.id}
+                                  <span className="font-mono text-xs font-semibold text-emerald-500">{localizeText("İlan #")}{localizeText(req.id)}
                                   </span>
                                   <Badge variant={statusInfo.badgeVariant} className="text-[10px] py-0 px-2">
-                                    {statusInfo.tr}
+                                    {localizeText(statusInfo.tr)}
                                   </Badge>
                                 </div>
                                 <h3 className="text-sm font-bold text-foreground mt-1 group-hover:text-emerald-500 transition-colors">
-                                  {req.fromCity} → {req.toCity}
+                                  {localizeText(req.fromCity)} → {localizeText(req.toCity)}
                                 </h3>
                               </div>
 
                               {hasGivenBid && (
-                                <span className="rounded-full bg-blue-500/15 px-2.5 py-0.5 text-[10px] font-semibold text-blue-500">
-                                  Teklifiniz Var
-                                </span>
+                                <span className="rounded-full bg-blue-500/15 px-2.5 py-0.5 text-[10px] font-semibold text-blue-500">{localizeText("Teklifiniz Var")}</span>
                               )}
                             </div>
 
                             {/* Load info - NO customer personal details */}
                             <p className="mt-2 text-xs text-muted-foreground bg-muted/30 p-2.5 rounded-xl leading-relaxed line-clamp-2">
-                              📦 {req.loadDescription}
+                              📦 {localizeText(req.loadDescription)}
                             </p>
 
                             <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground">
                               <span className="flex items-center gap-1">
                                 <Calendar className="h-3.5 w-3.5" />
-                                {req.requestedDate}
+                                {localizeText(req.requestedDate)}
                               </span>
                               {req.notes && (
-                                <span className="line-clamp-1">Not: {req.notes}</span>
+                                <span className="line-clamp-1">{localizeText("Not: ")}{localizeText(req.notes)}</span>
                               )}
                             </div>
 
                             {/* Submit Bid Button */}
                             <div className="mt-3.5 pt-2.5 border-t border-border/40 flex items-center justify-between">
-                              <span className="text-[11px] text-muted-foreground">
-                                Kredi: <strong className="text-foreground">{config.bidCreditFee} {config.currency}</strong>
+                              <span className="text-[11px] text-muted-foreground">{localizeText("Kredi:")}<strong className="text-foreground">{localizeText(config.bidCreditFee)} {localizeText(config.currency)}</strong>
                               </span>
                               <Button
                                 onClick={(e) => {
@@ -309,7 +288,7 @@ export function MovingScreen() {
                                 size="sm"
                                 className="rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs shadow-sm"
                               >
-                                {hasGivenBid ? 'Teklifi Düzenle' : 'Fiyat Teklifi Ver'}
+                                {localizeText(hasGivenBid ? 'Teklifi Düzenle' : 'Fiyat Teklifi Ver')}
                               </Button>
                             </div>
                           </div>
@@ -322,18 +301,13 @@ export function MovingScreen() {
                 {/* My Submitted Bids */}
                 <div>
                   <div className="mb-3 px-2 flex items-center justify-between">
-                    <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      Verdiğim Teklifler ({myBids.length})
+                    <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Verdiğim Teklifler (")}{localizeText(myBids.length)})
                     </h2>
-                    <span className="text-[11px] font-medium text-muted-foreground">
-                      Sadece Sizin Teklifleriniz
-                    </span>
+                    <span className="text-[11px] font-medium text-muted-foreground">{localizeText("Sadece Sizin Teklifleriniz")}</span>
                   </div>
 
                   {myBids.length === 0 ? (
-                    <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">
-                      Henüz bir ilana teklif vermediniz.
-                    </div>
+                    <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">{localizeText("Henüz bir ilana teklif vermediniz.")}</div>
                   ) : (
                     <div className="space-y-2.5">
                       {myBids.map((bid) => (
@@ -342,19 +316,17 @@ export function MovingScreen() {
                           className="rounded-2xl border border-border/80 bg-card p-3.5 text-xs flex items-center justify-between shadow-sm"
                         >
                           <div>
-                            <div className="font-semibold text-foreground">
-                              Talep #{bid.requestId} için Teklifiniz
-                            </div>
+                            <div className="font-semibold text-foreground">{localizeText("Talep #")}{localizeText(bid.requestId)}{localizeText(" için Teklifiniz")}</div>
                             <div className="text-[11px] text-muted-foreground mt-0.5">
-                              "{bid.bidNote}"
+                              "{localizeText(bid.bidNote)}"
                             </div>
                           </div>
                           <div className="text-right">
                             <div className="font-bold text-sm text-emerald-500">
-                              {bid.price.toLocaleString('tr-TR')} {bid.currency}
+                              {localizeText(bid.price.toLocaleString(getFormattingLocale()))} {localizeText(bid.currency)}
                             </div>
                             <span className="text-[10px] text-muted-foreground">
-                              {bid.status === 'accepted' ? '✓ Kabul Edildi' : 'Beklemede'}
+                              {localizeText(bid.status === 'accepted' ? '✓ Kabul Edildi' : 'Beklemede')}
                             </span>
                           </div>
                         </div>

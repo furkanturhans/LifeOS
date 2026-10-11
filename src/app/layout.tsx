@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { MobileProvider } from '@/components/providers/MobileProvider';
+import { LocaleProvider } from '@/components/providers/LocaleProvider';
+import { LayoutSyncProvider } from '@/components/providers/LayoutSyncProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,8 +28,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
   viewportFit: 'cover',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#f7f7fa' },
@@ -41,7 +41,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="h-full font-sans antialiased no-select overflow-hidden">
         <ThemeProvider>
           <MobileProvider>
-            {children}
+            <LocaleProvider>
+              <LayoutSyncProvider>{children}</LayoutSyncProvider>
+            </LocaleProvider>
           </MobileProvider>
         </ThemeProvider>
       </body>

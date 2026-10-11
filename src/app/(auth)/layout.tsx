@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'LifeOS — Giriş',
+  title: 'LifeOS',
 };
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {

@@ -11,8 +11,10 @@ import { AchievementsView } from './AchievementsView';
 import { LeaderboardView } from './LeaderboardView';
 import { Dock } from '@/components/os/Dock';
 import { useArcadeStore } from '@/stores/useArcadeStore';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function ArcadeScreen() {
+  const localizeText = useLocaleRender();
   const { activeSection, setActiveSection, setActiveGameId } = useArcadeStore();
 
   function handleFeatureClick(feature: ArcadeFeatureCardConfig) {
@@ -84,14 +86,10 @@ export function ArcadeScreen() {
             <div className="flex-1 pr-2">
               <div className="flex items-center gap-1.5 text-xs font-semibold text-rose-500">
                 <Zap className="h-3.5 w-3.5" />
-                <span>LifeOS Arcade Merkezi</span>
+                <span>{localizeText("LifeOS Arcade Merkezi")}</span>
               </div>
-              <h2 className="mt-1 text-base font-bold text-foreground">
-                Eğlence ve Zeka Molası
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                Kısa günlük molalar, zeka bulmacaları ve eğlenceli mini oyunlar. Cihazınızda hızlı, temiz ve reklamsız bir deneyim.
-              </p>
+              <h2 className="mt-1 text-base font-bold text-foreground">{localizeText("Eğlence ve Zeka Molası")}</h2>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{localizeText("Kısa günlük molalar, zeka bulmacaları ve eğlenceli mini oyunlar. Cihazınızda hızlı, temiz ve reklamsız bir deneyim.")}</p>
             </div>
             <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-rose-500/15 text-2xl shadow-sm">
               🎯
@@ -101,12 +99,12 @@ export function ArcadeScreen() {
           <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-border/40">
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <ShieldCheck className="h-3.5 w-3.5 text-rose-500" />
-              <span>Reklamsız & Güvenli</span>
+              <span>{localizeText("Reklamsız & Güvenli")}</span>
             </div>
             <span className="text-muted-foreground/40">•</span>
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-pink-500" />
-              <span>Çevrimdışı Çalışma</span>
+              <span>{localizeText("Çevrimdışı Çalışma")}</span>
             </div>
           </div>
         </motion.div>

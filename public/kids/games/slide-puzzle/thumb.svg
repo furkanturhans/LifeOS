@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="320" height="180">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c4470"/>
+      <stop offset="1" stop-color="#1b2a4a"/>
+    </linearGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff7e6"/>
+      <stop offset="1" stop-color="#ffe7a8"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" fill="url(#bg)"/>
+  <rect x="0.5" y="0.5" width="319" height="179" fill="none" stroke="rgba(255,255,255,0.08)"/>
+
+  <!-- 3x3 슬라이딩 퍼즐 미니어처 (좌측) -->
+  <g transform="translate(28,34)">
+    <rect x="-8" y="-8" width="128" height="128" rx="14" fill="rgba(0,0,0,0.25)"/>
+    <!-- 8 tiles + 1 empty (bottom-right) -->
+    <g font-family="'Pretendard','Noto Sans KR',sans-serif" font-size="22" text-anchor="middle">
+      <!-- row 1 -->
+      <rect x="0"  y="0"  width="36" height="36" rx="8" fill="url(#tile)"/>
+      <rect x="40" y="0"  width="36" height="36" rx="8" fill="url(#tile)"/>
+      <rect x="80" y="0"  width="36" height="36" rx="8" fill="url(#tile)"/>
+      <!-- row 2 -->
+      <rect x="0"  y="40" width="36" height="36" rx="8" fill="url(#tile)"/>
+      <rect x="40" y="40" width="36" height="36" rx="8" fill="url(#tile)"/>
+      <rect x="80" y="40" width="36" height="36" rx="8" fill="url(#tile)"/>
+      <!-- row 3 -->
+      <rect x="0"  y="80" width="36" height="36" rx="8" fill="url(#tile)"/>
+      <rect x="40" y="80" width="36" height="36" rx="8" fill="url(#tile)"/>
+      <!-- empty slot -->
+      <rect x="80" y="80" width="36" height="36" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" stroke-dasharray="4 3"/>
+    </g>
+    <!-- slide arrow hint -->
+    
+  </g>
+
+  <!-- 타이틀 (우하단) -->
+  <g font-family="'Pretendard','Noto Sans KR',sans-serif">
+    
+    
+  </g>
+</svg>

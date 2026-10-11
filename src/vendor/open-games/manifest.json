@@ -1,0 +1,147 @@
+{
+  "repository": "https://github.com/hajunho/zeli-web-games",
+  "commit": "ba9938eb222cb588ae7b0a6056ba6bdda89dcd9c",
+  "license": "Apache-2.0",
+  "games": [
+    {
+      "id": "snake",
+      "source": "arcade/Snake",
+      "title": "Yılan",
+      "emoji": "🐍",
+      "category": "reflex"
+    },
+    {
+      "id": "breakout",
+      "source": "arcade/Breakout",
+      "title": "Tuğla Kırma",
+      "emoji": "🧱",
+      "category": "reflex"
+    },
+    {
+      "id": "runner",
+      "source": "arcade/JumpRunner",
+      "title": "Sonsuz Koşu",
+      "emoji": "🏃",
+      "category": "reflex"
+    },
+    {
+      "id": "jelly",
+      "source": "arcade/FlappyJelly",
+      "title": "Uçan Denizanası",
+      "emoji": "🪼",
+      "category": "reflex"
+    },
+    {
+      "id": "pong",
+      "source": "arcade/PingPong",
+      "title": "Masa Tenisi",
+      "emoji": "🏓",
+      "category": "sports"
+    },
+    {
+      "id": "space",
+      "source": "arcade/SpaceInvader",
+      "title": "Uzay Savunması",
+      "emoji": "🚀",
+      "category": "reflex"
+    },
+    {
+      "id": "2048",
+      "source": "puzzle/Game2048",
+      "title": "2048",
+      "emoji": "🔢",
+      "category": "puzzle"
+    },
+    {
+      "id": "match3",
+      "source": "puzzle/Match3",
+      "title": "Mücevher Eşleştirme",
+      "emoji": "💎",
+      "category": "puzzle"
+    },
+    {
+      "id": "mines",
+      "source": "puzzle/Minesweeper",
+      "title": "Mayın Tarlası",
+      "emoji": "💣",
+      "category": "puzzle"
+    },
+    {
+      "id": "slide",
+      "source": "puzzle/SlidePuzzle",
+      "title": "Kaydırmalı Bulmaca",
+      "emoji": "🧩",
+      "category": "puzzle"
+    },
+    {
+      "id": "sokoban",
+      "source": "puzzle/Sokoban",
+      "title": "Kutu İtme",
+      "emoji": "📦",
+      "category": "puzzle"
+    },
+    {
+      "id": "lights",
+      "source": "puzzle/LightsOut",
+      "title": "Işıkları Söndür",
+      "emoji": "💡",
+      "category": "puzzle"
+    },
+    {
+      "id": "colors",
+      "source": "puzzle/ColorSort",
+      "title": "Renk Sıralama",
+      "emoji": "🧪",
+      "category": "puzzle"
+    },
+    {
+      "id": "hanoi",
+      "source": "puzzle/HanoiTower",
+      "title": "Hanoi Kuleleri",
+      "emoji": "🗼",
+      "category": "puzzle"
+    },
+    {
+      "id": "memory",
+      "source": "cards/MemoryMatch",
+      "title": "Hafıza Eşleştirme",
+      "emoji": "🃏",
+      "category": "puzzle"
+    },
+    {
+      "id": "four",
+      "source": "cards/ConnectFour",
+      "title": "Dörtlü Bağlantı",
+      "emoji": "🔴",
+      "category": "strategy"
+    },
+    {
+      "id": "reversi",
+      "source": "cards/Othello",
+      "title": "Reversi",
+      "emoji": "⚫",
+      "category": "strategy"
+    },
+    {
+      "id": "towers",
+      "source": "strategy/TowerDefense",
+      "title": "Kule Savunması",
+      "emoji": "🏰",
+      "category": "strategy"
+    },
+    {
+      "id": "basket",
+      "source": "sports/BasketballShoot",
+      "title": "Basket Atışı",
+      "emoji": "🏀",
+      "category": "sports"
+    },
+    {
+      "id": "archery",
+      "source": "sports/ArcheryGame",
+      "title": "Okçuluk",
+      "emoji": "🏹",
+      "category": "sports"
+    }
+  ]
+}

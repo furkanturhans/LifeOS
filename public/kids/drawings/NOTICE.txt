@@ -1,0 +1,1 @@
+Google Noto Emoji image resources. Copyright 2013 Google, Inc. Apache License 2.0. Adapted by LifeOS: original colors and gradients replaced by monochrome outlines. Source https://github.com/googlefonts/noto-emoji/tree/main/2D/svg. Original tracing pages: LifeOS.

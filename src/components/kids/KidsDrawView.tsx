@@ -17,6 +17,7 @@ import { Card } from '@/components/ui/Card';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { kidsSpeech } from '@/services/kidsSpeechService';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 const COLORS = [
   '#ef4444', // Red
@@ -33,6 +34,7 @@ const COLORS = [
 const STICKERS = ['⭐', '🐱', '🚀', '🌈', '👑', '🎈', '🌸', '🦖', '⚽'];
 
 export function KidsDrawView({ onBackToKids }: { onBackToKids: () => void }) {
+  const localizeText = useLocaleRender();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [color, setColor] = useState('#3b82f6');
   const [brushSize, setBrushSize] = useState(6);
@@ -126,7 +128,7 @@ export function KidsDrawView({ onBackToKids }: { onBackToKids: () => void }) {
             type="button"
             onClick={onBackToKids}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Kids Hub'a Dön"
+            aria-label={localizeText("Kids Hub'a Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -137,14 +139,10 @@ export function KidsDrawView({ onBackToKids }: { onBackToKids: () => void }) {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Çizim & Yaratıcılık
-              </h1>
-              <StatusBadge status="verified" label="Resim Defteri" size="sm" />
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Çizim & Yaratıcılık")}</h1>
+              <StatusBadge status="verified" label={localizeText("Resim Defteri")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Renkli fırçalar, eğlenceli çıkartmalar ve sınırsız tuval
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Renkli fırçalar, eğlenceli çıkartmalar ve sınırsız tuval")}</p>
           </div>
         </div>
 
@@ -158,28 +156,25 @@ export function KidsDrawView({ onBackToKids }: { onBackToKids: () => void }) {
               )
             }
             className="h-8 text-xs font-semibold px-2.5 border-teal-500/30 text-teal-600 dark:text-teal-400 bg-teal-500/10 hover:bg-teal-500/20"
-            title="Sesli Rehber"
+            title={localizeText("Sesli Rehber")}
           >
-            <Volume2 className="h-3.5 w-3.5 mr-1" /> Dinle
-          </Button>
+            <Volume2 className="h-3.5 w-3.5 mr-1" />{localizeText("Dinle")}</Button>
           <Button
             variant="outline"
             size="sm"
             onClick={clearCanvas}
             className="h-8 text-xs font-semibold px-2.5"
-            title="Tuvali Temizle"
+            title={localizeText("Tuvali Temizle")}
           >
-            <RotateCcw className="h-3.5 w-3.5 mr-1" /> Temizle
-          </Button>
+            <RotateCcw className="h-3.5 w-3.5 mr-1" />{localizeText("Temizle")}</Button>
           <Button
             variant="primary"
             size="sm"
             onClick={downloadCanvas}
             className="h-8 text-xs font-bold px-3 bg-teal-500 hover:bg-teal-600 border-none text-white shadow-xs"
-            title="Resmi Kaydet"
+            title={localizeText("Resmi Kaydet")}
           >
-            <Download className="h-3.5 w-3.5 mr-1" /> Kaydet
-          </Button>
+            <Download className="h-3.5 w-3.5 mr-1" />{localizeText("Kaydet")}</Button>
         </div>
       </div>
 
@@ -237,8 +232,7 @@ export function KidsDrawView({ onBackToKids }: { onBackToKids: () => void }) {
                     : 'bg-muted text-muted-foreground border-border'
                 )}
               >
-                <Eraser className="h-3.5 w-3.5" /> Silgi
-              </button>
+                <Eraser className="h-3.5 w-3.5" />{localizeText("Silgi")}</button>
 
               {/* Brush size buttons */}
               {[4, 8, 16].map((size) => (
@@ -264,8 +258,7 @@ export function KidsDrawView({ onBackToKids }: { onBackToKids: () => void }) {
           {/* Stickers Row */}
           <div className="flex items-center gap-1.5 pt-1 border-t border-border/40 overflow-x-auto no-scrollbar">
             <span className="text-[11px] font-bold text-muted-foreground flex items-center gap-1 shrink-0 mr-1">
-              <Smile className="h-3.5 w-3.5 text-teal-500" /> Çıkartmalar:
-            </span>
+              <Smile className="h-3.5 w-3.5 text-teal-500" />{localizeText("Çıkartmalar:")}</span>
             {STICKERS.map((s) => (
               <button
                 key={s}
@@ -280,7 +273,7 @@ export function KidsDrawView({ onBackToKids }: { onBackToKids: () => void }) {
                     : 'bg-muted/40 border-border hover:bg-muted'
                 )}
               >
-                {s}
+                {localizeText(s)}
               </button>
             ))}
           </div>

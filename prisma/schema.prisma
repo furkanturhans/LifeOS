@@ -31,6 +31,25 @@ model User {
   subscription Subscription?
   sessions     UserSession[]
   auditLogs    AuditLog[]
+  exploreProfiles ExploreProfile[]
+  academyClasses AcademyClass[]
+  academyMemberships AcademyMember[]
+  academyNotes AcademyNote[]
+  academyPosts AcademyPost[]
+  academyReplies AcademyReply[]
+  academyAttempts AcademyAttempt[]
+  creditAccount CreditAccount?
+  creditPurchases CreditPurchase[]
+  professionApplications ProfessionApplication[]
+  serviceRequests ServiceRequest[]
+  serviceUnlocks ServiceUnlock[]
+  creditEntries CreditEntry[]
+  taxiPasses TaxiPass[]
+  lifechatMembers LifechatMember[]
+  lifechatMessages LifechatMessage[]
+  travelCompanies TravelCompany[]
+  travelReservations TravelReservation[]
+  taxiLocation TaxiLocation?
 
   @@map("users")
 }
@@ -128,6 +147,56 @@ model AuditLog {
   @@map("audit_logs")
 }
 
+model ExploreProfile {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  slot Int @default(0)
+  createdAt DateTime @default(now())
+  posts ExplorePost[]
+  likes ExploreLike[]
+  comments ExploreComment[]
+  @@unique([userId, slot])
+  @@map("explore_profiles")
+}
+
+model ExplorePost {
+  id String @id @default(cuid())
+  profileId String
+  profile ExploreProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  text String @db.VarChar(2000)
+  kind String @default("post")
+  mediaPath String?
+  mediaType String?
+  createdAt DateTime @default(now())
+  deletedAt DateTime?
+  likes ExploreLike[]
+  comments ExploreComment[]
+  @@index([createdAt, id])
+  @@map("explore_posts")
+}
+
+model ExploreLike {
+  postId String
+  profileId String
+  post ExplorePost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  profile ExploreProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  @@id([postId, profileId])
+  @@map("explore_likes")
+}
+
+model ExploreComment {
+  id String @id @default(cuid())
+  postId String
+  profileId String
+  post ExplorePost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  profile ExploreProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  text String @db.VarChar(500)
+  createdAt DateTime @default(now())
+  @@index([postId, createdAt])
+  @@map("explore_comments")
+}
+
 enum ModuleStatus {
   ACTIVE
   COMING_SOON
@@ -145,4 +214,333 @@ enum SubscriptionStatus {
   ACTIVE
   EXPIRED
   CANCELLED
+}
+
+model AcademyClass {
+  id String @id @default(cuid())
+  ownerId String
+  owner User @relation(fields: [ownerId], references: [id])
+  title String @db.VarChar(120)
+  subject String @db.VarChar(80)
+  description String @db.VarChar(2000)
+  mode String @default("online")
+  location String @db.VarChar(250)
+  capacity Int @default(24)
+  dailyMilli Int
+  monthlyMilli Int
+  archived Boolean @default(false)
+  meetingId String?
+  attendeePassword String?
+  moderatorPassword String?
+  members AcademyMember[]
+  exams AcademyExam[]
+  notes AcademyNote[]
+  posts AcademyPost[]
+  charges AcademyCharge[]
+  createdAt DateTime @default(now())
+  @@index([archived, createdAt])
+  @@map("academy_classes")
+}
+
+model AcademyMember {
+  id String @id @default(cuid())
+  classId String
+  classroom AcademyClass @relation(fields: [classId], references: [id])
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  seat Int?
+  plan String
+  expiresAt DateTime
+  physicalRegistration Boolean @default(false)
+  createdAt DateTime @default(now())
+  @@unique([classId, userId])
+  @@unique([classId, seat])
+  @@map("academy_members")
+}
+
+model CreditAccount {
+  userId String @id
+  user User @relation(fields: [userId], references: [id])
+  balanceMilli BigInt @default(0)
+  updatedAt DateTime @updatedAt
+  @@map("credit_accounts")
+}
+
+model AcademyCharge {
+  id String @id @default(cuid())
+  key String @unique
+  classId String
+  classroom AcademyClass @relation(fields: [classId], references: [id])
+  studentId String
+  teacherId String
+  grossMilli Int
+  teacherMilli Int
+  commissionMilli Int
+  plan String
+  createdAt DateTime @default(now())
+  @@index([studentId, createdAt])
+  @@index([teacherId, createdAt])
+  @@map("academy_charges")
+}
+
+model CreditPurchase {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  credits Int
+  baseKurus Int
+  commissionKurus Int
+  totalKurus Int
+  status String @default("pending")
+  providerReference String? @unique
+  createdAt DateTime @default(now())
+  @@map("credit_purchases")
+}
+
+model AcademyNote {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  classId String?
+  classroom AcademyClass? @relation(fields: [classId], references: [id])
+  title String @db.VarChar(120)
+  content String @db.VarChar(20000)
+  updatedAt DateTime @updatedAt
+  @@index([userId, updatedAt])
+  @@map("academy_notes")
+}
+
+model AcademyPost {
+  id String @id @default(cuid())
+  authorId String
+  author User @relation(fields: [authorId], references: [id])
+  classId String?
+  classroom AcademyClass? @relation(fields: [classId], references: [id])
+  kind String
+  audience String @default("all")
+  title String @db.VarChar(120)
+  content String @db.VarChar(20000)
+  replies AcademyReply[]
+  createdAt DateTime @default(now())
+  @@index([kind, createdAt])
+  @@map("academy_posts")
+}
+
+model AcademyReply {
+  id String @id @default(cuid())
+  postId String
+  post AcademyPost @relation(fields: [postId], references: [id])
+  authorId String
+  author User @relation(fields: [authorId], references: [id])
+  content String @db.VarChar(4000)
+  createdAt DateTime @default(now())
+  @@index([postId, createdAt])
+  @@map("academy_replies")
+}
+
+model AcademyExam {
+  id String @id @default(cuid())
+  classId String
+  classroom AcademyClass @relation(fields: [classId], references: [id])
+  title String @db.VarChar(120)
+  durationMinutes Int
+  opensAt DateTime
+  closesAt DateTime
+  questions Json
+  attempts AcademyAttempt[]
+  createdAt DateTime @default(now())
+  @@index([classId, opensAt])
+  @@map("academy_exams")
+}
+
+model AcademyAttempt {
+  id String @id @default(cuid())
+  examId String
+  exam AcademyExam @relation(fields: [examId], references: [id])
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  answers Json @default("{}")
+  startedAt DateTime @default(now())
+  deadline DateTime
+  submittedAt DateTime?
+  score Int?
+  @@unique([examId, userId])
+  @@map("academy_attempts")
+}
+
+model ProfessionApplication {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profession String
+  specialty String
+  legalName String @db.VarChar(120)
+  region String @db.VarChar(120)
+  vehiclePlate String? @db.VarChar(30)
+  vehicleModel String? @db.VarChar(120)
+  status String @default("pending")
+  documentPaths String[]
+  validUntil DateTime?
+  reviewNote String? @db.VarChar(1000)
+  reviewedBy String?
+  reviewedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([userId, profession, specialty])
+  @@map("profession_applications")
+}
+
+model ServiceRequest {
+  id String @id @default(cuid())
+  ownerId String
+  owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  kind String
+  specialty String
+  title String @db.VarChar(120)
+  description String @db.VarChar(4000)
+  region String @db.VarChar(120)
+  address String @db.VarChar(500)
+  destination String? @db.VarChar(500)
+  phone String? @db.VarChar(30)
+  latitude Float?
+  longitude Float?
+  scheduledAt DateTime
+  status String @default("open")
+  acceptedUnlockId String?
+  unlocks ServiceUnlock[]
+  createdAt DateTime @default(now())
+  @@index([kind, status, createdAt])
+  @@map("service_requests")
+}
+
+model TaxiLocation {
+  userId String @id
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  latitude Float
+  longitude Float
+  online Boolean @default(false)
+  updatedAt DateTime @updatedAt
+  @@map("taxi_locations")
+}
+
+model ServiceUnlock {
+  id String @id @default(cuid())
+  requestId String
+  request ServiceRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  providerId String
+  provider User @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  feeMilli Int
+  offerKurus Int
+  note String @db.VarChar(2000)
+  createdAt DateTime @default(now())
+  @@unique([requestId, providerId])
+  @@map("service_unlocks")
+}
+
+model CreditEntry {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  key String @unique
+  amountMilli BigInt
+  kind String
+  referenceId String
+  createdAt DateTime @default(now())
+  @@index([userId, createdAt])
+  @@map("credit_entries")
+}
+
+model TaxiPass {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  @@index([userId, expiresAt])
+  @@map("taxi_passes")
+}
+
+model LifechatThread {
+  id String @id @default(cuid())
+  key String @unique
+  kind String
+  referenceId String?
+  title String @db.VarChar(160)
+  members LifechatMember[]
+  messages LifechatMessage[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("lifechat_threads")
+}
+
+model LifechatMember {
+  threadId String
+  thread LifechatThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  muted Boolean @default(false)
+  archived Boolean @default(false)
+  readAt DateTime @default(now())
+  @@id([threadId, userId])
+  @@map("lifechat_members")
+}
+
+model LifechatMessage {
+  id String @id @default(cuid())
+  threadId String
+  thread LifechatThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  senderId String
+  sender User @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  clientKey String
+  text String @db.VarChar(4000)
+  createdAt DateTime @default(now())
+  @@unique([senderId, clientKey])
+  @@index([threadId, createdAt])
+  @@map("lifechat_messages")
+}
+
+model TravelCompany {
+  id String @id @default(cuid())
+  ownerId String
+  owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  name String @db.VarChar(120)
+  trips TravelDeparture[]
+  createdAt DateTime @default(now())
+  @@map("travel_companies")
+}
+
+model TravelDeparture {
+  id String @id @default(cuid())
+  companyId String
+  company TravelCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  origin String @db.VarChar(120)
+  destination String @db.VarChar(120)
+  departureAt DateTime
+  capacity Int
+  priceKurus Int
+  cancellationHours Int @default(24)
+  published Boolean @default(false)
+  reservations TravelReservation[]
+  createdAt DateTime @default(now())
+  @@index([published, departureAt])
+  @@map("travel_departures")
+}
+
+model TravelReservation {
+  id String @id @default(cuid())
+  departureId String
+  departure TravelDeparture @relation(fields: [departureId], references: [id], onDelete: Cascade)
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  seat Int
+  passengerName String @db.VarChar(120)
+  status String @default("held")
+  expiresAt DateTime
+  totalKurus Int
+  commissionKurus Int
+  companyKurus Int
+  providerReference String? @unique
+  createdAt DateTime @default(now())
+  @@index([departureId, seat, status])
+  @@map("travel_reservations")
 }

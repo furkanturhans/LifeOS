@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { useKidsStore } from '@/stores/useKidsStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface ParentPinModalProps {
   isOpen: boolean;
@@ -23,6 +24,7 @@ export function ParentPinModal({
   title = 'Ebeveyn Doğrulaması',
   description = 'Kids alanından çıkmak veya ayarları düzenlemek için 4 haneli PIN kodunuzu girin.',
 }: ParentPinModalProps) {
+  const localizeText = useLocaleRender();
   const { verifyPin, lockoutUntil } = useKidsStore();
   const [pin, setPin] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -79,7 +81,7 @@ export function ParentPinModal({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={title} description={description} size="sm">
+    <Modal isOpen={isOpen} onClose={onClose} title={localizeText(title)} description={localizeText(description)} size="sm">
       <div className="py-3 flex flex-col items-center select-none space-y-4">
         {/* Lock Icon */}
         <div className="h-12 w-12 rounded-2xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center shadow-xs">
@@ -108,14 +110,12 @@ export function ParentPinModal({
         {errorMessage && (
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-destructive/10 border border-destructive/20 text-xs font-semibold text-destructive text-center">
             <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
-            <span>{errorMessage}</span>
+            <span>{localizeText(errorMessage)}</span>
           </div>
         )}
 
         {remainingTime && (
-          <div className="text-xs font-bold text-destructive">
-            Güvenlik kilidi: {remainingTime} saniye
-          </div>
+          <div className="text-xs font-bold text-destructive">{localizeText("Güvenlik kilidi: ")}{localizeText(remainingTime)}{localizeText(" saniye")}</div>
         )}
 
         {/* Number Keypad */}
@@ -127,16 +127,14 @@ export function ParentPinModal({
               onClick={() => handleDigit(num.toString())}
               className="h-12 rounded-2xl bg-card border border-border/80 hover:bg-muted font-bold text-lg text-foreground transition-all active:scale-95 disabled:opacity-40 shadow-2xs flex items-center justify-center"
             >
-              {num}
+              {localizeText(num)}
             </button>
           ))}
           <button
             disabled={Boolean(remainingTime)}
             onClick={handleClear}
             className="h-12 rounded-2xl bg-card border border-border/80 hover:bg-muted font-bold text-xs text-muted-foreground transition-all active:scale-95 disabled:opacity-40 flex items-center justify-center"
-          >
-            Temizle
-          </button>
+          >{localizeText("Temizle")}</button>
           <button
             disabled={Boolean(remainingTime)}
             onClick={() => handleDigit('0')}
@@ -154,8 +152,7 @@ export function ParentPinModal({
         </div>
 
         {/* Demo Hint */}
-        <p className="text-[11px] text-muted-foreground/60 text-center pt-1">
-          Varsayılan Ebeveyn PIN: <span className="font-mono font-bold text-foreground">2026</span>
+        <p className="text-[11px] text-muted-foreground/60 text-center pt-1">{localizeText("Varsayılan Ebeveyn PIN:")}<span className="font-mono font-bold text-foreground">2026</span>
         </p>
       </div>
     </Modal>

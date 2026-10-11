@@ -6,6 +6,7 @@ import { X, Calendar, Sparkles, AlertCircle, Coins, Bus, MapPin } from 'lucide-r
 import { useTravelPartnerStore } from '@/stores/useTravelPartnerStore';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface CreateTripModalProps {
   isOpen: boolean;
@@ -13,6 +14,7 @@ interface CreateTripModalProps {
 }
 
 export function CreateTripModal({ isOpen, onClose }: CreateTripModalProps) {
+  const localizeText = useLocaleRender();
   const { getMyRoutes, getMyVehicles, addDraftTrip } = useTravelPartnerStore();
 
   const routes = getMyRoutes();
@@ -91,35 +93,27 @@ export function CreateTripModal({ isOpen, onClose }: CreateTripModalProps) {
             </button>
 
             <div className="mb-4">
-              <h3 className="text-xl font-bold text-foreground">Yeni Sefer Taslağı Oluştur</h3>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Rota, araç, kalkış saati ve taban bilet fiyatı belirleyin.
-              </p>
+              <h3 className="text-xl font-bold text-foreground">{localizeText("Yeni Sefer Taslağı Oluştur")}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{localizeText("Rota, araç, kalkış saati ve taban bilet fiyatı belirleyin.")}</p>
             </div>
 
             {error && (
               <div className="mb-4 flex items-center gap-2 rounded-2xl bg-destructive/15 border border-destructive/30 p-3 text-xs text-destructive">
                 <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                <span>{error}</span>
+                <span>{localizeText(error)}</span>
               </div>
             )}
 
             {routes.length === 0 || vehicles.length === 0 ? (
               <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-xs text-foreground space-y-2">
-                <div className="font-bold text-amber-600 dark:text-amber-400">
-                  Önce Araç ve Rota Tanımlanmalı
-                </div>
-                <p className="text-[11px] text-muted-foreground">
-                  Sefer taslağı oluşturabilmek için en az 1 araç ve 1 güzergah kaydı bulunmalıdır.
-                </p>
+                <div className="font-bold text-amber-600 dark:text-amber-400">{localizeText("Önce Araç ve Rota Tanımlanmalı")}</div>
+                <p className="text-[11px] text-muted-foreground">{localizeText("Sefer taslağı oluşturabilmek için en az 1 araç ve 1 güzergah kaydı bulunmalıdır.")}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Route Selection */}
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-foreground">
-                    Güzergah / Hat Seçin *
-                  </label>
+                  <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Güzergah / Hat Seçin *")}</label>
                   <select
                     value={routeId}
                     onChange={(e) => setRouteId(e.target.value)}
@@ -128,17 +122,14 @@ export function CreateTripModal({ isOpen, onClose }: CreateTripModalProps) {
                   >
                     {routes.map((rt) => (
                       <option key={rt.id} value={rt.id}>
-                        {rt.originCity} → {rt.destinationCity} (~{rt.estimatedDurationHours} Saat)
-                      </option>
+                        {localizeText(rt.originCity)} → {localizeText(rt.destinationCity)} (~{localizeText(rt.estimatedDurationHours)}{localizeText(" Saat)")}</option>
                     ))}
                   </select>
                 </div>
 
                 {/* Vehicle Selection */}
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-foreground">
-                    Görevli Otobüs / Araç *
-                  </label>
+                  <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Görevli Otobüs / Araç *")}</label>
                   <select
                     value={vehicleId}
                     onChange={(e) => setVehicleId(e.target.value)}
@@ -147,8 +138,7 @@ export function CreateTripModal({ isOpen, onClose }: CreateTripModalProps) {
                   >
                     {vehicles.map((v) => (
                       <option key={v.id} value={v.id}>
-                        {v.vehicleCode} ({v.plateNumber}) — {v.seatCapacity} Koltuk
-                      </option>
+                        {localizeText(v.vehicleCode)} ({localizeText(v.plateNumber)}) — {localizeText(v.seatCapacity)}{localizeText(" Koltuk")}</option>
                     ))}
                   </select>
                 </div>
@@ -156,8 +146,8 @@ export function CreateTripModal({ isOpen, onClose }: CreateTripModalProps) {
                 {/* Departure Date/Time & Price */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <Input
-                    label="Kalkış Tarih ve Saati *"
-                    placeholder="Örn: 2026-09-28 22:30"
+                    label={localizeText("Kalkış Tarih ve Saati *")}
+                    placeholder={localizeText("Örn: 2026-09-28 22:30")}
                     value={departureDateTime}
                     onChange={(e) => setDepartureDateTime(e.target.value)}
                     icon={<Calendar className="h-4 w-4 text-muted-foreground" />}
@@ -165,12 +155,10 @@ export function CreateTripModal({ isOpen, onClose }: CreateTripModalProps) {
                   />
 
                   <div>
-                    <label className="mb-1 block text-xs font-medium text-foreground">
-                      Taban Bilet Fiyatı (TL) *
-                    </label>
+                    <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Taban Bilet Fiyatı (TL) *")}</label>
                     <input
                       type="number"
-                      placeholder="Örn: 650"
+                      placeholder={localizeText("Örn: 650")}
                       value={baseTicketPrice}
                       onChange={(e) => setBaseTicketPrice(e.target.value)}
                       className="w-full rounded-2xl border border-border bg-card p-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -181,9 +169,7 @@ export function CreateTripModal({ isOpen, onClose }: CreateTripModalProps) {
 
                 {/* Draft Status Notice */}
                 <div className="rounded-2xl border border-border/80 bg-muted/30 p-3 text-xs text-muted-foreground">
-                  <p className="text-[11px] leading-relaxed">
-                    ℹ️ Bu sefer <strong>Taslak</strong> olarak kaydedilir. Henüz canlı yolcu arama sonuçlarında görünmez ve bilet satışı yapılmaz.
-                  </p>
+                  <p className="text-[11px] leading-relaxed">{localizeText("ℹ️ Bu sefer")}<strong>{localizeText("Taslak")}</strong>{localizeText("olarak kaydedilir. Henüz canlı yolcu arama sonuçlarında görünmez ve bilet satışı yapılmaz.")}</p>
                 </div>
 
                 <div className="pt-2">
@@ -192,9 +178,7 @@ export function CreateTripModal({ isOpen, onClose }: CreateTripModalProps) {
                     size="lg"
                     className="w-full rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 font-semibold text-white shadow-lg shadow-blue-500/25"
                   >
-                    <Sparkles className="mr-2 h-4 w-4" />
-                    Sefer Taslağını Kaydet
-                  </Button>
+                    <Sparkles className="mr-2 h-4 w-4" />{localizeText("Sefer Taslağını Kaydet")}</Button>
                 </div>
               </form>
             )}

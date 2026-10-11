@@ -7,6 +7,7 @@ import { useTravelPartnerStore } from '@/stores/useTravelPartnerStore';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { LocationAutocompleteInput } from '@/components/services/common/LocationAutocompleteInput';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface CreateRouteModalProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface CreateRouteModalProps {
 }
 
 export function CreateRouteModal({ isOpen, onClose }: CreateRouteModalProps) {
+  const localizeText = useLocaleRender();
   const { addDraftRoute } = useTravelPartnerStore();
 
   const [originCity, setOriginCity] = useState('');
@@ -83,32 +85,30 @@ export function CreateRouteModal({ isOpen, onClose }: CreateRouteModalProps) {
             </button>
 
             <div className="mb-4">
-              <h3 className="text-xl font-bold text-foreground">Yeni Güzergah & Rota Ekle</h3>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Kalkış ve varış noktaları ile isteğe bağlı ara durakları tanımlayın.
-              </p>
+              <h3 className="text-xl font-bold text-foreground">{localizeText("Yeni Güzergah & Rota Ekle")}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{localizeText("Kalkış ve varış noktaları ile isteğe bağlı ara durakları tanımlayın.")}</p>
             </div>
 
             {error && (
               <div className="mb-4 flex items-center gap-2 rounded-2xl bg-destructive/15 border border-destructive/30 p-3 text-xs text-destructive">
                 <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                <span>{error}</span>
+                <span>{localizeText(error)}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-3">
                 <LocationAutocompleteInput
-                  label="Kalkış İli / Şehir *"
-                  placeholder="Örn: İstanbul"
+                  label={localizeText("Kalkış İli / Şehir *")}
+                  placeholder={localizeText("Örn: İstanbul")}
                   value={originCity}
                   onChange={(val) => setOriginCity(val)}
                   icon={<MapPin className="h-4 w-4 text-blue-500" />}
                   required
                 />
                 <Input
-                  label="Kalkış Otogarı / Terminal"
-                  placeholder="Örn: Esenler / Alibeyköy"
+                  label={localizeText("Kalkış Otogarı / Terminal")}
+                  placeholder={localizeText("Örn: Esenler / Alibeyköy")}
                   value={originTerminal}
                   onChange={(e) => setOriginTerminal(e.target.value)}
                 />
@@ -116,28 +116,26 @@ export function CreateRouteModal({ isOpen, onClose }: CreateRouteModalProps) {
 
               <div className="space-y-3">
                 <LocationAutocompleteInput
-                  label="Varış İli / Şehir *"
-                  placeholder="Örn: Ankara"
+                  label={localizeText("Varış İli / Şehir *")}
+                  placeholder={localizeText("Örn: Ankara")}
                   value={destinationCity}
                   onChange={(val) => setDestinationCity(val)}
                   icon={<MapPin className="h-4 w-4 text-indigo-500" />}
                   required
                 />
                 <Input
-                  label="Varış Otogarı / Terminal"
-                  placeholder="Örn: AŞTİ"
+                  label={localizeText("Varış Otogarı / Terminal")}
+                  placeholder={localizeText("Örn: AŞTİ")}
                   value={destinationTerminal}
                   onChange={(e) => setDestinationTerminal(e.target.value)}
                 />
               </div>
 
               <div>
-                <label className="mb-1 block text-xs font-medium text-foreground">
-                  Ara Duraklar (İsteğe Bağlı, Virgülle Ayırın)
-                </label>
+                <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Ara Duraklar (İsteğe Bağlı, Virgülle Ayırın)")}</label>
                 <input
                   type="text"
-                  placeholder="Örn: Gebze, Kocaeli (İzmit), Düzce, Bolu"
+                  placeholder={localizeText("Örn: Gebze, Kocaeli (İzmit), Düzce, Bolu")}
                   value={intermediateStops}
                   onChange={(e) => setIntermediateStops(e.target.value)}
                   className="w-full rounded-2xl border border-border bg-card p-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -145,9 +143,7 @@ export function CreateRouteModal({ isOpen, onClose }: CreateRouteModalProps) {
               </div>
 
               <div>
-                <label className="mb-1 block text-xs font-medium text-foreground">
-                  Tahmini Varış Süresi (Saat)
-                </label>
+                <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Tahmini Varış Süresi (Saat)")}</label>
                 <input
                   type="number"
                   value={estimatedDurationHours}
@@ -163,9 +159,7 @@ export function CreateRouteModal({ isOpen, onClose }: CreateRouteModalProps) {
                   size="lg"
                   className="w-full rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 font-semibold text-white shadow-lg shadow-blue-500/25"
                 >
-                  <Sparkles className="mr-2 h-4 w-4" />
-                  Rotayı Kaydet
-                </Button>
+                  <Sparkles className="mr-2 h-4 w-4" />{localizeText("Rotayı Kaydet")}</Button>
               </div>
             </form>
           </motion.div>

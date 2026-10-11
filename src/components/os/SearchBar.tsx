@@ -1,30 +1,26 @@
 'use client';
+import { moduleHref } from '@/modules/routes';
 
-import { useState, useRef, useEffect } from 'react';
+import { AppArtwork } from '@/components/ui/AppArtwork';
+
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { searchModules } from '@/modules/registry';
-import { useThemeStore } from '@/stores/useThemeStore';
-import type { ModuleDefinition } from '@/types/module';
+import { searchModules, getLocalizedModuleName, getLocalizedModuleDescription } from '@/modules/registry';
+import { useTranslation } from '@/lib/i18n';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function SearchBar() {
+  const localizeText = useLocaleRender();
   const router = useRouter();
   const [isExpanded, setIsExpanded] = useState(false);
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<ModuleDefinition[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { locale } = useThemeStore();
+  const { t, locale } = useTranslation();
 
-  useEffect(() => {
-    if (query.trim()) {
-      const found = searchModules(query, locale);
-      setResults(found.slice(0, 6));
-    } else {
-      setResults([]);
-    }
-  }, [query, locale]);
+  const results = query.trim() ? searchModules(query, locale).slice(0, 6) : [];
 
   function handleExpand() {
     setIsExpanded(true);
@@ -34,42 +30,16 @@ export function SearchBar() {
   function handleClose() {
     setIsExpanded(false);
     setQuery('');
-    setResults([]);
     inputRef.current?.blur();
   }
 
   function handleModuleClick(moduleId: string) {
     handleClose();
-    if (moduleId === 'taxi') {
-      router.push('/services/taxi');
-      return;
-    }
-    if (moduleId === 'travel') {
-      router.push('/services/travel');
-      return;
-    }
-    if (moduleId === 'moving') {
-      router.push('/services/moving');
-      return;
-    }
-    if (moduleId === 'craftsman') {
-      router.push('/services/craftsman');
-      return;
-    }
-    if (
-      moduleId === 'family' ||
-      moduleId === 'finance' ||
-      moduleId === 'arcade' ||
-      moduleId === 'explore' ||
-      moduleId === 'services'
-    ) {
-      router.push(`/${moduleId}`);
-      return;
-    }
-    router.push(`/home?module=${moduleId}`);
+    const entry = results.find(item => item.id === moduleId);
+    router.push(entry?.status === 'ACTIVE' ? moduleHref(moduleId) : '/library');
   }
 
-  const placeholder = locale === 'tr' ? "LifeOS'ta ara..." : 'Search LifeOS...';
+  const placeholder = t.common.searchPlaceholder;
 
   return (
     <div className="relative w-full px-4">
@@ -89,7 +59,7 @@ export function SearchBar() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={handleExpand}
-            placeholder={placeholder}
+            placeholder={localizeText(placeholder)}
             className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
           <AnimatePresence>
@@ -118,22 +88,22 @@ export function SearchBar() {
             >
               <div className="py-1">
                 {results.map((module) => {
-                  const name = locale === 'tr' ? module.name : module.nameEn;
-                  const description = locale === 'tr' ? module.description : module.descriptionEn;
+                  const name = getLocalizedModuleName(module, locale);
+                  const description = getLocalizedModuleDescription(module, locale);
                   return (
                     <button
                       key={module.id}
                       onClick={() => handleModuleClick(module.id)}
                       className="flex w-full items-center gap-3 px-3.5 py-2 hover:bg-muted/60 transition-colors text-left"
                     >
-                      <span className="text-lg w-7 text-center">{module.icon}</span>
+                      <AppArtwork id={module.id} fallback={module.icon} className="h-8 w-8" />
                       <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-foreground truncate">{name}</div>
-                        <div className="text-xs text-muted-foreground truncate">{description}</div>
+                        <div className="text-sm font-medium text-foreground truncate">{localizeText(name)}</div>
+                        <div className="text-xs text-muted-foreground truncate">{localizeText(description)}</div>
                       </div>
                       {module.status === 'COMING_SOON' && (
                         <span className="text-[11px] font-medium text-muted-foreground flex-shrink-0 bg-muted px-2 py-0.5 rounded border border-border">
-                          {locale === 'tr' ? 'Yakında' : 'Soon'}
+                          {localizeText(t.common.soon)}
                         </span>
                       )}
                     </button>
@@ -153,8 +123,7 @@ export function SearchBar() {
               exit={{ opacity: 0, height: 0 }}
               className="border-t border-border overflow-hidden"
             >
-              <div className="px-4 py-3 text-center text-xs text-muted-foreground">
-                {locale === 'tr' ? `"${query}" için sonuç bulunamadı` : `No results for "${query}"`}
+              <div className="px-4 py-3 text-center text-xs text-muted-foreground">{localizeText("\"")}{localizeText(query)}{localizeText("\"")}{localizeText(t.common.noResults)}
               </div>
             </motion.div>
           )}

@@ -17,6 +17,7 @@ import { useTaxiStore } from '@/stores/useTaxiStore';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { LocationAutocompleteInput } from '@/components/services/common/LocationAutocompleteInput';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface CreateTaxiRequestModalProps {
   isOpen: boolean;
@@ -24,6 +25,7 @@ interface CreateTaxiRequestModalProps {
 }
 
 export function CreateTaxiRequestModal({ isOpen, onClose }: CreateTaxiRequestModalProps) {
+  const localizeText = useLocaleRender();
   const { createTaxiRequest } = useTaxiStore();
 
   const [pickupLocation, setPickupLocation] = useState('');
@@ -91,16 +93,14 @@ export function CreateTaxiRequestModal({ isOpen, onClose }: CreateTaxiRequestMod
               <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-3xl shadow-lg shadow-amber-500/20 text-white">
                 🚕
               </div>
-              <h3 className="text-xl font-bold text-foreground">Yolculuk Talebi Oluştur</h3>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Konumunuza en yakın onaylı taksi şoförlerinden sabit fiyat teklifleri toplayın.
-              </p>
+              <h3 className="text-xl font-bold text-foreground">{localizeText("Yolculuk Talebi Oluştur")}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{localizeText("Konumunuza en yakın onaylı taksi şoförlerinden sabit fiyat teklifleri toplayın.")}</p>
             </div>
 
             {error && (
               <div className="mb-4 flex items-center gap-2 rounded-2xl bg-destructive/15 border border-destructive/30 p-3 text-xs text-destructive">
                 <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                <span>{error}</span>
+                <span>{localizeText(error)}</span>
               </div>
             )}
 
@@ -108,16 +108,16 @@ export function CreateTaxiRequestModal({ isOpen, onClose }: CreateTaxiRequestMod
               {/* Pickup & Dropoff */}
               <div className="space-y-3">
                 <LocationAutocompleteInput
-                  label="Alınış İli / Bölgesi *"
-                  placeholder="Örn: İstanbul - Kadıköy Rıhtım / Moda"
+                  label={localizeText("Alınış İli / Bölgesi *")}
+                  placeholder={localizeText("Örn: İstanbul - Kadıköy Rıhtım / Moda")}
                   value={pickupLocation}
                   onChange={(val) => setPickupLocation(val)}
                   icon={<MapPin className="h-4 w-4 text-amber-500" />}
                   required
                 />
                 <LocationAutocompleteInput
-                  label="Varış İli / Bölgesi *"
-                  placeholder="Örn: İstanbul - Sabiha Gökçen Havalimanı"
+                  label={localizeText("Varış İli / Bölgesi *")}
+                  placeholder={localizeText("Örn: İstanbul - Sabiha Gökçen Havalimanı")}
                   value={dropoffLocation}
                   onChange={(val) => setDropoffLocation(val)}
                   icon={<MapPin className="h-4 w-4 text-orange-500" />}
@@ -128,12 +128,10 @@ export function CreateTaxiRequestModal({ isOpen, onClose }: CreateTaxiRequestMod
               {/* Date/Time and Passenger Count */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-foreground">
-                    Zamanlama *
-                  </label>
+                  <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Zamanlama *")}</label>
                   <input
                     type="text"
-                    placeholder="Örn: Hemen / 15 dk sonra / 19:30"
+                    placeholder={localizeText("Örn: Hemen / 15 dk sonra / 19:30")}
                     value={requestedDateTime}
                     onChange={(e) => setRequestedDateTime(e.target.value)}
                     className="w-full rounded-2xl border border-border bg-card p-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-amber-500"
@@ -142,9 +140,7 @@ export function CreateTaxiRequestModal({ isOpen, onClose }: CreateTaxiRequestMod
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-foreground">
-                    Yolcu Sayısı
-                  </label>
+                  <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Yolcu Sayısı")}</label>
                   <div className="flex items-center gap-1 rounded-2xl border border-border bg-card p-1">
                     {[1, 2, 3, 4, 6].map((count) => (
                       <button
@@ -157,7 +153,7 @@ export function CreateTaxiRequestModal({ isOpen, onClose }: CreateTaxiRequestMod
                             : 'text-muted-foreground hover:text-foreground'
                         }`}
                       >
-                        {count === 6 ? '5+' : count}
+                        {localizeText(count === 6 ? '5+' : count)}
                       </button>
                     ))}
                   </div>
@@ -166,13 +162,11 @@ export function CreateTaxiRequestModal({ isOpen, onClose }: CreateTaxiRequestMod
 
               {/* Extra Notes */}
               <div>
-                <label className="mb-1 block text-xs font-medium text-foreground">
-                  Ek Not & Özel İstekler (Opsiyonel)
-                </label>
+                <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Ek Not & Özel İstekler (Opsiyonel)")}</label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Örn: 2 büyük valizimiz var, geniş bagajlı araç rica ederiz."
+                  placeholder={localizeText("Örn: 2 büyük valizimiz var, geniş bagajlı araç rica ederiz.")}
                   rows={2}
                   className="w-full rounded-2xl border border-border bg-card p-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-amber-500"
                 />
@@ -182,11 +176,9 @@ export function CreateTaxiRequestModal({ isOpen, onClose }: CreateTaxiRequestMod
               <div className="rounded-2xl border border-border/80 bg-muted/30 p-3 text-xs space-y-1">
                 <div className="font-semibold text-foreground flex items-center gap-1.5">
                   <ShieldCheck className="h-3.5 w-3.5 text-amber-500" />
-                  <span>Kişisel Veri ve Gizlilik Koruması</span>
+                  <span>{localizeText("Kişisel Veri ve Gizlilik Koruması")}</span>
                 </div>
-                <p className="text-[11px] text-muted-foreground leading-snug">
-                  Telefon numaranız, açık adresiniz ve tam kimliğiniz şoförlere gösterilmez. Yalnızca bölge ve yolculuk detayı iletilir.
-                </p>
+                <p className="text-[11px] text-muted-foreground leading-snug">{localizeText("Telefon numaranız, açık adresiniz ve tam kimliğiniz şoförlere gösterilmez. Yalnızca bölge ve yolculuk detayı iletilir.")}</p>
               </div>
 
               {/* Submit Button */}
@@ -196,9 +188,7 @@ export function CreateTaxiRequestModal({ isOpen, onClose }: CreateTaxiRequestMod
                   size="lg"
                   className="w-full rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 font-semibold text-white shadow-lg shadow-amber-500/25 hover:from-amber-600 hover:to-orange-700"
                 >
-                  <Sparkles className="mr-2 h-4 w-4" />
-                  Taksi Talebini Yayınla
-                </Button>
+                  <Sparkles className="mr-2 h-4 w-4" />{localizeText("Taksi Talebini Yayınla")}</Button>
               </div>
             </form>
           </motion.div>

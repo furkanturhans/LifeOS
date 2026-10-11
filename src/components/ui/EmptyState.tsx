@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from './Button';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export interface EmptyStateProps {
   icon?: React.ReactNode | LucideIcon;
@@ -22,6 +25,7 @@ export function EmptyState({
   actionIcon,
   className,
 }: EmptyStateProps) {
+  const localizeText = useLocaleRender();
   function renderIcon() {
     if (!icon) return null;
     if (React.isValidElement(icon)) return icon;
@@ -38,20 +42,20 @@ export function EmptyState({
     >
       {icon && (
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border/60 bg-muted/60 text-muted-foreground shadow-xs">
-          {renderIcon()}
+          {localizeText(renderIcon())}
         </div>
       )}
       <h3 className="mt-4 text-sm sm:text-base font-semibold text-foreground">
-        {title}
+        {localizeText(title)}
       </h3>
       <p className="mt-1.5 max-w-sm text-xs text-muted-foreground leading-relaxed">
-        {description}
+        {localizeText(description)}
       </p>
       {actionLabel && onAction && (
         <div className="mt-5">
           <Button onClick={onAction} size="sm" variant="primary">
-            {actionIcon}
-            {actionLabel}
+            {localizeText(actionIcon)}
+            {localizeText(actionLabel)}
           </Button>
         </div>
       )}

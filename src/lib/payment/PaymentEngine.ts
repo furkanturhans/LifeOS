@@ -12,7 +12,6 @@ import type {
 import { LIFEOS_CREDIT_RATE_KURUS, LIFEOS_CREDIT_RATE_TL } from '@/types/payment';
 import type { FinanceSourceModule, TimeFilterOption } from '@/types/finance';
 import { FinanceRegistry } from '@/lib/admin/FinanceRegistry';
-import { getPaymentProvider } from './PaymentProviderAdapter';
 
 // In-Memory Unified Wallets Database
 const WALLETS: Record<string, WalletAccount> = {
@@ -131,7 +130,7 @@ const IDEMPOTENCY_STORE = new Map<string, { response: any; timestamp: number }>(
 
 export class PaymentEngine {
   /**
-   * Get Active Credit Rate (1 LifeOS Kredisi = 1.35 TL)
+   * Get Active Credit Rate (1 LifeOS Kredisi = 2 TL)
    */
   public static getCreditRate(): { kurusPerCredit: number; tlPerCredit: number; label: string } {
     return {
@@ -255,7 +254,7 @@ export class PaymentEngine {
 
   /**
    * Purchase LifeOS Credits with TL
-   * Rate: 1 LifeOS Kredisi = 1.35 TL
+   * Rate: 1 LifeOS Kredisi = 2 TL
    */
   public static async purchaseCredits(params: {
     userId: string;
@@ -265,59 +264,8 @@ export class PaymentEngine {
     idempotencyKey?: string;
     description?: string;
   }): Promise<{ success: boolean; error?: string; wallet: WalletAccount; ledgerEntry?: CreditLedgerEntry }> {
-    if (params.creditCount <= 0 || !Number.isInteger(params.creditCount)) {
-      return { success: false, error: 'Kredi miktarı pozitif bir tam sayı olmalıdır.', wallet: this.getWallet(params.userId) };
-    }
+    return { success: false, error: 'GATEWAY_NOT_CONFIGURED', wallet: this.getWallet(params.userId) };
 
-    if (params.idempotencyKey && IDEMPOTENCY_STORE.has(params.idempotencyKey)) {
-      return IDEMPOTENCY_STORE.get(params.idempotencyKey)!.response;
-    }
-
-    const totalKurus = params.creditCount * LIFEOS_CREDIT_RATE_KURUS;
-
-    // Payment Gateway verification check (if gateway_card and no reference provided yet)
-    if (params.paymentMethod === 'gateway_card' && !params.gatewayReference) {
-      const provider = getPaymentProvider();
-      if (provider.getConfig().provider === 'disabled') {
-        return {
-          success: false,
-          error:
-            'Kredi kartı altyapısı henüz yapılandırılmadı. Lütfen ödeme sağlayıcı anahtarlarını yapılandırınız veya yetkili ödeme kanalını kullanınız.',
-          wallet: this.getWallet(params.userId),
-        };
-      }
-    }
-
-    const wallet = this.getWallet(params.userId);
-    wallet.creditBalance += params.creditCount;
-    wallet.purchasedCredits += params.creditCount;
-    wallet.educationCreditBalance = wallet.creditBalance;
-    wallet.updatedAt = new Date().toISOString();
-
-    const ledgerEntry: CreditLedgerEntry = {
-      id: `CLEDGER-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
-      userId: params.userId,
-      type: 'purchased',
-      creditAmount: params.creditCount,
-      creditBalanceAfter: wallet.creditBalance,
-      unitPriceKurus: LIFEOS_CREDIT_RATE_KURUS,
-      totalAmountKurus: totalKurus,
-      title: `${params.creditCount} LifeOS Kredisi Satın Alımı`,
-      description: params.description || `${params.creditCount} Kredi (${(totalKurus / 100).toFixed(2)} TL) satın alındı.`,
-      sourceModule: 'subscription',
-      status: 'succeeded',
-      gatewayTransactionId: params.gatewayReference,
-      originalPaymentMethod: params.paymentMethod === 'gateway_card' ? 'Kredi Kartı' : 'Banka / Kart',
-      createdAt: new Date().toISOString(),
-    };
-
-    CREDIT_LEDGER.unshift(ledgerEntry);
-
-    const result = { success: true, wallet, ledgerEntry };
-    if (params.idempotencyKey) {
-      IDEMPOTENCY_STORE.set(params.idempotencyKey, { response: result, timestamp: Date.now() });
-    }
-    return result;
   }
 
   /**

@@ -28,6 +28,7 @@ import {
 import { Card } from '@/components/ui/Card';
 import type { SmartDevice, SmartHomeRole } from '@/types/smarthome';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface DeviceCardProps {
   device: SmartDevice;
@@ -44,6 +45,7 @@ export function DeviceCard({
   onRemove,
   userRole = 'home_owner',
 }: DeviceCardProps) {
+  const localizeText = useLocaleRender();
   const [isHovered, setIsHovered] = useState(false);
 
   const getCategoryIcon = () => {
@@ -78,22 +80,18 @@ export function DeviceCard({
       case 'matter':
         return (
           <span className="flex items-center gap-1 rounded bg-emerald-500/10 px-1.5 py-0.2 text-[9px] font-bold text-emerald-600 border border-emerald-500/20">
-            <QrCode className="h-2.5 w-2.5" />
-            Matter
-          </span>
+            <QrCode className="h-2.5 w-2.5" />{localizeText("Matter")}</span>
         );
       case 'home_assistant':
         return (
           <span className="flex items-center gap-1 rounded bg-sky-500/10 px-1.5 py-0.2 text-[9px] font-bold text-sky-600 border border-sky-500/20">
-            <Home className="h-2.5 w-2.5" />
-            Home Assistant
-          </span>
+            <Home className="h-2.5 w-2.5" />{localizeText("Home Assistant")}</span>
         );
       case 'vendor_oauth':
         return (
           <span className="flex items-center gap-1 rounded bg-purple-500/10 px-1.5 py-0.2 text-[9px] font-bold text-purple-600 border border-purple-500/20">
             <Globe className="h-2.5 w-2.5" />
-            {device.vendorName || 'Resmi Hesap'}
+            {localizeText(device.vendorName || 'Resmi Hesap')}
           </span>
         );
       default:
@@ -141,21 +139,21 @@ export function DeviceCard({
                 : 'bg-muted text-muted-foreground border-border/70'
             )}
           >
-            {getCategoryIcon()}
+            {localizeText(getCategoryIcon())}
           </div>
 
           <div className="min-w-0">
             <div className="flex items-center gap-1.5 flex-wrap">
-              {getSourceBadge()}
+              {localizeText(getSourceBadge())}
               {device.room && (
                 <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">
-                  {device.room}
+                  {localizeText(device.room)}
                 </span>
               )}
             </div>
 
             <span className="text-xs font-bold text-foreground truncate block max-w-[130px] mt-0.5">
-              {device.name}
+              {localizeText(device.name)}
             </span>
           </div>
         </div>
@@ -166,7 +164,7 @@ export function DeviceCard({
             <button
               type="button"
               onClick={handleAction}
-              aria-label="Cihazı aç/kapat"
+              aria-label={localizeText("Cihazı aç/kapat")}
               className={cn(
                 'h-8 w-14 rounded-full transition-all flex items-center p-1 relative shadow-inner',
                 isActive ? 'bg-primary justify-end' : 'bg-muted justify-start'
@@ -188,7 +186,7 @@ export function DeviceCard({
               )}
             >
               {isLocked ? <Lock className="h-3 w-3" /> : <Unlock className="h-3 w-3" />}
-              <span>{isLocked ? 'Kilitli' : 'Açık'}</span>
+              <span>{localizeText(isLocked ? 'Kilitli' : 'Açık')}</span>
             </button>
           ) : (
             <span
@@ -197,7 +195,7 @@ export function DeviceCard({
                 isAlarm ? 'bg-rose-500 text-white' : 'bg-muted text-muted-foreground'
               )}
             >
-              {isAlarm ? 'ALARM' : device.state.toUpperCase()}
+              {localizeText(isAlarm ? 'ALARM' : device.state.toUpperCase())}
             </span>
           )}
 
@@ -206,7 +204,7 @@ export function DeviceCard({
             <button
               type="button"
               onClick={() => onRemove(device)}
-              title="Cihazı Kaldır"
+              title={localizeText("Cihazı Kaldır")}
               className="p-1 rounded-lg hover:bg-rose-500/10 text-muted-foreground hover:text-rose-600 transition-colors"
             >
               <Trash2 className="h-3.5 w-3.5" />
@@ -221,28 +219,25 @@ export function DeviceCard({
           {/* Temperature sensor */}
           {device.capabilities.hasTemperature && device.attributes.currentTemperature !== undefined ? (
             <span className="font-semibold text-foreground">
-              {device.attributes.currentTemperature}°C
-              {device.attributes.targetTemperature !== undefined && ` • Hedef: ${device.attributes.targetTemperature}°C`}
+              {localizeText(device.attributes.currentTemperature)}{localizeText("°C ")}{localizeText(device.attributes.targetTemperature !== undefined && ` • Hedef: ${device.attributes.targetTemperature}°C`)}
             </span>
           ) : device.capabilities.hasHumidity && device.attributes.humidity !== undefined ? (
             <span className="font-semibold text-foreground">
-              %{device.attributes.humidity} Nem
-            </span>
+              %{localizeText(device.attributes.humidity)}{localizeText(" Nem")}</span>
           ) : device.capabilities.hasPowerMeasurement && device.attributes.powerWatt !== undefined ? (
             <span className="font-semibold text-foreground font-mono">
-              ⚡ {device.attributes.powerWatt} W
-            </span>
+              ⚡ {localizeText(device.attributes.powerWatt)}{localizeText(" W")}</span>
           ) : device.category === 'door_window' ? (
             <span className={cn('font-bold', device.state === 'open' ? 'text-amber-500' : 'text-emerald-500')}>
-              {device.state === 'open' ? 'Açık' : 'Kapalı'}
+              {localizeText(device.state === 'open' ? 'Açık' : 'Kapalı')}
             </span>
           ) : device.category === 'motion' ? (
             <span className={cn('font-bold', device.state === 'on' ? 'text-amber-500' : 'text-muted-foreground')}>
-              {device.state === 'on' ? 'Hareket Algılandı' : 'Sakin'}
+              {localizeText(device.state === 'on' ? 'Hareket Algılandı' : 'Sakin')}
             </span>
           ) : (
             <span>
-              {isActive ? 'Aktif çalışıyor' : 'Kapalı / Beklemede'}
+              {localizeText(isActive ? 'Aktif çalışıyor' : 'Kapalı / Beklemede')}
             </span>
           )}
         </div>
@@ -250,7 +245,7 @@ export function DeviceCard({
         {/* Battery level if supported */}
         {device.capabilities.hasBattery && device.attributes.batteryLevel !== undefined && (
           <span className="text-[10px] font-mono text-muted-foreground font-semibold">
-            🔋 %{device.attributes.batteryLevel}
+            🔋 %{localizeText(device.attributes.batteryLevel)}
           </span>
         )}
       </div>

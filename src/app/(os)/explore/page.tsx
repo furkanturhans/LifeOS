@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { ExploreScreen } from '@/components/explore/ExploreScreen';
+import { ExploreScreen } from '@/components/explore/ExploreFeed';
 
 export const metadata: Metadata = {
-  title: 'Keşfet — LifeOS',
-  description: 'LifeOS Keşfet — Topluluk ve sosyal akış alanı',
+  title: 'Nodes — LifeOS',
+  description: 'LifeOS Nodes — Topluluk ve sosyal akış alanı',
 };
 
 export default function ExplorePage() {

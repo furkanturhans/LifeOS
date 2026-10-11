@@ -38,7 +38,7 @@ export const useWalletStore = create<WalletState>((set, get) => ({
   wallet: null,
   ledger: [],
   refundRequests: [],
-  creditRate: { kurusPerCredit: 135, tlPerCredit: 1.35, label: '1 LifeOS Kredisi = 1,35 TL' },
+  creditRate: { kurusPerCredit: 200, tlPerCredit: 2, label: '1 LifeOS Kredisi = 2 TL' },
   serviceRules: [],
   parental: null,
   isLoading: false,
@@ -55,7 +55,7 @@ export const useWalletStore = create<WalletState>((set, get) => ({
           wallet: data.wallet,
           ledger: data.ledger || [],
           refundRequests: data.refundRequests || [],
-          creditRate: data.creditRate || { kurusPerCredit: 135, tlPerCredit: 1.35, label: '1 LifeOS Kredisi = 1,35 TL' },
+          creditRate: data.creditRate || { kurusPerCredit: 200, tlPerCredit: 2, label: '1 LifeOS Kredisi = 2 TL' },
           serviceRules: data.serviceRules || [],
           parental: data.parental || null,
           isLoading: false,
@@ -123,7 +123,7 @@ export const useWalletStore = create<WalletState>((set, get) => ({
   },
 
   topupCash: async (amountKurus: number, description?: string) => {
-    const credits = Math.floor(amountKurus / 135) || 10;
+    const credits = Math.floor(amountKurus / 220) || 10;
     return get().purchaseCredits(credits, 'gateway_card', description);
   },
 

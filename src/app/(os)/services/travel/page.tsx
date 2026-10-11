@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { TravelScreen } from '@/components/services/travel/TravelScreen';
+import { TravelPlatform } from '@/components/platform/TravelPlatform';
 
 export const metadata: Metadata = {
   title: 'Seyahat Merkezi — LifeOS',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function TravelPage() {
-  return <TravelScreen />;
+  return <TravelPlatform />;
 }

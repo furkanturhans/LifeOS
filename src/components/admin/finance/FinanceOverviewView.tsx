@@ -19,6 +19,7 @@ import {
 import { useAdminFinanceStore } from '@/stores/useAdminFinanceStore';
 import { cn } from '@/lib/utils';
 import type { TimeFilterOption } from '@/types/finance';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 const TIME_FILTERS: { id: TimeFilterOption; label: string }[] = [
   { id: 'today', label: 'Bugün' },
@@ -32,7 +33,7 @@ const TIME_FILTERS: { id: TimeFilterOption; label: string }[] = [
 
 function formatTL(kurus: number): string {
   const tl = kurus / 100;
-  return new Intl.NumberFormat('tr-TR', {
+  return new Intl.NumberFormat(getFormattingLocale(), {
     style: 'currency',
     currency: 'TRY',
     minimumFractionDigits: 2,
@@ -40,6 +41,7 @@ function formatTL(kurus: number): string {
 }
 
 export function FinanceOverviewView() {
+  const localizeText = useLocaleRender();
   const { metrics, timeFilter, setTimeFilter, fetchOverview, isLoading } = useAdminFinanceStore();
   const [creditMetrics, setCreditMetrics] = React.useState<any>(null);
 
@@ -64,7 +66,7 @@ export function FinanceOverviewView() {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-3 text-muted-foreground">
         <RefreshCw className="h-8 w-8 animate-spin text-primary" />
-        <span className="text-xs font-semibold">Finansal veriler hesaplanıyor...</span>
+        <span className="text-xs font-semibold">{localizeText("Finansal veriler hesaplanıyor...")}</span>
       </div>
     );
   }
@@ -150,7 +152,7 @@ export function FinanceOverviewView() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-card/70 border border-border/80 p-3 rounded-2xl backdrop-blur-sm shadow-2xs">
         <div className="flex items-center gap-2">
           <Calendar className="h-4 w-4 text-primary" />
-          <span className="text-xs font-bold text-foreground">Dönem Filtresi:</span>
+          <span className="text-xs font-bold text-foreground">{localizeText("Dönem Filtresi:")}</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
@@ -165,7 +167,7 @@ export function FinanceOverviewView() {
                   : 'text-muted-foreground hover:bg-muted/70 hover:text-foreground'
               )}
             >
-              {filter.label}
+              {localizeText(filter.label)}
             </button>
           ))}
         </div>
@@ -186,19 +188,19 @@ export function FinanceOverviewView() {
                 </div>
                 <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-muted-foreground bg-muted/60 px-2 py-0.5 rounded-md">
                   {kpi.isPositive ? <ArrowUpRight className="h-3 w-3 text-emerald-500" /> : <ArrowDownRight className="h-3 w-3 text-rose-500" />}
-                  {kpi.trend}
+                  {localizeText(kpi.trend)}
                 </span>
               </div>
 
               <div className="mt-3">
                 <span className="text-[11px] font-semibold text-muted-foreground block truncate">
-                  {kpi.title}
+                  {localizeText(kpi.title)}
                 </span>
                 <div className="text-lg font-black tracking-tight text-foreground mt-0.5">
-                  {kpi.value}
+                  {localizeText(kpi.value)}
                 </div>
                 <span className="text-[10px] text-muted-foreground/80 block mt-1 truncate">
-                  {kpi.subtitle}
+                  {localizeText(kpi.subtitle)}
                 </span>
               </div>
             </div>
@@ -214,62 +216,58 @@ export function FinanceOverviewView() {
               🪙
             </div>
             <div>
-              <h3 className="text-xs font-bold text-foreground">LifeOS Kredisi Ekosistem & Yükümlülük Özeti</h3>
-              <p className="text-[11px] text-muted-foreground">
-                Uygulama içi kapalı devre kullanım kredisi, dolaşımdaki bakiye ve hizmet yükümlülüğü
-              </p>
+              <h3 className="text-xs font-bold text-foreground">{localizeText("LifeOS Kredisi Ekosistem & Yükümlülük Özeti")}</h3>
+              <p className="text-[11px] text-muted-foreground">{localizeText("Uygulama içi kapalı devre kullanım kredisi, dolaşımdaki bakiye ve hizmet yükümlülüğü")}</p>
             </div>
           </div>
-          <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full font-mono">
-            1 Kredi = 1,35 TL
-          </span>
+          <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full font-mono">{localizeText("1 Kredi = 1,35 TL")}</span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
           <div className="p-3 rounded-xl bg-muted/40 border border-border/60">
-            <span className="text-[10px] text-muted-foreground block font-semibold">Toplam Satılan Kredi</span>
+            <span className="text-[10px] text-muted-foreground block font-semibold">{localizeText("Toplam Satılan Kredi")}</span>
             <div className="text-base font-black text-foreground font-mono mt-0.5">
-              {creditMetrics?.totalSoldCredits || 0} <span className="text-xs font-normal text-muted-foreground">Kredi</span>
+              {localizeText(creditMetrics?.totalSoldCredits || 0)} <span className="text-xs font-normal text-muted-foreground">{localizeText("Kredi")}</span>
             </div>
             <span className="text-[10px] text-emerald-600 font-mono font-bold">
-              {formatTL(creditMetrics?.totalSoldKurus || 0)}
+              {localizeText(formatTL(creditMetrics?.totalSoldKurus || 0))}
             </span>
           </div>
 
           <div className="p-3 rounded-xl bg-muted/40 border border-border/60">
-            <span className="text-[10px] text-muted-foreground block font-semibold">Aktif Kullanıcı Bakiyeleri</span>
+            <span className="text-[10px] text-muted-foreground block font-semibold">{localizeText("Aktif Kullanıcı Bakiyeleri")}</span>
             <div className="text-base font-black text-foreground font-mono mt-0.5">
-              {creditMetrics?.totalActiveUserCredits || 0} <span className="text-xs font-normal text-muted-foreground">Kredi</span>
+              {localizeText(creditMetrics?.totalActiveUserCredits || 0)} <span className="text-xs font-normal text-muted-foreground">{localizeText("Kredi")}</span>
             </div>
-            <span className="text-[10px] text-muted-foreground">Dolaşımdaki toplam</span>
+            <span className="text-[10px] text-muted-foreground">{localizeText("Dolaşımdaki toplam")}</span>
           </div>
 
           <div className="p-3 rounded-xl bg-muted/40 border border-border/60">
-            <span className="text-[10px] text-muted-foreground block font-semibold">Toplam Harcanan Kredi</span>
+            <span className="text-[10px] text-muted-foreground block font-semibold">{localizeText("Toplam Harcanan Kredi")}</span>
             <div className="text-base font-black text-foreground font-mono mt-0.5">
-              {creditMetrics?.totalSpentCredits || 0} <span className="text-xs font-normal text-muted-foreground">Kredi</span>
+              {localizeText(creditMetrics?.totalSpentCredits || 0)} <span className="text-xs font-normal text-muted-foreground">{localizeText("Kredi")}</span>
             </div>
-            <span className="text-[10px] text-primary font-mono font-semibold">Hizmet & eğitim tüketimi</span>
+            <span className="text-[10px] text-primary font-mono font-semibold">{localizeText("Hizmet & eğitim tüketimi")}</span>
           </div>
 
           <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20">
-            <span className="text-[10px] text-amber-800 dark:text-amber-300 block font-bold">Kullanılmamış Kredi Yükümlülüğü</span>
+            <span className="text-[10px] text-amber-800 dark:text-amber-300 block font-bold">{localizeText("Kullanılmamış Kredi Yükümlülüğü")}</span>
             <div className="text-base font-black text-amber-700 dark:text-amber-400 font-mono mt-0.5">
-              {formatTL(creditMetrics?.unearnedCreditLiabilityKurus || 0)}
+              {localizeText(formatTL(creditMetrics?.unearnedCreditLiabilityKurus || 0))}
             </div>
-            <span className="text-[10px] text-amber-600/80 block">Bilanço ertelenmiş gelir payı</span>
+            <span className="text-[10px] text-amber-600/80 block">{localizeText("Bilanço ertelenmiş gelir payı")}</span>
           </div>
         </div>
 
         {/* Module breakdown row */}
         {creditMetrics?.moduleBreakdown && creditMetrics.moduleBreakdown.length > 0 && (
           <div className="pt-2 border-t border-border/50">
-            <span className="text-[11px] font-bold text-muted-foreground block mb-2">Modül Bazlı Kredi Harcamaları:</span>
+            <span className="text-[11px] font-bold text-muted-foreground block mb-2">{localizeText("Modül Bazlı Kredi Harcamaları:")}</span>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
               {creditMetrics.moduleBreakdown.map((mb: any) => (
                 <div key={mb.module} className="p-2 rounded-lg bg-muted/30 border border-border/40 flex items-center justify-between">
-                  <span className="text-muted-foreground text-[11px] truncate max-w-[110px]">{mb.labelTr}</span>
-                  <span className="font-mono font-bold text-foreground text-[11px]">{mb.creditsSpent} Kredi</span>
+                  <span className="text-muted-foreground text-[11px] truncate max-w-[110px]">{localizeText(mb.labelTr)}</span>
+                  <span className="font-mono font-bold text-foreground text-[11px]">{localizeText(mb.creditsSpent)}{localizeText(" Kredi")}</span>
                 </div>
               ))}
             </div>
@@ -283,12 +281,10 @@ export function FinanceOverviewView() {
         <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-xs font-bold text-foreground">Günün Saatlik Gelir Akışı</h3>
-              <p className="text-[11px] text-muted-foreground">Bugün gerçekleşen saatlik işlem hacmi</p>
+              <h3 className="text-xs font-bold text-foreground">{localizeText("Günün Saatlik Gelir Akışı")}</h3>
+              <p className="text-[11px] text-muted-foreground">{localizeText("Bugün gerçekleşen saatlik işlem hacmi")}</p>
             </div>
-            <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
-              Canlı Saatlik
-            </span>
+            <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">{localizeText("Canlı Saatlik")}</span>
           </div>
 
           <div className="h-48 flex items-end justify-between gap-2 pt-4 border-b border-border/50 pb-2">
@@ -303,12 +299,12 @@ export function FinanceOverviewView() {
                       className="w-full max-w-[28px] rounded-t-lg bg-gradient-to-t from-primary/80 to-primary group-hover:from-primary group-hover:to-primary/90 transition-all relative"
                     >
                       <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-popover text-popover-foreground text-[10px] font-bold px-1.5 py-0.5 rounded shadow whitespace-nowrap z-10 pointer-events-none transition-opacity">
-                        {formatTL(item.grossKurus)}
+                        {localizeText(formatTL(item.grossKurus))}
                       </div>
                     </div>
                   </div>
                   <span className="text-[10px] font-mono text-muted-foreground group-hover:text-foreground">
-                    {item.hour}
+                    {localizeText(item.hour)}
                   </span>
                 </div>
               );
@@ -320,12 +316,10 @@ export function FinanceOverviewView() {
         <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-xs font-bold text-foreground">Aylık Platform Gelir Trendi</h3>
-              <p className="text-[11px] text-muted-foreground">Son aylardaki brüt hacim ve net komisyon performansı</p>
+              <h3 className="text-xs font-bold text-foreground">{localizeText("Aylık Platform Gelir Trendi")}</h3>
+              <p className="text-[11px] text-muted-foreground">{localizeText("Son aylardaki brüt hacim ve net komisyon performansı")}</p>
             </div>
-            <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full">
-              Sürekli Büyüme
-            </span>
+            <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full">{localizeText("Sürekli Büyüme")}</span>
           </div>
 
           <div className="space-y-2.5 pt-1">
@@ -335,10 +329,10 @@ export function FinanceOverviewView() {
               return (
                 <div key={index} className="space-y-1">
                   <div className="flex items-center justify-between text-[11px]">
-                    <span className="font-semibold text-foreground">{m.month}</span>
+                    <span className="font-semibold text-foreground">{localizeText(m.month)}</span>
                     <div className="flex items-center gap-3">
-                      <span className="text-muted-foreground font-mono">Brüt: {formatTL(m.grossKurus)}</span>
-                      <span className="font-bold text-emerald-500 font-mono">Net: {formatTL(m.platformNetKurus)}</span>
+                      <span className="text-muted-foreground font-mono">{localizeText("Brüt: ")}{localizeText(formatTL(m.grossKurus))}</span>
+                      <span className="font-bold text-emerald-500 font-mono">{localizeText("Net: ")}{localizeText(formatTL(m.platformNetKurus))}</span>
                     </div>
                   </div>
                   <div className="h-2 w-full bg-muted/60 rounded-full overflow-hidden flex">
@@ -358,8 +352,8 @@ export function FinanceOverviewView() {
       <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-2xs space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-xs font-bold text-foreground">Gelir Kaynaklarına Göre Dağılım</h3>
-            <p className="text-[11px] text-muted-foreground">Her modülün ürettiği brüt ciro ve LifeOS komisyon tutarları</p>
+            <h3 className="text-xs font-bold text-foreground">{localizeText("Gelir Kaynaklarına Göre Dağılım")}</h3>
+            <p className="text-[11px] text-muted-foreground">{localizeText("Her modülün ürettiği brüt ciro ve LifeOS komisyon tutarları")}</p>
           </div>
         </div>
 
@@ -367,11 +361,11 @@ export function FinanceOverviewView() {
           <table className="w-full text-left text-xs">
             <thead>
               <tr className="border-b border-border/70 text-muted-foreground text-[11px]">
-                <th className="pb-2.5 font-bold">Gelir Kaynağı / Modül</th>
-                <th className="pb-2.5 font-bold text-center">İşlem Adedi</th>
-                <th className="pb-2.5 font-bold text-right">Toplam Brüt Hacim</th>
-                <th className="pb-2.5 font-bold text-right">LifeOS Net Komisyon</th>
-                <th className="pb-2.5 font-bold text-right">Pay Oranı</th>
+                <th className="pb-2.5 font-bold">{localizeText("Gelir Kaynağı / Modül")}</th>
+                <th className="pb-2.5 font-bold text-center">{localizeText("İşlem Adedi")}</th>
+                <th className="pb-2.5 font-bold text-right">{localizeText("Toplam Brüt Hacim")}</th>
+                <th className="pb-2.5 font-bold text-right">{localizeText("LifeOS Net Komisyon")}</th>
+                <th className="pb-2.5 font-bold text-right">{localizeText("Pay Oranı")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/40">
@@ -384,12 +378,12 @@ export function FinanceOverviewView() {
                   <tr key={idx} className="hover:bg-muted/30 transition-colors">
                     <td className="py-3 font-semibold text-foreground flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-primary" />
-                      {sb.labelTr}
+                      {localizeText(sb.labelTr)}
                     </td>
-                    <td className="py-3 text-center text-muted-foreground font-mono">{sb.transactionCount}</td>
-                    <td className="py-3 text-right font-bold font-mono text-foreground">{formatTL(sb.grossKurus)}</td>
-                    <td className="py-3 text-right font-black font-mono text-emerald-500">{formatTL(sb.platformNetKurus)}</td>
-                    <td className="py-3 text-right font-semibold text-muted-foreground">%{sharePercent}</td>
+                    <td className="py-3 text-center text-muted-foreground font-mono">{localizeText(sb.transactionCount)}</td>
+                    <td className="py-3 text-right font-bold font-mono text-foreground">{localizeText(formatTL(sb.grossKurus))}</td>
+                    <td className="py-3 text-right font-black font-mono text-emerald-500">{localizeText(formatTL(sb.platformNetKurus))}</td>
+                    <td className="py-3 text-right font-semibold text-muted-foreground">%{localizeText(sharePercent)}</td>
                   </tr>
                 );
               })}
@@ -404,7 +398,7 @@ export function FinanceOverviewView() {
         <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-2xs space-y-3">
           <div className="flex items-center gap-2">
             <Award className="h-4 w-4 text-amber-500" />
-            <h3 className="text-xs font-bold text-foreground">En Çok Kazanan Eğitmenler</h3>
+            <h3 className="text-xs font-bold text-foreground">{localizeText("En Çok Kazanan Eğitmenler")}</h3>
           </div>
           <div className="space-y-2 pt-1">
             {metrics?.topInstructors.map((inst) => (
@@ -414,13 +408,13 @@ export function FinanceOverviewView() {
                     👨‍🏫
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-foreground block">{inst.name}</span>
-                    <span className="text-[10px] text-muted-foreground">{inst.salesCount} Satış / Canlı Ders</span>
+                    <span className="text-xs font-bold text-foreground block">{localizeText(inst.name)}</span>
+                    <span className="text-[10px] text-muted-foreground">{localizeText(inst.salesCount)}{localizeText(" Satış / Canlı Ders")}</span>
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs font-black text-foreground block font-mono">{formatTL(inst.grossKurus)}</span>
-                  <span className="text-[10px] font-semibold text-emerald-500 font-mono">Platform: {formatTL(inst.platformCommissionKurus)}</span>
+                  <span className="text-xs font-black text-foreground block font-mono">{localizeText(formatTL(inst.grossKurus))}</span>
+                  <span className="text-[10px] font-semibold text-emerald-500 font-mono">{localizeText("Platform: ")}{localizeText(formatTL(inst.platformCommissionKurus))}</span>
                 </div>
               </div>
             ))}
@@ -431,7 +425,7 @@ export function FinanceOverviewView() {
         <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-2xs space-y-3">
           <div className="flex items-center gap-2">
             <Award className="h-4 w-4 text-sky-500" />
-            <h3 className="text-xs font-bold text-foreground">En Çok Kazanan Hizmet Sağlayıcılar</h3>
+            <h3 className="text-xs font-bold text-foreground">{localizeText("En Çok Kazanan Hizmet Sağlayıcılar")}</h3>
           </div>
           <div className="space-y-2 pt-1">
             {metrics?.topProviders.map((prov) => (
@@ -441,13 +435,13 @@ export function FinanceOverviewView() {
                     🛠️
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-foreground block">{prov.name}</span>
-                    <span className="text-[10px] text-muted-foreground">{prov.serviceType} • {prov.jobsCount} Hizmet</span>
+                    <span className="text-xs font-bold text-foreground block">{localizeText(prov.name)}</span>
+                    <span className="text-[10px] text-muted-foreground">{localizeText(prov.serviceType)} • {localizeText(prov.jobsCount)}{localizeText(" Hizmet")}</span>
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs font-black text-foreground block font-mono">{formatTL(prov.grossKurus)}</span>
-                  <span className="text-[10px] font-semibold text-emerald-500 font-mono">Platform: {formatTL(prov.commissionKurus)}</span>
+                  <span className="text-xs font-black text-foreground block font-mono">{localizeText(formatTL(prov.grossKurus))}</span>
+                  <span className="text-[10px] font-semibold text-emerald-500 font-mono">{localizeText("Platform: ")}{localizeText(formatTL(prov.commissionKurus))}</span>
                 </div>
               </div>
             ))}

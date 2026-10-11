@@ -1,7 +1,7 @@
 'use client';
 
-import { EducationScreen } from '@/components/education/EducationScreen';
+import { AcademyHub } from '@/components/education/AcademyHub';
 
 export default function CoursesPage() {
-  return <EducationScreen />;
+  return <AcademyHub />;
 }

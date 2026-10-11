@@ -26,8 +26,10 @@ import { useProviderAuthStore } from '@/stores/useProviderAuthStore';
 import { TAXI_STATUS_LABELS, type TaxiRequest } from '@/types/taxi';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 export function TaxiScreen() {
+  const localizeText = useLocaleRender();
   const {
     currentRole,
     config,
@@ -67,17 +69,17 @@ export function TaxiScreen() {
             <div className="flex-1 pr-2">
               <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-600 dark:text-amber-400">
                 <ShieldCheck className="h-3.5 w-3.5" />
-                <span>Sabit Fiyat & Güvenli Taksi</span>
+                <span>{localizeText("Sabit Fiyat & Güvenli Taksi")}</span>
               </div>
               <h2 className="mt-1 text-base font-bold text-foreground">
-                {currentRole === 'customer'
+                {localizeText(currentRole === 'customer'
                   ? 'Taksi Talepleri & Teklif Yönetimi'
-                  : 'Şoför Pazar Yeri & Açık Talepler'}
+                  : 'Şoför Pazar Yeri & Açık Talepler')}
               </h2>
               <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                {currentRole === 'customer'
+                {localizeText(currentRole === 'customer'
                   ? 'Gideceğiniz güzergahı belirtin, onaylı taksi şoförlerinden sabit fiyat teklifi toplayın. Numaranız gizli tutulur.'
-                  : 'Açık taksi taleplerini inceleyin, doğrudan sabit yolculuk teklifinizi iletin. Diğer şoförlerin teklifleri gizlidir.'}
+                  : 'Açık taksi taleplerini inceleyin, doğrudan sabit yolculuk teklifinizi iletin. Diğer şoförlerin teklifleri gizlidir.')}
               </p>
             </div>
             <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-amber-500/15 text-2xl shadow-sm">
@@ -88,12 +90,12 @@ export function TaxiScreen() {
           <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-border/40">
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-              <span>Numara Gizleme Garantisi</span>
+              <span>{localizeText("Numara Gizleme Garantisi")}</span>
             </div>
             <span className="text-muted-foreground/40">•</span>
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <Coins className="h-3.5 w-3.5 text-amber-500" />
-              <span>Teklif Kredisi: {config.bidCreditFee} {config.currency}</span>
+              <span>{localizeText("Teklif Kredisi: ")}{localizeText(config.bidCreditFee)} {localizeText(config.currency)}</span>
             </div>
           </div>
         </motion.div>
@@ -116,12 +118,8 @@ export function TaxiScreen() {
                       <Car className="h-6 w-6" />
                     </div>
                     <div>
-                      <h3 className="text-base font-bold text-foreground">
-                        Yolculuk Talebi Oluştur
-                      </h3>
-                      <p className="text-xs text-muted-foreground">
-                        Şehir içi sabit fiyatlı hızlı taksi çağır
-                      </p>
+                      <h3 className="text-base font-bold text-foreground">{localizeText("Yolculuk Talebi Oluştur")}</h3>
+                      <p className="text-xs text-muted-foreground">{localizeText("Şehir içi sabit fiyatlı hızlı taksi çağır")}</p>
                     </div>
                   </div>
                   <Button
@@ -129,9 +127,7 @@ export function TaxiScreen() {
                     size="sm"
                     className="rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs shadow-md shadow-amber-500/20"
                   >
-                    <Plus className="h-3.5 w-3.5 mr-1" />
-                    Taksi Çağır
-                  </Button>
+                    <Plus className="h-3.5 w-3.5 mr-1" />{localizeText("Taksi Çağır")}</Button>
                 </div>
               </motion.div>
             </div>
@@ -139,12 +135,9 @@ export function TaxiScreen() {
             {/* 2. My Requests Section */}
             <div className="px-4">
               <div className="mb-3 px-2 flex items-center justify-between">
-                <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  Taleplerim & Gelen Teklifler
-                </h2>
+                <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Taleplerim & Gelen Teklifler")}</h2>
                 <span className="text-[11px] font-medium text-amber-500">
-                  {deduplicatedMyRequests.length} Talep
-                </span>
+                  {localizeText(deduplicatedMyRequests.length)}{localizeText(" Talep")}</span>
               </div>
 
               {deduplicatedMyRequests.length === 0 ? (
@@ -152,12 +145,8 @@ export function TaxiScreen() {
                   <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
                     <Inbox className="h-6 w-6" />
                   </div>
-                  <h4 className="text-sm font-semibold text-foreground">
-                    Henüz Bir Taksi Talebiniz Yok
-                  </h4>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Yukarıdaki butona basarak ilk yolculuk talebinizi anonim olarak oluşturabilirsiniz.
-                  </p>
+                  <h4 className="text-sm font-semibold text-foreground">{localizeText("Henüz Bir Taksi Talebiniz Yok")}</h4>
+                  <p className="mt-1 text-xs text-muted-foreground">{localizeText("Yukarıdaki butona basarak ilk yolculuk talebinizi anonim olarak oluşturabilirsiniz.")}</p>
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -175,38 +164,36 @@ export function TaxiScreen() {
                           <div>
                             <div className="flex items-center gap-2">
                               <span className="font-mono text-xs font-semibold text-amber-500">
-                                #{req.id}
+                                #{localizeText(req.id)}
                               </span>
                               <Badge variant={statusInfo.badgeVariant} className="text-[10px] py-0 px-2">
-                                {statusInfo.tr}
+                                {localizeText(statusInfo.tr)}
                               </Badge>
                             </div>
                             <h3 className="text-sm font-bold text-foreground mt-1">
-                              {req.pickupLocation} → {req.dropoffLocation}
+                              {localizeText(req.pickupLocation)} → {localizeText(req.dropoffLocation)}
                             </h3>
                             <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1">
                               <span className="flex items-center gap-1">
                                 <Calendar className="h-3 w-3" />
-                                {req.requestedDateTime}
+                                {localizeText(req.requestedDateTime)}
                               </span>
                               <span className="flex items-center gap-1">
                                 <Users className="h-3 w-3" />
-                                {req.passengerCount} Yolcu
-                              </span>
+                                {localizeText(req.passengerCount)}{localizeText(" Yolcu")}</span>
                             </div>
                           </div>
 
                           <div className="text-right">
                             <span className="rounded-full bg-amber-500/10 px-2.5 py-1 text-xs font-bold text-amber-600 dark:text-amber-400">
-                              {reqBids.length} Teklif
-                            </span>
+                              {localizeText(reqBids.length)}{localizeText(" Teklif")}</span>
                           </div>
                         </div>
 
                         <div className="mt-3 pt-2.5 border-t border-border/40 flex items-center justify-between text-xs text-muted-foreground">
-                          <span>{req.notes ? `Not: ${req.notes}` : 'Ek not yok'}</span>
+                          <span>{localizeText(req.notes ? `Not: ${req.notes}` : 'Ek not yok')}</span>
                           <span className="font-semibold text-amber-500 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                            <span>Teklifleri Gör</span>
+                            <span>{localizeText("Teklifleri Gör")}</span>
                             <ChevronRight className="h-3.5 w-3.5" />
                           </span>
                         </div>
@@ -233,18 +220,13 @@ export function TaxiScreen() {
                 {/* Open Marketplace Requests */}
                 <div>
                   <div className="mb-3 px-2 flex items-center justify-between">
-                    <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      Açık Taksi Talepleri (Pazar Yeri)
-                    </h2>
+                    <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Açık Taksi Talepleri (Pazar Yeri)")}</h2>
                     <span className="text-[11px] font-medium text-amber-500">
-                      {driverMarketplaceRequests.length} Talep
-                    </span>
+                      {localizeText(driverMarketplaceRequests.length)}{localizeText(" Talep")}</span>
                   </div>
 
                   {driverMarketplaceRequests.length === 0 ? (
-                    <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">
-                      Şu anda teklif verilebilecek açık taksi talebi bulunmuyor.
-                    </div>
+                    <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">{localizeText("Şu anda teklif verilebilecek açık taksi talebi bulunmuyor.")}</div>
                   ) : (
                     <div className="space-y-3">
                       {driverMarketplaceRequests.map((req) => {
@@ -260,46 +242,40 @@ export function TaxiScreen() {
                             <div className="flex items-start justify-between gap-2">
                               <div>
                                 <div className="flex items-center gap-2">
-                                  <span className="font-mono text-xs font-semibold text-amber-500">
-                                    Talep #{req.id}
+                                  <span className="font-mono text-xs font-semibold text-amber-500">{localizeText("Talep #")}{localizeText(req.id)}
                                   </span>
                                   <Badge variant={statusInfo.badgeVariant} className="text-[10px] py-0 px-2">
-                                    {statusInfo.tr}
+                                    {localizeText(statusInfo.tr)}
                                   </Badge>
                                 </div>
                                 <h3 className="text-sm font-bold text-foreground mt-1 group-hover:text-amber-500 transition-colors">
-                                  {req.pickupLocation} → {req.dropoffLocation}
+                                  {localizeText(req.pickupLocation)} → {localizeText(req.dropoffLocation)}
                                 </h3>
                               </div>
 
                               {hasGivenBid && (
-                                <span className="rounded-full bg-blue-500/15 px-2.5 py-0.5 text-[10px] font-semibold text-blue-500">
-                                  Teklifiniz Var
-                                </span>
+                                <span className="rounded-full bg-blue-500/15 px-2.5 py-0.5 text-[10px] font-semibold text-blue-500">{localizeText("Teklifiniz Var")}</span>
                               )}
                             </div>
 
                             <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground">
                               <span className="flex items-center gap-1">
                                 <Calendar className="h-3.5 w-3.5 text-amber-500" />
-                                {req.requestedDateTime}
+                                {localizeText(req.requestedDateTime)}
                               </span>
                               <span className="flex items-center gap-1">
                                 <Users className="h-3.5 w-3.5 text-amber-500" />
-                                {req.passengerCount} Yolcu
-                              </span>
+                                {localizeText(req.passengerCount)}{localizeText(" Yolcu")}</span>
                             </div>
 
                             {req.notes && (
-                              <p className="mt-2 text-xs text-muted-foreground bg-muted/30 p-2.5 rounded-xl">
-                                Yolcu Notu: {req.notes}
+                              <p className="mt-2 text-xs text-muted-foreground bg-muted/30 p-2.5 rounded-xl">{localizeText("Yolcu Notu: ")}{localizeText(req.notes)}
                               </p>
                             )}
 
                             {/* Submit Bid Button */}
                             <div className="mt-3.5 pt-2.5 border-t border-border/40 flex items-center justify-between">
-                              <span className="text-[11px] text-muted-foreground">
-                                Kredi: <strong className="text-foreground">{config.bidCreditFee} {config.currency}</strong>
+                              <span className="text-[11px] text-muted-foreground">{localizeText("Kredi:")}<strong className="text-foreground">{localizeText(config.bidCreditFee)} {localizeText(config.currency)}</strong>
                               </span>
                               <Button
                                 onClick={(e) => {
@@ -309,7 +285,7 @@ export function TaxiScreen() {
                                 size="sm"
                                 className="rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs shadow-sm"
                               >
-                                {hasGivenBid ? 'Teklifi Düzenle' : 'Sabit Teklif Ver'}
+                                {localizeText(hasGivenBid ? 'Teklifi Düzenle' : 'Sabit Teklif Ver')}
                               </Button>
                             </div>
                           </div>
@@ -322,18 +298,13 @@ export function TaxiScreen() {
                 {/* My Submitted Bids */}
                 <div>
                   <div className="mb-3 px-2 flex items-center justify-between">
-                    <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      Verdiğim Teklifler ({myBids.length})
+                    <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Verdiğim Teklifler (")}{localizeText(myBids.length)})
                     </h2>
-                    <span className="text-[11px] font-medium text-muted-foreground">
-                      Sadece Sizin Teklifleriniz
-                    </span>
+                    <span className="text-[11px] font-medium text-muted-foreground">{localizeText("Sadece Sizin Teklifleriniz")}</span>
                   </div>
 
                   {myBids.length === 0 ? (
-                    <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">
-                      Henüz bir taksi talebine teklif vermediniz.
-                    </div>
+                    <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">{localizeText("Henüz bir taksi talebine teklif vermediniz.")}</div>
                   ) : (
                     <div className="space-y-2.5">
                       {myBids.map((bid) => (
@@ -342,19 +313,17 @@ export function TaxiScreen() {
                           className="rounded-2xl border border-border/80 bg-card p-3.5 text-xs flex items-center justify-between shadow-sm"
                         >
                           <div>
-                            <div className="font-semibold text-foreground">
-                              Talep #{bid.requestId} için Teklifiniz
-                            </div>
+                            <div className="font-semibold text-foreground">{localizeText("Talep #")}{localizeText(bid.requestId)}{localizeText(" için Teklifiniz")}</div>
                             <div className="text-[11px] text-muted-foreground mt-0.5">
-                              "{bid.bidNote}" ({bid.vehicleType})
+                              "{localizeText(bid.bidNote)}" ({localizeText(bid.vehicleType)})
                             </div>
                           </div>
                           <div className="text-right">
                             <div className="font-bold text-sm text-amber-500">
-                              {bid.price.toLocaleString('tr-TR')} {bid.currency}
+                              {localizeText(bid.price.toLocaleString(getFormattingLocale()))} {localizeText(bid.currency)}
                             </div>
                             <span className="text-[10px] text-muted-foreground">
-                              {bid.status === 'accepted' ? '✓ Kabul Edildi' : 'Beklemede'}
+                              {localizeText(bid.status === 'accepted' ? '✓ Kabul Edildi' : 'Beklemede')}
                             </span>
                           </div>
                         </div>

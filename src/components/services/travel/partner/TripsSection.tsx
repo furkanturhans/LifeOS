@@ -7,8 +7,10 @@ import { useTravelPartnerStore } from '@/stores/useTravelPartnerStore';
 import { CreateTripModal } from './CreateTripModal';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function TripsSection() {
+  const localizeText = useLocaleRender();
   const { getMyDraftTrips, getMyRoutes, getMyVehicles, deleteDraftTrip } =
     useTravelPartnerStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,19 +24,15 @@ export function TripsSection() {
       {/* Top Action Bar */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-foreground">Planlanan Sefer Taslakları</h3>
-          <p className="text-xs text-muted-foreground">
-            Firmanızın tanımladığı ve henüz yayına alınmamış seferler
-          </p>
+          <h3 className="text-sm font-bold text-foreground">{localizeText("Planlanan Sefer Taslakları")}</h3>
+          <p className="text-xs text-muted-foreground">{localizeText("Firmanızın tanımladığı ve henüz yayına alınmamış seferler")}</p>
         </div>
         <Button
           onClick={() => setIsModalOpen(true)}
           size="sm"
           className="rounded-2xl bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold shadow-md shadow-blue-500/20"
         >
-          <Plus className="h-3.5 w-3.5 mr-1" />
-          Yeni Sefer Taslağı
-        </Button>
+          <Plus className="h-3.5 w-3.5 mr-1" />{localizeText("Yeni Sefer Taslağı")}</Button>
       </div>
 
       {/* Trips List */}
@@ -43,12 +41,8 @@ export function TripsSection() {
           <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-500">
             <Calendar className="h-6 w-6" />
           </div>
-          <h4 className="text-sm font-semibold text-foreground">
-            Henüz Kayıtlı Bir Sefer Taslağı Yok
-          </h4>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Araç ve rotanızı seçerek sefer taslağınızı oluşturabilirsiniz.
-          </p>
+          <h4 className="text-sm font-semibold text-foreground">{localizeText("Henüz Kayıtlı Bir Sefer Taslağı Yok")}</h4>
+          <p className="mt-1 text-xs text-muted-foreground">{localizeText("Araç ve rotanızı seçerek sefer taslağınızı oluşturabilirsiniz.")}</p>
         </div>
       ) : (
         <div className="space-y-2.5">
@@ -70,26 +64,24 @@ export function TripsSection() {
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-xs text-foreground">
-                        {route ? `${route.originCity} → ${route.destinationCity}` : 'Sefer'}
+                        {localizeText(route ? `${route.originCity} → ${route.destinationCity}` : 'Sefer')}
                       </span>
-                      <Badge variant="outline" className="text-[9px] py-0 px-1.5 border-amber-500/40 text-amber-600 dark:text-amber-400">
-                        Taslak (Yayında Değil)
-                      </Badge>
+                      <Badge variant="outline" className="text-[9px] py-0 px-1.5 border-amber-500/40 text-amber-600 dark:text-amber-400">{localizeText("Taslak (Yayında Değil)")}</Badge>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-3 text-[11px] text-muted-foreground mt-1">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
-                        {trp.departureDateTime}
+                        {localizeText(trp.departureDateTime)}
                       </span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
                         <Bus className="h-3 w-3" />
-                        {vehicle ? `${vehicle.vehicleCode} (${vehicle.plateNumber})` : 'Otobüs'}
+                        {localizeText(vehicle ? `${vehicle.vehicleCode} (${vehicle.plateNumber})` : 'Otobüs')}
                       </span>
                       <span>•</span>
                       <span className="font-bold text-foreground">
-                        {trp.baseTicketPrice} {trp.currency}
+                        {localizeText(trp.baseTicketPrice)} {localizeText(trp.currency)}
                       </span>
                     </div>
                   </div>

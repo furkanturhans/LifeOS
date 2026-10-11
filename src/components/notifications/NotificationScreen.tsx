@@ -7,8 +7,10 @@ import { NotificationHeader } from './NotificationHeader';
 import { NotificationCategoriesGrid } from './NotificationCategoriesGrid';
 import { LockedNotificationModal } from './LockedNotificationModal';
 import { Dock } from '@/components/os/Dock';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function NotificationScreen() {
+  const localizeText = useLocaleRender();
   const [selectedLockedFeature, setSelectedLockedFeature] = useState<{
     title: string;
     icon: React.ReactNode;
@@ -39,14 +41,10 @@ export function NotificationScreen() {
             <div className="flex-1 pr-2">
               <div className="flex items-center gap-1.5 text-xs font-semibold text-indigo-500">
                 <CheckCircle2 className="h-3.5 w-3.5" />
-                <span>Gündem Sakin</span>
+                <span>{localizeText("Gündem Sakin")}</span>
               </div>
-              <h2 className="mt-1 text-base font-bold text-foreground">
-                Yeni Bildiriminiz Yok
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                Tüm modüllerden gelen önemli bildirimler ve hatırlatmalar burada toplanır. Dilediğiniz kategorinin ses ve öncelik seviyesini aşağıdan ayarlayabilirsiniz.
-              </p>
+              <h2 className="mt-1 text-base font-bold text-foreground">{localizeText("Yeni Bildiriminiz Yok")}</h2>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{localizeText("Tüm modüllerden gelen önemli bildirimler ve hatırlatmalar burada toplanır. Dilediğiniz kategorinin ses ve öncelik seviyesini aşağıdan ayarlayabilirsiniz.")}</p>
             </div>
             <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-indigo-500/15 text-2xl shadow-sm">
               🔔
@@ -56,12 +54,12 @@ export function NotificationScreen() {
           <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-border/40">
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <ShieldCheck className="h-3.5 w-3.5 text-indigo-500" />
-              <span>Gereksiz Bildirim Yok</span>
+              <span>{localizeText("Gereksiz Bildirim Yok")}</span>
             </div>
             <span className="text-muted-foreground/40">•</span>
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-purple-500" />
-              <span>Kategoriye Özel Kontrol</span>
+              <span>{localizeText("Kategoriye Özel Kontrol")}</span>
             </div>
           </div>
         </motion.div>

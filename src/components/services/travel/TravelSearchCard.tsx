@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/Button';
 import { LocationAutocompleteInput } from '@/components/services/common/LocationAutocompleteInput';
 import { cn } from '@/lib/utils';
 import type { TravelTripType, FlightCabinClass } from '@/types/travel';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface TravelSearchCardProps {
   onSearchExecuted?: () => void;
@@ -27,6 +28,7 @@ interface TravelSearchCardProps {
 }
 
 export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
+  const localizeText = useLocaleRender();
   const {
     activeTab,
     busQuery,
@@ -150,7 +152,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
       {validationError && (
         <div className="mb-4 flex items-center gap-2 rounded-2xl bg-destructive/15 border border-destructive/30 p-3 text-xs text-destructive">
           <AlertCircle className="h-4 w-4 flex-shrink-0" />
-          <span>{validationError}</span>
+          <span>{localizeText(validationError)}</span>
         </div>
       )}
 
@@ -170,9 +172,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                   ? 'bg-blue-500 text-white shadow-sm'
                   : 'text-muted-foreground hover:text-foreground'
               )}
-            >
-              Tek Yön
-            </button>
+            >{localizeText("Tek Yön")}</button>
             <button
               type="button"
               onClick={() => setBusQuery({ tripType: 'round_trip' })}
@@ -182,16 +182,14 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                   ? 'bg-blue-500 text-white shadow-sm'
                   : 'text-muted-foreground hover:text-foreground'
               )}
-            >
-              Gidiş - Dönüş
-            </button>
+            >{localizeText("Gidiş - Dönüş")}</button>
           </div>
 
           <div className="space-y-3">
             <div className="relative">
               <LocationAutocompleteInput
-                label="Kalkış Noktası (Nereden) *"
-                placeholder="Örn: İstanbul - Esenler Otogarı / Harem"
+                label={localizeText("Kalkış Noktası (Nereden) *")}
+                placeholder={localizeText("Örn: İstanbul - Esenler Otogarı / Harem")}
                 value={busQuery.fromLocation}
                 onChange={(val) => setBusQuery({ fromLocation: val })}
                 icon={<MapPin className="h-4 w-4 text-blue-500" />}
@@ -201,15 +199,15 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                 type="button"
                 onClick={swapBusLocations}
                 className="absolute right-3 top-7 z-10 flex h-7 w-7 items-center justify-center rounded-full border border-border bg-card shadow-sm text-muted-foreground hover:text-blue-500 hover:scale-105 active:scale-95 transition-all"
-                title="Kalkış ve Varış Noktalarını Değiştir"
+                title={localizeText("Kalkış ve Varış Noktalarını Değiştir")}
               >
                 <ArrowRightLeft className="h-3 w-3" />
               </button>
             </div>
 
             <LocationAutocompleteInput
-              label="Varış Noktası (Nereye) *"
-              placeholder="Örn: Ankara - AŞTİ / İzmir Otogarı"
+              label={localizeText("Varış Noktası (Nereye) *")}
+              placeholder={localizeText("Örn: Ankara - AŞTİ / İzmir Otogarı")}
               value={busQuery.toLocation}
               onChange={(val) => setBusQuery({ toLocation: val })}
               icon={<MapPin className="h-4 w-4 text-indigo-500" />}
@@ -219,9 +217,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                Gidiş Tarihi *
-              </label>
+              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Gidiş Tarihi *")}</label>
               <div className="relative">
                 <input
                   type="date"
@@ -237,9 +233,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
 
             {busQuery.tripType === 'round_trip' ? (
               <div>
-                <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  Dönüş Tarihi *
-                </label>
+                <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Dönüş Tarihi *")}</label>
                 <div className="relative">
                   <input
                     type="date"
@@ -254,9 +248,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
               </div>
             ) : (
               <div>
-                <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  Yolcu Sayısı
-                </label>
+                <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Yolcu Sayısı")}</label>
                 <div className="flex items-center gap-1 rounded-2xl border border-border bg-muted/30 p-1">
                   {[1, 2, 3, 4, 5].map((num) => (
                     <button
@@ -270,7 +262,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                           : 'text-muted-foreground hover:text-foreground'
                       )}
                     >
-                      {num}
+                      {localizeText(num)}
                     </button>
                   ))}
                 </div>
@@ -284,9 +276,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
               size="lg"
               className="w-full rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 font-semibold text-white shadow-lg shadow-blue-500/25 hover:from-blue-600 hover:to-indigo-700"
             >
-              <Search className="mr-2 h-4 w-4" />
-              Otobüs Bileti Bul
-            </Button>
+              <Search className="mr-2 h-4 w-4" />{localizeText("Otobüs Bileti Bul")}</Button>
           </div>
         </form>
       )}
@@ -308,9 +298,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                     ? 'bg-blue-500 text-white shadow-sm'
                     : 'text-muted-foreground hover:text-foreground'
                 )}
-              >
-                Tek Yön
-              </button>
+              >{localizeText("Tek Yön")}</button>
               <button
                 type="button"
                 onClick={() => setFlightQuery({ tripType: 'round_trip' })}
@@ -320,9 +308,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                     ? 'bg-blue-500 text-white shadow-sm'
                     : 'text-muted-foreground hover:text-foreground'
                 )}
-              >
-                Gidiş - Dönüş
-              </button>
+              >{localizeText("Gidiş - Dönüş")}</button>
             </div>
 
             <div className="flex items-center gap-1">
@@ -338,7 +324,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                       : 'text-muted-foreground hover:text-foreground'
                   )}
                 >
-                  {cls === 'economy' ? 'Ekonomi' : 'Business'}
+                  {localizeText(cls === 'economy' ? 'Ekonomi' : 'Business')}
                 </button>
               ))}
             </div>
@@ -347,8 +333,8 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
           <div className="space-y-3">
             <div className="relative">
               <LocationAutocompleteInput
-                label="Kalkış Havalimanı / Şehir (Nereden) *"
-                placeholder="Örn: IST - İstanbul Havalimanı / SAW"
+                label={localizeText("Kalkış Havalimanı / Şehir (Nereden) *")}
+                placeholder={localizeText("Örn: IST - İstanbul Havalimanı / SAW")}
                 value={flightQuery.fromAirport}
                 onChange={(val) => setFlightQuery({ fromAirport: val })}
                 icon={<Plane className="h-4 w-4 text-blue-500" />}
@@ -358,15 +344,15 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                 type="button"
                 onClick={swapFlightAirports}
                 className="absolute right-3 top-7 z-10 flex h-7 w-7 items-center justify-center rounded-full border border-border bg-card shadow-sm text-muted-foreground hover:text-blue-500 hover:scale-105 active:scale-95 transition-all"
-                title="Havalimanlarını Değiştir"
+                title={localizeText("Havalimanlarını Değiştir")}
               >
                 <ArrowRightLeft className="h-3 w-3" />
               </button>
             </div>
 
             <LocationAutocompleteInput
-              label="Varış Havalimanı / Şehir (Nereye) *"
-              placeholder="Örn: ESB - Ankara Esenboğa / AYT - Antalya"
+              label={localizeText("Varış Havalimanı / Şehir (Nereye) *")}
+              placeholder={localizeText("Örn: ESB - Ankara Esenboğa / AYT - Antalya")}
               value={flightQuery.toAirport}
               onChange={(val) => setFlightQuery({ toAirport: val })}
               icon={<Plane className="h-4 w-4 text-indigo-500 rotate-90" />}
@@ -376,9 +362,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                Gidiş Tarihi *
-              </label>
+              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Gidiş Tarihi *")}</label>
               <div className="relative">
                 <input
                   type="date"
@@ -394,9 +378,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
 
             {flightQuery.tripType === 'round_trip' ? (
               <div>
-                <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  Dönüş Tarihi *
-                </label>
+                <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Dönüş Tarihi *")}</label>
                 <div className="relative">
                   <input
                     type="date"
@@ -411,9 +393,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
               </div>
             ) : (
               <div>
-                <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  Yolcu Sayısı
-                </label>
+                <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Yolcu Sayısı")}</label>
                 <div className="flex items-center gap-1 rounded-2xl border border-border bg-muted/30 p-1">
                   {[1, 2, 3, 4, 5].map((num) => (
                     <button
@@ -427,7 +407,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                           : 'text-muted-foreground hover:text-foreground'
                       )}
                     >
-                      {num}
+                      {localizeText(num)}
                     </button>
                   ))}
                 </div>
@@ -441,9 +421,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
               size="lg"
               className="w-full rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 font-semibold text-white shadow-lg shadow-blue-500/25 hover:from-blue-600 hover:to-indigo-700"
             >
-              <Search className="mr-2 h-4 w-4" />
-              Uçak Bileti Bul
-            </Button>
+              <Search className="mr-2 h-4 w-4" />{localizeText("Uçak Bileti Bul")}</Button>
           </div>
         </form>
       )}
@@ -454,8 +432,8 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
       {activeTab === 'hotel' && (
         <form onSubmit={handleHotelSubmit} className="space-y-3.5">
           <LocationAutocompleteInput
-            label="Şehir, Bölge veya Otel Adı *"
-            placeholder="Örn: Antalya, Bodrum, Çeşme, İstanbul"
+            label={localizeText("Şehir, Bölge veya Otel Adı *")}
+            placeholder={localizeText("Örn: Antalya, Bodrum, Çeşme, İstanbul")}
             value={hotelQuery.location}
             onChange={(val) => setHotelQuery({ location: val })}
             icon={<Building className="h-4 w-4 text-blue-500" />}
@@ -464,9 +442,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                Giriş Tarihi *
-              </label>
+              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Giriş Tarihi *")}</label>
               <div className="relative">
                 <input
                   type="date"
@@ -481,9 +457,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
             </div>
 
             <div>
-              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                Çıkış Tarihi *
-              </label>
+              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Çıkış Tarihi *")}</label>
               <div className="relative">
                 <input
                   type="date"
@@ -500,9 +474,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                Misafir Sayısı
-              </label>
+              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Misafir Sayısı")}</label>
               <div className="flex items-center gap-1 rounded-2xl border border-border bg-muted/30 p-1">
                 {[1, 2, 3, 4].map((num) => (
                   <button
@@ -516,16 +488,14 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                         : 'text-muted-foreground hover:text-foreground'
                     )}
                   >
-                    {num}
+                    {localizeText(num)}
                   </button>
                 ))}
               </div>
             </div>
 
             <div>
-              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                Oda Sayısı
-              </label>
+              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Oda Sayısı")}</label>
               <div className="flex items-center gap-1 rounded-2xl border border-border bg-muted/30 p-1">
                 {[1, 2, 3].map((num) => (
                   <button
@@ -539,7 +509,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
                         : 'text-muted-foreground hover:text-foreground'
                     )}
                   >
-                    {num}
+                    {localizeText(num)}
                   </button>
                 ))}
               </div>
@@ -552,9 +522,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
               size="lg"
               className="w-full rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 font-semibold text-white shadow-lg shadow-blue-500/25 hover:from-blue-600 hover:to-indigo-700"
             >
-              <Search className="mr-2 h-4 w-4" />
-              Otel Ara
-            </Button>
+              <Search className="mr-2 h-4 w-4" />{localizeText("Otel Ara")}</Button>
           </div>
         </form>
       )}
@@ -565,8 +533,8 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
       {activeTab === 'car_rental' && (
         <form onSubmit={handleCarRentalSubmit} className="space-y-3.5">
           <LocationAutocompleteInput
-            label="Teslim Alma Yeri (Havalimanı / Şehir) *"
-            placeholder="Örn: İstanbul Havalimanı (IST) / İzmir Şube"
+            label={localizeText("Teslim Alma Yeri (Havalimanı / Şehir) *")}
+            placeholder={localizeText("Örn: İstanbul Havalimanı (IST) / İzmir Şube")}
             value={carRentalQuery.pickupLocation}
             onChange={(val) => setCarRentalQuery({ pickupLocation: val })}
             icon={<Car className="h-4 w-4 text-blue-500" />}
@@ -583,15 +551,13 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
               }
               className="rounded border-border text-blue-500 focus:ring-blue-500"
             />
-            <label htmlFor="diffLocation" className="text-xs text-muted-foreground select-none cursor-pointer">
-              Farklı bir lokasyonda teslim etmek istiyorum
-            </label>
+            <label htmlFor="diffLocation" className="text-xs text-muted-foreground select-none cursor-pointer">{localizeText("Farklı bir lokasyonda teslim etmek istiyorum")}</label>
           </div>
 
           {carRentalQuery.differentDropoffLocation && (
             <LocationAutocompleteInput
-              label="Bırakma Yeri *"
-              placeholder="Örn: Sabiha Gökçen Havalimanı (SAW)"
+              label={localizeText("Bırakma Yeri *")}
+              placeholder={localizeText("Örn: Sabiha Gökçen Havalimanı (SAW)")}
               value={carRentalQuery.dropoffLocation}
               onChange={(val) => setCarRentalQuery({ dropoffLocation: val })}
               icon={<MapPin className="h-4 w-4 text-indigo-500" />}
@@ -601,9 +567,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                Alış Tarihi & Saati *
-              </label>
+              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Alış Tarihi & Saati *")}</label>
               <div className="flex gap-2">
                 <input
                   type="date"
@@ -623,9 +587,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
             </div>
 
             <div>
-              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                İade Tarihi & Saati *
-              </label>
+              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("İade Tarihi & Saati *")}</label>
               <div className="flex gap-2">
                 <input
                   type="date"
@@ -651,9 +613,7 @@ export function TravelSearchCard({ onSearchExecuted }: TravelSearchCardProps) {
               size="lg"
               className="w-full rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 font-semibold text-white shadow-lg shadow-blue-500/25 hover:from-blue-600 hover:to-indigo-700"
             >
-              <Search className="mr-2 h-4 w-4" />
-              Kiralık Araç Bul
-            </Button>
+              <Search className="mr-2 h-4 w-4" />{localizeText("Kiralık Araç Bul")}</Button>
           </div>
         </form>
       )}

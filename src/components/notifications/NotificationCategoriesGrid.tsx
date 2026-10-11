@@ -19,6 +19,7 @@ import {
   type NotificationPreferenceLevel,
 } from '@/types/notifications';
 import { useNotificationStore } from '@/stores/useNotificationStore';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface NotificationCategoriesGridProps {
   onLockedTrigger: (title: string, icon: React.ReactNode) => void;
@@ -33,6 +34,7 @@ const CATEGORY_ICON_MAP: Record<NotificationCategoryKey, React.ReactNode> = {
 };
 
 export function NotificationCategoriesGrid({ onLockedTrigger }: NotificationCategoriesGridProps) {
+  const localizeText = useLocaleRender();
   const { preferences, setCategoryPreference } = useNotificationStore();
 
   function handlePreferenceSelect(
@@ -45,12 +47,8 @@ export function NotificationCategoriesGrid({ onLockedTrigger }: NotificationCate
   return (
     <div className="mt-4 px-4">
       <div className="mb-3 px-1 flex items-center justify-between">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Kategori Tercihleri
-        </h2>
-        <span className="text-xs font-medium text-muted-foreground">
-          5 Kategori
-        </span>
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Kategori Tercihleri")}</h2>
+        <span className="text-xs font-medium text-muted-foreground">{localizeText("5 Kategori")}</span>
       </div>
 
       <div className="space-y-3">
@@ -70,14 +68,14 @@ export function NotificationCategoriesGrid({ onLockedTrigger }: NotificationCate
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-start gap-3">
                       <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-muted border border-border">
-                        {CATEGORY_ICON_MAP[cat.id]}
+                        {localizeText(CATEGORY_ICON_MAP[cat.id])}
                       </div>
                       <div>
                         <CardTitle className="text-sm font-semibold">
-                          {cat.titleTr}
+                          {localizeText(cat.titleTr)}
                         </CardTitle>
                         <CardDescription className="text-xs mt-0.5">
-                          {cat.descriptionTr}
+                          {localizeText(cat.descriptionTr)}
                         </CardDescription>
                       </div>
                     </div>
@@ -86,7 +84,7 @@ export function NotificationCategoriesGrid({ onLockedTrigger }: NotificationCate
                     <button
                       onClick={() => onLockedTrigger(`${cat.titleTr} Bildirimleri`, CATEGORY_ICON_MAP[cat.id])}
                       className="rounded-md p-1 text-muted-foreground hover:text-foreground transition-colors"
-                      title="Detay"
+                      title={localizeText("Detay")}
                     >
                       <ChevronRight className="h-4 w-4" />
                     </button>
@@ -109,7 +107,7 @@ export function NotificationCategoriesGrid({ onLockedTrigger }: NotificationCate
                               : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border-transparent'
                           )}
                         >
-                          <span className="truncate w-full">{opt.labelTr}</span>
+                          <span className="truncate w-full">{localizeText(opt.labelTr)}</span>
                         </button>
                       );
                     })}

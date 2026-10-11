@@ -24,6 +24,7 @@ import { useKidsStore } from '@/stores/useKidsStore';
 import { kidsSpeech } from '@/services/kidsSpeechService';
 import type { KidsStoryItem } from '@/types/kids';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 const STORIES: KidsStoryItem[] = [
   {
@@ -113,6 +114,7 @@ const STORIES: KidsStoryItem[] = [
 ];
 
 export function KidsStoriesView({ onBackToKids }: { onBackToKids: () => void }) {
+  const localizeText = useLocaleRender();
   const { voiceSettings, isSpeaking, setIsSpeaking } = useKidsStore();
   const [activeStory, setActiveStory] = useState<KidsStoryItem | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
@@ -196,13 +198,12 @@ export function KidsStoriesView({ onBackToKids }: { onBackToKids: () => void }) 
               <ArrowLeft className="h-4 w-4" />
             </button>
 
-            <span className="text-2xl">{activeStory.coverEmoji}</span>
+            <span className="text-2xl">{localizeText(activeStory.coverEmoji)}</span>
             <div className="min-w-0">
               <h1 className="truncate text-base font-bold text-foreground">
-                {activeStory.title}
+                {localizeText(activeStory.title)}
               </h1>
-              <p className="truncate text-xs text-muted-foreground">
-                Sayfa {pageIndex + 1} / {activeStory.pages.length}
+              <p className="truncate text-xs text-muted-foreground">{localizeText("Sayfa ")}{localizeText(pageIndex + 1)} / {localizeText(activeStory.pages.length)}
               </p>
             </div>
           </div>
@@ -216,12 +217,10 @@ export function KidsStoriesView({ onBackToKids }: { onBackToKids: () => void }) 
           >
             {isSpeaking ? (
               <>
-                <Square className="h-3.5 w-3.5 mr-1" /> Durdur
-              </>
+                <Square className="h-3.5 w-3.5 mr-1" />{localizeText("Durdur")}</>
             ) : (
               <>
-                <Volume2 className="h-3.5 w-3.5 mr-1" /> Sesli Oku
-              </>
+                <Volume2 className="h-3.5 w-3.5 mr-1" />{localizeText("Sesli Oku")}</>
             )}
           </Button>
         </div>
@@ -238,14 +237,14 @@ export function KidsStoriesView({ onBackToKids }: { onBackToKids: () => void }) 
             {isSpeaking && (
               <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-300 text-xs font-bold border border-amber-500/30 animate-pulse">
                 <AudioLines className="h-3.5 w-3.5" />
-                <span>🌸 Kadın Anlatıcı Seslendiriyor...</span>
+                <span>{localizeText("🌸 Kadın Anlatıcı Seslendiriyor...")}</span>
               </div>
             )}
 
-            <span className="text-6xl my-4 tracking-widest">{page.illustrationEmoji}</span>
+            <span className="text-6xl my-4 tracking-widest">{localizeText(page.illustrationEmoji)}</span>
 
             <p className="text-base font-semibold text-foreground leading-relaxed">
-              {page.textTr}
+              {localizeText(page.textTr)}
             </p>
 
             <div className="pt-4 flex items-center justify-between w-full border-t border-border/40">
@@ -260,11 +259,10 @@ export function KidsStoriesView({ onBackToKids }: { onBackToKids: () => void }) 
                 }}
                 className="font-bold text-xs"
               >
-                <ChevronLeft className="h-4 w-4 mr-1" /> Önceki Sayfa
-              </Button>
+                <ChevronLeft className="h-4 w-4 mr-1" />{localizeText("Önceki Sayfa")}</Button>
 
               <span className="text-xs font-bold text-muted-foreground">
-                {pageIndex + 1} / {activeStory.pages.length}
+                {localizeText(pageIndex + 1)} / {localizeText(activeStory.pages.length)}
               </span>
 
               <Button
@@ -277,8 +275,7 @@ export function KidsStoriesView({ onBackToKids }: { onBackToKids: () => void }) 
                   setPageIndex((p) => p + 1);
                 }}
                 className="font-bold text-xs"
-              >
-                Sonraki Sayfa <ChevronRight className="h-4 w-4 ml-1" />
+              >{localizeText("Sonraki Sayfa")}<ChevronRight className="h-4 w-4 ml-1" />
               </Button>
             </div>
           </motion.div>
@@ -296,7 +293,7 @@ export function KidsStoriesView({ onBackToKids }: { onBackToKids: () => void }) 
             type="button"
             onClick={onBackToKids}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Kids Hub'a Dön"
+            aria-label={localizeText("Kids Hub'a Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -307,14 +304,10 @@ export function KidsStoriesView({ onBackToKids }: { onBackToKids: () => void }) 
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Masallar & Hikâyeler
-              </h1>
-              <StatusBadge status="verified" label="Doğal Anlatıcı" size="sm" />
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Masallar & Hikâyeler")}</h1>
+              <StatusBadge status="verified" label={localizeText("Doğal Anlatıcı")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Resimli ve sıcak kadın sesli çocuk masalları
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Resimli ve sıcak kadın sesli çocuk masalları")}</p>
           </div>
         </div>
       </div>
@@ -332,20 +325,20 @@ export function KidsStoriesView({ onBackToKids }: { onBackToKids: () => void }) 
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-amber-500/20 bg-amber-500/10 text-3xl shadow-xs group-hover:scale-105 transition-transform">
-                    {story.coverEmoji}
+                    {localizeText(story.coverEmoji)}
                   </div>
 
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <h3 className="text-sm font-bold text-foreground group-hover:text-amber-500 transition-colors truncate">
-                        {story.title}
+                        {localizeText(story.title)}
                       </h3>
                       <span className="rounded-md bg-muted px-2 py-0.5 text-[10px] font-bold text-muted-foreground">
-                        {story.ageRange}
+                        {localizeText(story.ageRange)}
                       </span>
                     </div>
                     <p className="mt-0.5 text-xs text-muted-foreground leading-snug line-clamp-1">
-                      {story.summary}
+                      {localizeText(story.summary)}
                     </p>
                   </div>
                 </div>
@@ -358,8 +351,7 @@ export function KidsStoriesView({ onBackToKids }: { onBackToKids: () => void }) 
                     setPageIndex(0);
                   }}
                   className="font-bold text-xs h-9 px-3.5 shrink-0 bg-amber-500 hover:bg-amber-600 border-none text-white shadow-xs"
-                >
-                  Oku <ChevronRight className="h-3.5 w-3.5 ml-1" />
+                >{localizeText("Oku")}<ChevronRight className="h-3.5 w-3.5 ml-1" />
                 </Button>
               </div>
             </Card>

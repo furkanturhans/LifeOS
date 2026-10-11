@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { useArcadeStore } from '@/stores/useArcadeStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
@@ -64,6 +65,7 @@ export function GameShell({
   xpEarned = 30,
   children,
 }: GameShellProps) {
+  const localizeText = useLocaleRender();
   const { isMuted, toggleMute } = useArcadeStore();
   const [isPaused, setIsPaused] = useState(false);
 
@@ -85,12 +87,12 @@ export function GameShell({
             className="h-9 px-2.5 text-xs font-semibold shrink-0"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
-            <span className="hidden sm:inline">Katalog</span>
+            <span className="hidden sm:inline">{localizeText("Katalog")}</span>
           </Button>
 
           <div className="flex items-center gap-1.5 truncate">
-            <span className="text-lg">{iconEmoji}</span>
-            <span className="font-bold text-sm text-foreground truncate">{title}</span>
+            <span className="text-lg">{localizeText(iconEmoji)}</span>
+            <span className="font-bold text-sm text-foreground truncate">{localizeText(title)}</span>
           </div>
         </div>
 
@@ -108,7 +110,7 @@ export function GameShell({
                     : 'text-muted-foreground hover:text-foreground'
                 )}
               >
-                {d === 'easy' ? 'Kolay' : d === 'medium' ? 'Orta' : 'Zor'}
+                {localizeText(d === 'easy' ? 'Kolay' : d === 'medium' ? 'Orta' : 'Zor')}
               </button>
             ))}
           </div>
@@ -119,7 +121,7 @@ export function GameShell({
           <button
             onClick={toggleMute}
             className="h-9 w-9 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title={isMuted ? 'Sesi Aç' : 'Sesi Kapat'}
+            title={localizeText(isMuted ? 'Sesi Aç' : 'Sesi Kapat')}
           >
             {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4 text-primary" />}
           </button>
@@ -127,7 +129,7 @@ export function GameShell({
           <button
             onClick={() => setIsPaused(true)}
             className="h-9 w-9 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title="Duraklat"
+            title={localizeText("Duraklat")}
           >
             <Pause className="h-4 w-4" />
           </button>
@@ -135,7 +137,7 @@ export function GameShell({
           <button
             onClick={onRestart}
             className="h-9 w-9 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title="Yeniden Başlat"
+            title={localizeText("Yeniden Başlat")}
           >
             <RotateCcw className="h-4 w-4" />
           </button>
@@ -147,65 +149,65 @@ export function GameShell({
         <div className="grid grid-cols-3 gap-2 px-4 py-2 max-w-md mx-auto w-full text-center">
           {stats.score !== undefined && (
             <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-              <span className="block text-[10px] uppercase font-bold text-muted-foreground">Puan</span>
-              <span className="text-base font-extrabold text-foreground">{stats.score}</span>
+              <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Puan")}</span>
+              <span className="text-base font-extrabold text-foreground">{localizeText(stats.score)}</span>
             </div>
           )}
 
           {stats.round !== undefined && (
             <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-              <span className="block text-[10px] uppercase font-bold text-muted-foreground">Tur</span>
+              <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Tur")}</span>
               <span className="text-base font-extrabold text-foreground">
-                {stats.round}{stats.maxRounds ? `/${stats.maxRounds}` : ''}
+                {localizeText(stats.round)}{localizeText(stats.maxRounds ? `/${stats.maxRounds}` : '')}
               </span>
             </div>
           )}
 
           {stats.level !== undefined && stats.round === undefined && (
             <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-              <span className="block text-[10px] uppercase font-bold text-muted-foreground">Seviye</span>
-              <span className="text-base font-extrabold text-foreground">{stats.level}</span>
+              <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Seviye")}</span>
+              <span className="text-base font-extrabold text-foreground">{localizeText(stats.level)}</span>
             </div>
           )}
 
           {stats.moves !== undefined && (
             <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-              <span className="block text-[10px] uppercase font-bold text-muted-foreground">Hamle</span>
-              <span className="text-base font-extrabold text-foreground">{stats.moves}</span>
+              <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Hamle")}</span>
+              <span className="text-base font-extrabold text-foreground">{localizeText(stats.moves)}</span>
             </div>
           )}
 
           {stats.timeSeconds !== undefined && stats.round === undefined && (
             <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-              <span className="block text-[10px] uppercase font-bold text-muted-foreground">Süre</span>
+              <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Süre")}</span>
               <span className="text-base font-extrabold text-foreground">
-                {formatTime(stats.timeSeconds)}
+                {localizeText(formatTime(stats.timeSeconds))}
               </span>
             </div>
           )}
 
           {stats.streak !== undefined && stats.streak > 1 && (
             <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-              <span className="block text-[10px] uppercase font-bold text-muted-foreground">Seri</span>
-              <span className="text-base font-extrabold text-amber-500">🔥 {stats.streak}x</span>
+              <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Seri")}</span>
+              <span className="text-base font-extrabold text-amber-500">🔥 {localizeText(stats.streak)}{localizeText(" x")}</span>
             </div>
           )}
 
           {stats.customStatLabel && (
             <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
               <span className="block text-[10px] uppercase font-bold text-muted-foreground">
-                {stats.customStatLabel}
+                {localizeText(stats.customStatLabel)}
               </span>
               <span className="text-base font-extrabold text-foreground">
-                {stats.customStatValue}
+                {localizeText(stats.customStatValue)}
               </span>
             </div>
           )}
 
           <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-            <span className="block text-[10px] uppercase font-bold text-muted-foreground">En Yüksek</span>
+            <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("En Yüksek")}</span>
             <span className="text-base font-extrabold text-primary">
-              {stats.bestScore !== undefined && stats.bestScore !== 0 ? stats.bestScore : '-'}
+              {localizeText(stats.bestScore !== undefined && stats.bestScore !== 0 ? stats.bestScore : '-')}
             </span>
           </div>
         </div>
@@ -220,8 +222,8 @@ export function GameShell({
       <Modal
         isOpen={isPaused}
         onClose={() => setIsPaused(false)}
-        title="Oyun Duraklatıldı"
-        description="Mola verdiniz. Hazır olduğunuzda devam edin."
+        title={localizeText("Oyun Duraklatıldı")}
+        description={localizeText("Mola verdiniz. Hazır olduğunuzda devam edin.")}
         size="sm"
       >
         <div className="space-y-3 pt-2">
@@ -230,9 +232,7 @@ export function GameShell({
             onClick={() => setIsPaused(false)}
             className="w-full font-bold h-11 text-sm"
           >
-            <Play className="h-4 w-4 mr-1.5" />
-            Devam Et
-          </Button>
+            <Play className="h-4 w-4 mr-1.5" />{localizeText("Devam Et")}</Button>
           <Button
             variant="outline"
             onClick={() => {
@@ -241,16 +241,12 @@ export function GameShell({
             }}
             className="w-full font-semibold text-xs"
           >
-            <RotateCcw className="h-3.5 w-3.5 mr-1.5" />
-            Yeniden Başlat
-          </Button>
+            <RotateCcw className="h-3.5 w-3.5 mr-1.5" />{localizeText("Yeniden Başlat")}</Button>
           <Button
             variant="ghost"
             onClick={onBack}
             className="w-full text-xs text-muted-foreground"
-          >
-            Kataloğa Dön
-          </Button>
+          >{localizeText("Kataloğa Dön")}</Button>
         </div>
       </Modal>
 
@@ -259,14 +255,14 @@ export function GameShell({
         isOpen={isGameOver}
         onClose={onRestart}
         title={
-          gameOverTitle ||
-          (isVictory ? 'Tebrikler! 🏆' : 'Oyun Tamamlandı')
+          localizeText(gameOverTitle ||
+          (isVictory ? 'Tebrikler! 🏆' : 'Oyun Tamamlandı'))
         }
         description={
-          gameOverDescription ||
+          localizeText(gameOverDescription ||
           (isVictory
             ? 'Harika bir performans sergilediniz!'
-            : 'Bu tur tamamlandı. Tekrar deneyebilirsiniz.')
+            : 'Bu tur tamamlandı. Tekrar deneyebilirsiniz.'))
         }
         size="sm"
       >
@@ -288,13 +284,12 @@ export function GameShell({
 
           {/* Stats Summary */}
           <div className="rounded-2xl border border-border bg-muted/30 p-3.5 text-center">
-            <span className="text-xs text-muted-foreground block mb-1">Kazanılan Skor</span>
+            <span className="text-xs text-muted-foreground block mb-1">{localizeText("Kazanılan Skor")}</span>
             <span className="text-2xl font-extrabold text-primary">
-              {stats?.score !== undefined ? stats.score : 50} Puan
-            </span>
+              {localizeText(stats?.score !== undefined ? stats.score : 50)}{localizeText(" Puan")}</span>
             <div className="mt-2 flex items-center justify-center gap-1 text-xs font-bold text-amber-600 dark:text-amber-400">
               <Sparkles className="h-3.5 w-3.5" />
-              <span>+{xpEarned} Arcade XP Eklendi</span>
+              <span>+{localizeText(xpEarned)}{localizeText(" Arcade XP Eklendi")}</span>
             </div>
           </div>
 
@@ -304,16 +299,12 @@ export function GameShell({
               onClick={onRestart}
               className="w-full font-bold h-11 text-sm"
             >
-              <RotateCcw className="h-4 w-4 mr-1.5" />
-              Tekrar Oyna
-            </Button>
+              <RotateCcw className="h-4 w-4 mr-1.5" />{localizeText("Tekrar Oyna")}</Button>
             <Button
               variant="outline"
               onClick={onBack}
               className="w-full text-xs font-semibold"
-            >
-              Mini Oyunlar Kataloğuna Dön
-            </Button>
+            >{localizeText("Mini Oyunlar Kataloğuna Dön")}</Button>
           </div>
         </div>
       </Modal>

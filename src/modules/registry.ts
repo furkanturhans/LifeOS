@@ -1,9 +1,12 @@
 import type { ModuleDefinition } from './types';
+import type { LocalePreference } from '@/types/user';
+import { localizeText } from '@/lib/i18n/runtime';
+import { LANGUAGE_MAP } from '@/lib/i18n/languages';
 
 export const MODULE_REGISTRY: ModuleDefinition[] = [
   {
     id: 'ai',
-    name: 'LifeOS Asistan',
+    name: 'LifeOS Asistanı',
     nameEn: 'LifeOS Assistant',
     icon: '🤖',
     color: '#6366f1',
@@ -17,8 +20,8 @@ export const MODULE_REGISTRY: ModuleDefinition[] = [
   },
   {
     id: 'chat',
-    name: 'LifeOS Connect',
-    nameEn: 'LifeOS Connect',
+    name: 'Lifechat',
+    nameEn: 'Lifechat',
     icon: '💬',
     color: '#22c55e',
     gradient: 'from-green-400 to-emerald-600',
@@ -101,7 +104,7 @@ export const MODULE_REGISTRY: ModuleDefinition[] = [
   },
   {
     id: 'arcade',
-    name: 'Arcade',
+    name: 'Oyun Merkezi',
     nameEn: 'Arcade',
     icon: '🎮',
     color: '#f43f5e',
@@ -129,7 +132,7 @@ export const MODULE_REGISTRY: ModuleDefinition[] = [
   },
   {
     id: 'kids',
-    name: 'Kids',
+    name: 'Çocuk Dünyası',
     nameEn: 'Kids',
     icon: '🧒',
     color: '#84cc16',
@@ -143,8 +146,8 @@ export const MODULE_REGISTRY: ModuleDefinition[] = [
   },
   {
     id: 'explore',
-    name: 'Keşfet',
-    nameEn: 'Explore',
+    name: 'Nodes',
+    nameEn: 'Nodes',
     icon: '🧭',
     color: '#3b82f6',
     gradient: 'from-blue-400 to-indigo-500',
@@ -379,11 +382,21 @@ export function getModulesByCategory(category: string): ModuleDefinition[] {
   return MODULE_REGISTRY.filter((m) => m.category === category);
 }
 
+export function getLocalizedModuleName(m: ModuleDefinition, locale: string = 'tr'): string {
+  const language = LANGUAGE_MAP.has(locale as LocalePreference) ? locale as LocalePreference : 'en';
+  return localizeText(m.name, language);
+}
+
+export function getLocalizedModuleDescription(m: ModuleDefinition, locale: string = 'tr'): string {
+  const language = LANGUAGE_MAP.has(locale as LocalePreference) ? locale as LocalePreference : 'en';
+  return localizeText(m.description, language);
+}
+
 export function searchModules(query: string, locale: string = 'tr'): ModuleDefinition[] {
   const q = query.toLowerCase();
   return MODULE_REGISTRY.filter((m) => {
-    const name = locale === 'tr' ? m.name.toLowerCase() : m.nameEn.toLowerCase();
-    const desc = locale === 'tr' ? m.description.toLowerCase() : m.descriptionEn.toLowerCase();
+    const name = getLocalizedModuleName(m, locale).toLowerCase();
+    const desc = getLocalizedModuleDescription(m, locale).toLowerCase();
     return name.includes(q) || desc.includes(q) || m.id.includes(q);
   });
 }

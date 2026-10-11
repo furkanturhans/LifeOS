@@ -28,6 +28,7 @@ import {
   type AssistantTask,
   type AssistantTaskType,
 } from '@/types/assistant';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 interface AssistantTaskCardProps {
   task: AssistantTask;
@@ -44,6 +45,7 @@ const TYPE_ICONS: Record<AssistantTaskType, React.ElementType> = {
 };
 
 export function AssistantTaskCard({ task, onOpenDetail }: AssistantTaskCardProps) {
+  const localizeText = useLocaleRender();
   const { approveTask, cancelTask, deleteTask } = useAssistantStore();
 
   const Icon = TYPE_ICONS[task.type] || CalendarCheck;
@@ -70,11 +72,11 @@ export function AssistantTaskCard({ task, onOpenDetail }: AssistantTaskCardProps
           <div>
             <div className="flex items-center gap-2">
               <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
-                {config.titleTr}
+                {localizeText(config.titleTr)}
               </span>
               <span className="text-muted-foreground/40">•</span>
               <span className="text-[11px] text-muted-foreground">
-                {new Date(task.createdAt).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}
+                {localizeText(new Date(task.createdAt).toLocaleTimeString(getFormattingLocale(), { hour: '2-digit', minute: '2-digit' }))}
               </span>
             </div>
 
@@ -82,29 +84,29 @@ export function AssistantTaskCard({ task, onOpenDetail }: AssistantTaskCardProps
               onClick={() => onOpenDetail(task)}
               className="text-sm sm:text-base font-bold text-foreground hover:text-primary cursor-pointer transition-colors line-clamp-1"
             >
-              {task.title}
+              {localizeText(task.title)}
             </h3>
           </div>
         </div>
 
         <div>
           {isPendingApproval ? (
-            <StatusBadge status="pending" label="Onay Bekliyor" size="sm" />
+            <StatusBadge status="pending" label={localizeText("Onay Bekliyor")} size="sm" />
           ) : isInProgress ? (
-            <StatusBadge status="bidding" label="İşleniyor" size="sm" />
+            <StatusBadge status="bidding" label={localizeText("İşleniyor")} size="sm" />
           ) : isCompleted ? (
-            <StatusBadge status="completed" label="Tamamlandı" size="sm" />
+            <StatusBadge status="completed" label={localizeText("Tamamlandı")} size="sm" />
           ) : isCancelled ? (
-            <StatusBadge status="cancelled" label="İptal Edildi" size="sm" />
+            <StatusBadge status="cancelled" label={localizeText("İptal Edildi")} size="sm" />
           ) : (
-            <StatusBadge status="open" label="Taslak" size="sm" />
+            <StatusBadge status="open" label={localizeText("Taslak")} size="sm" />
           )}
         </div>
       </div>
 
       {/* Description */}
       <p className="mt-2.5 text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-        {task.description}
+        {localizeText(task.description)}
       </p>
 
       {/* Required Permission Tags */}
@@ -120,7 +122,7 @@ export function AssistantTaskCard({ task, onOpenDetail }: AssistantTaskCardProps
                 className="inline-flex items-center gap-1 rounded-md border border-border/70 bg-muted/40 px-2 py-0.5 text-[10px] font-medium text-muted-foreground"
               >
                 <LockKeyhole className="h-2.5 w-2.5 text-primary" />
-                <span>{label}</span>
+                <span>{localizeText(label)}</span>
                 {isGranted && <span className="text-emerald-500 font-bold">✓</span>}
               </span>
             );
@@ -131,10 +133,9 @@ export function AssistantTaskCard({ task, onOpenDetail }: AssistantTaskCardProps
       {/* Step Progress Bar */}
       <div className="mt-4 pt-3 border-t border-border/50">
         <div className="flex items-center justify-between text-[11px] text-muted-foreground mb-1.5">
-          <span>İlerleme Adımları</span>
+          <span>{localizeText("İlerleme Adımları")}</span>
           <span className="font-semibold text-foreground">
-            {completedStepsCount}/{totalSteps} Adım
-          </span>
+            {localizeText(completedStepsCount)}/{localizeText(totalSteps)}{localizeText(" Adım")}</span>
         </div>
 
         <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
@@ -150,10 +151,10 @@ export function AssistantTaskCard({ task, onOpenDetail }: AssistantTaskCardProps
         <div className="mt-3 rounded-lg border border-amber-500/30 bg-amber-500/10 p-2.5 text-[11px] text-amber-700 dark:text-amber-300">
           <div className="font-semibold flex items-center gap-1 mb-0.5">
             <AlertTriangle className="h-3 w-3" />
-            <span>Kullanıcı Onayı Gereklidir:</span>
+            <span>{localizeText("Kullanıcı Onayı Gereklidir:")}</span>
           </div>
           <p className="text-muted-foreground leading-snug">
-            {task.approvalDescription}
+            {localizeText(task.approvalDescription)}
           </p>
         </div>
       )}
@@ -164,9 +165,7 @@ export function AssistantTaskCard({ task, onOpenDetail }: AssistantTaskCardProps
           type="button"
           onClick={() => onOpenDetail(task)}
           className="text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Detayları İncele →
-        </button>
+        >{localizeText("Detayları İncele →")}</button>
 
         <div className="flex items-center gap-2">
           {isPendingApproval && (
@@ -176,18 +175,14 @@ export function AssistantTaskCard({ task, onOpenDetail }: AssistantTaskCardProps
                 size="sm"
                 onClick={() => cancelTask(task.id)}
                 className="text-xs text-muted-foreground hover:text-destructive"
-              >
-                İptal
-              </Button>
+              >{localizeText("İptal")}</Button>
               <Button
                 variant="primary"
                 size="sm"
                 onClick={() => approveTask(task.id)}
                 className="text-xs font-semibold"
               >
-                <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
-                Onayla & Başlat
-              </Button>
+                <CheckCircle2 className="h-3.5 w-3.5 mr-1" />{localizeText("Onayla & Başlat")}</Button>
             </>
           )}
 
@@ -197,9 +192,7 @@ export function AssistantTaskCard({ task, onOpenDetail }: AssistantTaskCardProps
               size="sm"
               onClick={() => onOpenDetail(task)}
               className="text-xs font-semibold"
-            >
-              Görevi İzle
-            </Button>
+            >{localizeText("Görevi İzle")}</Button>
           )}
 
           {isCompleted && (
@@ -208,9 +201,7 @@ export function AssistantTaskCard({ task, onOpenDetail }: AssistantTaskCardProps
               size="sm"
               onClick={() => onOpenDetail(task)}
               className="text-xs font-semibold"
-            >
-              Sonuçları Gör
-            </Button>
+            >{localizeText("Sonuçları Gör")}</Button>
           )}
 
           {isCancelled && (

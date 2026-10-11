@@ -4,6 +4,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Wrench, X, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface LockedServicesModalProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ export function LockedServicesModal({
   serviceTitle = 'Bu Hizmet',
   serviceIcon,
 }: LockedServicesModalProps) {
+  const localizeText = useLocaleRender();
   return (
     <AnimatePresence>
       {isOpen && (
@@ -53,18 +55,16 @@ export function LockedServicesModal({
             {/* Pill Badge */}
             <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
               <Clock className="h-3.5 w-3.5" />
-              <span>{serviceTitle} — Hazırlanıyor</span>
+              <span>{localizeText(serviceTitle)}{localizeText("— Hazırlanıyor")}</span>
             </div>
 
             {/* Title */}
             <h3 className="text-lg font-bold tracking-tight text-foreground">
-              {serviceTitle}
+              {localizeText(serviceTitle)}
             </h3>
 
             {/* Exact Requested Copy */}
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              “Çok yakında sizlerle. Biraz daha zamana ihtiyacımız var; beklettiğimiz için üzgünüz.”
-            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{localizeText("“Çok yakında sizlerle. Biraz daha zamana ihtiyacımız var; beklettiğimiz için üzgünüz.”")}</p>
 
             {/* Action */}
             <div className="mt-6">
@@ -72,9 +72,7 @@ export function LockedServicesModal({
                 onClick={onClose}
                 size="lg"
                 className="w-full rounded-2xl bg-gradient-to-r from-amber-500 to-emerald-600 font-semibold text-white shadow-lg shadow-amber-500/25 hover:from-amber-600 hover:to-emerald-700"
-              >
-                Anladım
-              </Button>
+              >{localizeText("Anladım")}</Button>
             </div>
           </motion.div>
         </div>

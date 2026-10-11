@@ -1,26 +1,16 @@
 'use client';
 
+import { ParentContentHub } from './experience/ParentContentHub';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
 import {
-  ArrowLeft,
-  Shield,
-  Clock,
+  ArrowLeft,  Clock,
   Film,
   BookOpen,
   KeyRound,
-  LogOut,
-  RotateCcw,
-  Check,
+  LogOut,  Check,
   AlertCircle,
-  ShieldCheck,
-  ChevronRight,
-  Sliders,
-  Volume2,
-  VolumeX,
-  Sparkles,
-  Headphones,
+  ShieldCheck,  Headphones,
   Play,
   Square,
 } from 'lucide-react';
@@ -29,17 +19,18 @@ import { Card } from '@/components/ui/Card';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { useKidsStore } from '@/stores/useKidsStore';
 import { kidsSpeech } from '@/services/kidsSpeechService';
-import type { KidsAgeFilter, KidsStudySubject, KidsVoicePersona, KidsSpeechSpeed } from '@/types/kids';
+import type { KidsAgeFilter, KidsStudySubject, KidsSpeechSpeed } from '@/types/kids';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface ParentDashboardViewProps {
   onBackToKids: () => void;
 }
 
 export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) {
+  const localizeText = useLocaleRender();
   const router = useRouter();
   const {
-    isKidsModeActive,
     setKidsModeActive,
     dailyTimeLimitMinutes,
     setDailyTimeLimit,
@@ -50,11 +41,9 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
     toggleSubjectPermission,
     voiceSettings,
     updateVoiceSettings,
-    isSpeaking,
     setIsSpeaking,
     changePin,
     lockParent,
-    resetKidsSettings,
   } = useKidsStore();
 
   const [oldPin, setOldPin] = useState('');
@@ -171,7 +160,7 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
             type="button"
             onClick={onBackToKids}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Kids Hub'a Dön"
+            aria-label={localizeText("Kids Hub'a Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -182,14 +171,10 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Ebeveyn Denetim Masası
-              </h1>
-              <StatusBadge status="verified" label="Korumalı Alan" size="sm" />
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Ebeveyn Denetim Masası")}</h1>
+              <StatusBadge status="verified" label={localizeText("Korumalı Alan")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Kids modu, sesli anlatım, ekran süresi ve içerik izinleri
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Kids modu, sesli anlatım, ekran süresi ve içerik izinleri")}</p>
           </div>
         </div>
 
@@ -200,13 +185,12 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
           onClick={handleExitKidsToLifeOS}
           className="font-bold text-xs h-8 px-3 shadow-xs"
         >
-          <LogOut className="h-3.5 w-3.5 mr-1" />
-          LifeOS&apos;a Dön
-        </Button>
+          <LogOut className="h-3.5 w-3.5 mr-1" />{localizeText("LifeOS'a Dön")}</Button>
       </div>
 
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 max-w-2xl mx-auto w-full pb-12">
+        <ParentContentHub />
         {/* Active Protection Card */}
         <Card className="p-4 border-emerald-500/30 bg-emerald-500/10 shadow-2xs">
           <div className="flex items-start justify-between gap-3">
@@ -215,12 +199,8 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
                 🔒
               </div>
               <div>
-                <h3 className="text-sm font-bold text-emerald-900 dark:text-emerald-200">
-                  Kids Kilidi Aktif
-                </h3>
-                <p className="text-xs text-emerald-800/80 dark:text-emerald-300/80">
-                  Çocuğunuz bu alandayken ana ekrana, finansal servislere veya ayarlara erişemez.
-                </p>
+                <h3 className="text-sm font-bold text-emerald-900 dark:text-emerald-200">{localizeText("Kids Kilidi Aktif")}</h3>
+                <p className="text-xs text-emerald-800/80 dark:text-emerald-300/80">{localizeText("Çocuğunuz bu alandayken ana ekrana, finansal servislere veya ayarlara erişemez.")}</p>
               </div>
             </div>
           </div>
@@ -233,14 +213,10 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
               <Headphones className="h-4 w-4 text-purple-500" />
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-bold text-foreground">Sesli Anlatım ve Anlatıcı Sesi</h3>
-                  <span className="inline-flex items-center gap-1 rounded-md bg-purple-500/10 px-2 py-0.5 text-[10px] font-bold text-purple-600 dark:text-purple-400 border border-purple-500/20">
-                    🌸 Azure Türkçe Kadın Sesi
-                  </span>
+                  <h3 className="text-sm font-bold text-foreground">{localizeText("Sesli Anlatım ve Anlatıcı Sesi")}</h3>
+                  <span className="inline-flex items-center gap-1 rounded-md bg-purple-500/10 px-2 py-0.5 text-[10px] font-bold text-purple-600 dark:text-purple-400 border border-purple-500/20">{localizeText("🌸 Azure Türkçe Kadın Sesi")}</span>
                 </div>
-                <p className="text-[11px] text-muted-foreground mt-0.5">
-                  Sıcak, sakin ve güven veren kadın anlatıcı (Eski robotik/erkek sesler tamamen devre dışıdır)
-                </p>
+                <p className="text-[11px] text-muted-foreground mt-0.5">{localizeText("Sıcak, sakin ve güven veren kadın anlatıcı (Eski robotik/erkek sesler tamamen devre dışıdır)")}</p>
               </div>
             </div>
 
@@ -253,12 +229,10 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
             >
               {isPreviewPlaying ? (
                 <>
-                  <Square className="h-3 w-3 mr-1" /> Durdur
-                </>
+                  <Square className="h-3 w-3 mr-1" />{localizeText("Durdur")}</>
               ) : (
                 <>
-                  <Play className="h-3 w-3 mr-1" /> Sesi Dinle
-                </>
+                  <Play className="h-3 w-3 mr-1" />{localizeText("Sesi Dinle")}</>
               )}
             </Button>
           </div>
@@ -268,18 +242,16 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
             <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs font-medium space-y-1">
               <div className="flex items-center gap-2 font-bold text-amber-900 dark:text-amber-100">
                 <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
-                <span>Anlatıcı Servisi Bilgilendirmesi</span>
+                <span>{localizeText("Anlatıcı Servisi Bilgilendirmesi")}</span>
               </div>
-              <p className="leading-relaxed">
-                Sesli anlatımı etkinleştirmek için anlatıcı servisi yapılandırılmalıdır.
-              </p>
+              <p className="leading-relaxed">{localizeText("Sesli anlatımı etkinleştirmek için anlatıcı servisi yapılandırılmalıdır.")}</p>
             </div>
           )}
 
           {previewNotice && (
             <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-300 text-xs font-medium flex items-center gap-2">
               <AlertCircle className="h-4 w-4 shrink-0 text-amber-500" />
-              <span>{previewNotice}</span>
+              <span>{localizeText(previewNotice)}</span>
             </div>
           )}
 
@@ -294,12 +266,9 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
               className="flex items-center justify-between p-3 rounded-2xl border border-border bg-muted/20 cursor-pointer hover:bg-muted/40 transition-colors"
             >
               <div className="min-w-0 pr-2">
-                <span className="text-xs font-bold text-foreground block">
-                  Sesli Anlatıcı: {voiceSettings.isVoiceEnabled !== false ? 'Açık' : 'Kapalı'}
+                <span className="text-xs font-bold text-foreground block">{localizeText("Sesli Anlatıcı: ")}{localizeText(voiceSettings.isVoiceEnabled !== false ? 'Açık' : 'Kapalı')}
                 </span>
-                <span className="text-[11px] text-muted-foreground block">
-                  Tüm ders, masal ve oyun yönlendirmelerinde kadın sesli anlatımı açar veya kapatır.
-                </span>
+                <span className="text-[11px] text-muted-foreground block">{localizeText("Tüm ders, masal ve oyun yönlendirmelerinde kadın sesli anlatımı açar veya kapatır.")}</span>
               </div>
               <div
                 className={cn(
@@ -314,9 +283,7 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
 
           {/* Kadın Anlatıcı Sesi Seçimi (Elif / Emel) */}
           <div className="space-y-2 pt-1 border-t border-border/40">
-            <label className="block text-xs font-bold text-foreground">
-              Kadın Anlatıcı Ses Modeli
-            </label>
+            <label className="block text-xs font-bold text-foreground">{localizeText("Kadın Anlatıcı Ses Modeli")}</label>
             <div className="space-y-2">
               {AZURE_VOICE_OPTIONS.map((v) => {
                 const isSelected = currentVoiceId === v.id;
@@ -331,17 +298,15 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
                         : 'border-border bg-muted/20 hover:border-purple-300'
                     )}
                   >
-                    <span className="text-2xl mt-0.5">{v.icon}</span>
+                    <span className="text-2xl mt-0.5">{localizeText(v.icon)}</span>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-foreground">{v.label}</span>
+                        <span className="text-xs font-bold text-foreground">{localizeText(v.label)}</span>
                         {isSelected && (
-                          <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 bg-purple-500/20 px-2 py-0.5 rounded-full">
-                            Seçili
-                          </span>
+                          <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 bg-purple-500/20 px-2 py-0.5 rounded-full">{localizeText("Seçili")}</span>
                         )}
                       </div>
-                      <p className="text-[11px] text-muted-foreground mt-0.5">{v.desc}</p>
+                      <p className="text-[11px] text-muted-foreground mt-0.5">{localizeText(v.desc)}</p>
                     </div>
                   </div>
                 );
@@ -352,12 +317,8 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
           {/* Konuşma Hızı: Yavaş (0.75x) / Normal (0.85x) */}
           <div className="space-y-2 pt-1 border-t border-border/40">
             <div className="flex items-center justify-between">
-              <label className="block text-xs font-bold text-foreground">
-                Ses Hızı
-              </label>
-              <span className="text-[11px] font-semibold text-muted-foreground">
-                Çocukların rahat anlaması için hafif yavaşlatılmış tempo
-              </span>
+              <label className="block text-xs font-bold text-foreground">{localizeText("Ses Hızı")}</label>
+              <span className="text-[11px] font-semibold text-muted-foreground">{localizeText("Çocukların rahat anlaması için hafif yavaşlatılmış tempo")}</span>
             </div>
             <div className="grid grid-cols-2 gap-2">
               {[
@@ -377,7 +338,7 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
                         : 'bg-muted/40 text-muted-foreground border-border hover:text-foreground'
                     )}
                   >
-                    {s.label}
+                    {localizeText(s.label)}
                   </button>
                 );
               })}
@@ -387,9 +348,9 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
           {/* Ses Seviyesi: Düşük / Orta / Yüksek */}
           <div className="space-y-2 pt-1 border-t border-border/40">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-bold text-foreground">Ses Seviyesi</span>
+              <span className="font-bold text-foreground">{localizeText("Ses Seviyesi")}</span>
               <span className="font-bold text-purple-600 dark:text-purple-400">
-                %{Math.round((voiceSettings.volume ?? 0.85) * 100)}
+                %{localizeText(Math.round((voiceSettings.volume ?? 0.85) * 100))}
               </span>
             </div>
             <div className="grid grid-cols-3 gap-2">
@@ -409,7 +370,7 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
                       : 'bg-muted/40 text-muted-foreground border-border hover:text-foreground'
                   )}
                 >
-                  {vol.label}
+                  {localizeText(vol.label)}
                 </button>
               ))}
             </div>
@@ -426,12 +387,8 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
               className="flex items-center justify-between p-2.5 rounded-xl border border-border bg-muted/20 cursor-pointer hover:bg-muted/40 transition-colors"
             >
               <div className="min-w-0 pr-2">
-                <span className="text-xs font-bold text-foreground block">
-                  Hikâyelerde Sesli Anlatım
-                </span>
-                <span className="text-[11px] text-muted-foreground block">
-                  Masal sayfalarını kadın anlatıcıyla otomatik veya dokunarak okur.
-                </span>
+                <span className="text-xs font-bold text-foreground block">{localizeText("Hikâyelerde Sesli Anlatım")}</span>
+                <span className="text-[11px] text-muted-foreground block">{localizeText("Masal sayfalarını kadın anlatıcıyla otomatik veya dokunarak okur.")}</span>
               </div>
               <div
                 className={cn(
@@ -452,12 +409,8 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
               className="flex items-center justify-between p-2.5 rounded-xl border border-border bg-muted/20 cursor-pointer hover:bg-muted/40 transition-colors"
             >
               <div className="min-w-0 pr-2">
-                <span className="text-xs font-bold text-foreground block">
-                  Derslerde Sesli Telaffuz
-                </span>
-                <span className="text-[11px] text-muted-foreground block">
-                  Harf, sayı ve kelime kartları kadın ses tonuyla seslendirilir.
-                </span>
+                <span className="text-xs font-bold text-foreground block">{localizeText("Derslerde Sesli Telaffuz")}</span>
+                <span className="text-[11px] text-muted-foreground block">{localizeText("Harf, sayı ve kelime kartları kadın ses tonuyla seslendirilir.")}</span>
               </div>
               <div
                 className={cn(
@@ -474,9 +427,7 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
           <div className="p-3 rounded-xl bg-purple-500/5 border border-purple-500/20 text-[11px] text-muted-foreground leading-relaxed flex items-start gap-2">
             <ShieldCheck className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" />
             <div>
-              <strong className="text-foreground block">Sıfır Erkek Ses Güvencesi:</strong>
-              Cihazda veya tarayıcıda onaylı Türkçe kadın sesi bulunamazsa sistem asla erkek veya yabancı aksanlı sese geçiş yapmaz; çocukları korumak amacıyla sesli anlatım sessizce duraklatılır ve içerik ekranda yazılı olarak sunulur.
-            </div>
+              <strong className="text-foreground block">{localizeText("Sıfır Erkek Ses Güvencesi:")}</strong>{localizeText("Cihazda veya tarayıcıda onaylı Türkçe kadın sesi bulunamazsa sistem asla erkek veya yabancı aksanlı sese geçiş yapmaz; çocukları korumak amacıyla sesli anlatım sessizce duraklatılır ve içerik ekranda yazılı olarak sunulur.")}</div>
           </div>
         </Card>
 
@@ -485,16 +436,12 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4 text-amber-500" />
-              <h3 className="text-sm font-bold text-foreground">Günlük Ekran Süresi Sınırı</h3>
+              <h3 className="text-sm font-bold text-foreground">{localizeText("Günlük Ekran Süresi Sınırı")}</h3>
             </div>
-            <span className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-xl">
-              Bugün: {todayUsageMinutes} dk
-            </span>
+            <span className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-xl">{localizeText("Bugün: ")}{localizeText(todayUsageMinutes)}{localizeText(" dk")}</span>
           </div>
 
-          <p className="text-xs text-muted-foreground">
-            Süre dolduğunda çocuğunuza eğlenceli bir mola uyarısı gösterilir.
-          </p>
+          <p className="text-xs text-muted-foreground">{localizeText("Süre dolduğunda çocuğunuza eğlenceli bir mola uyarısı gösterilir.")}</p>
 
           <div className="grid grid-cols-5 gap-1.5 pt-1">
             {[
@@ -516,7 +463,7 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
                       : 'bg-muted/40 text-muted-foreground border-border hover:text-foreground'
                   )}
                 >
-                  {item.label}
+                  {localizeText(item.label)}
                 </button>
               );
             })}
@@ -527,11 +474,9 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
         <Card className="p-4 border-border bg-card shadow-2xs space-y-3">
           <div className="flex items-center gap-2">
             <Film className="h-4 w-4 text-rose-500" />
-            <h3 className="text-sm font-bold text-foreground">Kids Movie Yaş Filtresi</h3>
+            <h3 className="text-sm font-bold text-foreground">{localizeText("Kids Movie Yaş Filtresi")}</h3>
           </div>
-          <p className="text-xs text-muted-foreground">
-            Yalnızca seçilen yaş grubuna uygun çizgi film ve animasyonlar listelenir.
-          </p>
+          <p className="text-xs text-muted-foreground">{localizeText("Yalnızca seçilen yaş grubuna uygun çizgi film ve animasyonlar listelenir.")}</p>
 
           <div className="grid grid-cols-4 gap-1.5 pt-1">
             {[
@@ -552,7 +497,7 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
                       : 'bg-muted/40 text-muted-foreground border-border hover:text-foreground'
                   )}
                 >
-                  {f.label}
+                  {localizeText(f.label)}
                 </button>
               );
             })}
@@ -563,11 +508,9 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
         <Card className="p-4 border-border bg-card shadow-2xs space-y-3">
           <div className="flex items-center gap-2">
             <BookOpen className="h-4 w-4 text-blue-500" />
-            <h3 className="text-sm font-bold text-foreground">Kids Study Konu İzinleri</h3>
+            <h3 className="text-sm font-bold text-foreground">{localizeText("Kids Study Konu İzinleri")}</h3>
           </div>
-          <p className="text-xs text-muted-foreground">
-            Çocuğunuzun çalışma ekranında görmek istediğiniz ders konularını açın veya kapatın.
-          </p>
+          <p className="text-xs text-muted-foreground">{localizeText("Çocuğunuzun çalışma ekranında görmek istediğiniz ders konularını açın veya kapatın.")}</p>
 
           <div className="space-y-2 pt-1">
             {SUBJECT_LIST.map((subject) => {
@@ -584,8 +527,8 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
                   )}
                 >
                   <div className="flex items-center gap-2.5">
-                    <span className="text-xl">{subject.icon}</span>
-                    <span className="text-xs font-bold text-foreground">{subject.label}</span>
+                    <span className="text-xl">{localizeText(subject.icon)}</span>
+                    <span className="text-xs font-bold text-foreground">{localizeText(subject.label)}</span>
                   </div>
 
                   <div
@@ -608,34 +551,30 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
         <Card className="p-4 border-border bg-card shadow-2xs space-y-3">
           <div className="flex items-center gap-2">
             <KeyRound className="h-4 w-4 text-primary" />
-            <h3 className="text-sm font-bold text-foreground">Ebeveyn PIN Kodunu Değiştir</h3>
+            <h3 className="text-sm font-bold text-foreground">{localizeText("Ebeveyn PIN Kodunu Değiştir")}</h3>
           </div>
 
           <form onSubmit={handlePinSubmit} className="space-y-3 pt-1">
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-[11px] font-semibold text-muted-foreground mb-1">
-                  Mevcut PIN
-                </label>
+                <label className="block text-[11px] font-semibold text-muted-foreground mb-1">{localizeText("Mevcut PIN")}</label>
                 <input
                   type="password"
                   maxLength={4}
                   value={oldPin}
                   onChange={(e) => setOldPin(e.target.value)}
-                  placeholder="2026"
+                  placeholder={localizeText("2026")}
                   className="w-full h-9 rounded-xl border border-border bg-background px-3 text-xs font-bold text-center tracking-widest focus:border-primary focus:outline-none"
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-semibold text-muted-foreground mb-1">
-                  Yeni 4 Haneli PIN
-                </label>
+                <label className="block text-[11px] font-semibold text-muted-foreground mb-1">{localizeText("Yeni 4 Haneli PIN")}</label>
                 <input
                   type="password"
                   maxLength={4}
                   value={newPin}
                   onChange={(e) => setNewPin(e.target.value)}
-                  placeholder="****"
+                  placeholder={localizeText("****")}
                   className="w-full h-9 rounded-xl border border-border bg-background px-3 text-xs font-bold text-center tracking-widest focus:border-primary focus:outline-none"
                 />
               </div>
@@ -650,13 +589,11 @@ export function ParentDashboardView({ onBackToKids }: ParentDashboardViewProps) 
                     : 'bg-destructive/10 border-destructive/20 text-destructive'
                 )}
               >
-                {pinChangeMsg.text}
+                {localizeText(pinChangeMsg.text)}
               </div>
             )}
 
-            <Button type="submit" variant="primary" size="sm" className="w-full font-bold text-xs h-9">
-              PIN Güncelle
-            </Button>
+            <Button type="submit" variant="primary" size="sm" className="w-full font-bold text-xs h-9">{localizeText("PIN Güncelle")}</Button>
           </form>
         </Card>
       </div>

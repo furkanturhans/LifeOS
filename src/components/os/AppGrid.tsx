@@ -1,4 +1,7 @@
 'use client';
+import { SERVICE_LINKS } from '@/modules/service-links';
+
+import { AppArtwork } from '@/components/ui/AppArtwork';
 
 import { useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
@@ -21,11 +24,13 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { cn } from '@/lib/utils';
-import { getModuleById } from '@/modules/registry';
+import { getModuleById, getLocalizedModuleName } from '@/modules/registry';
+import { useTranslation } from '@/lib/i18n';
 import { useHomescreenStore } from '@/stores/useHomescreenStore';
 import { useThemeStore } from '@/stores/useThemeStore';
 import { LockedFeatureModal } from '@/components/ui/LockedFeatureModal';
 import type { HomescreenItem } from '@/types/module';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface AppIconProps {
   item: HomescreenItem;
@@ -35,9 +40,11 @@ interface AppIconProps {
 }
 
 function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
+  const localizeText = useLocaleRender();
   const module = getModuleById(item.moduleId);
   const { locale } = useThemeStore();
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const held = useRef(false);
   const { setEditMode } = useHomescreenStore();
 
   const {
@@ -56,8 +63,10 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
   };
 
   function handlePointerDown() {
+    held.current = false;
     if (!isEditMode) {
       longPressTimer.current = setTimeout(() => {
+        held.current = true;
         setEditMode(true);
       }, 500);
     }
@@ -71,6 +80,8 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
   }
 
   function handleClick() {
+    if (held.current) { held.current = false; return; }
+    if (isEditMode) { setEditMode(false); return; }
     if (!isEditMode) {
       onPress(item.moduleId);
     }
@@ -78,7 +89,7 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
 
   if (!module) return null;
 
-  const name = locale === 'tr' ? module.name : module.nameEn;
+  const name = getLocalizedModuleName(module, locale);
 
   return (
     <motion.div
@@ -107,7 +118,8 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
               e.stopPropagation();
               onRemove(item.moduleId);
             }}
-            className="absolute -top-2 -left-2 z-10 h-5 w-5 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center shadow-sm"
+            aria-label={`${localizeText("Kaldır")}: ${name}`}
+            className="absolute -top-2 -left-2 z-10 h-9 w-9 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center shadow-sm"
           >
             <X className="h-3 w-3" />
           </motion.button>
@@ -119,22 +131,24 @@ function AppIcon({ item, isEditMode, onPress, onRemove }: AppIconProps) {
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onPointerMove={handlePointerUp}
         onClick={handleClick}
         whileTap={!isEditMode ? { scale: 0.92 } : {}}
         className={cn(
-          'h-16 w-16 rounded-2xl flex items-center justify-center text-2xl shadow-sm border border-white/10 transition-all duration-200',
-          `bg-gradient-to-br ${module.gradient}`,
-          isEditMode && 'cursor-grab active:cursor-grabbing'
+          'h-20 w-20 rounded-3xl flex items-center justify-center text-2xl shadow-sm border border-border/60 bg-card transition-all duration-200 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary',
+
+          isEditMode && 'cursor-grab active:cursor-grabbing touch-none'
         )}
         {...(isEditMode ? { ...attributes, ...listeners } : {})}
-        aria-label={name}
+        aria-label={localizeText(name)}
       >
-        <span>{module.icon}</span>
+        <AppArtwork id={module.id} fallback={module.icon} className="h-12 w-12" />
       </motion.button>
 
       {/* Label */}
-      <span className="text-xs font-medium text-foreground text-center leading-tight max-w-[72px] truncate">
-        {name}
+      <span className="text-xs font-medium text-foreground text-center leading-tight max-w-[104px] min-h-8 break-words">
+        {localizeText(name)}
       </span>
     </motion.div>
   );
@@ -145,6 +159,7 @@ interface AppGridProps {
 }
 
 export function AppGrid({ pageIndex = 0 }: AppGridProps) {
+  const localizeText = useLocaleRender();
   const router = useRouter();
   const {
     layout,
@@ -197,20 +212,8 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
       const module = getModuleById(moduleId);
       if (!module) return;
 
-      if (moduleId === 'taxi') {
-        router.push('/services/taxi');
-        return;
-      }
-      if (moduleId === 'travel') {
-        router.push('/services/travel');
-        return;
-      }
-      if (moduleId === 'moving') {
-        router.push('/services/moving');
-        return;
-      }
-      if (moduleId === 'craftsman') {
-        router.push('/services/craftsman');
+      if (SERVICE_LINKS[moduleId]) {
+        router.push(SERVICE_LINKS[moduleId]);
         return;
       }
       if (moduleId === 'smart-home' || moduleId === 'smarthome') {
@@ -223,7 +226,7 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
         moduleId === 'arcade' ||
         moduleId === 'kids' ||
         moduleId === 'services' ||
-        (module.status === 'ACTIVE' && moduleId !== 'explore')
+        module.status === 'ACTIVE'
       ) {
         router.push(`/${moduleId}`);
         return;
@@ -240,16 +243,13 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
     [removeModuleFromHomescreen]
   );
 
-  const SUB_SERVICES = new Set(['taxi', 'travel', 'moving', 'craftsman']);
-  const filteredItems = items.filter((item) => !SUB_SERVICES.has(item.moduleId));
-  const sortedItems = [...filteredItems].sort((a, b) => a.position - b.position);
+  const sortedItems = [...items].sort((a, b) => a.position - b.position);
   const sortableIds = sortedItems.map((item) => item.moduleId);
 
+  const { t } = useTranslation();
   const activeComingSoonModule = comingSoonModule ? getModuleById(comingSoonModule) : null;
   const comingSoonName = activeComingSoonModule
-    ? locale === 'tr'
-      ? activeComingSoonModule.name
-      : activeComingSoonModule.nameEn
+    ? getLocalizedModuleName(activeComingSoonModule, locale)
     : '';
 
   return (
@@ -260,7 +260,7 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={sortableIds} strategy={rectSortingStrategy}>
-          <div className="grid grid-cols-4 gap-x-4 gap-y-6 px-4 py-2">
+          <div className="grid grid-cols-3 min-[380px]:grid-cols-4 sm:grid-cols-5 xl:grid-cols-6 gap-x-3 gap-y-6 px-4 py-4">
             {sortedItems.map((item) => (
               <div key={item.moduleId} className="flex justify-center">
                 <AppIcon
@@ -275,34 +275,13 @@ export function AppGrid({ pageIndex = 0 }: AppGridProps) {
         </SortableContext>
       </DndContext>
 
-      {/* Edit mode done button */}
-      <AnimatePresence>
-        {isEditMode && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-32 left-1/2 -translate-x-1/2 z-30"
-          >
-            <button
-              onClick={() => setEditMode(false)}
-              className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold shadow-lg"
-            >
-              {locale === 'tr' ? 'Bitti' : 'Done'}
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Coming Soon Modal */}
       <LockedFeatureModal
         isOpen={Boolean(comingSoonModule)}
         onClose={() => setComingSoonModule(null)}
-        title={comingSoonName}
+        title={localizeText(comingSoonName)}
         description={
-          locale === 'tr'
-            ? `${comingSoonName} modülünü sizin için hazırlıyoruz. Çok yakında LifeOS içerisinde kullanıma sunulacaktır.`
-            : `We are preparing the ${comingSoonName} module for you. It will be available in LifeOS soon.`
+          localizeText(`${comingSoonName} modülünü sizin için hazırlıyoruz. Çok yakında LifeOS içerisinde kullanıma sunulacaktır.`)
         }
         moduleName="LifeOS Modül"
       />

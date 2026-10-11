@@ -7,6 +7,7 @@ import { useArcadeStore } from '@/stores/useArcadeStore';
 import { kidsSound } from '@/lib/arcade/kidsSound';
 import { cn } from '@/lib/utils';
 import { CheckCircle2, Clock } from 'lucide-react';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 // =============================================================================
 // 1. MATEMATİK HIZI (SPEED MATH)
@@ -20,6 +21,7 @@ const SPEED_MATH_QUESTIONS = [
 ];
 
 export function MatematikHiziGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -62,7 +64,7 @@ export function MatematikHiziGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Matematik Hızı"
+      title={localizeText("Matematik Hızı")}
       iconEmoji="➕"
       onBack={onBack}
       onRestart={handleRestart}
@@ -77,7 +79,7 @@ export function MatematikHiziGame({ onBack }: { onBack: () => void }) {
     >
       <div className="w-full max-w-xs space-y-4 text-center">
         <div className="rounded-3xl border border-border bg-card/80 p-6 shadow-xs">
-          <span className="text-3xl font-extrabold text-foreground">{current.question}</span>
+          <span className="text-3xl font-extrabold text-foreground">{localizeText(current.question)}</span>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
@@ -88,7 +90,7 @@ export function MatematikHiziGame({ onBack }: { onBack: () => void }) {
               onClick={() => handleAnswer(opt)}
               className="h-14 rounded-2xl border border-border bg-card hover:border-primary text-2xl font-extrabold shadow-xs"
             >
-              {opt}
+              {localizeText(opt)}
             </motion.button>
           ))}
         </div>
@@ -108,6 +110,7 @@ const CLOCK_QUESTIONS = [
 ];
 
 export function SaatOgrenGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -150,7 +153,7 @@ export function SaatOgrenGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Saat Öğren"
+      title={localizeText("Saat Öğren")}
       iconEmoji="⏰"
       onBack={onBack}
       onRestart={handleRestart}
@@ -166,7 +169,7 @@ export function SaatOgrenGame({ onBack }: { onBack: () => void }) {
       <div className="w-full max-w-xs space-y-4 text-center">
         <div className="rounded-3xl border border-border bg-card/80 p-5 shadow-xs">
           <Clock className="h-10 w-10 text-primary mx-auto mb-2" />
-          <p className="text-base font-bold text-foreground">{current.question}</p>
+          <p className="text-base font-bold text-foreground">{localizeText(current.question)}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
@@ -177,7 +180,7 @@ export function SaatOgrenGame({ onBack }: { onBack: () => void }) {
               onClick={() => handleChoose(opt)}
               className="h-16 rounded-2xl border border-border bg-card hover:border-primary text-3xl flex items-center justify-center shadow-xs"
             >
-              {opt}
+              {localizeText(opt)}
             </motion.button>
           ))}
         </div>
@@ -217,6 +220,7 @@ const ANIMAL_QUESTIONS = [
 ];
 
 export function HayvanBilgisiGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -259,7 +263,7 @@ export function HayvanBilgisiGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Hayvan Bilgisi"
+      title={localizeText("Hayvan Bilgisi")}
       iconEmoji="🐾"
       onBack={onBack}
       onRestart={handleRestart}
@@ -274,8 +278,8 @@ export function HayvanBilgisiGame({ onBack }: { onBack: () => void }) {
     >
       <div className="w-full max-w-xs space-y-4 text-center">
         <div className="rounded-3xl border border-border bg-card/80 p-5 shadow-xs">
-          <span className="text-4xl block mb-2">{current.emoji}</span>
-          <p className="text-sm font-bold text-foreground leading-relaxed">{current.question}</p>
+          <span className="text-4xl block mb-2">{localizeText(current.emoji)}</span>
+          <p className="text-sm font-bold text-foreground leading-relaxed">{localizeText(current.question)}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
@@ -286,7 +290,7 @@ export function HayvanBilgisiGame({ onBack }: { onBack: () => void }) {
               onClick={() => handleChoose(opt)}
               className="p-3.5 rounded-2xl border border-border bg-card hover:border-primary text-sm font-extrabold shadow-xs"
             >
-              {opt}
+              {localizeText(opt)}
             </motion.button>
           ))}
         </div>
@@ -306,6 +310,7 @@ const FLAGS_QUESTIONS = [
 ];
 
 export function BayraklarGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -348,7 +353,7 @@ export function BayraklarGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Bayraklar"
+      title={localizeText("Bayraklar")}
       iconEmoji="🚩"
       onBack={onBack}
       onRestart={handleRestart}
@@ -363,7 +368,7 @@ export function BayraklarGame({ onBack }: { onBack: () => void }) {
     >
       <div className="w-full max-w-xs space-y-4 text-center">
         <div className="rounded-3xl border border-border bg-card/80 p-5 shadow-xs">
-          <p className="text-base font-bold text-foreground">{current.question}</p>
+          <p className="text-base font-bold text-foreground">{localizeText(current.question)}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
@@ -374,7 +379,7 @@ export function BayraklarGame({ onBack }: { onBack: () => void }) {
               onClick={() => handleChoose(opt)}
               className="h-16 rounded-2xl border border-border bg-card hover:border-primary text-4xl flex items-center justify-center shadow-xs"
             >
-              {opt}
+              {localizeText(opt)}
             </motion.button>
           ))}
         </div>

@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { useAssistantStore } from '@/stores/useAssistantStore';
 import type { AssistantMessage, AssistantToolCall } from '@/types/assistant';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 interface AssistantMessageBubbleProps {
   message: AssistantMessage;
@@ -27,6 +28,7 @@ export function AssistantMessageBubble({
   message,
   conversationId,
 }: AssistantMessageBubbleProps) {
+  const localizeText = useLocaleRender();
   const { resolveToolCall, retryLastMessage } = useAssistantStore();
   const [copied, setCopied] = useState(false);
 
@@ -65,7 +67,7 @@ export function AssistantMessageBubble({
               : 'border border-border bg-card text-foreground rounded-tl-xs shadow-xs'
           )}
         >
-          {message.content}
+          {isUser ? message.content : localizeText(message.content)}
         </div>
 
         {/* In-Chat Tool Calls & In-line Consent Cards */}
@@ -79,30 +81,24 @@ export function AssistantMessageBubble({
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5 font-bold text-foreground">
                     <LockKeyhole className="h-3.5 w-3.5 text-primary" />
-                    <span>{toolCall.labelTr}</span>
+                    <span>{localizeText(toolCall.labelTr)}</span>
                   </div>
 
                   {toolCall.status === 'executed' ? (
                     <span className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
-                      <CheckCircle2 className="h-3 w-3" />
-                      İzin Verildi
-                    </span>
+                      <CheckCircle2 className="h-3 w-3" />{localizeText("İzin Verildi")}</span>
                   ) : toolCall.status === 'rejected' ? (
                     <span className="flex items-center gap-1 text-[11px] font-semibold text-destructive bg-destructive/10 px-2 py-0.5 rounded">
-                      <XCircle className="h-3 w-3" />
-                      Reddedildi
-                    </span>
+                      <XCircle className="h-3 w-3" />{localizeText("Reddedildi")}</span>
                   ) : (
                     <span className="flex items-center gap-1 text-[11px] font-semibold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">
-                      <AlertTriangle className="h-3 w-3" />
-                      Onay Bekliyor
-                    </span>
+                      <AlertTriangle className="h-3 w-3" />{localizeText("Onay Bekliyor")}</span>
                   )}
                 </div>
 
                 {toolCall.permissionReason && (
                   <p className="text-[11px] text-muted-foreground leading-snug">
-                    {toolCall.permissionReason}
+                    {localizeText(toolCall.permissionReason)}
                   </p>
                 )}
 
@@ -114,17 +110,13 @@ export function AssistantMessageBubble({
                       onClick={() => resolveToolCall(conversationId, message.id, toolCall.id, true)}
                       className="text-xs font-semibold py-1 h-7"
                     >
-                      <Check className="h-3 w-3 mr-1" />
-                      İzin Ver
-                    </Button>
+                      <Check className="h-3 w-3 mr-1" />{localizeText("İzin Ver")}</Button>
                     <Button
                       size="sm"
                       variant="outline"
                       onClick={() => resolveToolCall(conversationId, message.id, toolCall.id, false)}
                       className="text-xs py-1 h-7 text-muted-foreground"
-                    >
-                      Reddet
-                    </Button>
+                    >{localizeText("Reddet")}</Button>
                   </div>
                 )}
               </div>
@@ -139,13 +131,13 @@ export function AssistantMessageBubble({
             isUser ? 'justify-end' : 'justify-start'
           )}
         >
-          <span>{new Date(message.timestamp).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}</span>
+          <span>{localizeText(new Date(message.timestamp).toLocaleTimeString(getFormattingLocale(), { hour: '2-digit', minute: '2-digit' }))}</span>
 
           {!isUser && !isError && (
             <button
               onClick={handleCopy}
               className="rounded p-1 hover:text-foreground transition-colors"
-              title="Kopyala"
+              title={localizeText("Kopyala")}
             >
               {copied ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
             </button>
@@ -157,7 +149,7 @@ export function AssistantMessageBubble({
               className="flex items-center gap-1 font-semibold text-primary hover:underline ml-2"
             >
               <RotateCcw className="h-3 w-3" />
-              <span>Tekrar Dene</span>
+              <span>{localizeText("Tekrar Dene")}</span>
             </button>
           )}
         </div>

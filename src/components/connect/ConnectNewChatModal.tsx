@@ -13,8 +13,10 @@ import {
 } from 'lucide-react';
 import { useConnectStore } from '@/stores/useConnectStore';
 import type { ConnectScope, ScopeMeta } from '@/types/connect';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function ConnectNewChatModal() {
+  const localizeText = useLocaleRender();
   const {
     isNewChatModalOpen,
     setNewChatModalOpen,
@@ -134,7 +136,7 @@ export function ConnectNewChatModal() {
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
           <div className="flex items-center gap-2">
             <MessageSquarePlus className="h-5 w-5 text-primary" />
-            <h3 className="text-sm font-bold text-foreground">{getScopeLabel()}</h3>
+            <h3 className="text-sm font-bold text-foreground">{localizeText(getScopeLabel())}</h3>
           </div>
           <button
             onClick={() => setNewChatModalOpen(false)}
@@ -148,7 +150,7 @@ export function ConnectNewChatModal() {
           {error && (
             <div className="flex items-start gap-2 rounded-xl border border-red-500/20 bg-red-500/10 p-3 text-xs text-red-400">
               <ShieldAlert className="h-4 w-4 flex-shrink-0 mt-0.5" />
-              <span>{error}</span>
+              <span>{localizeText(error)}</span>
             </div>
           )}
 
@@ -156,30 +158,28 @@ export function ConnectNewChatModal() {
             <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-4 text-xs text-amber-300 space-y-2">
               <div className="flex items-center gap-2 font-bold">
                 <ShieldAlert className="h-4 w-4" />
-                <span>Çocuk Güvenlik Koruması Aktif</span>
+                <span>{localizeText("Çocuk Güvenlik Koruması Aktif")}</span>
               </div>
-              <p className="text-[11px] leading-relaxed">
-                Çocuk hesapları yalnızca veli onaylı aile odalarında ve kayıtlı ders sınıflarında iletişim kurabilir. Birebir yabancı mesajlaşma izne tabidir.
-              </p>
+              <p className="text-[11px] leading-relaxed">{localizeText("Çocuk hesapları yalnızca veli onaylı aile odalarında ve kayıtlı ders sınıflarında iletişim kurabilir. Birebir yabancı mesajlaşma izne tabidir.")}</p>
             </div>
           ) : (
             <>
               <div>
                 <label className="text-xs font-semibold text-foreground">
-                  {activeScope === 'personal' ? 'Kişi Adı / Başlık' : 'Grup / Oda Başlığı'}
+                  {localizeText(activeScope === 'personal' ? 'Kişi Adı / Başlık' : 'Grup / Oda Başlığı')}
                 </label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder={
-                    activeScope === 'personal'
+                    localizeText(activeScope === 'personal'
                       ? 'Örn: Zeynep Kaya'
                       : activeScope === 'family'
                       ? 'Örn: Hafta Sonu Planları'
                       : activeScope === 'education'
                       ? 'Örn: Fizik Laboratuvarı Soru Grubu'
-                      : 'Örn: Nakliye Görevlisi (#771)'
+                      : 'Örn: Nakliye Görevlisi (#771)')
                   }
                   className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-xs text-foreground focus:border-primary focus:outline-none"
                   required
@@ -188,19 +188,15 @@ export function ConnectNewChatModal() {
 
               {activeScope === 'personal' && (
                 <div>
-                  <label className="text-xs font-semibold text-foreground">
-                    Kullanıcı Takma Adı / İzinli Bağlantı
-                  </label>
+                  <label className="text-xs font-semibold text-foreground">{localizeText("Kullanıcı Takma Adı / İzinli Bağlantı")}</label>
                   <input
                     type="text"
                     value={targetContact}
                     onChange={(e) => setTargetContact(e.target.value)}
-                    placeholder="Kişi takma adı..."
+                    placeholder={localizeText("Kişi takma adı...")}
                     className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-xs text-foreground focus:border-primary focus:outline-none"
                   />
-                  <span className="mt-1 block text-[10px] text-muted-foreground">
-                    * Telefon veya e-posta bilgisi gerekmez.
-                  </span>
+                  <span className="mt-1 block text-[10px] text-muted-foreground">{localizeText("* Telefon veya e-posta bilgisi gerekmez.")}</span>
                 </div>
               )}
             </>
@@ -211,16 +207,14 @@ export function ConnectNewChatModal() {
               type="button"
               onClick={() => setNewChatModalOpen(false)}
               className="rounded-lg px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-muted"
-            >
-              Kapat
-            </button>
+            >{localizeText("Kapat")}</button>
             {(!isChild || activeScope !== 'personal') && (
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
               >
-                {isSubmitting ? 'Oluşturuluyor...' : 'Sohbeti Başlat'}
+                {localizeText(isSubmitting ? 'Oluşturuluyor...' : 'Sohbeti Başlat')}
               </button>
             )}
           </div>

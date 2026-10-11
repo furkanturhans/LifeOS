@@ -1,0 +1,402 @@
+{
+  "bowling": {
+    "title": "Bowling",
+    "description": "Topu kaydırarak lobutları devirmeyi dene."
+  },
+  "mini-golf": {
+    "title": "Mini Golf",
+    "description": "Topun yönünü seçip golf deliğine ulaştır."
+  },
+  "penalty-kick": {
+    "title": "Penaltı",
+    "description": "Zamanında dokunarak kaleye top gönder."
+  },
+  "ring-toss": {
+    "title": "Halka Atma",
+    "description": "Halkaları hedeflere doğru at."
+  },
+  "ball-throw": {
+    "title": "Top Atma",
+    "description": "Topu kaydırarak hedefe ulaştır."
+  },
+  "jump-rope-rhythm": {
+    "title": "İp Atlama",
+    "description": "Ritmi izleyip zamanında zıpla."
+  },
+  "bicycle-balance": {
+    "title": "Bisiklet Dengesi",
+    "description": "Sağa sola yön vererek bisikleti dengede tut."
+  },
+  "stone-balance-walk": {
+    "title": "Denge Yolu",
+    "description": "Taşların üstündeki karaktere yol göster."
+  },
+  "kite-fly": {
+    "title": "Uçurtma Uçuşu",
+    "description": "Rüzgârda uçurtmanı yönlendir."
+  },
+  "paper-airplane-fly": {
+    "title": "Kâğıt Uçak",
+    "description": "Kâğıt uçağını fırlatıp uçuşunu izle."
+  },
+  "paper-boat-sail": {
+    "title": "Kâğıt Tekne",
+    "description": "Tekneni suyun üstünde yönlendir."
+  },
+  "train-track": {
+    "title": "Tren Rayları",
+    "description": "Ray parçalarını birleştirip trene yol aç."
+  },
+  "balance-tower": {
+    "title": "Denge Kulesi",
+    "description": "Parçaları dengeli biçimde üst üste koy."
+  },
+  "tower-rings": {
+    "title": "Halka Kulesi",
+    "description": "Halkaları yerleştirerek kule oluştur."
+  },
+  "tangram-puzzle": {
+    "title": "Tangram",
+    "description": "Parçaları birleştirerek bir şekil tamamla."
+  },
+  "jigsaw-mini": {
+    "title": "Resimli Yapboz",
+    "description": "Resim parçalarını uygun yerlere yerleştir."
+  },
+  "slide-puzzle": {
+    "title": "Kaydırmalı Yapboz",
+    "description": "Parçaları kaydırarak resmi tamamla."
+  },
+  "rabbit-maze": {
+    "title": "Tavşan Labirenti",
+    "description": "Tavşana labirentte yol göster."
+  },
+  "marble-roll": {
+    "title": "Bilye Yolu",
+    "description": "Bilyeyi yönlendirerek hedefe ulaştır."
+  },
+  "domino-chain": {
+    "title": "Domino Zinciri",
+    "description": "Domino parçalarını dizip hareketlerini izle."
+  },
+  "shadow-match": {
+    "title": "Gölge Eşleştirme",
+    "description": "Nesneleri gölgeleriyle eşleştir."
+  },
+  "spot-difference": {
+    "title": "Farkları Bul",
+    "description": "İki resimdeki farklı ayrıntıları keşfet."
+  },
+  "hidden-object-hunt": {
+    "title": "Gizli Nesneler",
+    "description": "Resmin içindeki nesneleri bul."
+  },
+  "sock-match": {
+    "title": "Çorap Eşleri",
+    "description": "Birbirine benzeyen çorapları eşleştir."
+  },
+  "fruit-pair": {
+    "title": "Meyve Eşleri",
+    "description": "Aynı meyveleri bir araya getir."
+  },
+  "memory-match": {
+    "title": "Hafıza Kartları",
+    "description": "Kartları açıp aynı resimleri bul."
+  },
+  "memory-sequence": {
+    "title": "Işık Sırası",
+    "description": "Parlayan düğmeleri aynı sırayla takip et."
+  },
+  "fruit-match": {
+    "title": "Meyve Dizisi",
+    "description": "Meyveleri eşleştirerek oyun alanını düzenle."
+  },
+  "face-match": {
+    "title": "Yüz Eşleri",
+    "description": "Benzer yüzleri eşleştir."
+  },
+  "star-connect": {
+    "title": "Yıldız Birleştirme",
+    "description": "Yıldızlara dokunarak çizgiler oluştur."
+  },
+  "constellation-draw": {
+    "title": "Yıldız Desenleri",
+    "description": "Yıldızları birleştirip gökyüzü desenleri çiz."
+  },
+  "shadow-puppet": {
+    "title": "Gölge Kuklası",
+    "description": "Kuklanı hareket ettirip gölgesini izle."
+  },
+  "paper-fold-lab": {
+    "title": "Kâğıt Katlama",
+    "description": "Kâğıdı adım adım katlayıp şekil oluştur."
+  },
+  "castle-builder": {
+    "title": "Kale Yapımı",
+    "description": "Parçalardan kendi kaleni kur."
+  },
+  "build-snowman": {
+    "title": "Kardan Adam",
+    "description": "Kardan adamın parçalarını ve aksesuarlarını seç."
+  },
+  "cake-decor": {
+    "title": "Pasta Süsleme",
+    "description": "Oyun pastanı renkli süslerle tasarla."
+  },
+  "pizza-maker": {
+    "title": "Pizza Yapımı",
+    "description": "Oyun pizzası için malzemeler seç."
+  },
+  "ice-cream-scoop": {
+    "title": "Dondurma Kulesi",
+    "description": "Dondurma toplarını üst üste yerleştir."
+  },
+  "cotton-candy": {
+    "title": "Pamuk Şeker",
+    "description": "Oyun şekerini çevirerek şekillendir."
+  },
+  "juice-pour-party": {
+    "title": "Meyve Suyu",
+    "description": "Bardağı uygun yere kadar doldur."
+  },
+  "pretend-play": {
+    "title": "Hayal Oyunu",
+    "description": "Oyuncaklarla küçük bir sahne kur."
+  },
+  "pet-feed": {
+    "title": "Hayvan Dostları",
+    "description": "Oyun hayvanlarına uygun yiyecekler ver."
+  },
+  "dog-walk": {
+    "title": "Köpek Gezisi",
+    "description": "Köpek dostunla oyun yolunda ilerle."
+  },
+  "teddy-dress": {
+    "title": "Ayıcığı Giydir",
+    "description": "Ayıcığın için giysi ve aksesuar seç."
+  },
+  "dinosaur-tap": {
+    "title": "Dinozor Dokunuşu",
+    "description": "Dinozorları dokunarak keşfet."
+  },
+  "hatch-egg": {
+    "title": "Yumurtadan Çıkış",
+    "description": "Dokunarak yumurtanın içindeki dostu ortaya çıkar."
+  },
+  "caterpillar-feed": {
+    "title": "Tırtılın Yaprakları",
+    "description": "Tırtıla yapraklar seçip büyümesini izle."
+  },
+  "vegetable-garden": {
+    "title": "Sebze Bahçesi",
+    "description": "Oyun bahçende sebzeler yetiştir."
+  },
+  "watering-plant": {
+    "title": "Bitki Sulama",
+    "description": "Bitkileri oyun içinde sulayıp gelişmelerini izle."
+  },
+  "mushroom-pick": {
+    "title": "Mantar Sepeti",
+    "description": "Oyun mantarlarını sepette topla."
+  },
+  "carrot-pull": {
+    "title": "Havuç Toplama",
+    "description": "Bahçedeki oyun havuçlarını topla."
+  },
+  "butterfly-garden": {
+    "title": "Kelebek Bahçesi",
+    "description": "Bahçedeki kelebekleri takip et."
+  },
+  "bee-pollen": {
+    "title": "Arının Çiçekleri",
+    "description": "Arıya çiçekler arasında yol göster."
+  },
+  "honey-drip": {
+    "title": "Bal Damlaları",
+    "description": "Bal damlalarını oyun kabına topla."
+  },
+  "acorn-squirrel": {
+    "title": "Sincabın Palamutları",
+    "description": "Sincabın palamutları toplamasına yardım et."
+  },
+  "frog-jump": {
+    "title": "Kurbağa Zıplaması",
+    "description": "Kurbağayı uygun yerlere zıplat."
+  },
+  "dolphin-jump": {
+    "title": "Yunus Sıçrayışı",
+    "description": "Yunusun hareketlerini zamanında dokunarak yönlendir."
+  },
+  "penguin-slide": {
+    "title": "Penguen Kayması",
+    "description": "Pengueni kaydırarak oyun yolunda ilerlet."
+  },
+  "snail-race": {
+    "title": "Salyangoz Yolu",
+    "description": "Salyangozu dokunarak ilerlet."
+  },
+  "cloud-jump": {
+    "title": "Bulutlara Zıpla",
+    "description": "Karakteri bulutlar arasında yönlendir."
+  },
+  "bounce-ball": {
+    "title": "Zıplayan Top",
+    "description": "Topun zıplamasına yön ver."
+  },
+  "balloon-pop": {
+    "title": "Balon Patlatma",
+    "description": "Renkli oyun balonlarına dokun."
+  },
+  "bubble-wrap": {
+    "title": "Baloncuklu Kâğıt",
+    "description": "Baloncuklara dokunarak serbestçe oyna."
+  },
+  "soap-bubble-catch": {
+    "title": "Sabun Köpükleri",
+    "description": "Uçuşan köpükleri dokunarak yakala."
+  },
+  "firefly-catch": {
+    "title": "Ateşböceği Işıkları",
+    "description": "Parlayan ateşböceklerine dokun."
+  },
+  "clover-find": {
+    "title": "Yonca Bahçesi",
+    "description": "Yoncaların arasındaki farklı şekli bul."
+  },
+  "dandelion": {
+    "title": "Karahindiba",
+    "description": "Dokunarak uçuşan tohumları izle."
+  },
+  "magic-wand": {
+    "title": "Sihirli Değnek",
+    "description": "Dokunarak ışıklı oyun desenleri oluştur."
+  },
+  "lantern-float": {
+    "title": "Işıklı Fenerler",
+    "description": "Hayalî fenerlerin hareketlerine yön ver."
+  },
+  "fireworks-tap": {
+    "title": "Gökyüzü Işıkları",
+    "description": "Dokunarak renkli gökyüzü desenleri oluştur."
+  },
+  "color-piano": {
+    "title": "Renkli Piyano",
+    "description": "Renkli tuşlarla serbest melodiler çal."
+  },
+  "percussion-band": {
+    "title": "Ritim Grubu",
+    "description": "Çalgıların seslerini sırayla keşfet."
+  },
+  "drum-beat": {
+    "title": "Davul Ritmi",
+    "description": "Davulu serbestçe çal veya verilen ritmi takip et."
+  },
+  "beat-animals": {
+    "title": "Ritimli Hayvanlar",
+    "description": "Parlayan hayvanlara ritme göre dokun."
+  },
+  "rhythm-touch-beat": {
+    "title": "Ritim Halkası",
+    "description": "Halka hedefle örtüşünce dokun."
+  },
+  "piano-tiles": {
+    "title": "Piyano Oyunu",
+    "description": "Piyano tuşlarıyla serbestçe çal veya bir şarkıyı takip et."
+  },
+  "top-spin-duel": {
+    "title": "Topaç Yarışı",
+    "description": "Dokunarak topacını güçlendirip dönmesini izle."
+  },
+  "ddakji-flip": {
+    "title": "Kâğıt Çevirme",
+    "description": "Aşağı kaydırarak oyun kâğıdını çevir."
+  },
+  "jegi-kick": {
+    "title": "Tüylü Top",
+    "description": "Karakteri topun altına getirip zamanında vur."
+  },
+  "gonggi-nori": {
+    "title": "Beştaş",
+    "description": "Yerdeki taşları topla, sonra düşen oyun taşını yakala."
+  },
+  "sabangchigi-hop": {
+    "title": "Seksek",
+    "description": "Hedef kareyi atlayarak sırayla ilerle."
+  },
+  "magnet-fish": {
+    "title": "Mıknatıslı Balık",
+    "description": "Mıknatısı kaydırarak balıkları topla, taşları atla."
+  },
+  "fish-catch": {
+    "title": "Balık Yakala",
+    "description": "Ağı yönlendirerek oyun balıklarını yakala."
+  },
+  "ice-fishing": {
+    "title": "Buzda Balık",
+    "description": "Balık oltaya yaklaşınca dokun."
+  },
+  "squid-catch": {
+    "title": "Kalamar Yakala",
+    "description": "Ağı yukarı aşağı taşıyarak kalamarları yakala."
+  },
+  "pearl-diver": {
+    "title": "İnci Dalgıcı",
+    "description": "İncileri topla ve yüzeye dönerek havayı yenile."
+  },
+  "treasure-dive": {
+    "title": "Deniz Hazinesi",
+    "description": "Hazine ve hava kabarcıklarını dokunarak topla."
+  },
+  "ocean-cleanup": {
+    "title": "Deniz Temizliği",
+    "description": "Denizaltıyla çöpleri topla, balıkları atla."
+  },
+  "recycle-rescue": {
+    "title": "Geri Dönüşüm",
+    "description": "Nesneleri uygun oyun kutusuna sürükle."
+  },
+  "space-garbage-collector": {
+    "title": "Uzay Temizliği",
+    "description": "Uzay çöplerini topla, meteorları atla."
+  },
+  "laundry-sort": {
+    "title": "Çamaşır Sepetleri",
+    "description": "Kıyafetleri renklerine göre oyun sepetlerine ayır."
+  },
+  "fridge-sort": {
+    "title": "Buzdolabı Oyunu",
+    "description": "Yiyecek resimlerini uygun saklama bölümlerine taşı."
+  },
+  "sandwich-order": {
+    "title": "Sandviç Siparişi",
+    "description": "Malzemelere doğru sırayla dokunarak sandviç hazırla."
+  },
+  "burger-stack": {
+    "title": "Hamburger Kulesi",
+    "description": "Zamanında dokunarak malzemeleri üst üste koy."
+  },
+  "sushi-conveyor": {
+    "title": "Suşi Siparişi",
+    "description": "Banttan geçen doğru siparişe dokun."
+  },
+  "robot-pet-grooming": {
+    "title": "Robot Köpeğin Banyosu",
+    "description": "Robot köpeği köpükle temizle, durula ve süsle."
+  },
+  "panda-bamboo-wind-chime": {
+    "title": "Pandanın Bambu Çanları",
+    "description": "Çanlara ve çiy damlalarına dokunarak melodiler çal."
+  },
+  "sea-turtle-coral-reef-swim": {
+    "title": "Kaplumbağanın Mercan Yolculuğu",
+    "description": "Kaplumbağayı yönlendirerek incileri ve yıldızları topla."
+  },
+  "otter-stream-pebble-skip": {
+    "title": "Su Samurunun Taş Oyunu",
+    "description": "Suya değen taşın halkasına dokunarak sekmeleri sürdür."
+  },
+  "train-ticket-stamp": {
+    "title": "Tren Bileti Damgalama",
+    "description": "Yıldız ortaya gelince basılı tutup bırakarak bileti damgala."
+  }
+}

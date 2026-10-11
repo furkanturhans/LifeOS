@@ -23,8 +23,10 @@ import { Button } from '@/components/ui/Button';
 import { useProviderAuthStore } from '@/stores/useProviderAuthStore';
 import { ProviderApplicationModal } from './provider/ProviderApplicationModal';
 import type { ServiceCategoryKey } from '@/types/providerAuth';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function ServicesWorkspaceSection() {
+  const localizeText = useLocaleRender();
   const { getProfile, approveDemoApplication } = useProviderAuthStore();
   const [activeModalService, setActiveModalService] = useState<ServiceCategoryKey | null>(null);
 
@@ -59,12 +61,8 @@ export function ServicesWorkspaceSection() {
     <div className="px-4 mt-8 sm:px-6">
       <div className="mb-3 flex items-center justify-between">
         <div>
-          <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Hizmet Veren & İş Ortaklığı Yönetimi
-          </h2>
-          <p className="text-[11px] text-muted-foreground mt-0.5">
-            Doğrulanmış hizmet sağlayıcıları ve kurumsal seyahat iş ortakları alanı
-          </p>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Hizmet Veren & İş Ortaklığı Yönetimi")}</h2>
+          <p className="text-[11px] text-muted-foreground mt-0.5">{localizeText("Doğrulanmış hizmet sağlayıcıları ve kurumsal seyahat iş ortakları alanı")}</p>
         </div>
       </div>
 
@@ -87,7 +85,7 @@ export function ServicesWorkspaceSection() {
 
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="text-sm font-bold text-foreground">{p.title}</h3>
+                        <h3 className="text-sm font-bold text-foreground">{localizeText(p.title)}</h3>
                         <StatusBadge
                           status={
                             isVerified
@@ -97,17 +95,17 @@ export function ServicesWorkspaceSection() {
                               : 'open'
                           }
                           label={
-                            isVerified
+                            localizeText(isVerified
                               ? 'Yetkili Sağlayıcı'
                               : isApplicant
                               ? 'İnceleniyor'
-                              : 'Başvuru Yapılmadı'
+                              : 'Başvuru Yapılmadı')
                           }
                           size="sm"
                         />
                       </div>
                       <p className="mt-0.5 text-xs text-muted-foreground">
-                        {p.description}
+                        {localizeText(p.description)}
                       </p>
                     </div>
                   </div>
@@ -116,9 +114,7 @@ export function ServicesWorkspaceSection() {
                   <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
                     {isVerified ? (
                       <Link href={p.href}>
-                        <Button variant="outline" size="sm" className="text-xs font-semibold">
-                          Teklif Paneli →
-                        </Button>
+                        <Button variant="outline" size="sm" className="text-xs font-semibold">{localizeText("Teklif Paneli →")}</Button>
                       </Link>
                     ) : isApplicant ? (
                       <Button
@@ -127,18 +123,14 @@ export function ServicesWorkspaceSection() {
                         onClick={() => approveDemoApplication(p.key)}
                         className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/30"
                       >
-                        <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
-                        Demo Onayla
-                      </Button>
+                        <CheckCircle2 className="h-3.5 w-3.5 mr-1" />{localizeText("Demo Onayla")}</Button>
                     ) : (
                       <Button
                         variant="primary"
                         size="sm"
                         onClick={() => setActiveModalService(p.key)}
                         className="text-xs font-semibold"
-                      >
-                        Başvuru Yap
-                      </Button>
+                      >{localizeText("Başvuru Yap")}</Button>
                     )}
                   </div>
                 </div>
@@ -155,21 +147,17 @@ export function ServicesWorkspaceSection() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500 border border-blue-500/20">
                   <Building2 className="h-5 w-5" />
                 </div>
-                <StatusBadge status="verified" label="İş Ortaklığı" size="sm" />
+                <StatusBadge status="verified" label={localizeText("İş Ortaklığı")} size="sm" />
               </div>
 
-              <h3 className="text-sm font-bold text-foreground">
-                Seyahat İş Ortaklığı
-              </h3>
-              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                Otobüs firmaları, acenteler ve seyahat sağlayıcıları için kurumsal sefer, filo ve güzergâh yönetim sistemi.
-              </p>
+              <h3 className="text-sm font-bold text-foreground">{localizeText("Seyahat İş Ortaklığı")}</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{localizeText("Otobüs firmaları, acenteler ve seyahat sağlayıcıları için kurumsal sefer, filo ve güzergâh yönetim sistemi.")}</p>
             </div>
 
             <div className="mt-5 pt-3 border-t border-border/50">
               <Link href="/services/travel">
                 <Button variant="outline" size="sm" className="w-full text-xs font-semibold">
-                  <span>Firma Paneline Giriş</span>
+                  <span>{localizeText("Firma Paneline Giriş")}</span>
                   <ChevronRight className="h-3.5 w-3.5 ml-1" />
                 </Button>
               </Link>

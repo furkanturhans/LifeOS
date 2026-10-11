@@ -4,51 +4,37 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Bell } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { formatTime, formatDate } from '@/lib/utils';
+import { formatTime, formatDate, getGreeting } from '@/lib/utils';
 import { useThemeStore } from '@/stores/useThemeStore';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface StatusBarProps {
   displayName?: string;
 }
 
 export function StatusBar({ displayName }: StatusBarProps) {
+  const localizeText = useLocaleRender();
   const [time, setTime] = useState(new Date());
   const { locale } = useThemeStore();
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
-    }, 1000);
+    }, 30000);
     return () => clearInterval(interval);
   }, []);
 
-  const hour = time.getHours();
-  const greeting =
-    locale === 'tr'
-      ? hour >= 5 && hour < 12
-        ? 'Günaydın'
-        : hour >= 12 && hour < 17
-        ? 'İyi günler'
-        : hour >= 17 && hour < 21
-        ? 'İyi akşamlar'
-        : 'İyi geceler'
-      : hour >= 5 && hour < 12
-      ? 'Good morning'
-      : hour >= 12 && hour < 17
-      ? 'Good afternoon'
-      : hour >= 17 && hour < 21
-      ? 'Good evening'
-      : 'Good night';
+  const greeting = getGreeting(time, locale);
 
   return (
-    <div className="relative flex flex-col items-center pt-8 pb-4 px-6 text-center">
+    <div className="relative flex flex-col items-start pt-8 pb-2 px-6 pe-20 text-start">
       {/* Top right notification bell shortcut */}
-      <div className="absolute right-6 top-6">
-        <Link href="/notifications">
+      <div className="absolute end-6 top-8">
+        <Link href="/notifications" aria-label={localizeText("Bildirim Merkezi")}>
           <motion.div
             whileTap={{ scale: 0.9 }}
-            className="flex h-9 w-9 items-center justify-center rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground transition-colors shadow-sm"
-            title="Bildirim Merkezi"
+            className="flex h-12 w-12 items-center justify-center rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground transition-colors shadow-sm"
+            title={localizeText("Bildirim Merkezi")}
           >
             <Bell className="h-4 w-4" />
           </motion.div>
@@ -56,19 +42,19 @@ export function StatusBar({ displayName }: StatusBarProps) {
       </div>
 
       {/* Time */}
-      <div className="text-6xl font-thin tracking-tight text-foreground tabular-nums">
-        {formatTime(time)}
+      <div className="text-3xl sm:text-4xl font-semibold tracking-tight text-foreground tabular-nums">
+        {localizeText(formatTime(time))}
       </div>
 
       {/* Date */}
-      <div className="mt-1 text-base text-muted-foreground font-medium">
-        {formatDate(time, locale)}
+      <div className="mt-2 text-sm text-muted-foreground font-medium">
+        {localizeText(formatDate(time, locale))}
       </div>
 
       {/* Greeting */}
       {displayName && (
         <div className="mt-3 text-sm text-muted-foreground">
-          {greeting}, <span className="font-semibold text-foreground">{displayName}</span> 👋
+          {localizeText(greeting)}, <span className="font-semibold text-foreground">{displayName}</span> 👋
         </div>
       )}
     </div>

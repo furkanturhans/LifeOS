@@ -5,6 +5,7 @@ import type {
   AIProviderHealth,
 } from './types';
 import type { AssistantToolCall } from '@/types/assistant';
+import { SUPPORTED_LANGUAGES } from '@/lib/i18n/languages';
 
 export class OpenAIProvider implements AIChatProvider {
   readonly id = 'openai' as const;
@@ -60,7 +61,8 @@ export class OpenAIProvider implements AIChatProvider {
     }
 
     const scopes = request.permissionScopes || [];
-    const systemPrompt = `Sen LifeOS Asistanısın. Türkçe konuşan, nazik, net ve güvenilir bir kişisel asistan modelisin.
+    const responseLanguage = SUPPORTED_LANGUAGES.find(language => language.code === request.contextData?.locale)?.name ?? 'Turkish';
+    const systemPrompt = `Sen LifeOS Asistanısın. Nazik, net ve güvenilir bir kişisel asistan modelisin. Yanıtlarını ${responseLanguage} dilinde ver.
 Kullanıcının verilerine yalnızca şu izinli kapsamlarda erişebilirsin: [${scopes.join(', ')}].
 Herhangi bir işlem yapmadan önce kullanıcıdan açık onay istemelisin. Asla sahte veri uydurma.`;
 

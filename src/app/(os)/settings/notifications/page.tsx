@@ -3,8 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Bell, MessageSquare, ShieldAlert, Sparkles, Volume2 } from 'lucide-react';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export default function NotificationsSettingsPage() {
+  const localizeText = useLocaleRender();
   const [settings, setSettings] = useState({
     systemAlerts: true,
     chatMessages: true,
@@ -53,8 +55,8 @@ export default function NotificationsSettingsPage() {
           <ArrowLeft className="w-5 h-5" />
         </Link>
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-foreground">Bildirimler</h1>
-          <p className="text-xs text-muted-foreground">Bildirim ve uyarı tercihlerinizi özelleştirin</p>
+          <h1 className="text-xl font-bold tracking-tight text-foreground">{localizeText("Bildirimler")}</h1>
+          <p className="text-xs text-muted-foreground">{localizeText("Bildirim ve uyarı tercihlerinizi özelleştirin")}</p>
         </div>
       </div>
 
@@ -73,8 +75,8 @@ export default function NotificationsSettingsPage() {
                   <Icon className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-foreground">{opt.title}</h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">{opt.description}</p>
+                  <h3 className="text-sm font-medium text-foreground">{localizeText(opt.title)}</h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">{localizeText(opt.description)}</p>
                 </div>
               </div>
 

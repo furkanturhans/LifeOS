@@ -24,6 +24,7 @@ import {
 } from '@/types/craftsman';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 interface CraftsmanRequestDetailModalProps {
   isOpen: boolean;
@@ -36,6 +37,7 @@ export function CraftsmanRequestDetailModal({
   onClose,
   request,
 }: CraftsmanRequestDetailModalProps) {
+  const localizeText = useLocaleRender();
   const { getBidsForMyRequest, acceptBid, cancelRequest } = useCraftsmanStore();
   const [lockedActionNotice, setLockedActionNotice] = useState<string | null>(null);
 
@@ -87,43 +89,39 @@ export function CraftsmanRequestDetailModal({
             {/* Header */}
             <div className="mb-4">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-semibold text-purple-500">
-                  Talep #{request.id}
+                <span className="font-mono text-xs font-semibold text-purple-500">{localizeText("Talep #")}{localizeText(request.id)}
                 </span>
                 <Badge variant={statusInfo.badgeVariant} className="text-[10px] py-0 px-2">
-                  {statusInfo.tr}
+                  {localizeText(statusInfo.tr)}
                 </Badge>
               </div>
-              <h3 className="text-xl font-bold text-foreground mt-1">
-                Usta Talebi Detayı
-              </h3>
+              <h3 className="text-xl font-bold text-foreground mt-1">{localizeText("Usta Talebi Detayı")}</h3>
             </div>
 
             {/* Request Summary Card */}
             <div className="mb-5 rounded-2xl border border-border/80 bg-muted/30 p-4 space-y-2.5 text-xs">
               <div className="flex items-center gap-2 text-foreground font-semibold text-sm">
-                <span className="text-base">{categoryConfig?.iconEmoji || '🛠️'}</span>
-                <span>{categoryConfig?.labelTr || 'Ustalık Hizmeti'}</span>
+                <span className="text-base">{localizeText(categoryConfig?.iconEmoji || '🛠️')}</span>
+                <span>{localizeText(categoryConfig?.labelTr || 'Ustalık Hizmeti')}</span>
               </div>
 
               <div className="bg-card/60 p-3 rounded-xl border border-border/40 text-foreground leading-relaxed">
-                "{request.problemDescription}"
+                "{localizeText(request.problemDescription)}"
               </div>
 
               <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-[11px] pt-1 border-t border-border/30">
                 <span className="flex items-center gap-1">
                   <MapPin className="h-3.5 w-3.5 text-purple-500" />
-                  {request.location}
+                  {localizeText(request.location)}
                 </span>
                 <span className="flex items-center gap-1">
                   <Calendar className="h-3.5 w-3.5 text-purple-500" />
-                  {request.preferredDateTime}
+                  {localizeText(request.preferredDateTime)}
                 </span>
               </div>
 
               {request.notes && (
-                <div className="text-[11px] text-muted-foreground pt-1 border-t border-border/30">
-                  Not: {request.notes}
+                <div className="text-[11px] text-muted-foreground pt-1 border-t border-border/30">{localizeText("Not: ")}{localizeText(request.notes)}
                 </div>
               )}
             </div>
@@ -133,25 +131,22 @@ export function CraftsmanRequestDetailModal({
               <div className="mb-5 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 p-4.5 space-y-3">
                 <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
                   <CheckCircle2 className="h-5 w-5" />
-                  <span>Eşleşme Onaylandı!</span>
+                  <span>{localizeText("Eşleşme Onaylandı!")}</span>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Ustanız talebinizi kabul etti ve belirtilen saatte adresinizde olacaktır.
-                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{localizeText("Ustanız talebinizi kabul etti ve belirtilen saatte adresinizde olacaktır.")}</p>
 
                 {acceptedBid && (
                   <div className="rounded-xl border border-emerald-500/30 bg-card p-3 flex items-center justify-between text-xs">
                     <div>
-                      <div className="font-bold text-foreground">{acceptedBid.craftsmanAnonymousTitle}</div>
-                      <div className="text-[11px] text-muted-foreground">
-                        Tahmini Süre: {acceptedBid.estimatedDuration}
+                      <div className="font-bold text-foreground">{localizeText(acceptedBid.craftsmanAnonymousTitle)}</div>
+                      <div className="text-[11px] text-muted-foreground">{localizeText("Tahmini Süre: ")}{localizeText(acceptedBid.estimatedDuration)}
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="font-bold text-emerald-500 text-sm">
-                        {acceptedBid.price.toLocaleString('tr-TR')} {acceptedBid.currency}
+                        {localizeText(acceptedBid.price.toLocaleString(getFormattingLocale()))} {localizeText(acceptedBid.currency)}
                       </div>
-                      <span className="text-[10px] text-muted-foreground">Sabit Teklif</span>
+                      <span className="text-[10px] text-muted-foreground">{localizeText("Sabit Teklif")}</span>
                     </div>
                   </div>
                 )}
@@ -169,7 +164,7 @@ export function CraftsmanRequestDetailModal({
                     className="rounded-xl text-xs flex items-center justify-center gap-1.5 border-emerald-500/30"
                   >
                     <Phone className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Arama (Çok Yakında)</span>
+                    <span>{localizeText("Arama (Çok Yakında)")}</span>
                   </Button>
                   <Button
                     onClick={() =>
@@ -182,14 +177,14 @@ export function CraftsmanRequestDetailModal({
                     className="rounded-xl text-xs flex items-center justify-center gap-1.5 border-emerald-500/30"
                   >
                     <MessageSquare className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Mesajlaşma (Çok Yakında)</span>
+                    <span>{localizeText("Mesajlaşma (Çok Yakında)")}</span>
                   </Button>
                 </div>
 
                 {lockedActionNotice && (
                   <div className="rounded-xl bg-muted/60 p-2.5 text-[11px] text-muted-foreground border border-border/40 flex items-start gap-2">
                     <Clock className="h-4 w-4 text-purple-500 flex-shrink-0 mt-0.5" />
-                    <span>{lockedActionNotice}</span>
+                    <span>{localizeText(lockedActionNotice)}</span>
                   </div>
                 )}
               </div>
@@ -199,18 +194,13 @@ export function CraftsmanRequestDetailModal({
             {!isMatchConfirmed && request.status !== 'cancelled' && (
               <div className="space-y-3">
                 <div className="flex items-center justify-between px-1">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Gelen Teklifler ({bids.length})
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Gelen Teklifler (")}{localizeText(bids.length)})
                   </h4>
-                  <span className="text-[11px] text-muted-foreground">
-                    Usta & Fiyat Seçin
-                  </span>
+                  <span className="text-[11px] text-muted-foreground">{localizeText("Usta & Fiyat Seçin")}</span>
                 </div>
 
                 {bids.length === 0 ? (
-                  <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">
-                    Şu anda henüz teklif gelmedi. Uygun ustalar inceliyor...
-                  </div>
+                  <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">{localizeText("Şu anda henüz teklif gelmedi. Uygun ustalar inceliyor...")}</div>
                 ) : (
                   <div className="space-y-2.5">
                     {bids.map((bid) => (
@@ -222,24 +212,24 @@ export function CraftsmanRequestDetailModal({
                           <div>
                             <div className="font-bold text-xs text-foreground flex items-center gap-1.5">
                               <Wrench className="h-4 w-4 text-purple-500" />
-                              <span>{bid.craftsmanAnonymousTitle}</span>
+                              <span>{localizeText(bid.craftsmanAnonymousTitle)}</span>
                             </div>
                             <div className="text-[11px] text-muted-foreground mt-0.5 flex items-center gap-1">
                               <Timer className="h-3 w-3 text-muted-foreground" />
-                              <span>Süre: {bid.estimatedDuration}</span>
+                              <span>{localizeText("Süre: ")}{localizeText(bid.estimatedDuration)}</span>
                             </div>
                           </div>
                           <div className="text-right">
                             <div className="font-bold text-base text-purple-500">
-                              {bid.price.toLocaleString('tr-TR')} {bid.currency}
+                              {localizeText(bid.price.toLocaleString(getFormattingLocale()))} {localizeText(bid.currency)}
                             </div>
-                            <span className="text-[10px] text-muted-foreground">Hizmet Bedeli</span>
+                            <span className="text-[10px] text-muted-foreground">{localizeText("Hizmet Bedeli")}</span>
                           </div>
                         </div>
 
                         {bid.bidNote && (
                           <p className="text-xs text-muted-foreground bg-muted/30 p-2.5 rounded-xl border border-border/30">
-                            "{bid.bidNote}"
+                            "{localizeText(bid.bidNote)}"
                           </p>
                         )}
 
@@ -248,9 +238,7 @@ export function CraftsmanRequestDetailModal({
                           size="sm"
                           className="w-full rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs shadow-sm"
                         >
-                          <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
-                          Teklifi Kabul Et & Eşleş
-                        </Button>
+                          <CheckCircle2 className="h-3.5 w-3.5 mr-1" />{localizeText("Teklifi Kabul Et & Eşleş")}</Button>
                       </div>
                     ))}
                   </div>
@@ -267,9 +255,7 @@ export function CraftsmanRequestDetailModal({
                   size="sm"
                   className="rounded-xl text-xs text-muted-foreground hover:text-destructive"
                 >
-                  <Ban className="h-3.5 w-3.5 mr-1" />
-                  Talebi İptal Et
-                </Button>
+                  <Ban className="h-3.5 w-3.5 mr-1" />{localizeText("Talebi İptal Et")}</Button>
               </div>
             )}
           </motion.div>

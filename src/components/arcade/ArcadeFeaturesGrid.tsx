@@ -12,6 +12,7 @@ import {
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import type { ArcadeSectionKey } from '@/types/arcade';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export interface ArcadeFeatureCardConfig {
   id: ArcadeSectionKey;
@@ -67,15 +68,12 @@ interface ArcadeFeaturesGridProps {
 }
 
 export function ArcadeFeaturesGrid({ onFeatureClick }: ArcadeFeaturesGridProps) {
+  const localizeText = useLocaleRender();
   return (
     <div className="mt-4 px-4">
       <div className="mb-3 px-1 flex items-center justify-between">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Arcade Alanları
-        </h2>
-        <span className="text-xs font-medium text-muted-foreground">
-          4 Aktif Bölüm
-        </span>
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Arcade Alanları")}</h2>
+        <span className="text-xs font-medium text-muted-foreground">{localizeText("4 Aktif Bölüm")}</span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -94,28 +92,28 @@ export function ArcadeFeaturesGrid({ onFeatureClick }: ArcadeFeaturesGridProps) 
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
                     <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-muted border border-border">
-                      {section.icon}
+                      {localizeText(section.icon)}
                     </div>
 
                     <div className="flex-1 min-w-0">
                       <CardTitle className="text-sm font-semibold">
-                        {section.title}
+                        {localizeText(section.title)}
                       </CardTitle>
                       <CardDescription className="mt-1 text-xs line-clamp-2">
-                        {section.description}
+                        {localizeText(section.description)}
                       </CardDescription>
                     </div>
                   </div>
 
                   <StatusBadge
                     status={section.isAvailable ? 'active' : 'locked'}
-                    label={section.isAvailable ? 'Aktif' : 'Yakında'}
+                    label={localizeText(section.isAvailable ? 'Aktif' : 'Yakında')}
                     size="sm"
                   />
                 </div>
 
                 <div className="mt-3 pt-2.5 border-t border-border/50 flex items-center justify-between text-xs text-muted-foreground">
-                  <span>Bölüme Gir</span>
+                  <span>{localizeText("Bölüme Gir")}</span>
                   <ChevronRight className="h-3.5 w-3.5" />
                 </div>
               </CardHeader>

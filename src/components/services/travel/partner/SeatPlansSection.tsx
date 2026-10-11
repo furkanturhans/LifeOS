@@ -4,20 +4,18 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { LayoutGrid, Sparkles, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function SeatPlansSection() {
+  const localizeText = useLocaleRender();
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-foreground">Koltuk Planları & Şablonlar</h3>
-          <p className="text-xs text-muted-foreground">
-            Araç tiplerine göre 2+1 ve 2+2 koltuk yerleşim şablonları
-          </p>
+          <h3 className="text-sm font-bold text-foreground">{localizeText("Koltuk Planları & Şablonlar")}</h3>
+          <p className="text-xs text-muted-foreground">{localizeText("Araç tiplerine göre 2+1 ve 2+2 koltuk yerleşim şablonları")}</p>
         </div>
-        <Badge variant="secondary" className="text-[10px] py-0 px-2">
-          Altyapı Hazır
-        </Badge>
+        <Badge variant="secondary" className="text-[10px] py-0 px-2">{localizeText("Altyapı Hazır")}</Badge>
       </div>
 
       {/* Professional Empty State with Layout Previews */}
@@ -30,38 +28,26 @@ export function SeatPlansSection() {
           <LayoutGrid className="h-7 w-7" />
         </div>
 
-        <h4 className="text-base font-bold text-foreground">
-          Koltuk Planı ve Şablon Yönetimi
-        </h4>
+        <h4 className="text-base font-bold text-foreground">{localizeText("Koltuk Planı ve Şablon Yönetimi")}</h4>
 
-        <p className="mx-auto mt-1.5 max-w-sm text-xs text-muted-foreground leading-relaxed">
-          Koltuk planı ve şablon oluşturma altyapısı hazırlanmıştır. Görsel koltuk seçimi, tekli/çiftli koltuk fiyatlandırma ve cinsiyet kuralı özellikleri bir sonraki sürümde aktif olacaktır.
-        </p>
+        <p className="mx-auto mt-1.5 max-w-sm text-xs text-muted-foreground leading-relaxed">{localizeText("Koltuk planı ve şablon oluşturma altyapısı hazırlanmıştır. Görsel koltuk seçimi, tekli/çiftli koltuk fiyatlandırma ve cinsiyet kuralı özellikleri bir sonraki sürümde aktif olacaktır.")}</p>
 
         {/* Supported Layouts Info */}
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
           <div className="rounded-2xl border border-border/60 bg-muted/30 p-3.5">
             <div className="flex items-center gap-2 font-bold text-xs text-foreground">
-              <span>💺 2+1 Rahat Hat Düzeni</span>
-              <Badge variant="success" className="text-[9px] py-0 px-1">
-                Destekleniyor
-              </Badge>
+              <span>{localizeText("💺 2+1 Rahat Hat Düzeni")}</span>
+              <Badge variant="success" className="text-[9px] py-0 px-1">{localizeText("Destekleniyor")}</Badge>
             </div>
-            <p className="mt-1 text-[11px] text-muted-foreground leading-snug">
-              Sol tekli koltuklar, sağ çiftli koltuklar. Toplam 38 koltuk şablonu.
-            </p>
+            <p className="mt-1 text-[11px] text-muted-foreground leading-snug">{localizeText("Sol tekli koltuklar, sağ çiftli koltuklar. Toplam 38 koltuk şablonu.")}</p>
           </div>
 
           <div className="rounded-2xl border border-border/60 bg-muted/30 p-3.5">
             <div className="flex items-center gap-2 font-bold text-xs text-foreground">
-              <span>🚌 2+2 Standart Düzen</span>
-              <Badge variant="success" className="text-[9px] py-0 px-1">
-                Destekleniyor
-              </Badge>
+              <span>{localizeText("🚌 2+2 Standart Düzen")}</span>
+              <Badge variant="success" className="text-[9px] py-0 px-1">{localizeText("Destekleniyor")}</Badge>
             </div>
-            <p className="mt-1 text-[11px] text-muted-foreground leading-snug">
-              Sol çiftli ve sağ çiftli standart koridor yerleşimi. 46-54 koltuk şablonu.
-            </p>
+            <p className="mt-1 text-[11px] text-muted-foreground leading-snug">{localizeText("Sol çiftli ve sağ çiftli standart koridor yerleşimi. 46-54 koltuk şablonu.")}</p>
           </div>
         </div>
       </motion.div>

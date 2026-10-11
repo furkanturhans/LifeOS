@@ -1,3 +1,5 @@
+'use client';
+
 import { cn, getInitials } from '@/lib/utils';
 
 interface AvatarProps {

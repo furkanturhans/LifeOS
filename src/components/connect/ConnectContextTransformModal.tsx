@@ -13,6 +13,7 @@ import {
   Tag,
 } from 'lucide-react';
 import type { Message, ActionTransformType, ActionTransformPayload } from '@/types/connect';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface ConnectContextTransformModalProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ export function ConnectContextTransformModal({
   message,
   onTransform,
 }: ConnectContextTransformModalProps) {
+  const localizeText = useLocaleRender();
   const [selectedType, setSelectedType] = useState<ActionTransformType>('task');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -97,9 +99,7 @@ export function ConnectContextTransformModal({
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
           <div className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-indigo-400" />
-            <h3 className="text-sm font-bold text-foreground">
-              Mesajı LifeOS Eylemine Dönüştür
-            </h3>
+            <h3 className="text-sm font-bold text-foreground">{localizeText("Mesajı LifeOS Eylemine Dönüştür")}</h3>
           </div>
           <button
             onClick={onClose}
@@ -111,7 +111,7 @@ export function ConnectContextTransformModal({
 
         {/* Source Message Preview */}
         <div className="bg-muted/40 px-5 py-3 border-b border-border/50 text-xs">
-          <span className="font-semibold text-muted-foreground">Kaynak Mesaj ({message.senderName}):</span>
+          <span className="font-semibold text-muted-foreground">{localizeText("Kaynak Mesaj (")}{localizeText(message.senderName)}):</span>
           <p className="mt-1 line-clamp-2 italic text-foreground/80">"{message.content}"</p>
         </div>
 
@@ -135,10 +135,10 @@ export function ConnectContextTransformModal({
                 >
                   <div className="flex items-center gap-2 font-medium text-xs text-foreground">
                     <Icon className="h-4 w-4" />
-                    <span>{opt.label}</span>
+                    <span>{localizeText(opt.label)}</span>
                   </div>
                   <span className="mt-1 text-[10px] text-muted-foreground leading-tight">
-                    {opt.desc}
+                    {localizeText(opt.desc)}
                   </span>
                 </button>
               );
@@ -147,26 +147,26 @@ export function ConnectContextTransformModal({
 
           {/* Title input */}
           <div>
-            <label className="text-xs font-semibold text-foreground">Başlık</label>
+            <label className="text-xs font-semibold text-foreground">{localizeText("Başlık")}</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-xs text-foreground focus:border-primary focus:outline-none"
-              placeholder="Eylem başlığı..."
+              placeholder={localizeText("Eylem başlığı...")}
               required
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="text-xs font-semibold text-foreground">Açıklama / Detay</label>
+            <label className="text-xs font-semibold text-foreground">{localizeText("Açıklama / Detay")}</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={2}
               className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-xs text-foreground focus:border-primary focus:outline-none"
-              placeholder="Detaylar..."
+              placeholder={localizeText("Detaylar...")}
             />
           </div>
 
@@ -174,9 +174,7 @@ export function ConnectContextTransformModal({
           {(selectedType === 'task' || selectedType === 'calendar_event') && (
             <div>
               <label className="text-xs font-semibold text-foreground flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5 text-muted-foreground" />
-                Hedef / Bitiş Tarihi
-              </label>
+                <Clock className="h-3.5 w-3.5 text-muted-foreground" />{localizeText("Hedef / Bitiş Tarihi")}</label>
               <input
                 type="date"
                 value={dueDate}
@@ -192,14 +190,12 @@ export function ConnectContextTransformModal({
               type="button"
               onClick={onClose}
               className="rounded-lg px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-muted"
-            >
-              Vazgeç
-            </button>
+            >{localizeText("Vazgeç")}</button>
             <button
               type="submit"
               className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90 shadow-sm"
             >
-              <span>Eylemi Oluştur</span>
+              <span>{localizeText("Eylemi Oluştur")}</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>

@@ -33,6 +33,7 @@ import type {
   LessonContentType,
 } from '@/types/education';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface CourseDraftBuilderProps {
   isOpen: boolean;
@@ -70,6 +71,7 @@ export function CourseDraftBuilder({
   onClose,
   initialDraft,
 }: CourseDraftBuilderProps) {
+  const localizeText = useLocaleRender();
   const { saveCourseDraft, instructorProfile } = useEducationStore();
 
   const [title, setTitle] = useState(initialDraft?.title || '');
@@ -211,22 +213,19 @@ export function CourseDraftBuilder({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={initialDraft ? 'Kurs Taslağını Düzenle' : 'Yeni Kurs Taslağı Oluştur'}
-      description="Kurs yapısını, hedef yaş grubunu ve ders içerik taslaklarını belirleyin."
+      title={localizeText(initialDraft ? 'Kurs Taslağını Düzenle' : 'Yeni Kurs Taslağı Oluştur')}
+      description={localizeText("Kurs yapısını, hedef yaş grubunu ve ders içerik taslaklarını belirleyin.")}
       size="lg"
     >
       <div className="space-y-5 max-h-[70vh] overflow-y-auto pr-1">
         {/* Basic Info Section */}
         <div className="space-y-3 p-4 rounded-2xl border border-border bg-card/60">
           <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Sparkles className="h-3.5 w-3.5 text-primary" /> Temel Kurs Bilgileri
-          </h4>
+            <Sparkles className="h-3.5 w-3.5 text-primary" />{localizeText("Temel Kurs Bilgileri")}</h4>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
             <div className="sm:col-span-1">
-              <label className="block text-[11px] font-bold text-muted-foreground mb-1">
-                Kapak Simgesi
-              </label>
+              <label className="block text-[11px] font-bold text-muted-foreground mb-1">{localizeText("Kapak Simgesi")}</label>
               <input
                 type="text"
                 value={coverEmoji}
@@ -237,28 +236,24 @@ export function CourseDraftBuilder({
             </div>
 
             <div className="sm:col-span-3">
-              <label className="block text-[11px] font-bold text-muted-foreground mb-1">
-                Kurs Başlığı
-              </label>
+              <label className="block text-[11px] font-bold text-muted-foreground mb-1">{localizeText("Kurs Başlığı")}</label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Örn: Sıfırdan Web Geliştirme Temelleri"
+                placeholder={localizeText("Örn: Sıfırdan Web Geliştirme Temelleri")}
                 className="w-full h-10 rounded-xl border border-border bg-background px-3 text-xs font-semibold text-foreground focus:border-primary focus:outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-[11px] font-bold text-muted-foreground mb-1">
-              Kurs Açıklaması
-            </label>
+            <label className="block text-[11px] font-bold text-muted-foreground mb-1">{localizeText("Kurs Açıklaması")}</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={2}
-              placeholder="Bu eğitimde öğrencilerin neler öğreneceğini özetleyin..."
+              placeholder={localizeText("Bu eğitimde öğrencilerin neler öğreneceğini özetleyin...")}
               className="w-full rounded-xl border border-border bg-background p-2.5 text-xs text-foreground focus:border-primary focus:outline-none resize-none"
             />
           </div>
@@ -266,9 +261,7 @@ export function CourseDraftBuilder({
           {/* Age Group & Level Selectors */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             <div>
-              <label className="block text-[11px] font-bold text-muted-foreground mb-1">
-                Hedef Yaş Grubu
-              </label>
+              <label className="block text-[11px] font-bold text-muted-foreground mb-1">{localizeText("Hedef Yaş Grubu")}</label>
               <select
                 value={ageGroup}
                 onChange={(e) => setAgeGroup(e.target.value as AgeGroup)}
@@ -276,16 +269,14 @@ export function CourseDraftBuilder({
               >
                 {AGE_GROUPS.map((ag) => (
                   <option key={ag.id} value={ag.id}>
-                    {ag.label} ({ag.age})
+                    {localizeText(ag.label)} ({localizeText(ag.age)})
                   </option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-muted-foreground mb-1">
-                Zorluk Seviyesi
-              </label>
+              <label className="block text-[11px] font-bold text-muted-foreground mb-1">{localizeText("Zorluk Seviyesi")}</label>
               <select
                 value={level}
                 onChange={(e) => setLevel(e.target.value as CourseLevel)}
@@ -293,7 +284,7 @@ export function CourseDraftBuilder({
               >
                 {COURSE_LEVELS.map((lvl) => (
                   <option key={lvl.id} value={lvl.id}>
-                    {lvl.label}
+                    {localizeText(lvl.label)}
                   </option>
                 ))}
               </select>
@@ -303,9 +294,7 @@ export function CourseDraftBuilder({
 
         {/* Learning Goals */}
         <div className="space-y-3 p-4 rounded-2xl border border-border bg-card/60">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Kazanımlar ve Hedefler
-          </h4>
+          <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Kazanımlar ve Hedefler")}</h4>
 
           <div className="flex gap-2">
             <input
@@ -313,12 +302,11 @@ export function CourseDraftBuilder({
               value={newGoalInput}
               onChange={(e) => setNewGoalInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddGoal())}
-              placeholder="Yeni öğrenim hedefi ekleyin..."
+              placeholder={localizeText("Yeni öğrenim hedefi ekleyin...")}
               className="flex-1 h-9 rounded-xl border border-border bg-background px-3 text-xs text-foreground focus:border-primary focus:outline-none"
             />
             <Button size="sm" variant="outline" onClick={handleAddGoal} className="h-9 px-3 text-xs">
-              <Plus className="h-3.5 w-3.5 mr-1" /> Ekle
-            </Button>
+              <Plus className="h-3.5 w-3.5 mr-1" />{localizeText("Ekle")}</Button>
           </div>
 
           <div className="space-y-1.5">
@@ -327,7 +315,7 @@ export function CourseDraftBuilder({
                 key={idx}
                 className="flex items-center justify-between p-2 rounded-xl bg-background border border-border/70 text-xs"
               >
-                <span className="text-foreground font-medium">✓ {goal}</span>
+                <span className="text-foreground font-medium">✓ {localizeText(goal)}</span>
                 <button
                   onClick={() => handleRemoveGoal(idx)}
                   className="text-muted-foreground hover:text-destructive p-1"
@@ -343,11 +331,9 @@ export function CourseDraftBuilder({
         <div className="space-y-3 p-4 rounded-2xl border border-border bg-card/60">
           <div className="flex items-center justify-between">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Layers className="h-3.5 w-3.5 text-primary" /> Ders İzlencesi (Müfredat)
-            </h4>
+              <Layers className="h-3.5 w-3.5 text-primary" />{localizeText("Ders İzlencesi (Müfredat)")}</h4>
             <Button size="sm" variant="outline" onClick={handleAddSection} className="h-7 text-[11px] px-2.5">
-              <Plus className="h-3 w-3 mr-1" /> Bölüm Ekle
-            </Button>
+              <Plus className="h-3 w-3 mr-1" />{localizeText("Bölüm Ekle")}</Button>
           </div>
 
           <div className="space-y-3">
@@ -370,9 +356,7 @@ export function CourseDraftBuilder({
                     variant="ghost"
                     onClick={() => handleAddLesson(section.id)}
                     className="h-6 text-[10px] px-2"
-                  >
-                    + Ders Ekle
-                  </Button>
+                  >{localizeText("+ Ders Ekle")}</Button>
                 </div>
 
                 {/* Lessons inside Section */}
@@ -381,9 +365,9 @@ export function CourseDraftBuilder({
                     <div key={lesson.id} className="p-2.5 rounded-xl border border-border/70 bg-card/80 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="font-semibold text-xs text-foreground truncate">
-                          {lesson.title}
+                          {localizeText(lesson.title)}
                         </span>
-                        <StatusBadge status="draft" label="Taslak Ders" size="sm" />
+                        <StatusBadge status="draft" label={localizeText("Taslak Ders")} size="sm" />
                       </div>
 
                       {/* Content Badges */}
@@ -394,25 +378,23 @@ export function CourseDraftBuilder({
                             className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-muted text-[10px] font-semibold text-muted-foreground border border-border/60"
                           >
                             <span>
-                              {CONTENT_TYPE_OPTIONS.find((t) => t.id === cnt.type)?.icon}
+                              {localizeText(CONTENT_TYPE_OPTIONS.find((t) => t.id === cnt.type)?.icon)}
                             </span>
-                            <span>{cnt.title}</span>
+                            <span>{localizeText(cnt.title)}</span>
                           </span>
                         ))}
                       </div>
 
                       {/* Add Content Type Action Pills */}
                       <div className="flex items-center gap-1 overflow-x-auto no-scrollbar pt-1">
-                        <span className="text-[10px] text-muted-foreground font-bold mr-1 shrink-0">
-                          İçerik Ekle:
-                        </span>
+                        <span className="text-[10px] text-muted-foreground font-bold mr-1 shrink-0">{localizeText("İçerik Ekle:")}</span>
                         {CONTENT_TYPE_OPTIONS.map((opt) => (
                           <button
                             key={opt.id}
                             onClick={() => handleAddContent(section.id, lesson.id, opt.id)}
                             className="px-2 py-0.5 rounded-lg border border-border hover:border-primary bg-background text-[10px] font-semibold text-muted-foreground hover:text-foreground shrink-0 transition-colors"
                           >
-                            {opt.icon} {opt.label}
+                            {localizeText(opt.icon)} {localizeText(opt.label)}
                           </button>
                         ))}
                       </div>
@@ -426,9 +408,7 @@ export function CourseDraftBuilder({
 
         {/* Actions Footer */}
         <div className="flex items-center justify-end gap-2 pt-2 border-t border-border">
-          <Button variant="outline" onClick={onClose} className="text-xs font-semibold">
-            Vazgeç
-          </Button>
+          <Button variant="outline" onClick={onClose} className="text-xs font-semibold">{localizeText("Vazgeç")}</Button>
           <Button
             variant="primary"
             onClick={handleSave}
@@ -437,14 +417,10 @@ export function CourseDraftBuilder({
           >
             {saveSuccess ? (
               <>
-                <CheckCircle2 className="h-4 w-4 mr-1 text-white animate-bounce" />
-                Kaydedildi!
-              </>
+                <CheckCircle2 className="h-4 w-4 mr-1 text-white animate-bounce" />{localizeText("Kaydedildi!")}</>
             ) : (
               <>
-                <Save className="h-4 w-4 mr-1" />
-                Taslağı Kaydet
-              </>
+                <Save className="h-4 w-4 mr-1" />{localizeText("Taslağı Kaydet")}</>
             )}
           </Button>
         </div>

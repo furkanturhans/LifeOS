@@ -16,6 +16,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import type { Message, MessageReaction } from '@/types/connect';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface ConnectMessageItemProps {
   message: Message;
@@ -36,6 +37,7 @@ export function ConnectMessageItem({
   onPin,
   onOpenTransform,
 }: ConnectMessageItemProps) {
+  const localizeText = useLocaleRender();
   const [showPicker, setShowPicker] = useState(false);
 
   const formattedTime = new Date(message.createdAt).toLocaleTimeString([], {
@@ -46,13 +48,13 @@ export function ConnectMessageItem({
   const getRoleBadge = () => {
     switch (message.senderRole) {
       case 'instructor':
-        return <span className="rounded bg-blue-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-blue-300">Eğitmen</span>;
+        return <span className="rounded bg-blue-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-blue-300">{localizeText("Eğitmen")}</span>;
       case 'service_provider':
-        return <span className="rounded bg-emerald-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-emerald-300">Hizmet</span>;
+        return <span className="rounded bg-emerald-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-emerald-300">{localizeText("Hizmet")}</span>;
       case 'guardian':
-        return <span className="rounded bg-amber-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-amber-300">Veli</span>;
+        return <span className="rounded bg-amber-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-amber-300">{localizeText("Veli")}</span>;
       case 'child':
-        return <span className="rounded bg-purple-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-purple-300">Çocuk</span>;
+        return <span className="rounded bg-purple-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-purple-300">{localizeText("Çocuk")}</span>;
       default:
         return null;
     }
@@ -68,14 +70,14 @@ export function ConnectMessageItem({
       {message.isPinned && (
         <div className="mb-1 flex items-center gap-1 text-[10px] font-medium text-amber-400">
           <Pin className="h-3 w-3 fill-amber-400" />
-          <span>Sabitlenen Mesaj</span>
+          <span>{localizeText("Sabitlenen Mesaj")}</span>
         </div>
       )}
 
       {/* Reply Reference Preview */}
       {message.replyToPreview && (
         <div className="mb-1 ml-1 max-w-md rounded-lg border-l-2 border-primary/60 bg-muted/50 px-2.5 py-1 text-[11px] text-muted-foreground">
-          <span className="font-semibold text-primary">{message.replyToPreview.senderName}: </span>
+          <span className="font-semibold text-primary">{localizeText(message.replyToPreview.senderName)}: </span>
           <span className="truncate">{message.replyToPreview.content}</span>
         </div>
       )}
@@ -89,17 +91,17 @@ export function ConnectMessageItem({
               : 'bg-muted border border-border text-foreground'
           }`}
         >
-          {message.senderName.slice(0, 2).toUpperCase()}
+          {localizeText(message.senderName.slice(0, 2).toUpperCase())}
         </div>
 
         {/* Message Bubble & Content */}
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline gap-2">
             <span className="text-xs font-semibold text-foreground">
-              {message.senderName}
+              {localizeText(message.senderName)}
             </span>
-            {getRoleBadge()}
-            <span className="text-[10px] text-muted-foreground">{formattedTime}</span>
+            {localizeText(getRoleBadge())}
+            <span className="text-[10px] text-muted-foreground">{localizeText(formattedTime)}</span>
 
             {/* Status check icons for own messages */}
             {isCurrentUser && (
@@ -127,8 +129,7 @@ export function ConnectMessageItem({
               {message.transformedAction.type === 'calendar_event' && <Calendar className="h-3.5 w-3.5 text-amber-400" />}
               {message.transformedAction.type === 'course_note' && <BookOpen className="h-3.5 w-3.5 text-blue-400" />}
               {message.transformedAction.type === 'service_request' && <Briefcase className="h-3.5 w-3.5 text-emerald-400" />}
-              <span className="font-medium text-[11px]">
-                Eyleme Dönüştürüldü: <span className="underline">{message.transformedAction.title}</span>
+              <span className="font-medium text-[11px]">{localizeText("Eyleme Dönüştürüldü:")}<span className="underline">{localizeText(message.transformedAction.title)}</span>
               </span>
             </div>
           )}
@@ -142,8 +143,8 @@ export function ConnectMessageItem({
                   onClick={() => onReact(message.id, r.emoji)}
                   className="inline-flex items-center gap-1 rounded-full border border-border bg-background px-2 py-0.5 text-[11px] text-foreground hover:bg-muted"
                 >
-                  <span>{r.emoji}</span>
-                  <span className="text-[10px] font-medium text-muted-foreground">{r.count}</span>
+                  <span>{localizeText(r.emoji)}</span>
+                  <span className="text-[10px] font-medium text-muted-foreground">{localizeText(r.count)}</span>
                 </button>
               ))}
             </div>
@@ -157,7 +158,7 @@ export function ConnectMessageItem({
             <button
               onClick={() => setShowPicker(!showPicker)}
               className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
-              title="İfade Bırak"
+              title={localizeText("İfade Bırak")}
             >
               <Smile className="h-3.5 w-3.5" />
             </button>
@@ -173,7 +174,7 @@ export function ConnectMessageItem({
                     }}
                     className="rounded p-1 text-sm hover:scale-125 transition-transform"
                   >
-                    {emoji}
+                    {localizeText(emoji)}
                   </button>
                 ))}
               </div>
@@ -184,7 +185,7 @@ export function ConnectMessageItem({
           <button
             onClick={() => onReply(message)}
             className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
-            title="Yanıtla"
+            title={localizeText("Yanıtla")}
           >
             <Reply className="h-3.5 w-3.5" />
           </button>
@@ -195,7 +196,7 @@ export function ConnectMessageItem({
             className={`rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground ${
               message.isPinned ? 'text-amber-400' : ''
             }`}
-            title={message.isPinned ? 'Sabitlemeyi Kaldır' : 'Sabitle'}
+            title={localizeText(message.isPinned ? 'Sabitlemeyi Kaldır' : 'Sabitle')}
           >
             <Pin className="h-3.5 w-3.5" />
           </button>
@@ -204,7 +205,7 @@ export function ConnectMessageItem({
           <button
             onClick={() => onOpenTransform(message)}
             className="rounded p-1 text-indigo-400 hover:bg-indigo-500/20 hover:text-indigo-300"
-            title="LifeOS Eylemine Dönüştür (Görev, Takvim, Not)"
+            title={localizeText("LifeOS Eylemine Dönüştür (Görev, Takvim, Not)")}
           >
             <Sparkles className="h-3.5 w-3.5" />
           </button>

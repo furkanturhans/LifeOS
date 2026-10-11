@@ -10,8 +10,10 @@ import { WalletDashboardView } from '@/components/wallet/WalletDashboardView';
 import { UniversalCheckoutModal } from '@/components/payment/UniversalCheckoutModal';
 import { Dock } from '@/components/os/Dock';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function FinanceScreen() {
+  const localizeText = useLocaleRender();
   const [activeTab, setActiveTab] = useState<'wallet' | 'features'>('wallet');
   const [selectedLockedFeature, setSelectedLockedFeature] = useState<{
     title: string;
@@ -38,7 +40,7 @@ export function FinanceScreen() {
             )}
           >
             <Wallet className="h-4 w-4 text-emerald-500" />
-            <span>LifeOS Cüzdanım</span>
+            <span>{localizeText("LifeOS Cüzdanım")}</span>
           </button>
 
           <button
@@ -52,7 +54,7 @@ export function FinanceScreen() {
             )}
           >
             <PieChart className="h-4 w-4 text-primary" />
-            <span>Finansal Yaşam Araçları</span>
+            <span>{localizeText("Finansal Yaşam Araçları")}</span>
           </button>
         </div>
 
@@ -71,14 +73,10 @@ export function FinanceScreen() {
                 <div className="flex-1 pr-2">
                   <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                     <ShieldCheck className="h-3.5 w-3.5" />
-                    <span>Gizlilik Odaklı Finans</span>
+                    <span>{localizeText("Gizlilik Odaklı Finans")}</span>
                   </div>
-                  <h2 className="mt-1 text-base font-bold text-foreground">
-                    Finansal Yaşam Alanın
-                  </h2>
-                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                    Tüm harcamalarını, bütçeni ve birikim hedeflerini tek bir güvenli çatı altında yönet. Finansal verilerin sadece senin kontrolündedir.
-                  </p>
+                  <h2 className="mt-1 text-base font-bold text-foreground">{localizeText("Finansal Yaşam Alanın")}</h2>
+                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{localizeText("Tüm harcamalarını, bütçeni ve birikim hedeflerini tek bir güvenli çatı altında yönet. Finansal verilerin sadece senin kontrolündedir.")}</p>
                 </div>
                 <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-emerald-500/15 text-2xl shadow-sm">
                   🛡️
@@ -88,12 +86,12 @@ export function FinanceScreen() {
               <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-border/40">
                 <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
                   <Lock className="h-3.5 w-3.5 text-emerald-500" />
-                  <span>Cihazda Güvenli Depolama</span>
+                  <span>{localizeText("Cihazda Güvenli Depolama")}</span>
                 </div>
                 <span className="text-muted-foreground/40">•</span>
                 <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
                   <Sparkles className="h-3.5 w-3.5 text-teal-500" />
-                  <span>Modüler Entegrasyon</span>
+                  <span>{localizeText("Modüler Entegrasyon")}</span>
                 </div>
               </div>
             </motion.div>

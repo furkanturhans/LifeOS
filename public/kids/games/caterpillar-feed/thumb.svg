@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 90">
+  <rect width="120" height="90" rx="12" fill="#1a4a2e"/>
+  <!-- 배경 잎 -->
+  
+  
+  
+  <!-- 반짝 효과 -->
+  <circle cx="34" cy="22" r="12" fill="#4dcc66" opacity="0.2"/>
+  <!-- 애벌레 -->
+  
+  <!-- 제목 -->
+  
+</svg>

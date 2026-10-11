@@ -20,6 +20,7 @@ import { useTaxiStore } from '@/stores/useTaxiStore';
 import { TAXI_STATUS_LABELS, type TaxiRequest, type TaxiBid } from '@/types/taxi';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 interface TaxiRequestDetailModalProps {
   isOpen: boolean;
@@ -32,6 +33,7 @@ export function TaxiRequestDetailModal({
   onClose,
   request,
 }: TaxiRequestDetailModalProps) {
+  const localizeText = useLocaleRender();
   const { getBidsForMyRequest, acceptBid, cancelRequest } = useTaxiStore();
   const [lockedActionNotice, setLockedActionNotice] = useState<string | null>(null);
 
@@ -82,39 +84,34 @@ export function TaxiRequestDetailModal({
             {/* Header */}
             <div className="mb-4">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-semibold text-amber-500">
-                  Talep #{request.id}
+                <span className="font-mono text-xs font-semibold text-amber-500">{localizeText("Talep #")}{localizeText(request.id)}
                 </span>
                 <Badge variant={statusInfo.badgeVariant} className="text-[10px] py-0 px-2">
-                  {statusInfo.tr}
+                  {localizeText(statusInfo.tr)}
                 </Badge>
               </div>
-              <h3 className="text-xl font-bold text-foreground mt-1">
-                Taksi Talebi Detayı
-              </h3>
+              <h3 className="text-xl font-bold text-foreground mt-1">{localizeText("Taksi Talebi Detayı")}</h3>
             </div>
 
             {/* Trip Info Card */}
             <div className="mb-5 rounded-2xl border border-border/80 bg-muted/30 p-4 space-y-2.5 text-xs">
               <div className="flex items-center gap-2 text-foreground font-semibold text-sm">
                 <MapPin className="h-4 w-4 text-amber-500 flex-shrink-0" />
-                <span>{request.pickupLocation} → {request.dropoffLocation}</span>
+                <span>{localizeText(request.pickupLocation)} → {localizeText(request.dropoffLocation)}</span>
               </div>
 
               <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-[11px] pt-1 border-t border-border/30">
                 <span className="flex items-center gap-1">
                   <Calendar className="h-3.5 w-3.5 text-amber-500" />
-                  {request.requestedDateTime}
+                  {localizeText(request.requestedDateTime)}
                 </span>
                 <span className="flex items-center gap-1">
                   <Users className="h-3.5 w-3.5 text-amber-500" />
-                  {request.passengerCount} Yolcu
-                </span>
+                  {localizeText(request.passengerCount)}{localizeText(" Yolcu")}</span>
               </div>
 
               {request.notes && (
-                <div className="text-[11px] text-muted-foreground bg-card/60 p-2.5 rounded-xl border border-border/40">
-                  Not: {request.notes}
+                <div className="text-[11px] text-muted-foreground bg-card/60 p-2.5 rounded-xl border border-border/40">{localizeText("Not: ")}{localizeText(request.notes)}
                 </div>
               )}
             </div>
@@ -124,23 +121,21 @@ export function TaxiRequestDetailModal({
               <div className="mb-5 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 p-4.5 space-y-3">
                 <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
                   <CheckCircle2 className="h-5 w-5" />
-                  <span>Eşleşme Onaylandı!</span>
+                  <span>{localizeText("Eşleşme Onaylandı!")}</span>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Taksi şoförünüz talebinizi onayladı ve belirtilen saatte alınış noktasında olacaktır.
-                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{localizeText("Taksi şoförünüz talebinizi onayladı ve belirtilen saatte alınış noktasında olacaktır.")}</p>
 
                 {acceptedBid && (
                   <div className="rounded-xl border border-emerald-500/30 bg-card p-3 flex items-center justify-between text-xs">
                     <div>
-                      <div className="font-bold text-foreground">{acceptedBid.driverAnonymousTitle}</div>
-                      <div className="text-[11px] text-muted-foreground">{acceptedBid.vehicleType}</div>
+                      <div className="font-bold text-foreground">{localizeText(acceptedBid.driverAnonymousTitle)}</div>
+                      <div className="text-[11px] text-muted-foreground">{localizeText(acceptedBid.vehicleType)}</div>
                     </div>
                     <div className="text-right">
                       <div className="font-bold text-emerald-500 text-sm">
-                        {acceptedBid.price.toLocaleString('tr-TR')} {acceptedBid.currency}
+                        {localizeText(acceptedBid.price.toLocaleString(getFormattingLocale()))} {localizeText(acceptedBid.currency)}
                       </div>
-                      <span className="text-[10px] text-muted-foreground">Sabit Fiyat</span>
+                      <span className="text-[10px] text-muted-foreground">{localizeText("Sabit Fiyat")}</span>
                     </div>
                   </div>
                 )}
@@ -158,7 +153,7 @@ export function TaxiRequestDetailModal({
                     className="rounded-xl text-xs flex items-center justify-center gap-1.5 border-emerald-500/30"
                   >
                     <Phone className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Arama (Çok Yakında)</span>
+                    <span>{localizeText("Arama (Çok Yakında)")}</span>
                   </Button>
                   <Button
                     onClick={() =>
@@ -171,14 +166,14 @@ export function TaxiRequestDetailModal({
                     className="rounded-xl text-xs flex items-center justify-center gap-1.5 border-emerald-500/30"
                   >
                     <MessageSquare className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Mesajlaşma (Çok Yakında)</span>
+                    <span>{localizeText("Mesajlaşma (Çok Yakında)")}</span>
                   </Button>
                 </div>
 
                 {lockedActionNotice && (
                   <div className="rounded-xl bg-muted/60 p-2.5 text-[11px] text-muted-foreground border border-border/40 flex items-start gap-2">
                     <Clock className="h-4 w-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                    <span>{lockedActionNotice}</span>
+                    <span>{localizeText(lockedActionNotice)}</span>
                   </div>
                 )}
               </div>
@@ -188,18 +183,13 @@ export function TaxiRequestDetailModal({
             {!isMatchConfirmed && request.status !== 'cancelled' && (
               <div className="space-y-3">
                 <div className="flex items-center justify-between px-1">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Gelen Teklifler ({bids.length})
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Gelen Teklifler (")}{localizeText(bids.length)})
                   </h4>
-                  <span className="text-[11px] text-muted-foreground">
-                    En Uygun Fiyatı Seçin
-                  </span>
+                  <span className="text-[11px] text-muted-foreground">{localizeText("En Uygun Fiyatı Seçin")}</span>
                 </div>
 
                 {bids.length === 0 ? (
-                  <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">
-                    Şu anda henüz teklif gelmedi. Yakındaki şoförler inceliyor...
-                  </div>
+                  <div className="rounded-2xl border border-dashed border-border/80 bg-card/40 p-5 text-center text-xs text-muted-foreground">{localizeText("Şu anda henüz teklif gelmedi. Yakındaki şoförler inceliyor...")}</div>
                 ) : (
                   <div className="space-y-2.5">
                     {bids.map((bid) => (
@@ -211,23 +201,23 @@ export function TaxiRequestDetailModal({
                           <div>
                             <div className="font-bold text-xs text-foreground flex items-center gap-1.5">
                               <Car className="h-4 w-4 text-amber-500" />
-                              <span>{bid.driverAnonymousTitle}</span>
+                              <span>{localizeText(bid.driverAnonymousTitle)}</span>
                             </div>
                             <div className="text-[11px] text-muted-foreground mt-0.5">
-                              {bid.vehicleType}
+                              {localizeText(bid.vehicleType)}
                             </div>
                           </div>
                           <div className="text-right">
                             <div className="font-bold text-base text-amber-500">
-                              {bid.price.toLocaleString('tr-TR')} {bid.currency}
+                              {localizeText(bid.price.toLocaleString(getFormattingLocale()))} {localizeText(bid.currency)}
                             </div>
-                            <span className="text-[10px] text-muted-foreground">Sabit Ücret</span>
+                            <span className="text-[10px] text-muted-foreground">{localizeText("Sabit Ücret")}</span>
                           </div>
                         </div>
 
                         {bid.bidNote && (
                           <p className="text-xs text-muted-foreground bg-muted/30 p-2.5 rounded-xl border border-border/30">
-                            "{bid.bidNote}"
+                            "{localizeText(bid.bidNote)}"
                           </p>
                         )}
 
@@ -236,9 +226,7 @@ export function TaxiRequestDetailModal({
                           size="sm"
                           className="w-full rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs shadow-sm"
                         >
-                          <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
-                          Teklifi Kabul Et & Eşleş
-                        </Button>
+                          <CheckCircle2 className="h-3.5 w-3.5 mr-1" />{localizeText("Teklifi Kabul Et & Eşleş")}</Button>
                       </div>
                     ))}
                   </div>
@@ -255,9 +243,7 @@ export function TaxiRequestDetailModal({
                   size="sm"
                   className="rounded-xl text-xs text-muted-foreground hover:text-destructive"
                 >
-                  <Ban className="h-3.5 w-3.5 mr-1" />
-                  Talebi İptal Et
-                </Button>
+                  <Ban className="h-3.5 w-3.5 mr-1" />{localizeText("Talebi İptal Et")}</Button>
               </div>
             )}
           </motion.div>

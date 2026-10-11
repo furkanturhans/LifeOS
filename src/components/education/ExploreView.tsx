@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { cn } from '@/lib/utils';
 import type { AgeGroup } from '@/types/education';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface ExploreViewProps {
   onBackToHub: () => void;
@@ -41,6 +42,7 @@ const CATEGORIES = [
 ];
 
 export function ExploreView({ onBackToHub }: ExploreViewProps) {
+  const localizeText = useLocaleRender();
   const [selectedAge, setSelectedAge] = useState<'all' | AgeGroup>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -53,7 +55,7 @@ export function ExploreView({ onBackToHub }: ExploreViewProps) {
             type="button"
             onClick={onBackToHub}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Dersler Merkezine Dön"
+            aria-label={localizeText("Dersler Merkezine Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -64,14 +66,10 @@ export function ExploreView({ onBackToHub }: ExploreViewProps) {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Kurs & Eğitim Keşfi
-              </h1>
-              <StatusBadge status="active" label="Katalog" size="sm" />
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Kurs & Eğitim Keşfi")}</h1>
+              <StatusBadge status="active" label={localizeText("Katalog")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Yaş grupları ve uzmanlık alanlarına göre eğitimler
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Yaş grupları ve uzmanlık alanlarına göre eğitimler")}</p>
           </div>
         </div>
       </div>
@@ -85,7 +83,7 @@ export function ExploreView({ onBackToHub }: ExploreViewProps) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Kurs veya konu ara..."
+            placeholder={localizeText("Kurs veya konu ara...")}
             className="w-full h-9 pl-9 pr-3 rounded-xl border border-border bg-card text-xs text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
           />
         </div>
@@ -103,9 +101,9 @@ export function ExploreView({ onBackToHub }: ExploreViewProps) {
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
               )}
             >
-              <span>{group.icon}</span>
-              <span>{group.label}</span>
-              <span className="text-[10px] opacity-70">({group.ageRange})</span>
+              <span>{localizeText(group.icon)}</span>
+              <span>{localizeText(group.label)}</span>
+              <span className="text-[10px] opacity-70">({localizeText(group.ageRange)})</span>
             </button>
           ))}
         </div>
@@ -118,10 +116,8 @@ export function ExploreView({ onBackToHub }: ExploreViewProps) {
           <div className="flex items-center gap-2.5">
             <ShieldCheck className="h-5 w-5 text-blue-500 shrink-0" />
             <div className="min-w-0">
-              <span className="font-bold block">Güvenli Eğitim Ortamı</span>
-              <span className="text-[11px] opacity-90 block">
-                Doğrulanmış eğitmenler, pedagojik denetim ve veli kontrolü ile güvenli öğrenim.
-              </span>
+              <span className="font-bold block">{localizeText("Güvenli Eğitim Ortamı")}</span>
+              <span className="text-[11px] opacity-90 block">{localizeText("Doğrulanmış eğitmenler, pedagojik denetim ve veli kontrolü ile güvenli öğrenim.")}</span>
             </div>
           </div>
         </div>
@@ -129,12 +125,8 @@ export function ExploreView({ onBackToHub }: ExploreViewProps) {
         {/* Categories Grid */}
         <div className="space-y-3">
           <div className="px-1 flex items-center justify-between">
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Eğitim Kategorileri
-            </h2>
-            <span className="text-xs font-medium text-muted-foreground">
-              6 Kategori
-            </span>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Eğitim Kategorileri")}</h2>
+            <span className="text-xs font-medium text-muted-foreground">{localizeText("6 Kategori")}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -148,15 +140,15 @@ export function ExploreView({ onBackToHub }: ExploreViewProps) {
                 <Card className="p-4 border-border bg-card hover:border-primary/40 transition-all shadow-2xs group cursor-pointer">
                   <div className="flex items-start gap-3.5">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-border bg-muted/60 text-2xl shadow-2xs group-hover:scale-105 transition-transform">
-                      {cat.icon}
+                      {localizeText(cat.icon)}
                     </div>
 
                     <div className="min-w-0 flex-1">
                       <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
-                        {cat.name}
+                        {localizeText(cat.name)}
                       </h3>
                       <p className="mt-0.5 text-xs text-muted-foreground font-medium">
-                        {cat.count}
+                        {localizeText(cat.count)}
                       </p>
                     </div>
                   </div>

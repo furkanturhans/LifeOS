@@ -14,7 +14,9 @@ import {
 } from 'lucide-react';
 import { useWalletStore } from '@/stores/useWalletStore';
 import { cn } from '@/lib/utils';
-import { LIFEOS_CREDIT_RATE_TL, LIFEOS_CREDIT_RATE_KURUS } from '@/types/payment';
+import { LIFEOS_CREDIT_RATE_TL } from '@/types/payment';
+import { purchaseQuote } from '@/lib/education/academy-rules';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface WalletTopupModalProps {
   isOpen: boolean;
@@ -29,6 +31,7 @@ const PRESET_PACKAGES = [
 ];
 
 export function WalletTopupModal({ isOpen, onClose }: WalletTopupModalProps) {
+  const localizeText = useLocaleRender();
   const { purchaseCredits, isActionLoading } = useWalletStore();
   const [selectedCredits, setSelectedCredits] = useState<number>(100);
   const [customCredits, setCustomCredits] = useState<string>('100');
@@ -39,7 +42,7 @@ export function WalletTopupModal({ isOpen, onClose }: WalletTopupModalProps) {
   if (!isOpen) return null;
 
   const currentCreditCount = isCustom ? parseInt(customCredits) || 0 : selectedCredits;
-  const totalAmountTL = (currentCreditCount * LIFEOS_CREDIT_RATE_TL).toFixed(2);
+  const totalAmountTL = (currentCreditCount > 0 && currentCreditCount <= 100000 ? purchaseQuote(currentCreditCount).totalKurus / 100 : 0).toFixed(2);
 
   const handleSelectPackage = (credits: number) => {
     setIsCustom(false);
@@ -94,8 +97,8 @@ export function WalletTopupModal({ isOpen, onClose }: WalletTopupModalProps) {
                 <Coins className="h-4 w-4" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-foreground">LifeOS Kredisi Satın Al</h2>
-                <p className="text-[11px] text-muted-foreground">Uygulama İçi Kullanım Bakiyesi</p>
+                <h2 className="text-sm font-bold text-foreground">{localizeText("LifeOS Kredisi Satın Al")}</h2>
+                <p className="text-[11px] text-muted-foreground">{localizeText("Uygulama İçi Kullanım Bakiyesi")}</p>
               </div>
             </div>
             <button
@@ -111,28 +114,24 @@ export function WalletTopupModal({ isOpen, onClose }: WalletTopupModalProps) {
             <div className="p-3.5 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-xs text-blue-900 dark:text-blue-200 space-y-1">
               <div className="flex items-center gap-1.5 font-bold">
                 <Info className="h-4 w-4 text-blue-500 shrink-0" />
-                <span>LifeOS Kredisi Nedir?</span>
+                <span>{localizeText("LifeOS Kredisi Nedir?")}</span>
               </div>
-              <p className="text-[11px] leading-relaxed">
-                LifeOS Kredisi, uygulama içindeki seçili hizmet ve ürünlerde kullanılan kullanım
-                bakiyesidir. Krediler kullanıcılar arasında transfer edilemez, nakde çevrilemez veya
-                dışarıda kullanılamaz.
-              </p>
+              <p className="text-[11px] leading-relaxed">{localizeText("LifeOS Kredisi, uygulama içindeki seçili hizmet ve ürünlerde kullanılan kullanım bakiyesidir. Krediler kullanıcılar arasında transfer edilemez, nakde çevrilemez veya dışarıda kullanılamaz.")}</p>
             </div>
 
             {/* Rate Banner */}
             <div className="p-3 rounded-2xl bg-muted/50 border border-border/70 flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Merkezi Kredi Birim Fiyatı:</span>
-              <span className="font-mono font-bold text-primary">1 Kredi = 1,35 TL</span>
+              <span className="text-muted-foreground">{localizeText("Merkezi Kredi Birim Fiyatı:")}</span>
+              <span className="font-mono font-bold text-primary">{localizeText("Kredi")} × {LIFEOS_CREDIT_RATE_TL} TL + %10 {localizeText("Komisyon")}</span>
             </div>
 
             {/* Packages Grid */}
             <div className="space-y-2">
-              <label className="text-xs font-bold text-foreground block">Kredi Paketleri</label>
+              <label className="text-xs font-bold text-foreground block">{localizeText("Kredi Paketleri")}</label>
               <div className="grid grid-cols-2 gap-2.5">
                 {PRESET_PACKAGES.map((pkg) => {
                   const isSelected = !isCustom && selectedCredits === pkg.credits;
-                  const price = (pkg.credits * LIFEOS_CREDIT_RATE_TL).toFixed(2);
+                  const price = (purchaseQuote(pkg.credits).totalKurus / 100).toFixed(2);
                   return (
                     <button
                       key={pkg.credits}
@@ -147,15 +146,14 @@ export function WalletTopupModal({ isOpen, onClose }: WalletTopupModalProps) {
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-bold text-foreground">
-                          {pkg.credits} Kredi
-                        </span>
+                          {localizeText(pkg.credits)}{localizeText(" Kredi")}</span>
                         {pkg.badge && (
                           <span className="text-[9px] font-bold px-1.5 py-0.2 rounded-md bg-primary/15 text-primary">
-                            {pkg.badge}
+                            {localizeText(pkg.badge)}
                           </span>
                         )}
                       </div>
-                      <div className="text-xs font-bold text-primary font-mono">{price} TL</div>
+                      <div className="text-xs font-bold text-primary font-mono">{localizeText(price)}{localizeText(" TL")}</div>
                     </button>
                   );
                 })}
@@ -164,7 +162,7 @@ export function WalletTopupModal({ isOpen, onClose }: WalletTopupModalProps) {
 
             {/* Custom Quantity Input */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-foreground block">Özel Kredi Miktarı</label>
+              <label className="text-xs font-bold text-foreground block">{localizeText("Özel Kredi Miktarı")}</label>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
@@ -172,29 +170,29 @@ export function WalletTopupModal({ isOpen, onClose }: WalletTopupModalProps) {
                   max={10000}
                   value={customCredits}
                   onChange={(e) => handleCustomChange(e.target.value)}
-                  placeholder="Örn: 150"
+                  placeholder={localizeText("Örn: 150")}
                   className={cn(
                     'flex-1 h-11 rounded-2xl border bg-background px-3.5 text-xs font-bold text-foreground focus:border-primary focus:outline-none',
                     isCustom ? 'border-primary ring-1 ring-primary/30' : 'border-border'
                   )}
                 />
-                <span className="text-xs font-semibold text-muted-foreground pr-1">Kredi</span>
+                <span className="text-xs font-semibold text-muted-foreground pr-1">{localizeText("Kredi")}</span>
               </div>
             </div>
 
             {/* Total Summary */}
             <div className="p-3.5 rounded-2xl bg-muted/40 border border-border/80 space-y-2">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-muted-foreground">Alınacak Kredi:</span>
-                <span className="font-mono font-bold text-foreground">{currentCreditCount} Adet</span>
+                <span className="text-muted-foreground">{localizeText("Alınacak Kredi:")}</span>
+                <span className="font-mono font-bold text-foreground">{localizeText(currentCreditCount)}{localizeText(" Adet")}</span>
               </div>
               <div className="flex items-center justify-between text-xs">
-                <span className="text-muted-foreground">Birim Fiyat:</span>
-                <span className="font-mono text-muted-foreground">1,35 TL (KDV Dahil)</span>
+                <span className="text-muted-foreground">{localizeText("Birim Fiyat:")}</span>
+                <span className="font-mono text-muted-foreground">{localizeText("1,35 TL (KDV Dahil)")}</span>
               </div>
               <div className="flex items-center justify-between text-xs border-t border-border/50 pt-2 font-bold">
-                <span className="text-foreground">Toplam Ödenecek Tutar:</span>
-                <span className="text-sm font-black font-mono text-primary">{totalAmountTL} TL</span>
+                <span className="text-foreground">{localizeText("Toplam Ödenecek Tutar:")}</span>
+                <span className="text-sm font-black font-mono text-primary">{localizeText(totalAmountTL)}{localizeText(" TL")}</span>
               </div>
             </div>
 
@@ -202,14 +200,14 @@ export function WalletTopupModal({ isOpen, onClose }: WalletTopupModalProps) {
             {error && (
               <div className="p-3 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-xs text-rose-600 flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
-                <span>{error}</span>
+                <span>{localizeText(error)}</span>
               </div>
             )}
 
             {successMessage && (
               <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-600 flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 shrink-0" />
-                <span>{successMessage}</span>
+                <span>{localizeText(successMessage)}</span>
               </div>
             )}
 
@@ -222,7 +220,7 @@ export function WalletTopupModal({ isOpen, onClose }: WalletTopupModalProps) {
                 className="w-full h-11 rounded-2xl font-bold text-xs bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center gap-2 transition-all shadow-xs"
               >
                 <CreditCard className="h-4 w-4" />
-                <span>{isActionLoading ? 'İşlem Yapılıyor...' : `${totalAmountTL} TL ile Satın Al`}</span>
+                <span>{localizeText(isActionLoading ? 'İşlem Yapılıyor...' : `${totalAmountTL} TL ile Satın Al`)}</span>
               </button>
             </div>
           </div>

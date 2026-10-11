@@ -5,14 +5,14 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { useHomescreenStore } from '@/stores/useHomescreenStore';
 
 export function LayoutSyncProvider({ children }: { children: React.ReactNode }) {
-  const { user } = useAuthStore();
+  const userId = useAuthStore(state => state.user?.id);
   const fetchLayout = useHomescreenStore((state) => state.fetchLayout);
 
   useEffect(() => {
-    if (user) {
+    if (userId) {
       fetchLayout();
     }
-  }, [user, fetchLayout]);
+  }, [userId, fetchLayout]);
 
   return <>{children}</>;
 }

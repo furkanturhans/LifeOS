@@ -7,6 +7,7 @@ import { useArcadeStore } from '@/stores/useArcadeStore';
 import { kidsSound } from '@/lib/arcade/kidsSound';
 import { cn } from '@/lib/utils';
 import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 // =============================================================================
 // 1. TANGRAM GAME
@@ -33,6 +34,7 @@ const TANGRAM_LEVELS = [
 ];
 
 export function TangramGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [level, setLevel] = useState(0);
   const [score, setScore] = useState(0);
@@ -79,7 +81,7 @@ export function TangramGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Tangram"
+      title={localizeText("Tangram")}
       iconEmoji="📐"
       onBack={onBack}
       onRestart={handleRestart}
@@ -95,17 +97,16 @@ export function TangramGame({ onBack }: { onBack: () => void }) {
       <div className="w-full max-w-xs space-y-5 text-center">
         {/* Silhouette Area */}
         <div className="rounded-3xl border border-border bg-card/80 p-5 shadow-xs">
-          <span className="text-4xl block mb-2">{current.targetEmoji}</span>
+          <span className="text-4xl block mb-2">{localizeText(current.targetEmoji)}</span>
           <span className="text-xs font-bold text-muted-foreground block mb-3">
-            {current.targetName} Şeklini Oluşturun
-          </span>
+            {localizeText(current.targetName)}{localizeText(" Şeklini Oluşturun")}</span>
           <div className="flex items-center justify-center gap-2 min-h-[50px]">
             {current.pieces.map((_, i) => (
               <div
                 key={i}
                 className="h-12 w-12 rounded-2xl border-2 border-dashed border-primary/50 bg-primary/5 flex items-center justify-center text-2xl"
               >
-                {placed[i] || ''}
+                {localizeText(placed[i] || '')}
               </div>
             ))}
           </div>
@@ -123,7 +124,7 @@ export function TangramGame({ onBack }: { onBack: () => void }) {
                 disabled={isUsed}
                 className="h-14 w-14 rounded-2xl border border-border bg-card hover:border-primary text-2xl flex items-center justify-center shadow-xs disabled:opacity-30"
               >
-                {p}
+                {localizeText(p)}
               </motion.button>
             );
           })}
@@ -137,6 +138,7 @@ export function TangramGame({ onBack }: { onBack: () => void }) {
 // 2. YAPBOZ (SLIDING PUZZLE)
 // =============================================================================
 export function YapbozGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [tiles, setTiles] = useState([1, 2, 3, 4, 5, 6, 7, 0, 8]); // 0 is empty slot
   const [moves, setMoves] = useState(0);
@@ -189,7 +191,7 @@ export function YapbozGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Yapboz"
+      title={localizeText("Yapboz")}
       iconEmoji="🧩"
       onBack={onBack}
       onRestart={handleRestart}
@@ -212,7 +214,7 @@ export function YapbozGame({ onBack }: { onBack: () => void }) {
                   : 'border-border bg-card hover:border-primary text-foreground shadow-xs'
               )}
             >
-              {val !== 0 ? val : ''}
+              {localizeText(val !== 0 ? val : '')}
             </motion.button>
           ))}
         </div>
@@ -233,6 +235,7 @@ const MAZE_GRID = [
 ];
 
 export function LabirentGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [playerPos, setPlayerPos] = useState({ r: 0, c: 0 });
   const [moves, setMoves] = useState(0);
@@ -273,7 +276,7 @@ export function LabirentGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Labirent"
+      title={localizeText("Labirent")}
       iconEmoji="🌀"
       onBack={onBack}
       onRestart={handleRestart}
@@ -303,7 +306,7 @@ export function LabirentGame({ onBack }: { onBack: () => void }) {
                       : 'border-border/40 bg-card'
                   )}
                 >
-                  {isPlayer ? '🐱' : isExit ? '⭐️' : isWall ? '🧱' : ''}
+                  {localizeText(isPlayer ? '🐱' : isExit ? '⭐️' : isWall ? '🧱' : '')}
                 </div>
               );
             })
@@ -355,6 +358,7 @@ const SPOT_DIFF_LEVELS = [
 ];
 
 export function FarkBulGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -397,7 +401,7 @@ export function FarkBulGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Farkı Bul"
+      title={localizeText("Farkı Bul")}
       iconEmoji="👀"
       onBack={onBack}
       onRestart={handleRestart}
@@ -411,7 +415,7 @@ export function FarkBulGame({ onBack }: { onBack: () => void }) {
       gameOverDescription="Keskin gözlerinizle farklı olan tüm nesneleri tespit ettiniz!"
     >
       <div className="w-full max-w-xs space-y-4 text-center">
-        <p className="text-xs font-bold text-muted-foreground">Farklı olan nesneye dokunun!</p>
+        <p className="text-xs font-bold text-muted-foreground">{localizeText("Farklı olan nesneye dokunun!")}</p>
         <div className="grid grid-cols-3 gap-2.5 p-4 rounded-3xl border border-border bg-card/80 shadow-xs">
           {current.items.map((emoji, i) => (
             <motion.button
@@ -420,7 +424,7 @@ export function FarkBulGame({ onBack }: { onBack: () => void }) {
               onClick={() => handlePick(i)}
               className="aspect-square rounded-2xl border border-border bg-card hover:border-primary text-3xl flex items-center justify-center shadow-xs"
             >
-              {emoji}
+              {localizeText(emoji)}
             </motion.button>
           ))}
         </div>
@@ -440,6 +444,7 @@ const SHADOW_ITEMS = [
 ];
 
 export function GolgeEslestirGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -483,7 +488,7 @@ export function GolgeEslestirGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Gölge Eşleştir"
+      title={localizeText("Gölge Eşleştir")}
       iconEmoji="👤"
       onBack={onBack}
       onRestart={handleRestart}
@@ -499,9 +504,9 @@ export function GolgeEslestirGame({ onBack }: { onBack: () => void }) {
       <div className="w-full max-w-xs space-y-4 text-center">
         {/* Silhouette Display */}
         <div className="rounded-3xl border border-border bg-card/80 p-5 shadow-xs">
-          <span className="text-xs font-bold text-muted-foreground block mb-2">Bu gölge kime ait?</span>
+          <span className="text-xs font-bold text-muted-foreground block mb-2">{localizeText("Bu gölge kime ait?")}</span>
           <div className="flex items-center justify-center h-20 w-20 mx-auto rounded-2xl bg-muted/60 border text-4xl filter grayscale contrast-200">
-            {current.item}
+            {localizeText(current.item)}
           </div>
         </div>
 
@@ -514,7 +519,7 @@ export function GolgeEslestirGame({ onBack }: { onBack: () => void }) {
               onClick={() => handleSelect(opt.item)}
               className="p-3.5 rounded-2xl border border-border bg-card hover:border-primary text-2xl flex items-center justify-center shadow-xs"
             >
-              {opt.item}
+              {localizeText(opt.item)}
             </motion.button>
           ))}
         </div>
@@ -533,6 +538,7 @@ const PATTERNS_LIST = [
 ];
 
 export function DesenTamamlaGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -575,7 +581,7 @@ export function DesenTamamlaGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Desen Tamamla"
+      title={localizeText("Desen Tamamla")}
       iconEmoji="🎨"
       onBack={onBack}
       onRestart={handleRestart}
@@ -592,7 +598,7 @@ export function DesenTamamlaGame({ onBack }: { onBack: () => void }) {
         {/* Sequence strip */}
         <div className="flex items-center justify-center gap-2 p-4 rounded-3xl border border-border bg-card/80 shadow-xs flex-wrap">
           {current.sequence.map((item, i) => (
-            <span key={i} className="text-3xl">{item}</span>
+            <span key={i} className="text-3xl">{localizeText(item)}</span>
           ))}
           <div className="h-10 w-10 rounded-xl border-2 border-dashed border-primary bg-primary/10 text-primary flex items-center justify-center font-extrabold text-lg animate-pulse">
             ?
@@ -608,7 +614,7 @@ export function DesenTamamlaGame({ onBack }: { onBack: () => void }) {
               onClick={() => handlePick(opt)}
               className="h-14 rounded-2xl border border-border bg-card hover:border-primary text-2xl flex items-center justify-center shadow-xs"
             >
-              {opt}
+              {localizeText(opt)}
             </motion.button>
           ))}
         </div>

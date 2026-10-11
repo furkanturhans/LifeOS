@@ -15,8 +15,10 @@ import {
 } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { useAdminStore } from '@/stores/useAdminStore';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function AdminOverviewView() {
+  const localizeText = useLocaleRender();
   const { overviewMetrics, setActiveTab, setApplicationTypeFilter, setApplicationStatusFilter } =
     useAdminStore();
 
@@ -131,10 +133,10 @@ export function AdminOverviewView() {
 
                 <div className="mt-4">
                   <div className="text-2xl font-black tracking-tight text-foreground">
-                    {card.value}
+                    {localizeText(card.value)}
                   </div>
                   <p className="mt-1 text-xs font-semibold text-muted-foreground">
-                    {card.title}
+                    {localizeText(card.title)}
                   </p>
                 </div>
               </Card>
@@ -150,11 +152,9 @@ export function AdminOverviewView() {
           <div className="flex items-center justify-between border-b border-border/60 pb-3">
             <div className="flex items-center gap-2">
               <Activity className="h-4 w-4 text-primary" />
-              <h3 className="text-sm font-bold text-foreground">
-                Haftalık Yönetim ve Onay Trendi
-              </h3>
+              <h3 className="text-sm font-bold text-foreground">{localizeText("Haftalık Yönetim ve Onay Trendi")}</h3>
             </div>
-            <span className="text-[11px] text-muted-foreground">Son 7 Gün</span>
+            <span className="text-[11px] text-muted-foreground">{localizeText("Son 7 Gün")}</span>
           </div>
 
           <div className="pt-2">
@@ -166,7 +166,7 @@ export function AdminOverviewView() {
                 return (
                   <div key={index} className="flex-1 flex flex-col items-center gap-2">
                     <span className="text-[10px] font-bold text-muted-foreground">
-                      {item.actions}
+                      {localizeText(item.actions)}
                     </span>
                     <div className="w-full max-w-[28px] bg-muted rounded-t-lg overflow-hidden h-28 flex items-end">
                       <div
@@ -175,7 +175,7 @@ export function AdminOverviewView() {
                       />
                     </div>
                     <span className="text-[10px] font-semibold text-muted-foreground">
-                      {item.date}
+                      {localizeText(item.date)}
                     </span>
                   </div>
                 );
@@ -188,30 +188,16 @@ export function AdminOverviewView() {
         <Card className="p-5 border-border bg-card shadow-xs space-y-3.5">
           <div className="flex items-center gap-2 border-b border-border/60 pb-3">
             <ShieldCheck className="h-4 w-4 text-emerald-500" />
-            <h3 className="text-sm font-bold text-foreground">
-              Yönetim İlkeleri & Güvenlik
-            </h3>
+            <h3 className="text-sm font-bold text-foreground">{localizeText("Yönetim İlkeleri & Güvenlik")}</h3>
           </div>
 
           <div className="space-y-2.5 text-xs text-muted-foreground">
             <div className="p-2.5 rounded-xl bg-muted/40 border border-border/50">
-              <strong className="text-foreground block text-[11px] mb-0.5">
-                Değiştirilemez Denetim:
-              </strong>
-              Tüm onay, ret, askıya alma ve belge incelemeleri yönetici kimliğiyle loglanır.
-            </div>
+              <strong className="text-foreground block text-[11px] mb-0.5">{localizeText("Değiştirilemez Denetim:")}</strong>{localizeText("Tüm onay, ret, askıya alma ve belge incelemeleri yönetici kimliğiyle loglanır.")}</div>
             <div className="p-2.5 rounded-xl bg-muted/40 border border-border/50">
-              <strong className="text-foreground block text-[11px] mb-0.5">
-                Fiziksel Silme Yasağı:
-              </strong>
-              Hiçbir veri silinmez; durum değişiklikleri (`suspended`, `restricted`) uygulanır.
-            </div>
+              <strong className="text-foreground block text-[11px] mb-0.5">{localizeText("Fiziksel Silme Yasağı:")}</strong>{localizeText("Hiçbir veri silinmez; durum değişiklikleri (`suspended`, `restricted`) uygulanır.")}</div>
             <div className="p-2.5 rounded-xl bg-muted/40 border border-border/50">
-              <strong className="text-foreground block text-[11px] mb-0.5">
-                Veri Maskeleme:
-              </strong>
-              Kullanıcıların T.C. kimlik ve açık iletişim verileri korunur.
-            </div>
+              <strong className="text-foreground block text-[11px] mb-0.5">{localizeText("Veri Maskeleme:")}</strong>{localizeText("Kullanıcıların T.C. kimlik ve açık iletişim verileri korunur.")}</div>
           </div>
         </Card>
       </div>

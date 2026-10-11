@@ -55,8 +55,10 @@ const ADMIN_MENU_ITEMS: {
 ];
 
 import { AdminKeyUnlockModal } from './AdminKeyUnlockModal';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function AdminLayout() {
+  const localizeText = useLocaleRender();
   const [isUnlocked, setIsUnlocked] = React.useState<boolean>(false);
   const [isCheckingLock, setIsCheckingLock] = React.useState<boolean>(true);
 
@@ -112,9 +114,7 @@ export function AdminLayout() {
       <div className="flex h-svh items-center justify-center bg-background select-none">
         <div className="flex flex-col items-center gap-3">
           <div className="h-9 w-9 animate-spin rounded-full border-3 border-primary border-t-transparent" />
-          <span className="text-xs font-semibold text-muted-foreground">
-            Yönetici yetkileri doğrulanıyor...
-          </span>
+          <span className="text-xs font-semibold text-muted-foreground">{localizeText("Yönetici yetkileri doğrulanıyor...")}</span>
         </div>
       </div>
     );
@@ -128,13 +128,11 @@ export function AdminLayout() {
           <ShieldAlert className="h-8 w-8" />
         </div>
 
-        <h1 className="text-lg font-bold text-foreground">
-          Bu Alana Erişim Yetkiniz Bulunmuyor
-        </h1>
+        <h1 className="text-lg font-bold text-foreground">{localizeText("Bu Alana Erişim Yetkiniz Bulunmuyor")}</h1>
 
         <p className="mt-2 max-w-md text-xs text-muted-foreground leading-relaxed">
-          {authError ||
-            'LifeOS Yönetim Paneli yalnızca sistem yöneticileri ve süper yöneticiler için ayrılmıştır. Hesabınızda yönetici yetkisi tanımlı değildir.'}
+          {localizeText(authError ||
+            'LifeOS Yönetim Paneli yalnızca sistem yöneticileri ve süper yöneticiler için ayrılmıştır. Hesabınızda yönetici yetkisi tanımlı değildir.')}
         </p>
 
         <div className="mt-6 flex items-center gap-3">
@@ -143,7 +141,7 @@ export function AdminLayout() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-primary text-primary-foreground text-xs font-bold shadow-xs hover:bg-primary/90 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Ana Ekrana Dön</span>
+            <span>{localizeText("Ana Ekrana Dön")}</span>
           </Link>
         </div>
       </div>
@@ -158,13 +156,9 @@ export function AdminLayout() {
           🔐
         </div>
 
-        <h1 className="text-lg font-bold text-foreground">
-          Yönetici Kasası Kilitli
-        </h1>
+        <h1 className="text-lg font-bold text-foreground">{localizeText("Yönetici Kasası Kilitli")}</h1>
 
-        <p className="mt-2 max-w-md text-xs text-muted-foreground leading-relaxed">
-          Yönetim paneline erişmek için 22 haneli kişisel güvenlik anahtarınızı doğrulamanız gerekmektedir.
-        </p>
+        <p className="mt-2 max-w-md text-xs text-muted-foreground leading-relaxed">{localizeText("Yönetim paneline erişmek için 22 haneli kişisel güvenlik anahtarınızı doğrulamanız gerekmektedir.")}</p>
 
         <div className="mt-6 flex items-center gap-3">
           <Link
@@ -172,15 +166,13 @@ export function AdminLayout() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl border border-border text-xs font-semibold text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Profile Dön</span>
+            <span>{localizeText("Profile Dön")}</span>
           </Link>
 
           <button
             onClick={() => setIsUnlocked(false)}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-bold shadow-md shadow-amber-500/20"
-          >
-            22 Haneli Şifreyi Gir
-          </button>
+          >{localizeText("22 Haneli Şifreyi Gir")}</button>
         </div>
 
         <AdminKeyUnlockModal
@@ -208,11 +200,9 @@ export function AdminLayout() {
               🛡️
             </div>
             <div>
-              <span className="font-bold text-sm tracking-tight text-foreground">
-                LifeOS Yönetim
-              </span>
+              <span className="font-bold text-sm tracking-tight text-foreground">{localizeText("LifeOS Yönetim")}</span>
               <span className="block text-[10px] font-bold text-primary uppercase tracking-wider">
-                {adminRole === 'super_admin' ? 'Süper Yönetici' : 'Yönetici Paneli'}
+                {localizeText(adminRole === 'super_admin' ? 'Süper Yönetici' : 'Yönetici Paneli')}
               </span>
             </div>
           </div>
@@ -221,7 +211,7 @@ export function AdminLayout() {
             type="button"
             onClick={toggleTheme}
             className="flex h-8 w-8 items-center justify-center rounded-xl border border-border/70 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-            title="Tema Değiştir"
+            title={localizeText("Tema Değiştir")}
           >
             {resolvedTheme === 'dark' ? (
               <Sun className="h-4 w-4 text-amber-400" />
@@ -255,7 +245,7 @@ export function AdminLayout() {
                   )}
                   strokeWidth={isActive ? 2.5 : 2}
                 />
-                <span className="flex-1 truncate">{item.label}</span>
+                <span className="flex-1 truncate">{localizeText(item.label)}</span>
                 {isActive && <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />}
               </button>
             );
@@ -270,10 +260,10 @@ export function AdminLayout() {
             </div>
             <div className="min-w-0">
               <div className="text-xs font-bold text-foreground truncate">
-                {adminDisplayName || 'Yönetici'}
+                {localizeText(adminDisplayName || 'Yönetici')}
               </div>
               <div className="text-[10px] text-muted-foreground truncate font-mono">
-                {adminRole || 'admin'}
+                {localizeText(adminRole || 'admin')}
               </div>
             </div>
           </div>
@@ -281,7 +271,7 @@ export function AdminLayout() {
           <Link
             href="/home"
             className="flex h-7 w-7 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-foreground"
-            title="Kullanıcı Arayüzüne Dön"
+            title={localizeText("Kullanıcı Arayüzüne Dön")}
           >
             <ArrowLeft className="h-3.5 w-3.5" />
           </Link>
@@ -293,14 +283,12 @@ export function AdminLayout() {
         {/* Mobile Header */}
         <div className="flex md:hidden items-center justify-between px-4 py-3 border-b border-border bg-card">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-bold text-foreground">LifeOS Yönetim</span>
+            <span className="text-sm font-bold text-foreground">{localizeText("LifeOS Yönetim")}</span>
             <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
-              {adminRole}
+              {localizeText(adminRole)}
             </span>
           </div>
-          <Link href="/home" className="text-xs font-semibold text-muted-foreground">
-            ← Çıkış
-          </Link>
+          <Link href="/home" className="text-xs font-semibold text-muted-foreground">{localizeText("← Çıkış")}</Link>
         </div>
 
         {/* Mobile Nav Scroller */}
@@ -316,7 +304,7 @@ export function AdminLayout() {
                   : 'bg-card border border-border text-muted-foreground'
               )}
             >
-              {item.label}
+              {localizeText(item.label)}
             </button>
           ))}
         </div>
@@ -338,13 +326,11 @@ export function AdminLayout() {
             <div className="py-16 text-center text-xs text-muted-foreground border border-dashed border-border rounded-3xl space-y-2">
               <ShieldCheck className="h-8 w-8 text-primary mx-auto" />
               <h4 className="text-sm font-bold text-foreground">
-                {activeTab === 'courses' && 'Dersler ve Canlı Sınıf Yönetimi'}
-                {activeTab === 'services' && 'Hizmet İlanları ve Teklif Pazar Yeri'}
-                {activeTab === 'settings' && 'Platform Güvenlik & Sistem Ayarları'}
+                {localizeText(activeTab === 'courses' && 'Dersler ve Canlı Sınıf Yönetimi')}
+                {localizeText(activeTab === 'services' && 'Hizmet İlanları ve Teklif Pazar Yeri')}
+                {localizeText(activeTab === 'settings' && 'Platform Güvenlik & Sistem Ayarları')}
               </h4>
-              <p className="max-w-md mx-auto">
-                Bu alandaki tüm veriler ve politikalar Yönetim Paneli üzerinden merkezi olarak yönetilmektedir.
-              </p>
+              <p className="max-w-md mx-auto">{localizeText("Bu alandaki tüm veriler ve politikalar Yönetim Paneli üzerinden merkezi olarak yönetilmektedir.")}</p>
             </div>
           )}
         </div>

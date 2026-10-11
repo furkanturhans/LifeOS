@@ -22,6 +22,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { LocationAutocompleteInput } from '@/components/services/common/LocationAutocompleteInput';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface CreateCraftsmanRequestModalProps {
   isOpen: boolean;
@@ -32,6 +33,7 @@ export function CreateCraftsmanRequestModal({
   isOpen,
   onClose,
 }: CreateCraftsmanRequestModalProps) {
+  const localizeText = useLocaleRender();
   const { createCraftsmanRequest } = useCraftsmanStore();
 
   const [category, setCategory] = useState<CraftsmanCategory>('electrical');
@@ -103,25 +105,21 @@ export function CreateCraftsmanRequestModal({
               <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-3xl shadow-lg shadow-purple-500/20 text-white">
                 🛠️
               </div>
-              <h3 className="text-xl font-bold text-foreground">Usta Talebi Oluştur</h3>
-              <p className="mt-1 text-xs text-muted-foreground">
-                İhtiyacınıza uygun alandaki doğrulanmış ustalardan fiyat ve süre teklifi toplayın.
-              </p>
+              <h3 className="text-xl font-bold text-foreground">{localizeText("Usta Talebi Oluştur")}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{localizeText("İhtiyacınıza uygun alandaki doğrulanmış ustalardan fiyat ve süre teklifi toplayın.")}</p>
             </div>
 
             {error && (
               <div className="mb-4 flex items-center gap-2 rounded-2xl bg-destructive/15 border border-destructive/30 p-3 text-xs text-destructive">
                 <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                <span>{error}</span>
+                <span>{localizeText(error)}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Category Selector */}
               <div>
-                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Hizmet Kategorisi Seçin *
-                </label>
+                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Hizmet Kategorisi Seçin *")}</label>
                 <div className="grid grid-cols-2 gap-2">
                   {CRAFTSMAN_CATEGORIES_CONFIG.map((cat) => {
                     const isSelected = category === cat.id;
@@ -137,10 +135,10 @@ export function CreateCraftsmanRequestModal({
                             : 'border-border/80 bg-muted/30 hover:bg-muted/60'
                         )}
                       >
-                        <span className="text-xl">{cat.iconEmoji}</span>
+                        <span className="text-xl">{localizeText(cat.iconEmoji)}</span>
                         <div className="flex-1 min-w-0">
                           <div className="text-xs font-bold text-foreground truncate">
-                            {cat.labelTr}
+                            {localizeText(cat.labelTr)}
                           </div>
                         </div>
                         {isSelected && <Check className="h-3.5 w-3.5 text-purple-500" />}
@@ -152,13 +150,11 @@ export function CreateCraftsmanRequestModal({
 
               {/* Problem Description */}
               <div>
-                <label className="mb-1 block text-xs font-medium text-foreground">
-                  Sorunun veya İhtiyacın Kısa Açıklaması *
-                </label>
+                <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Sorunun veya İhtiyacın Kısa Açıklaması *")}</label>
                 <textarea
                   value={problemDescription}
                   onChange={(e) => setProblemDescription(e.target.value)}
-                  placeholder="Örn: Mutfak lavabosu altındaki su borusundan damlama var, contaların değişmesi ve genel kontrol gerekiyor."
+                  placeholder={localizeText("Örn: Mutfak lavabosu altındaki su borusundan damlama var, contaların değişmesi ve genel kontrol gerekiyor.")}
                   rows={3}
                   className="w-full rounded-2xl border border-border bg-card p-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-purple-500"
                   required
@@ -168,16 +164,16 @@ export function CreateCraftsmanRequestModal({
               {/* Location & Preferred Time */}
               <div className="space-y-2.5">
                 <LocationAutocompleteInput
-                  label="İl / İlçe / Bölge *"
-                  placeholder="Örn: İstanbul - Kadıköy / Moda"
+                  label={localizeText("İl / İlçe / Bölge *")}
+                  placeholder={localizeText("Örn: İstanbul - Kadıköy / Moda")}
                   value={location}
                   onChange={(val) => setLocation(val)}
                   icon={<MapPin className="h-4 w-4 text-purple-500" />}
                   required
                 />
                 <Input
-                  label="Uygun Tarih ve Saat *"
-                  placeholder="Örn: Cumartesi 14:00 - 18:00"
+                  label={localizeText("Uygun Tarih ve Saat *")}
+                  placeholder={localizeText("Örn: Cumartesi 14:00 - 18:00")}
                   value={preferredDateTime}
                   onChange={(e) => setPreferredDateTime(e.target.value)}
                   icon={<Calendar className="h-4 w-4 text-purple-500" />}
@@ -187,12 +183,10 @@ export function CreateCraftsmanRequestModal({
 
               {/* Extra Notes */}
               <div>
-                <label className="mb-1 block text-xs font-medium text-foreground">
-                  Ek Not (Opsiyonel)
-                </label>
+                <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Ek Not (Opsiyonel)")}</label>
                 <input
                   type="text"
-                  placeholder="Örn: Malzemeler evde hazır / Ustanın malzeme getirmesi gerekiyor"
+                  placeholder={localizeText("Örn: Malzemeler evde hazır / Ustanın malzeme getirmesi gerekiyor")}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   className="w-full rounded-2xl border border-border bg-card p-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-purple-500"
@@ -203,11 +197,9 @@ export function CreateCraftsmanRequestModal({
               <div className="rounded-2xl border border-border/80 bg-muted/30 p-3 text-xs space-y-1">
                 <div className="font-semibold text-foreground flex items-center gap-1.5">
                   <ShieldCheck className="h-3.5 w-3.5 text-purple-500" />
-                  <span>Gizlilik Garantisi</span>
+                  <span>{localizeText("Gizlilik Garantisi")}</span>
                 </div>
-                <p className="text-[11px] text-muted-foreground leading-snug">
-                  Telefon numaranız, açık ev adresiniz ve kimlik bilgileriniz ustalara gösterilmez. Yalnızca bölge ve iş detayı iletilir.
-                </p>
+                <p className="text-[11px] text-muted-foreground leading-snug">{localizeText("Telefon numaranız, açık ev adresiniz ve kimlik bilgileriniz ustalara gösterilmez. Yalnızca bölge ve iş detayı iletilir.")}</p>
               </div>
 
               {/* Submit Button */}
@@ -217,9 +209,7 @@ export function CreateCraftsmanRequestModal({
                   size="lg"
                   className="w-full rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 font-semibold text-white shadow-lg shadow-purple-500/25 hover:from-purple-700 hover:to-indigo-700"
                 >
-                  <Sparkles className="mr-2 h-4 w-4" />
-                  Usta Talebini Yayınla
-                </Button>
+                  <Sparkles className="mr-2 h-4 w-4" />{localizeText("Usta Talebini Yayınla")}</Button>
               </div>
             </form>
           </motion.div>

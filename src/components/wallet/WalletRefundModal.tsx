@@ -15,6 +15,7 @@ import {
 import { useWalletStore } from '@/stores/useWalletStore';
 import { cn } from '@/lib/utils';
 import { LIFEOS_CREDIT_RATE_KURUS, LIFEOS_CREDIT_RATE_TL } from '@/types/payment';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface WalletRefundModalProps {
   isOpen: boolean;
@@ -22,6 +23,7 @@ interface WalletRefundModalProps {
 }
 
 export function WalletRefundModal({ isOpen, onClose }: WalletRefundModalProps) {
+  const localizeText = useLocaleRender();
   const { wallet, requestRefund, isActionLoading } = useWalletStore();
   const [creditCount, setCreditCount] = useState<number>(20);
   const [reason, setReason] = useState('');
@@ -84,8 +86,8 @@ export function WalletRefundModal({ isOpen, onClose }: WalletRefundModalProps) {
                 <RotateCcw className="h-4 w-4" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-foreground">Kredi İadesi Talebi</h2>
-                <p className="text-[11px] text-muted-foreground">Kullanılmamış Kredi İade Formu</p>
+                <h2 className="text-sm font-bold text-foreground">{localizeText("Kredi İadesi Talebi")}</h2>
+                <p className="text-[11px] text-muted-foreground">{localizeText("Kullanılmamış Kredi İade Formu")}</p>
               </div>
             </div>
             <button
@@ -101,26 +103,21 @@ export function WalletRefundModal({ isOpen, onClose }: WalletRefundModalProps) {
             <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200 space-y-1">
               <div className="flex items-center gap-1.5 font-bold">
                 <ShieldCheck className="h-4 w-4 text-amber-500 shrink-0" />
-                <span>Kredi İade Politikası</span>
+                <span>{localizeText("Kredi İade Politikası")}</span>
               </div>
-              <p className="text-[11px] leading-relaxed">
-                Yalnızca satın alınıp hiç kullanılmamış krediler için iade talep edilebilir. İade,
-                <strong> orijinal ödeme yönteminize</strong> yapılacaktır. Harcanmış veya promosyon
-                krediler iade edilemez.
-              </p>
+              <p className="text-[11px] leading-relaxed">{localizeText("Yalnızca satın alınıp hiç kullanılmamış krediler için iade talep edilebilir. İade,")}<strong>{localizeText("orijinal ödeme yönteminize")}</strong>{localizeText("yapılacaktır. Harcanmış veya promosyon krediler iade edilemez.")}</p>
             </div>
 
             {/* Eligible balance info */}
             <div className="p-3 rounded-2xl bg-muted/40 border border-border/70 flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">İade Edilebilir Krediniz:</span>
+              <span className="text-muted-foreground">{localizeText("İade Edilebilir Krediniz:")}</span>
               <span className="font-bold text-foreground font-mono">
-                {maxEligibleCredits} LifeOS Kredisi
-              </span>
+                {localizeText(maxEligibleCredits)}{localizeText(" LifeOS Kredisi")}</span>
             </div>
 
             {/* Credit Input */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-foreground block">İade Edilecek Kredi Adedi</label>
+              <label className="text-xs font-bold text-foreground block">{localizeText("İade Edilecek Kredi Adedi")}</label>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
@@ -136,43 +133,41 @@ export function WalletRefundModal({ isOpen, onClose }: WalletRefundModalProps) {
                   onClick={() => setCreditCount(maxEligibleCredits)}
                   disabled={maxEligibleCredits <= 0}
                   className="h-11 px-3.5 rounded-2xl border border-border bg-muted/60 text-xs font-bold hover:bg-muted"
-                >
-                  Tümü
-                </button>
+                >{localizeText("Tümü")}</button>
               </div>
             </div>
 
             {/* Calculated Refund Value */}
             <div className="p-3.5 rounded-2xl bg-primary/5 border border-primary/20 space-y-2">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-muted-foreground">Birim İade Değeri:</span>
-                <span className="font-mono font-bold text-foreground">1 Kredi = 1,35 TL</span>
+                <span className="text-muted-foreground">{localizeText("Birim İade Değeri:")}</span>
+                <span className="font-mono font-bold text-foreground">{localizeText("1 Kredi = 1,35 TL")}</span>
               </div>
               <div className="flex items-center justify-between text-xs border-t border-border/40 pt-2">
-                <span className="font-bold text-foreground">Orijinal Yönteme Aktarılacak Tutar:</span>
-                <span className="font-mono font-black text-sm text-primary">{refundAmountTL} TL</span>
+                <span className="font-bold text-foreground">{localizeText("Orijinal Yönteme Aktarılacak Tutar:")}</span>
+                <span className="font-mono font-black text-sm text-primary">{localizeText(refundAmountTL)}{localizeText(" TL")}</span>
               </div>
             </div>
 
             {/* Reason */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-foreground block">İade Nedeni *</label>
+              <label className="text-xs font-bold text-foreground block">{localizeText("İade Nedeni *")}</label>
               <textarea
                 required
                 rows={2}
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                placeholder="Örn: Yanlışlıkla fazla paket satın aldım, kredileri kullanmadım."
+                placeholder={localizeText("Örn: Yanlışlıkla fazla paket satın aldım, kredileri kullanmadım.")}
                 className="w-full rounded-2xl border border-border bg-background p-3 text-xs text-foreground focus:border-primary focus:outline-none resize-none"
               />
             </div>
 
             {/* Destination */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-foreground block">İade Kanalı</label>
+              <label className="text-xs font-bold text-foreground block">{localizeText("İade Kanalı")}</label>
               <div className="p-3 rounded-2xl border border-border bg-card flex items-center gap-2.5 text-xs">
                 <CreditCard className="h-4 w-4 text-primary" />
-                <span className="font-semibold text-foreground">Satın Alımda Kullanılan Orijinal Kart</span>
+                <span className="font-semibold text-foreground">{localizeText("Satın Alımda Kullanılan Orijinal Kart")}</span>
               </div>
             </div>
 
@@ -180,14 +175,14 @@ export function WalletRefundModal({ isOpen, onClose }: WalletRefundModalProps) {
             {error && (
               <div className="p-3 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-xs text-rose-600 flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0" />
-                <span>{error}</span>
+                <span>{localizeText(error)}</span>
               </div>
             )}
 
             {successMessage && (
               <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-600 flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 shrink-0" />
-                <span>{successMessage}</span>
+                <span>{localizeText(successMessage)}</span>
               </div>
             )}
 
@@ -204,7 +199,7 @@ export function WalletRefundModal({ isOpen, onClose }: WalletRefundModalProps) {
                 )}
               >
                 <RotateCcw className="h-4 w-4" />
-                <span>{isActionLoading ? 'Talep İletiliyor...' : 'İade Talebini Gönder'}</span>
+                <span>{localizeText(isActionLoading ? 'Talep İletiliyor...' : 'İade Talebini Gönder')}</span>
               </button>
             </div>
           </form>

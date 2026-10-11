@@ -9,6 +9,7 @@ import { FAMILY_ROLES, type FamilyRole } from '@/types/family';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface CreateFamilyModalProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ interface CreateFamilyModalProps {
 const FAMILY_EMOJIS = ['🏡', '👨‍👩‍👧‍👦', '❤️', '🌟', '🏰', '🌱', '🛡️', '☀️'];
 
 export function CreateFamilyModal({ isOpen, onClose }: CreateFamilyModalProps) {
+  const localizeText = useLocaleRender();
   const { user } = useAuthStore();
   const { createFamily } = useFamilyStore();
 
@@ -62,20 +64,16 @@ export function CreateFamilyModal({ isOpen, onClose }: CreateFamilyModalProps) {
             {/* Header */}
             <div className="mb-6 text-center">
               <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-3xl shadow-lg shadow-amber-500/20">
-                {selectedEmoji}
+                {localizeText(selectedEmoji)}
               </div>
-              <h3 className="text-xl font-bold text-foreground">Yeni Aile Oluştur</h3>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Aileni bir araya getir, anılarını ve planlarını paylaş.
-              </p>
+              <h3 className="text-xl font-bold text-foreground">{localizeText("Yeni Aile Oluştur")}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{localizeText("Aileni bir araya getir, anılarını ve planlarını paylaş.")}</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Emoji Selector */}
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Aile Simgesi
-                </label>
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Aile Simgesi")}</label>
                 <div className="flex justify-between gap-2 overflow-x-auto pb-1">
                   {FAMILY_EMOJIS.map((emoji) => (
                     <button
@@ -89,7 +87,7 @@ export function CreateFamilyModal({ isOpen, onClose }: CreateFamilyModalProps) {
                           : 'bg-muted/50 hover:bg-muted'
                       )}
                     >
-                      {emoji}
+                      {localizeText(emoji)}
                     </button>
                   ))}
                 </div>
@@ -97,8 +95,8 @@ export function CreateFamilyModal({ isOpen, onClose }: CreateFamilyModalProps) {
 
               {/* Family Name */}
               <Input
-                label="Aile Adı"
-                placeholder="Örn: Yılmaz Ailesi"
+                label={localizeText("Aile Adı")}
+                placeholder={localizeText("Örn: Yılmaz Ailesi")}
                 value={familyName}
                 onChange={(e) => setFamilyName(e.target.value)}
                 icon={<Home className="h-4 w-4 text-muted-foreground" />}
@@ -107,8 +105,8 @@ export function CreateFamilyModal({ isOpen, onClose }: CreateFamilyModalProps) {
 
               {/* Creator Name */}
               <Input
-                label="Senin İsmin"
-                placeholder="Adın veya lakabın"
+                label={localizeText("Senin İsmin")}
+                placeholder={localizeText("Adın veya lakabın")}
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 required
@@ -116,9 +114,7 @@ export function CreateFamilyModal({ isOpen, onClose }: CreateFamilyModalProps) {
 
               {/* Role Selection */}
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Ailedaki Rolün
-                </label>
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Ailedaki Rolün")}</label>
                 <div className="grid grid-cols-2 gap-2">
                   {FAMILY_ROLES.map((role) => (
                     <button
@@ -132,13 +128,13 @@ export function CreateFamilyModal({ isOpen, onClose }: CreateFamilyModalProps) {
                           : 'border-border bg-card hover:bg-muted/40 text-muted-foreground'
                       )}
                     >
-                      <span className="text-xl">{role.icon}</span>
+                      <span className="text-xl">{localizeText(role.icon)}</span>
                       <div className="flex-1 min-w-0">
                         <div className="text-xs font-semibold truncate text-foreground">
-                          {role.labelTr}
+                          {localizeText(role.labelTr)}
                         </div>
                         <div className="text-[10px] text-muted-foreground truncate">
-                          {role.descriptionTr}
+                          {localizeText(role.descriptionTr)}
                         </div>
                       </div>
                       {selectedRole === role.id && (
@@ -155,9 +151,7 @@ export function CreateFamilyModal({ isOpen, onClose }: CreateFamilyModalProps) {
                   size="lg"
                   className="w-full rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 font-semibold text-white shadow-lg shadow-amber-500/25 hover:from-amber-600 hover:to-orange-700"
                 >
-                  <Sparkles className="mr-2 h-4 w-4" />
-                  Aileni Başlat
-                </Button>
+                  <Sparkles className="mr-2 h-4 w-4" />{localizeText("Aileni Başlat")}</Button>
               </div>
             </form>
           </motion.div>

@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { CheckCircle2, Clock, AlertTriangle, XCircle, Lock, Info, Sparkles } from 'lucide-react';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export type StatusType =
   | 'open'
@@ -23,6 +26,7 @@ export interface StatusBadgeProps {
 }
 
 export function StatusBadge({ status, label, className, size = 'sm' }: StatusBadgeProps) {
+  const localizeText = useLocaleRender();
   const configs: Record<StatusType, { labelTr: string; icon: React.ReactNode; bg: string; text: string; border: string }> = {
     open: {
       labelTr: 'Açık Talep',
@@ -117,8 +121,8 @@ export function StatusBadge({ status, label, className, size = 'sm' }: StatusBad
         className
       )}
     >
-      {config.icon}
-      <span>{displayLabel}</span>
+      {localizeText(config.icon)}
+      <span>{localizeText(displayLabel)}</span>
     </span>
   );
 }

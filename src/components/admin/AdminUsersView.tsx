@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { Users, ShieldAlert, UserCheck, Search, ShieldCheck } from 'lucide-react';
 import { useAdminStore } from '@/stores/useAdminStore';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 export function AdminUsersView() {
+  const localizeText = useLocaleRender();
   const { users, updateUserStatus } = useAdminStore();
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -29,8 +31,8 @@ export function AdminUsersView() {
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <h2 className="text-sm font-bold text-foreground">Kullanıcı Yönetimi ({users.length})</h2>
-          <p className="text-xs text-muted-foreground">Kullanıcı hesap durumu, roller ve güvenlik kısıtlamaları</p>
+          <h2 className="text-sm font-bold text-foreground">{localizeText("Kullanıcı Yönetimi (")}{localizeText(users.length)})</h2>
+          <p className="text-xs text-muted-foreground">{localizeText("Kullanıcı hesap durumu, roller ve güvenlik kısıtlamaları")}</p>
         </div>
 
         <div className="relative w-full sm:w-64">
@@ -39,7 +41,7 @@ export function AdminUsersView() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Kullanıcı ara..."
+            placeholder={localizeText("Kullanıcı ara...")}
             className="w-full h-8 rounded-xl border border-border bg-background pl-9 pr-3 text-xs font-semibold text-foreground focus:border-primary focus:outline-none"
           />
         </div>
@@ -55,20 +57,20 @@ export function AdminUsersView() {
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
                   <h4 className="text-xs font-bold text-foreground">{u.displayName}</h4>
-                  <span className="text-[11px] text-muted-foreground font-mono">@{u.lifeosId}</span>
-                  {u.accountStatus === 'active' && <StatusBadge status="verified" label="Aktif Hesap" size="sm" />}
-                  {u.accountStatus === 'restricted' && <StatusBadge status="pending" label="Kısıtlı" size="sm" />}
-                  {u.accountStatus === 'suspended' && <StatusBadge status="rejected" label="Askıda" size="sm" />}
+                  <span className="text-[11px] text-muted-foreground font-mono">@{localizeText(u.lifeosId)}</span>
+                  {u.accountStatus === 'active' && <StatusBadge status="verified" label={localizeText("Aktif Hesap")} size="sm" />}
+                  {u.accountStatus === 'restricted' && <StatusBadge status="pending" label={localizeText("Kısıtlı")} size="sm" />}
+                  {u.accountStatus === 'suspended' && <StatusBadge status="rejected" label={localizeText("Askıda")} size="sm" />}
                 </div>
 
                 <div className="mt-1 flex items-center gap-3 text-[11px] text-muted-foreground">
-                  <span>E-posta: <strong className="font-mono text-foreground">{u.maskedEmail}</strong></span>
+                  <span>{localizeText("E-posta:")}<strong className="font-mono text-foreground">{localizeText(u.maskedEmail)}</strong></span>
                   <span>•</span>
-                  <span>Kayıt: {new Date(u.createdAt).toLocaleDateString('tr-TR')}</span>
+                  <span>{localizeText("Kayıt: ")}{localizeText(new Date(u.createdAt).toLocaleDateString(getFormattingLocale()))}</span>
                   {u.roles.isAdmin && (
                     <>
                       <span>•</span>
-                      <span className="text-primary font-bold">🛡️ Yönetici</span>
+                      <span className="text-primary font-bold">{localizeText("🛡️ Yönetici")}</span>
                     </>
                   )}
                 </div>
@@ -83,9 +85,7 @@ export function AdminUsersView() {
                   onClick={() => handleStatusChange(u.id, 'active')}
                   className="h-8 text-xs font-semibold text-emerald-600 border-border hover:bg-emerald-500/10"
                 >
-                  <UserCheck className="h-3.5 w-3.5 mr-1" />
-                  Aktifleştir
-                </Button>
+                  <UserCheck className="h-3.5 w-3.5 mr-1" />{localizeText("Aktifleştir")}</Button>
               ) : (
                 <>
                   <Button
@@ -93,17 +93,13 @@ export function AdminUsersView() {
                     size="sm"
                     onClick={() => handleStatusChange(u.id, 'restricted')}
                     className="h-8 text-xs font-semibold text-amber-600 border-border hover:bg-amber-500/10"
-                  >
-                    Kısıtla
-                  </Button>
+                  >{localizeText("Kısıtla")}</Button>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleStatusChange(u.id, 'suspended')}
                     className="h-8 text-xs font-semibold text-destructive border-border hover:bg-destructive/10"
-                  >
-                    Askıya Al
-                  </Button>
+                  >{localizeText("Askıya Al")}</Button>
                 </>
               )}
             </div>

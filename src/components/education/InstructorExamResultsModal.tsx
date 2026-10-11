@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import type { Exam, ExamAttempt } from '@/types/education';
 import { cn } from '@/lib/utils';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 interface InstructorExamResultsModalProps {
   isOpen: boolean;
@@ -30,6 +31,7 @@ export function InstructorExamResultsModal({
   exam,
   instructorId,
 }: InstructorExamResultsModalProps) {
+  const localizeText = useLocaleRender();
   const [attempts, setAttempts] = useState<ExamAttempt[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -72,11 +74,9 @@ export function InstructorExamResultsModal({
               📊
             </div>
             <div>
-              <h2 className="text-sm font-bold text-foreground">
-                Sınav Sonuçları ve Öğrenci Katılımları
-              </h2>
+              <h2 className="text-sm font-bold text-foreground">{localizeText("Sınav Sonuçları ve Öğrenci Katılımları")}</h2>
               <p className="text-xs text-muted-foreground">
-                {exam.title} ({exam.courseTitle})
+                {localizeText(exam.title)} ({localizeText(exam.courseTitle)})
               </p>
             </div>
           </div>
@@ -94,63 +94,51 @@ export function InstructorExamResultsModal({
           {/* Summary Stats */}
           <div className="grid grid-cols-3 gap-3">
             <div className="p-3.5 rounded-2xl border border-border bg-muted/30">
-              <span className="text-[11px] text-muted-foreground block font-semibold">
-                Teslim Edilen
-              </span>
+              <span className="text-[11px] text-muted-foreground block font-semibold">{localizeText("Teslim Edilen")}</span>
               <span className="text-lg font-extrabold text-foreground">
-                {totalAttempts} Öğrenci
-              </span>
+                {localizeText(totalAttempts)}{localizeText(" Öğrenci")}</span>
             </div>
 
             <div className="p-3.5 rounded-2xl border border-border bg-muted/30">
-              <span className="text-[11px] text-muted-foreground block font-semibold">
-                Başarı Oranı
-              </span>
+              <span className="text-[11px] text-muted-foreground block font-semibold">{localizeText("Başarı Oranı")}</span>
               <span className="text-lg font-extrabold text-emerald-500">
-                {totalAttempts > 0 ? Math.round((passedCount / totalAttempts) * 100) : 0}%
+                {localizeText(totalAttempts > 0 ? Math.round((passedCount / totalAttempts) * 100) : 0)}%
               </span>
             </div>
 
             <div className="p-3.5 rounded-2xl border border-border bg-muted/30">
-              <span className="text-[11px] text-muted-foreground block font-semibold">
-                Ortalama Not
-              </span>
+              <span className="text-[11px] text-muted-foreground block font-semibold">{localizeText("Ortalama Not")}</span>
               <span className="text-lg font-extrabold text-foreground">
-                %{avgScore}
+                %{localizeText(avgScore)}
               </span>
             </div>
           </div>
 
           {/* Submissions List */}
           <div className="space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Öğrenci Denemeleri ({attempts.length})
+            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Öğrenci Denemeleri (")}{localizeText(attempts.length)})
             </h3>
 
             {isLoading ? (
-              <div className="py-8 text-center text-xs text-muted-foreground">
-                Sonuçlar yükleniyor...
-              </div>
+              <div className="py-8 text-center text-xs text-muted-foreground">{localizeText("Sonuçlar yükleniyor...")}</div>
             ) : attempts.length === 0 ? (
-              <div className="py-8 text-center text-xs text-muted-foreground border border-dashed border-border rounded-2xl">
-                Bu sınava henüz öğrenci teslimatı yapılmadı.
-              </div>
+              <div className="py-8 text-center text-xs text-muted-foreground border border-dashed border-border rounded-2xl">{localizeText("Bu sınava henüz öğrenci teslimatı yapılmadı.")}</div>
             ) : (
               <div className="space-y-2">
                 {attempts.map((attempt) => (
                   <Card key={attempt.id} className="p-3.5 border-border bg-card shadow-xs flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary text-xs font-bold">
-                        {attempt.learnerName.slice(0, 2).toUpperCase()}
+                        {localizeText(attempt.learnerName.slice(0, 2).toUpperCase())}
                       </div>
                       <div>
                         <h4 className="text-xs font-bold text-foreground">
-                          {attempt.learnerName}
+                          {localizeText(attempt.learnerName)}
                         </h4>
                         <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
                           <Clock className="h-3 w-3" />
                           <span>
-                            {attempt.submittedAt ? new Date(attempt.submittedAt).toLocaleTimeString('tr-TR') : 'Sürüyor'}
+                            {localizeText(attempt.submittedAt ? new Date(attempt.submittedAt).toLocaleTimeString(getFormattingLocale()) : 'Sürüyor')}
                           </span>
                         </div>
                       </div>
@@ -159,13 +147,13 @@ export function InstructorExamResultsModal({
                     <div className="text-right flex items-center gap-3">
                       <div>
                         <span className="text-xs font-extrabold text-foreground block">
-                          %{attempt.scorePercent ?? 0}
+                          %{localizeText(attempt.scorePercent ?? 0)}
                         </span>
                         <span className={cn(
                           'text-[10px] font-semibold',
                           attempt.isPassed ? 'text-emerald-500' : 'text-amber-500'
                         )}>
-                          {attempt.isPassed ? 'Başarılı' : 'Kaldı'}
+                          {localizeText(attempt.isPassed ? 'Başarılı' : 'Kaldı')}
                         </span>
                       </div>
                     </div>
@@ -178,9 +166,7 @@ export function InstructorExamResultsModal({
 
         {/* Footer */}
         <div className="px-6 py-3 border-t border-border bg-card/60 flex justify-end">
-          <Button variant="outline" size="sm" onClick={onClose} className="text-xs font-semibold">
-            Kapat
-          </Button>
+          <Button variant="outline" size="sm" onClick={onClose} className="text-xs font-semibold">{localizeText("Kapat")}</Button>
         </div>
       </motion.div>
     </div>

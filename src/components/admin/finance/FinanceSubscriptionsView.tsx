@@ -12,10 +12,11 @@ import {
 } from 'lucide-react';
 import { useAdminFinanceStore } from '@/stores/useAdminFinanceStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 function formatTL(kurus: number): string {
   const tl = kurus / 100;
-  return new Intl.NumberFormat('tr-TR', {
+  return new Intl.NumberFormat(getFormattingLocale(), {
     style: 'currency',
     currency: 'TRY',
     minimumFractionDigits: 2,
@@ -23,6 +24,7 @@ function formatTL(kurus: number): string {
 }
 
 export function FinanceSubscriptionsView() {
+  const localizeText = useLocaleRender();
   const { subscriptionMetrics, fetchOverview } = useAdminFinanceStore();
 
   useEffect(() => {
@@ -80,10 +82,10 @@ export function FinanceSubscriptionsView() {
               </div>
               <div className="mt-3">
                 <span className="text-[11px] font-semibold text-muted-foreground block truncate">
-                  {c.title}
+                  {localizeText(c.title)}
                 </span>
-                <div className="text-xl font-black text-foreground mt-0.5">{c.value}</div>
-                <span className="text-[10px] text-muted-foreground mt-1 block">{c.subtitle}</span>
+                <div className="text-xl font-black text-foreground mt-0.5">{localizeText(c.value)}</div>
+                <span className="text-[10px] text-muted-foreground mt-1 block">{localizeText(c.subtitle)}</span>
               </div>
             </div>
           );
@@ -94,23 +96,21 @@ export function FinanceSubscriptionsView() {
       <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-2xs space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-xs font-bold text-foreground">Paket Bazlı MRR Dağılımı</h3>
-            <p className="text-[11px] text-muted-foreground">Aktif abonelik katmanları ve churn oranları</p>
+            <h3 className="text-xs font-bold text-foreground">{localizeText("Paket Bazlı MRR Dağılımı")}</h3>
+            <p className="text-[11px] text-muted-foreground">{localizeText("Aktif abonelik katmanları ve churn oranları")}</p>
           </div>
-          <span className="text-[10px] font-bold text-purple-500 bg-purple-500/10 px-2 py-0.5 rounded-full">
-            Otomatik Tahsilat
-          </span>
+          <span className="text-[10px] font-bold text-purple-500 bg-purple-500/10 px-2 py-0.5 rounded-full">{localizeText("Otomatik Tahsilat")}</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
               <tr className="border-b border-border/70 text-muted-foreground text-[11px]">
-                <th className="pb-2.5 font-bold">Paket Adı</th>
-                <th className="pb-2.5 font-bold text-center">Aktif Abone</th>
-                <th className="pb-2.5 font-bold text-right">Birim Fiyat</th>
-                <th className="pb-2.5 font-bold text-right">Aylık Hacim (MRR)</th>
-                <th className="pb-2.5 font-bold text-center">Churn (Kayıp)</th>
+                <th className="pb-2.5 font-bold">{localizeText("Paket Adı")}</th>
+                <th className="pb-2.5 font-bold text-center">{localizeText("Aktif Abone")}</th>
+                <th className="pb-2.5 font-bold text-right">{localizeText("Birim Fiyat")}</th>
+                <th className="pb-2.5 font-bold text-right">{localizeText("Aylık Hacim (MRR)")}</th>
+                <th className="pb-2.5 font-bold text-center">{localizeText("Churn (Kayıp)")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/40">
@@ -118,12 +118,12 @@ export function FinanceSubscriptionsView() {
                 <tr key={p.planId} className="hover:bg-muted/30 transition-colors">
                   <td className="py-3 font-semibold text-foreground flex items-center gap-2">
                     <Sparkles className="h-4 w-4 text-purple-500" />
-                    {p.planName}
+                    {localizeText(p.planName)}
                   </td>
-                  <td className="py-3 text-center font-mono font-bold text-foreground">{p.activeCount}</td>
-                  <td className="py-3 text-right font-mono text-muted-foreground">{formatTL(p.monthlyPriceKurus)} / ay</td>
-                  <td className="py-3 text-right font-bold font-mono text-emerald-500">{formatTL(p.mrrKurus)}</td>
-                  <td className="py-3 text-center font-semibold text-muted-foreground">%{p.churnRatePercent}</td>
+                  <td className="py-3 text-center font-mono font-bold text-foreground">{localizeText(p.activeCount)}</td>
+                  <td className="py-3 text-right font-mono text-muted-foreground">{localizeText(formatTL(p.monthlyPriceKurus))}{localizeText("/ ay")}</td>
+                  <td className="py-3 text-right font-bold font-mono text-emerald-500">{localizeText(formatTL(p.mrrKurus))}</td>
+                  <td className="py-3 text-center font-semibold text-muted-foreground">%{localizeText(p.churnRatePercent)}</td>
                 </tr>
               ))}
             </tbody>

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeft, Compass, Bus, Plane, Building, Car } from 'lucide-react';
 import { TRAVEL_TABS, type TravelTabCategory } from '@/types/travel';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export type TravelViewRole = 'passenger' | 'partner';
 
@@ -30,6 +31,7 @@ export function TravelHeader({
   onTabSelect,
   onLockedTabClick,
 }: TravelHeaderProps) {
+  const localizeText = useLocaleRender();
   const router = useRouter();
 
   return (
@@ -41,7 +43,7 @@ export function TravelHeader({
             type="button"
             onClick={() => router.push('/services')}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Hizmetlere Dön"
+            aria-label={localizeText("Hizmetlere Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -52,16 +54,12 @@ export function TravelHeader({
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Seyahat
-              </h1>
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Seyahat")}</h1>
               <span className="hidden sm:inline-block rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
-                {currentRole === 'passenger' ? 'Yolcu' : 'Firma Paneli'}
+                {localizeText(currentRole === 'passenger' ? 'Yolcu' : 'Firma Paneli')}
               </span>
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Otobüs, Uçak, Otel ve Araç Kiralama
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Otobüs, Uçak, Otel ve Araç Kiralama")}</p>
           </div>
         </div>
 
@@ -76,9 +74,7 @@ export function TravelHeader({
                 ? 'bg-card text-foreground shadow-xs'
                 : 'text-muted-foreground hover:text-foreground'
             )}
-          >
-            Yolcu
-          </button>
+          >{localizeText("Yolcu")}</button>
           <button
             type="button"
             onClick={() => onRoleChange('partner')}
@@ -88,9 +84,7 @@ export function TravelHeader({
                 ? 'bg-card text-foreground shadow-xs'
                 : 'text-muted-foreground hover:text-foreground'
             )}
-          >
-            Firma Paneli
-          </button>
+          >{localizeText("Firma Paneli")}</button>
         </div>
       </div>
 
@@ -119,8 +113,8 @@ export function TravelHeader({
                     : 'bg-muted/40 text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-transparent'
                 )}
               >
-                {Icon}
-                <span>{tab.labelTr}</span>
+                {localizeText(Icon)}
+                <span>{localizeText(tab.labelTr)}</span>
               </button>
             );
           })}

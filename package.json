@@ -7,9 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:i18n": "node --test scripts/test-localization.cjs",
+    "test:explore": "node --test scripts/test-explore.cjs",
+    "audit:source": "node scripts/audit-source.cjs",
     "cap:sync": "npx cap sync android",
     "cap:open": "npx cap open android",
-    "cap:run": "npx cap run android"
+    "cap:run": "npx cap run android",
+    "test:academy": "node --test scripts/test-academy.cjs",
+    "test:platform": "node --test scripts/test-platform.cjs",
+    "build:games": "node scripts/build-open-games.cjs",
+    "prebuild": "npm run build:games",
+    "test:games": "node --test scripts/test-open-games.cjs"
   },
   "dependencies": {
     "@capacitor/keyboard": "^8.0.5",
@@ -45,6 +53,7 @@
     "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-config-next": "16.3.1",
     "prisma": "^7.9.1",

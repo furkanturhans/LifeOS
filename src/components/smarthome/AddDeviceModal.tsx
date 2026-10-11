@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { useSmartHomeStore } from '@/stores/useSmartHomeStore';
 import type { CandidateSmartDevice, SupportedVendorAccount } from '@/types/smarthome';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface AddDeviceModalProps {
   isOpen: boolean;
@@ -31,6 +32,7 @@ interface AddDeviceModalProps {
 type AddMethod = 'select' | 'matter' | 'home_assistant' | 'vendor';
 
 export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
+  const localizeText = useLocaleRender();
   const {
     commissionMatterDevice,
     discoverHomeAssistantEntities,
@@ -192,17 +194,15 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
               </div>
               <div>
                 <h2 className="text-base font-bold text-foreground">
-                  {step === 'select'
+                  {localizeText(step === 'select'
                     ? 'Yeni Akıllı Cihaz Ekle'
                     : step === 'matter'
                     ? 'Matter Cihazı Eşleştir'
                     : step === 'home_assistant'
                     ? 'Home Assistant Entegrasyonu'
-                    : 'Desteklenen Marka Hesabı'}
+                    : 'Desteklenen Marka Hesabı')}
                 </h2>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  Yalnızca fiziksel olarak sahip olduğunuz gerçek cihazları bağlayın
-                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Yalnızca fiziksel olarak sahip olduğunuz gerçek cihazları bağlayın")}</p>
               </div>
             </div>
 
@@ -218,14 +218,14 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
           {error && (
             <div className="mt-4 flex items-start gap-2.5 p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-600 text-xs">
               <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
-              <span>{error}</span>
+              <span>{localizeText(error)}</span>
             </div>
           )}
 
           {successMsg && (
             <div className="mt-4 flex items-start gap-2.5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 text-xs">
               <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5" />
-              <span>{successMsg}</span>
+              <span>{localizeText(successMsg)}</span>
             </div>
           )}
 
@@ -246,14 +246,10 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <h3 className="text-sm font-bold text-foreground">Matter Cihazı Ekle</h3>
-                          <span className="rounded bg-emerald-500/15 px-2 py-0.2 text-[10px] font-bold text-emerald-600">
-                            Yerel Standart
-                          </span>
+                          <h3 className="text-sm font-bold text-foreground">{localizeText("Matter Cihazı Ekle")}</h3>
+                          <span className="rounded bg-emerald-500/15 px-2 py-0.2 text-[10px] font-bold text-emerald-600">{localizeText("Yerel Standart")}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground mt-0.5">
-                          Kutu veya cihaz üzerindeki Matter QR kodunu veya 11/21 haneli kurulum kodunu tarayın.
-                        </p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Kutu veya cihaz üzerindeki Matter QR kodunu veya 11/21 haneli kurulum kodunu tarayın.")}</p>
                       </div>
                     </div>
                     <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
@@ -272,14 +268,10 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <h3 className="text-sm font-bold text-foreground">Home Assistant’a Bağlan</h3>
-                          <span className="rounded bg-sky-500/15 px-2 py-0.2 text-[10px] font-bold text-sky-600">
-                            Köprü
-                          </span>
+                          <h3 className="text-sm font-bold text-foreground">{localizeText("Home Assistant’a Bağlan")}</h3>
+                          <span className="rounded bg-sky-500/15 px-2 py-0.2 text-[10px] font-bold text-sky-600">{localizeText("Köprü")}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground mt-0.5">
-                          Evinizdeki Home Assistant varlıklarını doğrulayın ve istediklerinizi seçerek ekleyin.
-                        </p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Evinizdeki Home Assistant varlıklarını doğrulayın ve istediklerinizi seçerek ekleyin.")}</p>
                       </div>
                     </div>
                     <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
@@ -298,14 +290,10 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <h3 className="text-sm font-bold text-foreground">Desteklenen Marka Hesabını Bağla</h3>
-                          <span className="rounded bg-purple-500/15 px-2 py-0.2 text-[10px] font-bold text-purple-600">
-                            Resmi API
-                          </span>
+                          <h3 className="text-sm font-bold text-foreground">{localizeText("Desteklenen Marka Hesabını Bağla")}</h3>
+                          <span className="rounded bg-purple-500/15 px-2 py-0.2 text-[10px] font-bold text-purple-600">{localizeText("Resmi API")}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground mt-0.5">
-                          Philips Hue, Tuya, Shelly, Netatmo, Daikin, Fronius resmi OAuth hesabı bağlama.
-                        </p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Philips Hue, Tuya, Shelly, Netatmo, Daikin, Fronius resmi OAuth hesabı bağlama.")}</p>
                       </div>
                     </div>
                     <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
@@ -316,10 +304,8 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                 <div className="rounded-2xl border border-border/80 bg-muted/30 p-4 mt-4 flex items-start gap-3">
                   <Smartphone className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-xs font-bold text-foreground">Yerel Ağ & Bluetooth Keşfi</h4>
-                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
-                      Yerel ağ izni ve Bluetooth ile doğrudan donanım eşleştirmesi için LifeOS mobil uygulamasını kullanabilirsiniz. Tarayıcıda güvenli Matter kodu veya Home Assistant / Marka API'si ile cihaz ekleyebilirsiniz.
-                    </p>
+                    <h4 className="text-xs font-bold text-foreground">{localizeText("Yerel Ağ & Bluetooth Keşfi")}</h4>
+                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">{localizeText("Yerel ağ izni ve Bluetooth ile doğrudan donanım eşleştirmesi için LifeOS mobil uygulamasını kullanabilirsiniz. Tarayıcıda güvenli Matter kodu veya Home Assistant / Marka API'si ile cihaz ekleyebilirsiniz.")}</p>
                   </div>
                 </div>
               </div>
@@ -329,44 +315,36 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
             {step === 'matter' && (
               <form onSubmit={handleMatterSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-foreground mb-1.5">
-                    Matter Kurulum Kodu veya QR Metni
-                  </label>
+                  <label className="block text-xs font-bold text-foreground mb-1.5">{localizeText("Matter Kurulum Kodu veya QR Metni")}</label>
                   <input
                     type="text"
                     value={matterCode}
                     onChange={(e) => setMatterCode(e.target.value)}
-                    placeholder="Örn: MT:Y35J04VJ00MAS000000 veya 11/21 haneli kod"
+                    placeholder={localizeText("Örn: MT:Y35J04VJ00MAS000000 veya 11/21 haneli kod")}
                     className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-xs text-foreground font-mono focus:outline-none focus:ring-2 focus:ring-primary/40"
                     required
                   />
-                  <p className="text-[11px] text-muted-foreground mt-1">
-                    Cihazın üzerindeki veya kutusundaki resmi Matter QR kodunu giriniz.
-                  </p>
+                  <p className="text-[11px] text-muted-foreground mt-1">{localizeText("Cihazın üzerindeki veya kutusundaki resmi Matter QR kodunu giriniz.")}</p>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-foreground mb-1.5">
-                    Cihaz Adı
-                  </label>
+                  <label className="block text-xs font-bold text-foreground mb-1.5">{localizeText("Cihaz Adı")}</label>
                   <input
                     type="text"
                     value={matterDeviceName}
                     onChange={(e) => setMatterDeviceName(e.target.value)}
-                    placeholder="Örn: Salon Lambaderi"
+                    placeholder={localizeText("Örn: Salon Lambaderi")}
                     className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-foreground mb-1.5">
-                    Oda Belirle (İsteğe Bağlı)
-                  </label>
+                  <label className="block text-xs font-bold text-foreground mb-1.5">{localizeText("Oda Belirle (İsteğe Bağlı)")}</label>
                   <input
                     type="text"
                     value={matterRoomName}
                     onChange={(e) => setMatterRoomName(e.target.value)}
-                    placeholder="Örn: Salon, Çalışma Odası, Balkon"
+                    placeholder={localizeText("Örn: Salon, Çalışma Odası, Balkon")}
                     className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
                   />
                 </div>
@@ -376,9 +354,7 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                     type="button"
                     onClick={() => setStep('select')}
                     className="px-4 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:bg-muted"
-                  >
-                    Geri
-                  </button>
+                  >{localizeText("Geri")}</button>
 
                   <button
                     type="submit"
@@ -386,7 +362,7 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                     className="px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs font-bold shadow-xs hover:opacity-95 disabled:opacity-50 flex items-center gap-1.5"
                   >
                     {isSubmitting && <RefreshCw className="h-3.5 w-3.5 animate-spin" />}
-                    <span>Eşleştirmeyi Doğrula & Ekle</span>
+                    <span>{localizeText("Eşleştirmeyi Doğrula & Ekle")}</span>
                   </button>
                 </div>
               </form>
@@ -398,34 +374,28 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                 {!isHaLoaded ? (
                   <form onSubmit={handleHaDiscover} className="space-y-4">
                     <div>
-                      <label className="block text-xs font-bold text-foreground mb-1.5">
-                        Home Assistant Sunucu Adresi
-                      </label>
+                      <label className="block text-xs font-bold text-foreground mb-1.5">{localizeText("Home Assistant Sunucu Adresi")}</label>
                       <input
                         type="url"
                         value={haUrl}
                         onChange={(e) => setHaUrl(e.target.value)}
-                        placeholder="http://homeassistant.local:8123"
+                        placeholder={localizeText("http://homeassistant.local:8123")}
                         className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-xs text-foreground font-mono focus:outline-none focus:ring-2 focus:ring-primary/40"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-foreground mb-1.5">
-                        Long-Lived Access Token (Erişim Belirteci)
-                      </label>
+                      <label className="block text-xs font-bold text-foreground mb-1.5">{localizeText("Long-Lived Access Token (Erişim Belirteci)")}</label>
                       <textarea
                         value={haToken}
                         onChange={(e) => setHaToken(e.target.value)}
-                        placeholder="Home Assistant Profilinizden oluşturulan Uzun Süreli Erişim Belirteci"
+                        placeholder={localizeText("Home Assistant Profilinizden oluşturulan Uzun Süreli Erişim Belirteci")}
                         rows={3}
                         className="w-full rounded-xl border border-border bg-background px-3.5 py-2 text-xs text-foreground font-mono focus:outline-none focus:ring-2 focus:ring-primary/40"
                         required
                       />
-                      <p className="text-[11px] text-muted-foreground mt-1">
-                        Token yalnızca sunucu tarafında güvenle saklanır, istemciye iletilmez.
-                      </p>
+                      <p className="text-[11px] text-muted-foreground mt-1">{localizeText("Token yalnızca sunucu tarafında güvenle saklanır, istemciye iletilmez.")}</p>
                     </div>
 
                     <div className="flex items-center justify-between pt-3 border-t border-border/50">
@@ -433,9 +403,7 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                         type="button"
                         onClick={() => setStep('select')}
                         className="px-4 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:bg-muted"
-                      >
-                        Geri
-                      </button>
+                      >{localizeText("Geri")}</button>
 
                       <button
                         type="submit"
@@ -443,7 +411,7 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                         className="px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs font-bold shadow-xs hover:opacity-95 disabled:opacity-50 flex items-center gap-1.5"
                       >
                         {isSubmitting && <RefreshCw className="h-3.5 w-3.5 animate-spin" />}
-                        <span>Bağlantıyı Doğrula & Cihazları Listele</span>
+                        <span>{localizeText("Bağlantıyı Doğrula & Cihazları Listele")}</span>
                       </button>
                     </div>
                   </form>
@@ -451,21 +419,16 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                          Bulunan Gerçek Cihazlar ({haCandidates.length})
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Bulunan Gerçek Cihazlar (")}{localizeText(haCandidates.length)})
                         </h3>
-                        <p className="text-[11px] text-muted-foreground">
-                          LifeOS’a eklemek istediğiniz cihazları işaretleyin:
-                        </p>
+                        <p className="text-[11px] text-muted-foreground">{localizeText("LifeOS’a eklemek istediğiniz cihazları işaretleyin:")}</p>
                       </div>
 
                       <button
                         type="button"
                         onClick={() => setIsHaLoaded(false)}
                         className="text-xs font-semibold text-primary hover:underline"
-                      >
-                        Adres/Token Değiştir
-                      </button>
+                      >{localizeText("Adres/Token Değiştir")}</button>
                     </div>
 
                     <div className="space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
@@ -496,10 +459,10 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2">
                                   <span className="text-xs font-bold text-foreground truncate">
-                                    {candidate.name}
+                                    {localizeText(candidate.name)}
                                   </span>
                                   <span className="rounded bg-muted px-1.5 py-0.2 text-[9px] font-mono text-muted-foreground">
-                                    {candidate.providerDeviceId}
+                                    {localizeText(candidate.providerDeviceId)}
                                   </span>
                                 </div>
 
@@ -513,7 +476,7 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                                         [candidate.providerDeviceId]: e.target.value,
                                       }))
                                     }
-                                    placeholder="Cihaz Adı"
+                                    placeholder={localizeText("Cihaz Adı")}
                                     className="rounded-lg border border-border bg-background px-2.5 py-1 text-xs text-foreground focus:outline-none"
                                   />
 
@@ -526,7 +489,7 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                                         [candidate.providerDeviceId]: e.target.value,
                                       }))
                                     }
-                                    placeholder="Oda (örn: Salon, Mutfak)"
+                                    placeholder={localizeText("Oda (örn: Salon, Mutfak)")}
                                     className="rounded-lg border border-border bg-background px-2.5 py-1 text-xs text-foreground focus:outline-none"
                                   />
                                 </div>
@@ -539,8 +502,7 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
 
                     <div className="flex items-center justify-between pt-3 border-t border-border/50">
                       <span className="text-xs font-semibold text-muted-foreground">
-                        {Object.values(selectedHaIds).filter(Boolean).length} cihaz seçildi
-                      </span>
+                        {localizeText(Object.values(selectedHaIds).filter(Boolean).length)}{localizeText(" cihaz seçildi")}</span>
 
                       <button
                         type="button"
@@ -549,7 +511,7 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                         className="px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs font-bold shadow-xs hover:opacity-95 disabled:opacity-50 flex items-center gap-1.5"
                       >
                         {isSubmitting && <RefreshCw className="h-3.5 w-3.5 animate-spin" />}
-                        <span>Seçilenleri LifeOS’a Ekle</span>
+                        <span>{localizeText("Seçilenleri LifeOS’a Ekle")}</span>
                       </button>
                     </div>
                   </div>
@@ -573,21 +535,17 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-xl">{v.brandIcon}</span>
-                          <span className="text-xs font-bold text-foreground">{v.name}</span>
+                          <span className="text-xl">{localizeText(v.brandIcon)}</span>
+                          <span className="text-xs font-bold text-foreground">{localizeText(v.name)}</span>
                         </div>
                         {v.isSupported ? (
-                          <span className="rounded bg-emerald-500/15 px-2 py-0.5 text-[9px] font-bold text-emerald-600">
-                            OAuth2 Aktif
-                          </span>
+                          <span className="rounded bg-emerald-500/15 px-2 py-0.5 text-[9px] font-bold text-emerald-600">{localizeText("OAuth2 Aktif")}</span>
                         ) : (
-                          <span className="rounded bg-amber-500/15 px-2 py-0.5 text-[9px] font-bold text-amber-600">
-                            Desteklenmiyor
-                          </span>
+                          <span className="rounded bg-amber-500/15 px-2 py-0.5 text-[9px] font-bold text-amber-600">{localizeText("Desteklenmiyor")}</span>
                         )}
                       </div>
                       <p className="text-[11px] text-muted-foreground line-clamp-2">
-                        {v.description}
+                        {localizeText(v.description)}
                       </p>
                     </div>
                   ))}
@@ -596,15 +554,13 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                 {selectedVendor && (
                   <div className="mt-4 p-4 rounded-2xl border border-border bg-muted/40 space-y-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-lg">{selectedVendor.brandIcon}</span>
-                      <h4 className="text-xs font-bold text-foreground">{selectedVendor.name} Bağlantısı</h4>
+                      <span className="text-lg">{localizeText(selectedVendor.brandIcon)}</span>
+                      <h4 className="text-xs font-bold text-foreground">{localizeText(selectedVendor.name)}{localizeText(" Bağlantısı")}</h4>
                     </div>
 
                     {selectedVendor.isSupported ? (
                       <div>
-                        <p className="text-xs text-muted-foreground leading-relaxed">
-                          Resmi OAuth2 yetkilendirmesi ile {selectedVendor.name} hesabınızı güvenli şekilde bağlayabilirsiniz. Şifreniz asla LifeOS’a iletilmez.
-                        </p>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{localizeText("Resmi OAuth2 yetkilendirmesi ile ")}{localizeText(selectedVendor.name)}{localizeText(" hesabınızı güvenli şekilde bağlayabilirsiniz. Şifreniz asla LifeOS’a iletilmez.")}</p>
                         <button
                           onClick={() => {
                             setSuccessMsg(`${selectedVendor.name} yetkilendirme penceresi açılıyor...`);
@@ -612,14 +568,14 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                           }}
                           className="mt-3 px-4 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-bold shadow-xs hover:opacity-95 flex items-center gap-1.5"
                         >
-                          <span>{selectedVendor.name} ile Giriş Yap</span>
+                          <span>{localizeText(selectedVendor.name)}{localizeText(" ile Giriş Yap")}</span>
                           <ArrowRight className="h-3.5 w-3.5" />
                         </button>
                       </div>
                     ) : (
                       <div className="flex items-start gap-2 text-xs text-amber-600 bg-amber-500/10 p-3 rounded-xl border border-amber-500/20">
                         <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
-                        <span>{selectedVendor.statusNotice}</span>
+                        <span>{localizeText(selectedVendor.statusNotice)}</span>
                       </div>
                     )}
                   </div>
@@ -630,9 +586,7 @@ export function AddDeviceModal({ isOpen, onClose }: AddDeviceModalProps) {
                     type="button"
                     onClick={() => setStep('select')}
                     className="px-4 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:bg-muted"
-                  >
-                    Geri
-                  </button>
+                  >{localizeText("Geri")}</button>
                 </div>
               </div>
             )}

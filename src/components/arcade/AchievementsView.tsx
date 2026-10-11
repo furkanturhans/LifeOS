@@ -16,6 +16,7 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { useArcadeStore } from '@/stores/useArcadeStore';
 import type { AchievementCategory } from '@/types/arcade';
 import { cn } from '@/lib/utils';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 interface AchievementsViewProps {
   onBackToArcade: () => void;
@@ -30,6 +31,7 @@ const CATEGORY_TABS: { id: 'all' | AchievementCategory; label: string }[] = [
 ];
 
 export function AchievementsView({ onBackToArcade }: AchievementsViewProps) {
+  const localizeText = useLocaleRender();
   const { achievements, totalXp } = useArcadeStore();
   const [selectedCategory, setSelectedCategory] = useState<'all' | AchievementCategory>('all');
 
@@ -53,7 +55,7 @@ export function AchievementsView({ onBackToArcade }: AchievementsViewProps) {
             type="button"
             onClick={onBackToArcade}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Arcade'e Dön"
+            aria-label={localizeText("Arcade'e Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -64,25 +66,21 @@ export function AchievementsView({ onBackToArcade }: AchievementsViewProps) {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Başarımlar
-              </h1>
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Başarımlar")}</h1>
               <StatusBadge
                 status={unlockedCount > 0 ? 'verified' : 'draft'}
-                label={`${unlockedCount}/${totalCount} Açıldı`}
+                label={localizeText(`${unlockedCount}/${totalCount} Açıldı`)}
                 size="sm"
               />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Kazanılan rozetler ve ustalık dereceleri
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Kazanılan rozetler ve ustalık dereceleri")}</p>
           </div>
         </div>
 
         {/* Total Points */}
         <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 font-extrabold text-xs">
           <Trophy className="h-3.5 w-3.5" />
-          <span>{totalScorePoints} Puan</span>
+          <span>{localizeText(totalScorePoints)}{localizeText(" Puan")}</span>
         </div>
       </div>
 
@@ -100,7 +98,7 @@ export function AchievementsView({ onBackToArcade }: AchievementsViewProps) {
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
               )}
             >
-              {tab.label}
+              {localizeText(tab.label)}
             </button>
           ))}
         </div>
@@ -145,15 +143,15 @@ export function AchievementsView({ onBackToArcade }: AchievementsViewProps) {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-1">
                         <h3 className="text-sm font-bold text-foreground truncate">
-                          {ach.title}
+                          {localizeText(ach.title)}
                         </h3>
                         <span className="text-[11px] font-extrabold text-purple-600 dark:text-purple-400 shrink-0">
-                          +{ach.points}
+                          +{localizeText(ach.points)}
                         </span>
                       </div>
 
                       <p className="mt-1 text-xs text-muted-foreground leading-snug">
-                        {ach.description}
+                        {localizeText(ach.description)}
                       </p>
                     </div>
                   </div>
@@ -163,20 +161,19 @@ export function AchievementsView({ onBackToArcade }: AchievementsViewProps) {
                     {ach.isUnlocked ? (
                       <div className="flex items-center justify-between text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                         <span className="inline-flex items-center gap-1">
-                          <CheckCircle2 className="h-3.5 w-3.5" /> Rozet Kazanıldı
-                        </span>
+                          <CheckCircle2 className="h-3.5 w-3.5" />{localizeText("Rozet Kazanıldı")}</span>
                         {ach.unlockedAt && (
                           <span className="text-[10px] text-muted-foreground">
-                            {new Date(ach.unlockedAt).toLocaleDateString('tr-TR')}
+                            {localizeText(new Date(ach.unlockedAt).toLocaleDateString(getFormattingLocale()))}
                           </span>
                         )}
                       </div>
                     ) : (
                       <div className="space-y-1">
                         <div className="flex items-center justify-between text-[11px] text-muted-foreground font-medium">
-                          <span>İlerleme</span>
+                          <span>{localizeText("İlerleme")}</span>
                           <span>
-                            {ach.progress.current} / {ach.progress.max}
+                            {localizeText(ach.progress.current)} / {localizeText(ach.progress.max)}
                           </span>
                         </div>
                         <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">

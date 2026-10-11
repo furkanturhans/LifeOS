@@ -28,6 +28,7 @@ import {
   type AssistantPermissionLevel,
 } from '@/types/assistant';
 import { cn } from '@/lib/utils';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 const SCOPE_ICONS: Record<AssistantPermissionScopeKey, React.ElementType> = {
   tasks: ListTodo,
@@ -47,6 +48,7 @@ const PERMISSION_LEVELS: { id: AssistantPermissionLevel; labelTr: string; descTr
 ];
 
 export function AssistantPermissionCenter() {
+  const localizeText = useLocaleRender();
   const {
     permissions,
     setPermissionLevel,
@@ -65,14 +67,10 @@ export function AssistantPermissionCenter() {
           <div>
             <div className="inline-flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-xs font-semibold text-primary mb-2">
               <ShieldCheck className="h-3.5 w-3.5" />
-              <span>Sıfır Güven & İzin Mimarisi</span>
+              <span>{localizeText("Sıfır Güven & İzin Mimarisi")}</span>
             </div>
-            <h1 className="text-base sm:text-lg font-bold text-foreground">
-              İzinler ve Veri Erişimi Yönetimi
-            </h1>
-            <p className="mt-1 text-xs text-muted-foreground leading-relaxed max-w-xl">
-              LifeOS Asistan verilerinize varsayılan olarak erişemez. Her modülün veri paylaşım seviyesini bağımsız olarak denetleyebilir ve istediğiniz an iptal edebilirsiniz.
-            </p>
+            <h1 className="text-base sm:text-lg font-bold text-foreground">{localizeText("İzinler ve Veri Erişimi Yönetimi")}</h1>
+            <p className="mt-1 text-xs text-muted-foreground leading-relaxed max-w-xl">{localizeText("LifeOS Asistan verilerinize varsayılan olarak erişemez. Her modülün veri paylaşım seviyesini bağımsız olarak denetleyebilir ve istediğiniz an iptal edebilirsiniz.")}</p>
           </div>
 
           <Button
@@ -81,21 +79,15 @@ export function AssistantPermissionCenter() {
             onClick={revokeAllPermissions}
             className="shrink-0 font-semibold text-xs"
           >
-            <RotateCcw className="h-3.5 w-3.5 mr-1" />
-            Tüm İzinleri Sıfırla
-          </Button>
+            <RotateCcw className="h-3.5 w-3.5 mr-1" />{localizeText("Tüm İzinleri Sıfırla")}</Button>
         </div>
       </Card>
 
       {/* Granular Permission Scopes List */}
       <div>
         <div className="mb-3 flex items-center justify-between px-1">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Modül İzin Seviyeleri (7 Kapsam)
-          </h2>
-          <span className="text-[11px] font-medium text-muted-foreground">
-            Finans & Aile Varsayılan Olarak Kapalıdır
-          </span>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Modül İzin Seviyeleri (7 Kapsam)")}</h2>
+          <span className="text-[11px] font-medium text-muted-foreground">{localizeText("Finans & Aile Varsayılan Olarak Kapalıdır")}</span>
         </div>
 
         <div className="space-y-3">
@@ -116,16 +108,14 @@ export function AssistantPermissionCenter() {
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-bold text-foreground truncate">
-                          {info.titleTr}
+                          {localizeText(info.titleTr)}
                         </h3>
                         {info.isSensitive && (
-                          <span className="rounded-md border border-amber-500/20 bg-amber-500/10 px-1.5 py-0.2 text-[10px] font-bold text-amber-600 dark:text-amber-400">
-                            Hassas Veri
-                          </span>
+                          <span className="rounded-md border border-amber-500/20 bg-amber-500/10 px-1.5 py-0.2 text-[10px] font-bold text-amber-600 dark:text-amber-400">{localizeText("Hassas Veri")}</span>
                         )}
                       </div>
                       <p className="mt-0.5 text-xs text-muted-foreground leading-snug">
-                        {info.descriptionTr}
+                        {localizeText(info.descriptionTr)}
                       </p>
                     </div>
                   </div>
@@ -150,9 +140,9 @@ export function AssistantPermissionCenter() {
                                 : 'bg-primary/10 text-primary border-primary/30'
                               : 'bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground border-transparent'
                           )}
-                          title={lvl.descTr}
+                          title={localizeText(lvl.descTr)}
                         >
-                          <span className="text-[11px] truncate w-full">{lvl.labelTr}</span>
+                          <span className="text-[11px] truncate w-full">{localizeText(lvl.labelTr)}</span>
                         </button>
                       );
                     })}
@@ -168,11 +158,9 @@ export function AssistantPermissionCenter() {
       <Card className="border-border bg-card p-4 sm:p-5 shadow-2xs space-y-2">
         <div className="flex items-center gap-2 text-xs font-bold text-foreground">
           <FileCheck2 className="h-4 w-4 text-emerald-500" />
-          <span>Fotoğraf ve Medya Gizlilik Protokolü</span>
+          <span>{localizeText("Fotoğraf ve Medya Gizlilik Protokolü")}</span>
         </div>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          Cihazınızdaki fotoğraf albümüne hiçbir şekilde arka planda tam erişim sağlanmaz. Sadece seçtiğiniz fotoğraflar, GPS koordinatları ve EXIF bilgileri temizlenerek analiz onayınıza sunulur.
-        </p>
+        <p className="text-xs text-muted-foreground leading-relaxed">{localizeText("Cihazınızdaki fotoğraf albümüne hiçbir şekilde arka planda tam erişim sağlanmaz. Sadece seçtiğiniz fotoğraflar, GPS koordinatları ve EXIF bilgileri temizlenerek analiz onayınıza sunulur.")}</p>
       </Card>
 
       {/* Data Access Audit Log */}
@@ -180,7 +168,7 @@ export function AssistantPermissionCenter() {
         <div className="flex items-center justify-between border-b border-border/60 pb-3 mb-3">
           <div className="flex items-center gap-2 text-xs font-bold text-foreground">
             <Terminal className="h-4 w-4 text-primary" />
-            <span>Veri Erişim Günlüğü (Audit Trail)</span>
+            <span>{localizeText("Veri Erişim Günlüğü (Audit Trail)")}</span>
           </div>
 
           {dataAccessLogs.length > 0 && (
@@ -189,15 +177,13 @@ export function AssistantPermissionCenter() {
               className="text-xs text-muted-foreground hover:text-destructive transition-colors flex items-center gap-1"
             >
               <Trash2 className="h-3.5 w-3.5" />
-              <span>Günlüğü Temizle</span>
+              <span>{localizeText("Günlüğü Temizle")}</span>
             </button>
           )}
         </div>
 
         {dataAccessLogs.length === 0 ? (
-          <div className="py-6 text-center text-xs text-muted-foreground">
-            Henüz herhangi bir veri erişim kaydı bulunmuyor.
-          </div>
+          <div className="py-6 text-center text-xs text-muted-foreground">{localizeText("Henüz herhangi bir veri erişim kaydı bulunmuyor.")}</div>
         ) : (
           <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
             {dataAccessLogs.map((log) => (
@@ -208,11 +194,11 @@ export function AssistantPermissionCenter() {
                 <div className="space-y-0.5">
                   <div className="font-semibold text-foreground flex items-center gap-1.5">
                     <span className="uppercase text-muted-foreground font-mono">
-                      [{log.scope}]
+                      [{localizeText(log.scope)}]
                     </span>
-                    <span>{log.actionName}</span>
+                    <span>{localizeText(log.actionName)}</span>
                   </div>
-                  <p className="text-muted-foreground">{log.reason}</p>
+                  <p className="text-muted-foreground">{localizeText(log.reason)}</p>
                 </div>
 
                 <div className="text-right shrink-0 space-y-0.5">
@@ -226,10 +212,10 @@ export function AssistantPermissionCenter() {
                         : 'bg-amber-500/10 text-amber-500'
                     )}
                   >
-                    {log.status === 'allowed' ? 'İzin Verildi' : log.status === 'denied' ? 'Engellendi' : 'Sıfırlandı'}
+                    {localizeText(log.status === 'allowed' ? 'İzin Verildi' : log.status === 'denied' ? 'Engellendi' : 'Sıfırlandı')}
                   </span>
                   <div className="text-[10px] text-muted-foreground font-mono">
-                    {new Date(log.timestamp).toLocaleTimeString('tr-TR')}
+                    {localizeText(new Date(log.timestamp).toLocaleTimeString(getFormattingLocale()))}
                   </div>
                 </div>
               </div>

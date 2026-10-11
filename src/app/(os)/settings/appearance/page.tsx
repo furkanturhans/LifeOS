@@ -10,6 +10,7 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import type { ThemePreference, BackgroundType, AccentColor } from '@/types/user';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface ThemeOptionProps {
   value: ThemePreference;
@@ -21,6 +22,7 @@ interface ThemeOptionProps {
 }
 
 function ThemeOption({ value, label, description, isSelected, onSelect, preview }: ThemeOptionProps) {
+  const localizeText = useLocaleRender();
   return (
     <motion.button
       whileTap={{ scale: 0.97 }}
@@ -54,8 +56,8 @@ function ThemeOption({ value, label, description, isSelected, onSelect, preview 
         )}
       </div>
       <div className="flex-1 min-w-0">
-        <div className="font-medium text-sm text-foreground">{label}</div>
-        <div className="text-xs text-muted-foreground mt-0.5">{description}</div>
+        <div className="font-medium text-sm text-foreground">{localizeText(label)}</div>
+        <div className="text-xs text-muted-foreground mt-0.5">{localizeText(description)}</div>
       </div>
       {isSelected && (
         <div className="h-6 w-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
@@ -81,8 +83,9 @@ const SOLID_COLORS = [
 ];
 
 export default function AppearancePage() {
+  const localizeText = useLocaleRender();
   const router = useRouter();
-  const { theme, setTheme, locale, backgroundType, backgroundValue, setBackground, resetBackground } = useThemeStore();
+  const { theme, setTheme, backgroundType, backgroundValue, setBackground, resetBackground } = useThemeStore();
   const { user, setUser } = useAuthStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -226,10 +229,10 @@ export default function AppearancePage() {
           </button>
           <div>
             <h1 className="text-2xl font-bold text-foreground">
-              {locale === 'tr' ? 'Görünüm & Tema' : 'Appearance & Theme'}
+              {localizeText('Görünüm & Tema')}
             </h1>
             <p className="text-xs text-muted-foreground mt-0.5">
-              {locale === 'tr' ? 'Tema, vurgu rengi ve arayüz tercihlerini özelleştirin' : 'Customize theme mode, accent color, and interface preferences'}
+              {localizeText('Tema, vurgu rengi ve arayüz tercihlerini özelleştirin')}
             </p>
           </div>
         </motion.div>
@@ -237,15 +240,15 @@ export default function AppearancePage() {
         {/* Section 1: Theme Mode */}
         <div className="px-4 mt-2 space-y-3">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            {locale === 'tr' ? 'Tema Modu' : 'Theme Mode'}
+            {localizeText('Tema Modu')}
           </h2>
           <div className="space-y-2.5">
             {themes.map((t) => (
               <ThemeOption
                 key={t.value}
                 value={t.value}
-                label={locale === 'tr' ? t.labelTr : t.labelEn}
-                description={locale === 'tr' ? t.descTr : t.descEn}
+                label={localizeText(t.labelTr)}
+                description={localizeText(t.descTr)}
                 isSelected={theme === t.value}
                 onSelect={() => {
                   setTheme(t.value);
@@ -266,7 +269,7 @@ export default function AppearancePage() {
         {/* Section 2: Accent Color */}
         <div className="px-4 mt-8 space-y-3">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            {locale === 'tr' ? 'Vurgu Rengi (Accent)' : 'Accent Color'}
+            {localizeText('Vurgu Rengi (Accent)')}
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             {ACCENT_OPTIONS.map((opt) => {
@@ -296,7 +299,7 @@ export default function AppearancePage() {
                     {isSelected && <Check className="h-4 w-4 stroke-[3]" />}
                   </div>
                   <span className="text-xs font-semibold text-foreground">
-                    {locale === 'tr' ? opt.labelTr : opt.labelEn}
+                    {localizeText(opt.labelTr)}
                   </span>
                 </button>
               );
@@ -307,17 +310,15 @@ export default function AppearancePage() {
         {/* Section 3: Reduced Motion */}
         <div className="px-4 mt-8 space-y-3">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            {locale === 'tr' ? 'Erişilebilirlik & Hareket' : 'Accessibility & Motion'}
+            {localizeText('Erişilebilirlik & Hareket')}
           </h2>
           <div className="flex items-center justify-between p-4 rounded-2xl border border-border bg-card">
             <div>
               <div className="text-sm font-medium text-foreground">
-                {locale === 'tr' ? 'Animasyonları Azalt' : 'Reduce Motion'}
+                {localizeText('Animasyonları Azalt')}
               </div>
               <div className="text-xs text-muted-foreground mt-0.5">
-                {locale === 'tr'
-                  ? 'Arayüz geçişlerini ve hareketli efektleri en aza indirir'
-                  : 'Minimizes interface transitions and decorative motion'}
+                {localizeText('Arayüz geçişlerini ve hareketli efektleri en aza indirir')}
               </div>
             </div>
             <button
@@ -347,14 +348,14 @@ export default function AppearancePage() {
         <div className="px-4 mt-8 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              {locale === 'tr' ? 'Ana Ekran Arka Planı' : 'Homescreen Background'}
+              {localizeText('Ana Ekran Arka Planı')}
             </h2>
             {backgroundType !== 'default' && (
               <button
                 onClick={handleRemoveImage}
                 className="text-xs text-primary hover:underline"
               >
-                {locale === 'tr' ? 'Varsayılana Dön' : 'Reset to Default'}
+                {localizeText('Varsayılana Dön')}
               </button>
             )}
           </div>
@@ -371,7 +372,7 @@ export default function AppearancePage() {
               )}
             >
               <Palette className="w-3.5 h-3.5" />
-              {locale === 'tr' ? 'Sade Renk' : 'Solid Color'}
+              {localizeText('Sade Renk')}
             </button>
             <button
               onClick={() => setActiveTab('image')}
@@ -383,7 +384,7 @@ export default function AppearancePage() {
               )}
             >
               <ImageIcon className="w-3.5 h-3.5" />
-              {locale === 'tr' ? 'Kendi Fotoğrafım' : 'Custom Photo'}
+              {localizeText('Kendi Fotoğrafım')}
             </button>
           </div>
 
@@ -395,9 +396,7 @@ export default function AppearancePage() {
               className="rounded-3xl border border-border bg-card p-5 space-y-4"
             >
               <p className="text-xs text-muted-foreground">
-                {locale === 'tr'
-                  ? 'LifeOS tasarımına uygun soft ve sade renk tonlarından birini seçin:'
-                  : 'Select one of the soft and minimal tones matching LifeOS style:'}
+                {localizeText('LifeOS tasarımına uygun soft ve sade renk tonlarından birini seçin:')}
               </p>
 
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
@@ -437,7 +436,7 @@ export default function AppearancePage() {
                         )}
                       </div>
                       <span className="text-[11px] font-medium text-foreground truncate w-full">
-                        {locale === 'tr' ? c.nameTr : c.nameEn}
+                        {localizeText(c.nameTr)}
                       </span>
                     </button>
                   );
@@ -467,7 +466,7 @@ export default function AppearancePage() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={backgroundValue}
-                      alt="Current Background"
+                      alt={localizeText("Current Background")}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -478,7 +477,7 @@ export default function AppearancePage() {
                         className="gap-1.5"
                       >
                         <Upload className="w-4 h-4" />
-                        {locale === 'tr' ? 'Fotoğrafı Değiştir' : 'Change Photo'}
+                        {localizeText('Fotoğrafı Değiştir')}
                       </Button>
                     </div>
                   </div>
@@ -491,7 +490,7 @@ export default function AppearancePage() {
                       className="flex-1 gap-2"
                     >
                       <Upload className="w-4 h-4" />
-                      {locale === 'tr' ? 'Yeni Fotoğraf Seç' : 'Choose New Photo'}
+                      {localizeText('Yeni Fotoğraf Seç')}
                     </Button>
                     <Button
                       variant="destructive"
@@ -500,7 +499,7 @@ export default function AppearancePage() {
                       className="gap-2"
                     >
                       <Trash2 className="w-4 h-4" />
-                      {locale === 'tr' ? 'Kaldır' : 'Remove'}
+                      {localizeText('Kaldır')}
                     </Button>
                   </div>
                 </div>
@@ -514,13 +513,11 @@ export default function AppearancePage() {
                   </div>
                   <div>
                     <div className="text-xs font-semibold text-foreground">
-                      {isUploading
-                        ? locale === 'tr' ? 'Yükleniyor...' : 'Uploading...'
-                        : locale === 'tr' ? 'Cihazınızdan Fotoğraf Seçin' : 'Select Photo from Device'}
+                      {localizeText(isUploading
+                        ? 'Yükleniyor...'
+                        : 'Cihazınızdan Fotoğraf Seçin')}
                     </div>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">
-                      JPG, PNG, WebP • Otomatik karartma ve optimizasyon uygulanır
-                    </p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">{localizeText("JPG, PNG, WebP • Otomatik karartma ve optimizasyon uygulanır")}</p>
                   </div>
                 </div>
               )}

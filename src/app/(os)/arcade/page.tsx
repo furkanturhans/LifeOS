@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import { ArcadeScreen } from '@/components/arcade/ArcadeScreen';
+import { OpenGameCenter } from '@/components/arcade/OpenGameCenter';
 
 export const metadata: Metadata = {
-  title: 'Arcade — LifeOS',
+  title: 'LifeOS',
   description: 'LifeOS Arcade — Oyun ve eğlence merkezi',
 };
 
 export default function ArcadePage() {
-  return <ArcadeScreen />;
+  return <OpenGameCenter />;
 }

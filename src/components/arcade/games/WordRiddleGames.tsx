@@ -8,6 +8,7 @@ import { kidsSound } from '@/lib/arcade/kidsSound';
 import { cn } from '@/lib/utils';
 import { CheckCircle2, XCircle, Sparkles, HelpCircle, Volume2 } from 'lucide-react';
 import { kidsSpeech } from '@/services/kidsSpeechService';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 // =============================================================================
 // 1. BİLMECE (RIDDLE GAME)
@@ -46,6 +47,7 @@ const RIDDLES_DATA = [
 ];
 
 export function BilmeceGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -107,7 +109,7 @@ export function BilmeceGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Bilmece"
+      title={localizeText("Bilmece")}
       iconEmoji="❓"
       onBack={onBack}
       onRestart={handleRestart}
@@ -128,14 +130,11 @@ export function BilmeceGame({ onBack }: { onBack: () => void }) {
             type="button"
             onClick={() => kidsSpeech.speak(current.question)}
             className="absolute right-4 top-4 flex h-8 items-center gap-1 px-2.5 rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-bold hover:bg-indigo-500/20 transition-all"
-            title="Bilmeciyi Sesli Dinle"
+            title={localizeText("Bilmeciyi Sesli Dinle")}
           >
-            <Volume2 className="h-3.5 w-3.5" /> Dinle
-          </button>
-          <span className="text-4xl block mb-2">{current.emoji}</span>
-          <p className="text-base font-bold text-foreground leading-relaxed">
-            &ldquo;{current.question}&rdquo;
-          </p>
+            <Volume2 className="h-3.5 w-3.5" />{localizeText("Dinle")}</button>
+          <span className="text-4xl block mb-2">{localizeText(current.emoji)}</span>
+          <p className="text-base font-bold text-foreground leading-relaxed">{localizeText("“")}{localizeText(current.question)}{localizeText("”")}</p>
         </div>
 
         {/* 4 Choices */}
@@ -155,7 +154,7 @@ export function BilmeceGame({ onBack }: { onBack: () => void }) {
                   : 'border-border bg-card hover:border-primary/50 text-foreground'
               )}
             >
-              {opt}
+              {localizeText(opt)}
             </motion.button>
           ))}
         </div>
@@ -178,6 +177,7 @@ const GRID_LETTERS = [
 ];
 
 export function KelimeAviGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [foundWords, setFoundWords] = useState<string[]>([]);
   const [selectedCells, setSelectedCells] = useState<{ r: number; c: number }[]>([]);
@@ -230,7 +230,7 @@ export function KelimeAviGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Kelime Avı"
+      title={localizeText("Kelime Avı")}
       iconEmoji="🔍"
       onBack={onBack}
       onRestart={handleRestart}
@@ -256,7 +256,7 @@ export function KelimeAviGame({ onBack }: { onBack: () => void }) {
                   : 'bg-muted text-foreground border border-border'
               )}
             >
-              {w}
+              {localizeText(w)}
             </span>
           ))}
         </div>
@@ -278,7 +278,7 @@ export function KelimeAviGame({ onBack }: { onBack: () => void }) {
                       : 'border-border/60 bg-muted/40 hover:bg-muted text-foreground'
                   )}
                 >
-                  {letter}
+                  {localizeText(letter)}
                 </motion.button>
               );
             })
@@ -301,6 +301,7 @@ const WORD_MAKER_LEVELS = [
 ];
 
 export function KelimeYapGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [levelIdx, setLevelIdx] = useState(0);
   const [score, setScore] = useState(0);
@@ -371,7 +372,7 @@ export function KelimeYapGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Kelime Yap"
+      title={localizeText("Kelime Yap")}
       iconEmoji="🔤"
       onBack={onBack}
       onRestart={handleRestart}
@@ -387,8 +388,8 @@ export function KelimeYapGame({ onBack }: { onBack: () => void }) {
       <div className="w-full max-w-sm space-y-5 text-center">
         {/* Hint Card */}
         <div className="rounded-3xl border border-border bg-card/80 p-4 shadow-xs">
-          <span className="text-4xl block mb-1">{current.emoji}</span>
-          <p className="text-xs text-muted-foreground font-semibold">{current.hint}</p>
+          <span className="text-4xl block mb-1">{localizeText(current.emoji)}</span>
+          <p className="text-xs text-muted-foreground font-semibold">{localizeText(current.hint)}</p>
         </div>
 
         {/* Word Building Slots */}
@@ -405,7 +406,7 @@ export function KelimeYapGame({ onBack }: { onBack: () => void }) {
                   : 'border-dashed border-border bg-muted/30 text-transparent'
               )}
             >
-              {builtLetters[i] || ''}
+              {localizeText(builtLetters[i] || '')}
             </motion.button>
           ))}
         </div>
@@ -419,7 +420,7 @@ export function KelimeYapGame({ onBack }: { onBack: () => void }) {
               onClick={() => handleAddLetter(char, idx)}
               className="h-12 w-12 rounded-2xl border border-border bg-card hover:border-primary text-lg font-extrabold flex items-center justify-center shadow-xs"
             >
-              {char}
+              {localizeText(char)}
             </motion.button>
           ))}
         </div>
@@ -440,6 +441,7 @@ const ANAGRAM_ITEMS = [
 ];
 
 export function AnagramGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -499,7 +501,7 @@ export function AnagramGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Anagram"
+      title={localizeText("Anagram")}
       iconEmoji="🔄"
       onBack={onBack}
       onRestart={handleRestart}
@@ -514,11 +516,11 @@ export function AnagramGame({ onBack }: { onBack: () => void }) {
     >
       <div className="w-full max-w-sm space-y-4 text-center">
         <div className="rounded-3xl border border-border bg-card/80 p-5 shadow-xs">
-          <span className="text-xs font-bold text-muted-foreground block mb-1">Karışık Harfler</span>
+          <span className="text-xs font-bold text-muted-foreground block mb-1">{localizeText("Karışık Harfler")}</span>
           <span className="text-2xl font-extrabold text-primary tracking-widest block mb-2">
-            {current.scrambled}
+            {localizeText(current.scrambled)}
           </span>
-          <p className="text-xs text-muted-foreground">{current.hint}</p>
+          <p className="text-xs text-muted-foreground">{localizeText(current.hint)}</p>
         </div>
 
         <div className="space-y-3">
@@ -526,7 +528,7 @@ export function AnagramGame({ onBack }: { onBack: () => void }) {
             type="text"
             value={userInput}
             onChange={(e) => setUserInput(e.target.value.toUpperCase())}
-            placeholder="Doğru kelimeyi yazın..."
+            placeholder={localizeText("Doğru kelimeyi yazın...")}
             className="w-full h-12 rounded-2xl border border-border bg-card px-4 text-center text-lg font-bold text-foreground focus:border-primary focus:outline-none"
           />
 
@@ -535,9 +537,7 @@ export function AnagramGame({ onBack }: { onBack: () => void }) {
             onClick={handleCheck}
             disabled={!userInput.trim() || feedback !== 'idle'}
             className="w-full h-11 rounded-2xl bg-primary text-primary-foreground font-bold text-sm shadow-xs disabled:opacity-50"
-          >
-            Kontrol Et
-          </motion.button>
+          >{localizeText("Kontrol Et")}</motion.button>
         </div>
       </div>
     </GameShell>
@@ -556,6 +556,7 @@ const SPELLING_ITEMS = [
 ];
 
 export function YazimOyunuGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -605,7 +606,7 @@ export function YazimOyunuGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Yazım Oyunu"
+      title={localizeText("Yazım Oyunu")}
       iconEmoji="✏️"
       onBack={onBack}
       onRestart={handleRestart}
@@ -620,11 +621,11 @@ export function YazimOyunuGame({ onBack }: { onBack: () => void }) {
     >
       <div className="w-full max-w-sm space-y-5 text-center">
         <div className="rounded-3xl border border-border bg-card/80 p-5 shadow-xs">
-          <span className="text-4xl block mb-2">{current.emoji}</span>
+          <span className="text-4xl block mb-2">{localizeText(current.emoji)}</span>
           <span className="text-2xl font-extrabold text-foreground tracking-widest block">
-            {current.word}
+            {localizeText(current.word)}
           </span>
-          <p className="mt-2 text-xs text-muted-foreground">Eksik harfi bulunuz</p>
+          <p className="mt-2 text-xs text-muted-foreground">{localizeText("Eksik harfi bulunuz")}</p>
         </div>
 
         {/* 4 Choice buttons */}
@@ -637,7 +638,7 @@ export function YazimOyunuGame({ onBack }: { onBack: () => void }) {
               disabled={feedback !== 'idle'}
               className="h-14 rounded-2xl border border-border bg-card hover:border-primary text-xl font-extrabold shadow-xs transition-all"
             >
-              {opt}
+              {localizeText(opt)}
             </motion.button>
           ))}
         </div>

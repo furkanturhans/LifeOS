@@ -16,6 +16,7 @@ import {
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { useAssistantStore } from '@/stores/useAssistantStore';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface AssistantChatSidebarProps {
   isOpenMobile: boolean;
@@ -26,6 +27,7 @@ export function AssistantChatSidebar({
   isOpenMobile,
   onCloseMobile,
 }: AssistantChatSidebarProps) {
+  const localizeText = useLocaleRender();
   const {
     conversations,
     activeConversationId,
@@ -76,23 +78,19 @@ export function AssistantChatSidebar({
         className="w-full justify-center font-semibold mb-3"
       >
         <Plus className="h-4 w-4 mr-1.5" />
-        <span>Yeni Sohbet</span>
+        <span>{localizeText("Yeni Sohbet")}</span>
       </Button>
 
       <div className="mb-2 flex items-center justify-between px-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
         <span className="flex items-center gap-1.5">
-          <History className="h-3.5 w-3.5" />
-          Sohbet Geçmişi
-        </span>
-        <span className="text-[11px] font-medium">{conversations.length}</span>
+          <History className="h-3.5 w-3.5" />{localizeText("Sohbet Geçmişi")}</span>
+        <span className="text-[11px] font-medium">{localizeText(conversations.length)}</span>
       </div>
 
       {/* Conversation List */}
       <div className="flex-1 space-y-1 overflow-y-auto pr-0.5">
         {conversations.length === 0 ? (
-          <div className="py-8 text-center text-xs text-muted-foreground">
-            Henüz kayıtlı bir sohbet bulunmuyor.
-          </div>
+          <div className="py-8 text-center text-xs text-muted-foreground">{localizeText("Henüz kayıtlı bir sohbet bulunmuyor.")}</div>
         ) : (
           conversations.map((conv) => {
             const isActive = conv.id === activeConversationId;
@@ -125,7 +123,7 @@ export function AssistantChatSidebar({
                       autoFocus
                     />
                   ) : (
-                    <span className="truncate">{conv.title}</span>
+                    <span className="truncate">{localizeText(conv.title)}</span>
                   )}
                 </div>
 
@@ -136,14 +134,14 @@ export function AssistantChatSidebar({
                       <button
                         onClick={(e) => handleSaveRename(conv.id, e)}
                         className="rounded p-1 text-emerald-500 hover:bg-muted"
-                        title="Kaydet"
+                        title={localizeText("Kaydet")}
                       >
                         <Check className="h-3 w-3" />
                       </button>
                       <button
                         onClick={handleCancelRename}
                         className="rounded p-1 text-muted-foreground hover:bg-muted"
-                        title="İptal"
+                        title={localizeText("İptal")}
                       >
                         <X className="h-3 w-3" />
                       </button>
@@ -153,14 +151,14 @@ export function AssistantChatSidebar({
                       <button
                         onClick={(e) => handleStartRename(conv.id, conv.title, e)}
                         className="rounded p-1 text-muted-foreground hover:text-foreground hover:bg-muted"
-                        title="Yeniden Adlandır"
+                        title={localizeText("Yeniden Adlandır")}
                       >
                         <Edit2 className="h-3 w-3" />
                       </button>
                       <button
                         onClick={(e) => handleDelete(conv.id, e)}
                         className="rounded p-1 text-muted-foreground hover:text-destructive hover:bg-muted"
-                        title="Sohbeti Sil"
+                        title={localizeText("Sohbeti Sil")}
                       >
                         <Trash2 className="h-3 w-3" />
                       </button>
@@ -181,7 +179,7 @@ export function AssistantChatSidebar({
             className="flex items-center justify-center gap-1.5 w-full py-1.5 rounded-lg text-xs font-medium text-muted-foreground hover:text-destructive hover:bg-muted/40 transition-colors"
           >
             <Trash2 className="h-3.5 w-3.5" />
-            <span>Tüm Sohbetleri Temizle</span>
+            <span>{localizeText("Tüm Sohbetleri Temizle")}</span>
           </button>
         </div>
       )}
@@ -192,7 +190,7 @@ export function AssistantChatSidebar({
     <>
       {/* Desktop Persistent Left Panel */}
       <div className="hidden md:flex w-64 shrink-0 flex-col border-r border-border/80 bg-card/40">
-        {content}
+        {localizeText(content)}
       </div>
 
       {/* Mobile Drawer */}
@@ -214,7 +212,7 @@ export function AssistantChatSidebar({
               className="fixed inset-y-0 left-0 z-50 w-72 border-r border-border bg-card shadow-2xl md:hidden"
             >
               <div className="flex items-center justify-between border-b border-border/60 p-3">
-                <span className="font-bold text-sm text-foreground">Sohbetler</span>
+                <span className="font-bold text-sm text-foreground">{localizeText("Sohbetler")}</span>
                 <button
                   onClick={onCloseMobile}
                   className="rounded-lg p-1 text-muted-foreground hover:text-foreground"
@@ -222,7 +220,7 @@ export function AssistantChatSidebar({
                   <X className="h-4 w-4" />
                 </button>
               </div>
-              <div className="h-[calc(100%-53px)]">{content}</div>
+              <div className="h-[calc(100%-53px)]">{localizeText(content)}</div>
             </motion.div>
           </>
         )}

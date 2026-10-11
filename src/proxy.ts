@@ -25,8 +25,30 @@ export async function proxy(request: NextRequest) {
     !supabaseAnonKey ||
     !isValidHttpUrl(supabaseUrl) ||
     supabaseUrl.includes('your-project') ||
-    supabaseUrl.includes('your_supabase_project_url')
+    supabaseUrl.includes('your_supabase_project_url') ||
+    supabaseUrl.includes('placeholder')
   ) {
+    const localSession = request.cookies.get('lifeos_session')?.value;
+    const { pathname } = request.nextUrl;
+    const protectedPaths = ['/home', '/library', '/profile', '/settings'];
+    const isProtectedPath = protectedPaths.some(
+      (path) => pathname === path || pathname.startsWith(path + '/')
+    );
+    const authPaths = ['/login', '/register'];
+    const isAuthPath = authPaths.some((path) => pathname.startsWith(path));
+
+    if (!localSession && isProtectedPath) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/login';
+      return NextResponse.redirect(url);
+    }
+
+    if (localSession && isAuthPath) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/home';
+      return NextResponse.redirect(url);
+    }
+
     return supabaseResponse;
   }
 
@@ -58,6 +80,9 @@ export async function proxy(request: NextRequest) {
       data: { user },
     } = await supabase.auth.getUser();
 
+    const localSession = request.cookies.get('lifeos_session')?.value;
+    const hasSession = !!user || Boolean(localSession);
+
     const { pathname } = request.nextUrl;
 
     // Protected routes
@@ -70,13 +95,13 @@ export async function proxy(request: NextRequest) {
     const authPaths = ['/login', '/register'];
     const isAuthPath = authPaths.some((path) => pathname.startsWith(path));
 
-    if (!user && isProtectedPath) {
+    if (!hasSession && isProtectedPath) {
       const url = request.nextUrl.clone();
       url.pathname = '/login';
       return NextResponse.redirect(url);
     }
 
-    if (user && isAuthPath) {
+    if (hasSession && isAuthPath) {
       const url = request.nextUrl.clone();
       url.pathname = '/home';
       return NextResponse.redirect(url);

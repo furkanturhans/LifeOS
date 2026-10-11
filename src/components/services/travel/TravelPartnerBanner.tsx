@@ -6,12 +6,14 @@ import { Building2, ChevronRight, Sparkles, ShieldCheck } from 'lucide-react';
 import { useTravelPartnerStore } from '@/stores/useTravelPartnerStore';
 import { TravelPartnerApplicationModal } from './partner/TravelPartnerApplicationModal';
 import { Badge } from '@/components/ui/Badge';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface TravelPartnerBannerProps {
   onOpenPartner?: () => void;
 }
 
 export function TravelPartnerBanner({ onOpenPartner }: TravelPartnerBannerProps) {
+  const localizeText = useLocaleRender();
   const { status, partnerProfile } = useTravelPartnerStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -44,27 +46,25 @@ export function TravelPartnerBanner({ onOpenPartner }: TravelPartnerBannerProps)
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-blue-600 dark:text-blue-400">
-                    Otobüs Firması & Acenteler
-                  </span>
+                  <span className="text-xs font-bold text-blue-600 dark:text-blue-400">{localizeText("Otobüs Firması & Acenteler")}</span>
                   <Badge
                     variant={isVerified ? 'success' : isApplicant ? 'secondary' : 'outline'}
                     className="text-[9px] py-0 px-1.5"
                   >
-                    {isVerified
+                    {localizeText(isVerified
                       ? '✓ İş Ortağı Onaylı'
                       : isApplicant
                       ? 'Başvuru İnceleniyor'
-                      : 'Firma Girişi'}
+                      : 'Firma Girişi')}
                   </Badge>
                 </div>
                 <h4 className="text-sm font-bold text-foreground">
-                  {isVerified ? `${partnerProfile?.companyName} Firma Paneli` : 'Seyahat İş Ortağımız Olun'}
+                  {localizeText(isVerified ? `${partnerProfile?.companyName} Firma Paneli` : 'Seyahat İş Ortağımız Olun')}
                 </h4>
                 <p className="text-[11px] text-muted-foreground line-clamp-1">
-                  {isVerified
+                  {localizeText(isVerified
                     ? 'Araçlarınızı, rotalarınızı ve sefer taslaklarınızı yönetin.'
-                    : 'D2/B2 yetki belgeli otobüs seferlerinizi LifeOS seyahat merkezine bağlayın.'}
+                    : 'D2/B2 yetki belgeli otobüs seferlerinizi LifeOS seyahat merkezine bağlayın.')}
                 </p>
               </div>
             </div>

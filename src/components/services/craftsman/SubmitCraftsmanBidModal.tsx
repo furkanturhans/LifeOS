@@ -25,6 +25,7 @@ import {
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Badge } from '@/components/ui/Badge';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface SubmitCraftsmanBidModalProps {
   isOpen: boolean;
@@ -37,6 +38,7 @@ export function SubmitCraftsmanBidModal({
   onClose,
   request,
 }: SubmitCraftsmanBidModalProps) {
+  const localizeText = useLocaleRender();
   const { config, submitBid, getExistingBidForRequest } = useCraftsmanStore();
   const { isVerifiedFor } = useProviderAuthStore();
 
@@ -150,43 +152,41 @@ export function SubmitCraftsmanBidModal({
             {/* Header */}
             <div className="mb-4">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-semibold text-purple-500">
-                  Talep #{request.id}
+                <span className="font-mono text-xs font-semibold text-purple-500">{localizeText("Talep #")}{localizeText(request.id)}
                 </span>
                 <Badge variant="secondary" className="text-[10px] py-0 px-2">
-                  {existingBid ? 'Teklifiniz Kayıtlı' : 'Açık Usta Talebi'}
+                  {localizeText(existingBid ? 'Teklifiniz Kayıtlı' : 'Açık Usta Talebi')}
                 </Badge>
               </div>
               <h3 className="text-xl font-bold text-foreground mt-1">
-                {existingBid ? 'Ustalık Teklifini Güncelle' : 'Fiyat ve Süre Teklifi İlet'}
+                {localizeText(existingBid ? 'Ustalık Teklifini Güncelle' : 'Fiyat ve Süre Teklifi İlet')}
               </h3>
             </div>
 
             {/* Anonymous Request Details */}
             <div className="mb-5 rounded-2xl border border-border/80 bg-muted/30 p-4 space-y-2.5 text-xs">
               <div className="flex items-center gap-2 text-foreground font-semibold text-sm">
-                <span className="text-base">{categoryConfig?.iconEmoji || '🛠️'}</span>
-                <span>{categoryConfig?.labelTr || 'Ustalık Hizmeti'}</span>
+                <span className="text-base">{localizeText(categoryConfig?.iconEmoji || '🛠️')}</span>
+                <span>{localizeText(categoryConfig?.labelTr || 'Ustalık Hizmeti')}</span>
               </div>
 
               <div className="bg-card/60 p-3 rounded-xl border border-border/40 text-foreground leading-relaxed">
-                "{request.problemDescription}"
+                "{localizeText(request.problemDescription)}"
               </div>
 
               <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-[11px] pt-1">
                 <span className="flex items-center gap-1">
                   <MapPin className="h-3.5 w-3.5 text-purple-500" />
-                  {request.location}
+                  {localizeText(request.location)}
                 </span>
                 <span className="flex items-center gap-1">
                   <Calendar className="h-3.5 w-3.5 text-purple-500" />
-                  {request.preferredDateTime}
+                  {localizeText(request.preferredDateTime)}
                 </span>
               </div>
 
               {request.notes && (
-                <div className="text-[11px] text-muted-foreground pt-1 border-t border-border/30">
-                  Müşteri Notu: {request.notes}
+                <div className="text-[11px] text-muted-foreground pt-1 border-t border-border/30">{localizeText("Müşteri Notu: ")}{localizeText(request.notes)}
                 </div>
               )}
             </div>
@@ -196,10 +196,8 @@ export function SubmitCraftsmanBidModal({
               <div className="mb-4 rounded-2xl border border-destructive/30 bg-destructive/10 p-4 text-xs text-destructive flex items-start gap-2.5">
                 <Lock className="h-4 w-4 flex-shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-bold">Kendi Talebinize Teklif Veremezsiniz</div>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground">
-                    Bu usta talebini siz oluşturdunuz. Kendi taleplerinize teklif iletemezsiniz.
-                  </p>
+                  <div className="font-bold">{localizeText("Kendi Talebinize Teklif Veremezsiniz")}</div>
+                  <p className="mt-0.5 text-[11px] text-muted-foreground">{localizeText("Bu usta talebini siz oluşturdunuz. Kendi taleplerinize teklif iletemezsiniz.")}</p>
                 </div>
               </div>
             )}
@@ -208,12 +206,8 @@ export function SubmitCraftsmanBidModal({
             {isSuccess ? (
               <div className="rounded-2xl bg-emerald-500/15 border border-emerald-500/30 p-6 text-center">
                 <CheckCircle2 className="mx-auto mb-2 h-10 w-10 text-emerald-500" />
-                <h4 className="text-base font-bold text-foreground">
-                  Teklif Başarıyla İletildi!
-                </h4>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Müşteri teklifinizi onayladığında eşleşme tamamlanacaktır.
-                </p>
+                <h4 className="text-base font-bold text-foreground">{localizeText("Teklif Başarıyla İletildi!")}</h4>
+                <p className="mt-1 text-xs text-muted-foreground">{localizeText("Müşteri teklifinizi onayladığında eşleşme tamamlanacaktır.")}</p>
               </div>
             ) : (
               /* Bid Form */
@@ -221,19 +215,17 @@ export function SubmitCraftsmanBidModal({
                 {validationError && (
                   <div className="flex items-center gap-2 rounded-2xl bg-destructive/15 border border-destructive/30 p-3 text-xs text-destructive">
                     <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                    <span>{validationError}</span>
+                    <span>{localizeText(validationError)}</span>
                   </div>
                 )}
 
                 {/* Price */}
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-foreground">
-                    Hizmet & İşçilik Teklifi (TL) *
-                  </label>
+                  <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Hizmet & İşçilik Teklifi (TL) *")}</label>
                   <div className="relative">
                     <input
                       type="number"
-                      placeholder="Örn: 850"
+                      placeholder={localizeText("Örn: 850")}
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
                       disabled={isSelfRequest}
@@ -241,15 +233,15 @@ export function SubmitCraftsmanBidModal({
                       required
                     />
                     <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-muted-foreground">
-                      {config.currency}
+                      {localizeText(config.currency)}
                     </span>
                   </div>
                 </div>
 
                 {/* Estimated Duration */}
                 <Input
-                  label="Tahmini Tamamlanma Süresi *"
-                  placeholder="Örn: 2-3 Saat / Aynı Gün / 1 Gün"
+                  label={localizeText("Tahmini Tamamlanma Süresi *")}
+                  placeholder={localizeText("Örn: 2-3 Saat / Aynı Gün / 1 Gün")}
                   value={estimatedDuration}
                   onChange={(e) => setEstimatedDuration(e.target.value)}
                   icon={<Timer className="h-4 w-4 text-muted-foreground" />}
@@ -259,13 +251,11 @@ export function SubmitCraftsmanBidModal({
 
                 {/* Description / Bid Note */}
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-foreground">
-                    Açıklama & Garanti / Kapsam Notu *
-                  </label>
+                  <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Açıklama & Garanti / Kapsam Notu *")}</label>
                   <textarea
                     value={bidNote}
                     onChange={(e) => setBidNote(e.target.value)}
-                    placeholder="Örn: Gerekli tüm profesyonel aletlerle geleceğim. Değişen parçalara 1 yıl işçilik garantisi verilir."
+                    placeholder={localizeText("Örn: Gerekli tüm profesyonel aletlerle geleceğim. Değişen parçalara 1 yıl işçilik garantisi verilir.")}
                     rows={3}
                     disabled={isSelfRequest}
                     className="w-full rounded-2xl border border-border bg-card p-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-purple-500 disabled:opacity-50"
@@ -278,15 +268,13 @@ export function SubmitCraftsmanBidModal({
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 font-semibold">
                       <Coins className="h-4 w-4 text-amber-500" />
-                      <span>Teklif Kredisi Bilgisi</span>
+                      <span>{localizeText("Teklif Kredisi Bilgisi")}</span>
                     </div>
                     <span className="font-bold text-amber-600 dark:text-amber-400">
-                      {config.bidCreditFee} {config.currency}
+                      {localizeText(config.bidCreditFee)} {localizeText(config.currency)}
                     </span>
                   </div>
-                  <p className="mt-1.5 text-xs font-medium text-foreground leading-relaxed">
-                    Bu teklif için <strong>{config.bidCreditFee} {config.currency}</strong> teklif kredisi kullanılır.
-                  </p>
+                  <p className="mt-1.5 text-xs font-medium text-foreground leading-relaxed">{localizeText("Bu teklif için")}<strong>{localizeText(config.bidCreditFee)} {localizeText(config.currency)}</strong>{localizeText("teklif kredisi kullanılır.")}</p>
                 </div>
 
                 {/* Submit */}
@@ -298,7 +286,7 @@ export function SubmitCraftsmanBidModal({
                     className="w-full rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 font-semibold text-white shadow-lg shadow-purple-500/25 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50"
                   >
                     <Sparkles className="mr-2 h-4 w-4" />
-                    {existingBid ? 'Teklifi Güncelle' : 'Teklif Ver'}
+                    {localizeText(existingBid ? 'Teklifi Güncelle' : 'Teklif Ver')}
                   </Button>
                 </div>
               </form>

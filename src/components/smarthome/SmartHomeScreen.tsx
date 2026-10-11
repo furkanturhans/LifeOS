@@ -32,8 +32,10 @@ import { AddDeviceModal } from './AddDeviceModal';
 import { SecurityConfirmModal } from './SecurityConfirmModal';
 import type { SmartDevice, SmartHomeRole } from '@/types/smarthome';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function SmartHomeScreen() {
+  const localizeText = useLocaleRender();
   const {
     home,
     overview,
@@ -88,7 +90,7 @@ export function SmartHomeScreen() {
   };
 
   const handleRemoveDevice = async (device: SmartDevice) => {
-    if (confirm(`"${device.name}" cihazını LifeOS'tan kaldırmak istediğinize emin misiniz?`)) {
+    if (confirm(localizeText(`"${device.name}" cihazını LifeOS'tan kaldırmak istediğinize emin misiniz?`))) {
       const res = await removeDevice(device.id);
       if (res.success) {
         showNotification(res.message);
@@ -128,7 +130,7 @@ export function SmartHomeScreen() {
               : 'bg-emerald-600/90 text-white border-emerald-400'
           }`}
         >
-          {actionAlert.message}
+          {localizeText(actionAlert.message)}
         </div>
       )}
 
@@ -143,16 +145,15 @@ export function SmartHomeScreen() {
 
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="font-black text-base text-foreground">Akıllı Evim</h1>
+                <h1 className="font-black text-base text-foreground">{localizeText("Akıllı Evim")}</h1>
                 {hasDevices && (
                   <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600 border border-emerald-500/30">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    {devices.length} Cihaz Bağlı
-                  </span>
+                    {localizeText(devices.length)}{localizeText(" Cihaz Bağlı")}</span>
                 )}
               </div>
               <p className="text-[11px] text-muted-foreground">
-                {hasDevices ? 'Fiziksel bağlı cihaz kontrol merkezi' : 'Fiziksel cihaz eşleştirme merkezi'}
+                {localizeText(hasDevices ? 'Fiziksel bağlı cihaz kontrol merkezi' : 'Fiziksel cihaz eşleştirme merkezi')}
               </p>
             </div>
           </div>
@@ -165,7 +166,7 @@ export function SmartHomeScreen() {
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-primary text-primary-foreground text-xs font-bold shadow-xs hover:opacity-95 active:scale-95 transition-all"
             >
               <Plus className="h-4 w-4" />
-              <span>Cihaz Ekle</span>
+              <span>{localizeText("Cihaz Ekle")}</span>
             </button>
 
             {/* Role Switcher */}
@@ -174,13 +175,13 @@ export function SmartHomeScreen() {
               <select
                 value={currentRole}
                 onChange={(e) => setCurrentRole(e.target.value as SmartHomeRole)}
-                aria-label="Kullanıcı rolü"
+                aria-label={localizeText("Kullanıcı rolü")}
                 className="bg-transparent text-[11px] font-bold text-foreground cursor-pointer focus:outline-none pr-1"
               >
-                <option value="home_owner" className="bg-card">Ev Sahibi</option>
-                <option value="family_member" className="bg-card">Aile Üyesi</option>
-                <option value="guest" className="bg-card">Misafir</option>
-                <option value="child" className="bg-card">Çocuk</option>
+                <option value="home_owner" className="bg-card">{localizeText("Ev Sahibi")}</option>
+                <option value="family_member" className="bg-card">{localizeText("Aile Üyesi")}</option>
+                <option value="guest" className="bg-card">{localizeText("Misafir")}</option>
+                <option value="child" className="bg-card">{localizeText("Çocuk")}</option>
               </select>
             </div>
           </div>
@@ -201,19 +202,15 @@ export function SmartHomeScreen() {
               </div>
             </div>
 
-            <h2 className="text-lg font-black tracking-tight text-foreground sm:text-xl">
-              Henüz bağlı bir akıllı ev cihazın yok.
-            </h2>
-            <p className="mt-2 text-xs text-muted-foreground max-w-md leading-relaxed sm:text-sm">
-              Fiziksel olarak sahip olduğun cihazları <strong>Matter</strong>, <strong>Home Assistant</strong> veya <strong>desteklenen resmi marka hesabı</strong> ile eşleştirerek bağlayabilirsin.
-            </p>
+            <h2 className="text-lg font-black tracking-tight text-foreground sm:text-xl">{localizeText("Henüz bağlı bir akıllı ev cihazın yok.")}</h2>
+            <p className="mt-2 text-xs text-muted-foreground max-w-md leading-relaxed sm:text-sm">{localizeText("Fiziksel olarak sahip olduğun cihazları")}<strong>{localizeText("Matter")}</strong>, <strong>{localizeText("Home Assistant")}</strong>{localizeText("veya")}<strong>{localizeText("desteklenen resmi marka hesabı")}</strong>{localizeText("ile eşleştirerek bağlayabilirsin.")}</p>
 
             <button
               onClick={() => setIsAddDeviceModalOpen(true)}
               className="mt-6 flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary text-primary-foreground text-sm font-bold shadow-md shadow-primary/20 hover:opacity-95 active:scale-98 transition-all"
             >
               <Plus className="h-4.5 w-4.5" />
-              <span>Cihaz Ekle</span>
+              <span>{localizeText("Cihaz Ekle")}</span>
             </button>
 
             {/* Quick Helper Cards */}
@@ -223,10 +220,8 @@ export function SmartHomeScreen() {
                 className="cursor-pointer rounded-2xl border border-border bg-card p-4 hover:border-primary/40 hover:bg-muted/30 transition-all"
               >
                 <QrCode className="h-5 w-5 text-emerald-500 mb-2" />
-                <h3 className="text-xs font-bold text-foreground">Matter QR Eşleştirme</h3>
-                <p className="text-[11px] text-muted-foreground mt-1">
-                  Kutudaki veya cihazdaki resmi Matter kodunu tarayın.
-                </p>
+                <h3 className="text-xs font-bold text-foreground">{localizeText("Matter QR Eşleştirme")}</h3>
+                <p className="text-[11px] text-muted-foreground mt-1">{localizeText("Kutudaki veya cihazdaki resmi Matter kodunu tarayın.")}</p>
               </div>
 
               <div
@@ -234,10 +229,8 @@ export function SmartHomeScreen() {
                 className="cursor-pointer rounded-2xl border border-border bg-card p-4 hover:border-primary/40 hover:bg-muted/30 transition-all"
               >
                 <Home className="h-5 w-5 text-sky-500 mb-2" />
-                <h3 className="text-xs font-bold text-foreground">Home Assistant Köprüsü</h3>
-                <p className="text-[11px] text-muted-foreground mt-1">
-                  Mevcut Home Assistant varlıklarınızı seçerek içe aktarın.
-                </p>
+                <h3 className="text-xs font-bold text-foreground">{localizeText("Home Assistant Köprüsü")}</h3>
+                <p className="text-[11px] text-muted-foreground mt-1">{localizeText("Mevcut Home Assistant varlıklarınızı seçerek içe aktarın.")}</p>
               </div>
 
               <div
@@ -245,10 +238,8 @@ export function SmartHomeScreen() {
                 className="cursor-pointer rounded-2xl border border-border bg-card p-4 hover:border-primary/40 hover:bg-muted/30 transition-all"
               >
                 <Globe className="h-5 w-5 text-purple-500 mb-2" />
-                <h3 className="text-xs font-bold text-foreground">Resmi Marka Hesapları</h3>
-                <p className="text-[11px] text-muted-foreground mt-1">
-                  Philips Hue, Tuya, Shelly veya Netatmo OAuth hesabı bağlayın.
-                </p>
+                <h3 className="text-xs font-bold text-foreground">{localizeText("Resmi Marka Hesapları")}</h3>
+                <p className="text-[11px] text-muted-foreground mt-1">{localizeText("Philips Hue, Tuya, Shelly veya Netatmo OAuth hesabı bağlayın.")}</p>
               </div>
             </div>
           </div>
@@ -262,10 +253,9 @@ export function SmartHomeScreen() {
                   <Lightbulb className="h-4.5 w-4.5" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-muted-foreground block">Açık Işıklar</span>
+                  <span className="text-[10px] text-muted-foreground block">{localizeText("Açık Işıklar")}</span>
                   <span className="text-sm font-bold text-foreground">
-                    {overview?.activeLights || 0} Lamba
-                  </span>
+                    {localizeText(overview?.activeLights || 0)}{localizeText(" Lamba")}</span>
                 </div>
               </div>
 
@@ -274,10 +264,9 @@ export function SmartHomeScreen() {
                   <Power className="h-4.5 w-4.5" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-muted-foreground block">Aktif Prizler</span>
+                  <span className="text-[10px] text-muted-foreground block">{localizeText("Aktif Prizler")}</span>
                   <span className="text-sm font-bold text-foreground">
-                    {overview?.activeSwitches || 0} Priz
-                  </span>
+                    {localizeText(overview?.activeSwitches || 0)}{localizeText(" Priz")}</span>
                 </div>
               </div>
 
@@ -286,9 +275,9 @@ export function SmartHomeScreen() {
                   <DoorOpen className="h-4.5 w-4.5" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-muted-foreground block">Kapı / Pencere</span>
+                  <span className="text-[10px] text-muted-foreground block">{localizeText("Kapı / Pencere")}</span>
                   <span className="text-sm font-bold text-foreground">
-                    {overview?.openDoorsWindows ? `${overview.openDoorsWindows} Açık` : 'Tümü Kapalı'}
+                    {localizeText(overview?.openDoorsWindows ? `${overview.openDoorsWindows} Açık` : 'Tümü Kapalı')}
                   </span>
                 </div>
               </div>
@@ -298,10 +287,9 @@ export function SmartHomeScreen() {
                   <Layers className="h-4.5 w-4.5" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-muted-foreground block">Toplam Cihaz</span>
+                  <span className="text-[10px] text-muted-foreground block">{localizeText("Toplam Cihaz")}</span>
                   <span className="text-sm font-bold text-foreground">
-                    {devices.length} Cihaz
-                  </span>
+                    {localizeText(devices.length)}{localizeText(" Cihaz")}</span>
                 </div>
               </div>
             </div>
@@ -316,8 +304,7 @@ export function SmartHomeScreen() {
                       ? 'bg-primary text-primary-foreground shadow-xs'
                       : 'bg-muted text-muted-foreground hover:bg-muted/80'
                   }`}
-                >
-                  Tüm Cihazlar ({devices.length})
+                >{localizeText("Tüm Cihazlar (")}{localizeText(devices.length)})
                 </button>
 
                 {rooms.map((room) => (
@@ -330,8 +317,8 @@ export function SmartHomeScreen() {
                         : 'bg-muted text-muted-foreground hover:bg-muted/80'
                     }`}
                   >
-                    <span>{room.name}</span>
-                    <span className="text-[10px] opacity-75">({room.deviceCount})</span>
+                    <span>{localizeText(room.name)}</span>
+                    <span className="text-[10px] opacity-75">({localizeText(room.deviceCount)})</span>
                   </button>
                 ))}
 
@@ -341,7 +328,7 @@ export function SmartHomeScreen() {
                   className="flex items-center gap-1 px-3 py-1.5 rounded-xl border border-dashed border-border hover:border-primary/50 text-xs font-semibold text-muted-foreground hover:text-foreground transition-all"
                 >
                   <FolderPlus className="h-3.5 w-3.5" />
-                  <span>+ Oda Oluştur</span>
+                  <span>{localizeText("+ Oda Oluştur")}</span>
                 </button>
               </div>
             </div>
@@ -381,15 +368,15 @@ export function SmartHomeScreen() {
       {isNewRoomModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md">
           <div className="w-full max-w-sm rounded-3xl border border-border bg-card p-6 shadow-2xl">
-            <h3 className="text-sm font-bold text-foreground mb-1">Yeni Oda Oluştur</h3>
-            <p className="text-xs text-muted-foreground mb-4">Cihazlarınızı düzenlemek için bir oda adı belirleyin.</p>
+            <h3 className="text-sm font-bold text-foreground mb-1">{localizeText("Yeni Oda Oluştur")}</h3>
+            <p className="text-xs text-muted-foreground mb-4">{localizeText("Cihazlarınızı düzenlemek için bir oda adı belirleyin.")}</p>
 
             <form onSubmit={handleCreateRoom} className="space-y-4">
               <input
                 type="text"
                 value={newRoomName}
                 onChange={(e) => setNewRoomName(e.target.value)}
-                placeholder="Örn: Çalışma Odası, Balkon, Garaj"
+                placeholder={localizeText("Örn: Çalışma Odası, Balkon, Garaj")}
                 className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
                 autoFocus
                 required
@@ -400,15 +387,11 @@ export function SmartHomeScreen() {
                   type="button"
                   onClick={() => setIsNewRoomModalOpen(false)}
                   className="px-3.5 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:bg-muted"
-                >
-                  İptal
-                </button>
+                >{localizeText("İptal")}</button>
                 <button
                   type="submit"
                   className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-bold shadow-xs hover:opacity-95"
-                >
-                  Oluştur
-                </button>
+                >{localizeText("Oluştur")}</button>
               </div>
             </form>
           </div>

@@ -21,6 +21,7 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { useArcadeStore } from '@/stores/useArcadeStore';
 import type { MiniGameId, LeaderboardEntry } from '@/types/arcade';
 import { cn } from '@/lib/utils';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 interface LeaderboardViewProps {
   onBackToArcade: () => void;
@@ -30,6 +31,8 @@ type Period = 'all_time' | 'weekly';
 type GameFilter = 'all' | MiniGameId;
 
 export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
+  const localizeText = useLocaleRender();
+  const dateLocale = getFormattingLocale();
   const {
     gameSessions,
     scores,
@@ -78,13 +81,13 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
         gameId: (gameFilter === 'all' ? 'all' : gameFilter) as any,
         score: topScore.score,
         rank: 1,
-        date: new Date(topScore.completedAt).toLocaleDateString('tr-TR'),
+        date: new Date(topScore.completedAt).toLocaleDateString(dateLocale),
         isCurrentUser: true,
       },
     ];
 
     return entries;
-  }, [gameSessions, period, gameFilter, userNickname]);
+  }, [gameSessions, period, gameFilter, userNickname, dateLocale]);
 
   function handleSaveNickname() {
     const clean = tempNickname.trim() || 'Oyuncu';
@@ -101,7 +104,7 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
             type="button"
             onClick={onBackToArcade}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Arcade'e Dön"
+            aria-label={localizeText("Arcade'e Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -112,14 +115,10 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Liderlik Tablosu
-              </h1>
-              <StatusBadge status="verified" label="Doğrulanmış Skorlar" size="sm" />
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Liderlik Tablosu")}</h1>
+              <StatusBadge status="verified" label={localizeText("Doğrulanmış Skorlar")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Rekorlar ve sıralama
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Rekorlar ve sıralama")}</p>
           </div>
         </div>
 
@@ -130,7 +129,7 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
             setIsEditNicknameOpen(true);
           }}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-card border border-border hover:bg-muted text-xs font-semibold text-foreground transition-colors shadow-2xs"
-          title="Oyuncu Takma Adını Değiştir"
+          title={localizeText("Oyuncu Takma Adını Değiştir")}
         >
           <User className="h-3.5 w-3.5 text-primary" />
           <span className="max-w-[80px] truncate">{userNickname}</span>
@@ -151,9 +150,7 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
                   ? 'bg-primary text-primary-foreground shadow-xs'
                   : 'text-muted-foreground hover:text-foreground'
               )}
-            >
-              Tüm Zamanlar
-            </button>
+            >{localizeText("Tüm Zamanlar")}</button>
             <button
               onClick={() => setPeriod('weekly')}
               className={cn(
@@ -162,14 +159,12 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
                   ? 'bg-primary text-primary-foreground shadow-xs'
                   : 'text-muted-foreground hover:text-foreground'
               )}
-            >
-              Bu Hafta
-            </button>
+            >{localizeText("Bu Hafta")}</button>
           </div>
 
           <div className="text-[11px] text-muted-foreground flex items-center gap-1 font-medium">
             <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-            <span>Kişisel Veri Gizli</span>
+            <span>{localizeText("Kişisel Veri Gizli")}</span>
           </div>
         </div>
 
@@ -198,7 +193,7 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
                   : 'text-muted-foreground hover:text-foreground'
               )}
             >
-              {gf.label}
+              {localizeText(gf.label)}
             </button>
           ))}
         </div>
@@ -209,8 +204,8 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
         {leaderboardEntries.length > 0 ? (
           <div className="space-y-2">
             <div className="px-1 flex items-center justify-between text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              <span>Sıra & Oyuncu</span>
-              <span>Skor</span>
+              <span>{localizeText("Sıra & Oyuncu")}</span>
+              <span>{localizeText("Skor")}</span>
             </div>
 
             {leaderboardEntries.map((entry, index) => (
@@ -242,7 +237,7 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
                           : 'bg-muted text-muted-foreground'
                       )}
                     >
-                      {entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : `#${entry.rank}`}
+                      {localizeText(entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : `#${entry.rank}`)}
                     </div>
 
                     <div className="min-w-0">
@@ -251,24 +246,19 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
                           {entry.displayName}
                         </span>
                         {entry.isCurrentUser && (
-                          <span className="text-[10px] font-extrabold text-primary bg-primary/10 px-1.5 py-0.5 rounded">
-                            Sen
-                          </span>
+                          <span className="text-[10px] font-extrabold text-primary bg-primary/10 px-1.5 py-0.5 rounded">{localizeText("Sen")}</span>
                         )}
                       </div>
-                      <span className="text-[11px] text-muted-foreground block">
-                        Kayıt: {entry.date}
+                      <span className="text-[11px] text-muted-foreground block">{localizeText("Kayıt: ")}{localizeText(entry.date)}
                       </span>
                     </div>
                   </div>
 
                   <div className="text-right shrink-0">
                     <span className="text-base font-extrabold text-primary block">
-                      {entry.score}
+                      {localizeText(entry.score)}
                     </span>
-                    <span className="text-[10px] uppercase font-bold text-muted-foreground">
-                      Puan
-                    </span>
+                    <span className="text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Puan")}</span>
                   </div>
                 </Card>
               </motion.div>
@@ -280,12 +270,8 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
             <div className="flex h-16 w-16 mx-auto items-center justify-center rounded-3xl border border-border bg-muted/40 text-3xl shadow-xs">
               🎯
             </div>
-            <h3 className="mt-4 text-base font-bold text-foreground">
-              Henüz Kayıtlı Skor Yok
-            </h3>
-            <p className="mt-1.5 text-xs text-muted-foreground max-w-sm mx-auto leading-relaxed">
-              Bu filtrede henüz tamamlanmış bir oyun kaydı bulunmuyor. Mini oyunları oynayarak liderlik tablosunda yerinizi alın!
-            </p>
+            <h3 className="mt-4 text-base font-bold text-foreground">{localizeText("Henüz Kayıtlı Skor Yok")}</h3>
+            <p className="mt-1.5 text-xs text-muted-foreground max-w-sm mx-auto leading-relaxed">{localizeText("Bu filtrede henüz tamamlanmış bir oyun kaydı bulunmuyor. Mini oyunları oynayarak liderlik tablosunda yerinizi alın!")}</p>
 
             <div className="mt-6">
               <Button
@@ -294,9 +280,7 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
                 onClick={() => setActiveSection('mini_games')}
                 className="font-bold text-xs h-10 px-5 shadow-xs"
               >
-                <Gamepad2 className="h-4 w-4 mr-1.5" />
-                Mini Oyun Oyna
-              </Button>
+                <Gamepad2 className="h-4 w-4 mr-1.5" />{localizeText("Mini Oyun Oyna")}</Button>
             </div>
           </div>
         )}
@@ -306,26 +290,22 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
       <Modal
         isOpen={isEditNicknameOpen}
         onClose={() => setIsEditNicknameOpen(false)}
-        title="Oyuncu Takma Adı"
-        description="Liderlik tablosunda ve oyunlarda görünecek takma adınızı belirleyin."
+        title={localizeText("Oyuncu Takma Adı")}
+        description={localizeText("Liderlik tablosunda ve oyunlarda görünecek takma adınızı belirleyin.")}
         size="sm"
       >
         <div className="space-y-4 pt-2">
           <div>
-            <label className="block text-xs font-semibold text-foreground mb-1.5">
-              Takma Adınız
-            </label>
+            <label className="block text-xs font-semibold text-foreground mb-1.5">{localizeText("Takma Adınız")}</label>
             <input
               type="text"
               maxLength={20}
               value={tempNickname}
               onChange={(e) => setTempNickname(e.target.value)}
-              placeholder="Örn: Kaplan99"
+              placeholder={localizeText("Örn: Kaplan99")}
               className="w-full h-10 rounded-xl border border-border bg-background px-3 text-sm font-semibold text-foreground focus:border-primary focus:outline-none"
             />
-            <p className="mt-1 text-[11px] text-muted-foreground">
-              Gizliliğiniz için gerçek ad veya hassas bilgi yazmayınız.
-            </p>
+            <p className="mt-1 text-[11px] text-muted-foreground">{localizeText("Gizliliğiniz için gerçek ad veya hassas bilgi yazmayınız.")}</p>
           </div>
 
           <div className="flex items-center gap-2 pt-2">
@@ -333,16 +313,12 @@ export function LeaderboardView({ onBackToArcade }: LeaderboardViewProps) {
               variant="outline"
               onClick={() => setIsEditNicknameOpen(false)}
               className="flex-1 text-xs font-semibold"
-            >
-              Vazgeç
-            </Button>
+            >{localizeText("Vazgeç")}</Button>
             <Button
               variant="primary"
               onClick={handleSaveNickname}
               className="flex-1 text-xs font-bold"
-            >
-              Kaydet
-            </Button>
+            >{localizeText("Kaydet")}</Button>
           </div>
         </div>
       </Modal>

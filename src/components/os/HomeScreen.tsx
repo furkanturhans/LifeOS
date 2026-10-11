@@ -1,5 +1,11 @@
 'use client';
 
+import { FrequentModules } from './FrequentModules';
+
+import Link from 'next/link';
+import { LayoutGrid } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n';
+import { useHomescreenStore } from '@/stores/useHomescreenStore';
 import { motion } from 'framer-motion';
 import { StatusBar } from './StatusBar';
 import { SearchBar } from './SearchBar';
@@ -7,10 +13,16 @@ import { AppGrid } from './AppGrid';
 import { Dock } from './Dock';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useThemeStore } from '@/stores/useThemeStore';
+import { useEffect, useRef } from 'react';
 
 export function HomeScreen() {
+
+  const { t } = useTranslation();
+  const { isEditMode, setEditMode } = useHomescreenStore();
   const { user } = useAuthStore();
   const { backgroundType, backgroundValue } = useThemeStore();
+  const press = useRef<{ x: number; y: number; held: boolean; moved: boolean; timer?: ReturnType<typeof setTimeout> } | null>(null);
+  useEffect(() => () => { clearTimeout(press.current?.timer); }, []);
 
   const isColor = backgroundType === 'color' && backgroundValue;
   const isImage = backgroundType === 'image' && backgroundValue;
@@ -21,6 +33,35 @@ export function HomeScreen() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
       className="relative flex h-full flex-col overflow-hidden transition-colors duration-200"
+      onPointerDown={event => {
+        if (event.button !== 0 || (event.target as HTMLElement).closest('button, a, input, select, textarea, [data-widget]')) return;
+        clearTimeout(press.current?.timer);
+        const current = { x: event.clientX, y: event.clientY, held: false, moved: false, timer: undefined as ReturnType<typeof setTimeout> | undefined };
+        press.current = current;
+        current.timer = setTimeout(() => { current.held = true; setEditMode(true); }, 500);
+      }}
+      onPointerMove={event => {
+        const current = press.current;
+        if (current && Math.hypot(event.clientX - current.x, event.clientY - current.y) > 8) {
+          current.moved = true; clearTimeout(current.timer);
+        }
+      }}
+      onPointerUp={() => {
+        const current = press.current;
+        clearTimeout(current?.timer);
+        if (current && !current.held && !current.moved) setEditMode(false);
+        press.current = null;
+      }}
+      onPointerCancel={() => { clearTimeout(press.current?.timer); press.current = null; }}
+      onContextMenu={event => event.preventDefault()}
+      onKeyDown={event => {
+        if (event.key === 'Escape') setEditMode(false);
+        if (event.target === event.currentTarget && (event.key === 'Enter' || event.key === ' ')) {
+          event.preventDefault(); setEditMode(!isEditMode);
+        }
+      }}
+      tabIndex={0}
+      aria-label={t.common.edit}
       style={{
         backgroundColor: isColor ? backgroundValue : undefined,
         background: isColor
@@ -45,7 +86,7 @@ export function HomeScreen() {
       )}
 
       {/* Scrollable content area */}
-      <div className="flex-1 overflow-y-auto overflow-x-hidden pb-32 scroll-smooth">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden pb-32 scroll-smooth w-full max-w-5xl mx-auto sm:px-4">
         {/* Status Bar: Time, Date, Greeting, Notifications */}
         <StatusBar displayName={user?.displayName || (user?.lifeosId ? `@${user.lifeosId}` : undefined)} />
 
@@ -54,43 +95,10 @@ export function HomeScreen() {
           <SearchBar />
         </div>
 
-        {/* LifeOS Asistan Prominent Quick Entry Bar */}
-        <div className="px-4 mt-3">
-          <motion.div
-            whileTap={{ scale: 0.98 }}
-            className="group cursor-pointer rounded-2xl border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-colors p-3.5 flex items-center justify-between gap-3 shadow-2xs"
-            onClick={() => window.location.href = '/ai'}
-          >
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold shadow-xs">
-                🤖
-              </div>
-              <div className="min-w-0">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-bold text-foreground group-hover:text-primary transition-colors truncate">
-                    LifeOS Asistan
-                  </span>
-                  <span className="rounded-full bg-primary/20 px-1.5 py-0.2 text-[9px] font-bold text-primary">
-                    AI Agent
-                  </span>
-                </div>
-                <p className="text-[11px] text-muted-foreground truncate">
-                  Doğal dille görev verin, planlama ve video kurgu süreçlerini yönetin
-                </p>
-              </div>
-            </div>
-
-            <span className="text-xs font-semibold text-primary shrink-0 flex items-center gap-1">
-              <span>Aç</span>
-              <span>→</span>
-            </span>
-          </motion.div>
-        </div>
+        <FrequentModules />
 
         {/* Full Interactive Application Grid */}
-        <div className="mt-4">
-          <AppGrid pageIndex={0} />
-        </div>
+        <section className="mt-7"><AppGrid pageIndex={0} /></section>
 
         {/* Bottom spacer */}
         <div className="h-8" />
@@ -98,6 +106,12 @@ export function HomeScreen() {
 
       {/* Mobile Glass Dock */}
       <Dock />
+      {isEditMode && <div className="fixed bottom-5 inset-x-4 z-30 flex justify-center gap-2 safe-bottom">
+        <Link href="/library" onClick={() => setEditMode(false)} className="flex min-h-12 items-center gap-2 rounded-2xl border border-border bg-card px-5 text-sm font-medium shadow-lg">
+          <LayoutGrid className="h-5 w-5" />{t.library.title}
+        </Link>
+        <button type="button" onClick={() => setEditMode(false)} className="min-h-12 rounded-2xl bg-primary px-4 text-sm text-primary-foreground">{t.common.done}</button>
+      </div>}
     </motion.div>
   );
 }

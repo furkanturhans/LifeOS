@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { Truck, Car, Wrench, Bus, ShieldCheck, AlertTriangle } from 'lucide-react';
 import { useAdminStore } from '@/stores/useAdminStore';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function AdminProvidersView() {
+  const localizeText = useLocaleRender();
   const { users } = useAdminStore();
   const [selectedService, setSelectedService] = useState<'all' | 'moving' | 'taxi' | 'craftsman' | 'travel'>('all');
 
@@ -20,8 +22,8 @@ export function AdminProvidersView() {
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <h2 className="text-sm font-bold text-foreground">Hizmet Sağlayıcılar</h2>
-          <p className="text-xs text-muted-foreground">Taksi, Nakliye, Usta ve Seyahat için ayrı ayrı yetkilendirilen sağlayıcılar</p>
+          <h2 className="text-sm font-bold text-foreground">{localizeText("Hizmet Sağlayıcılar")}</h2>
+          <p className="text-xs text-muted-foreground">{localizeText("Taksi, Nakliye, Usta ve Seyahat için ayrı ayrı yetkilendirilen sağlayıcılar")}</p>
         </div>
 
         {/* Filter Pills */}
@@ -42,7 +44,7 @@ export function AdminProvidersView() {
                   : 'bg-card border border-border text-muted-foreground hover:text-foreground'
               }`}
             >
-              {item.label}
+              {localizeText(item.label)}
             </button>
           ))}
         </div>
@@ -58,18 +60,17 @@ export function AdminProvidersView() {
               <div>
                 <div className="flex items-center gap-2">
                   <h4 className="text-xs font-bold text-foreground">{p.displayName}</h4>
-                  <StatusBadge status="verified" label="Onaylı Sağlayıcı" size="sm" />
+                  <StatusBadge status="verified" label={localizeText("Onaylı Sağlayıcı")} size="sm" />
                 </div>
-                <p className="text-[11px] text-muted-foreground mt-0.5">
-                  ID: @{p.lifeosId} • E-posta: {p.maskedEmail}
+                <p className="text-[11px] text-muted-foreground mt-0.5">{localizeText("ID: @")}{localizeText(p.lifeosId)}{localizeText("• E-posta: ")}{localizeText(p.maskedEmail)}
                 </p>
                 <div className="mt-1.5 flex items-center gap-1.5 flex-wrap">
                   {p.roles.providerServices.map((srv) => (
                     <span key={srv} className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-muted text-foreground border border-border">
-                      {srv === 'moving' && '🚚 Nakliye'}
-                      {srv === 'taxi' && '🚕 Taksi'}
-                      {srv === 'craftsman' && '🛠️ Usta'}
-                      {srv === 'travel' && '🚌 Seyahat'}
+                      {localizeText(srv === 'moving' && '🚚 Nakliye')}
+                      {localizeText(srv === 'taxi' && '🚕 Taksi')}
+                      {localizeText(srv === 'craftsman' && '🛠️ Usta')}
+                      {localizeText(srv === 'travel' && '🚌 Seyahat')}
                     </span>
                   ))}
                 </div>
@@ -81,17 +82,13 @@ export function AdminProvidersView() {
                 variant="outline"
                 size="sm"
                 className="h-8 text-xs font-semibold text-destructive hover:bg-destructive/10 border-border"
-              >
-                Hizmeti Askıya Al
-              </Button>
+              >{localizeText("Hizmeti Askıya Al")}</Button>
             </div>
           </Card>
         ))}
 
         {providers.length === 0 && (
-          <div className="py-10 text-center text-xs text-muted-foreground border border-dashed border-border rounded-3xl">
-            Seçili kategoride onaylanmış hizmet sağlayıcı bulunmuyor.
-          </div>
+          <div className="py-10 text-center text-xs text-muted-foreground border border-dashed border-border rounded-3xl">{localizeText("Seçili kategoride onaylanmış hizmet sağlayıcı bulunmuyor.")}</div>
         )}
       </div>
     </div>

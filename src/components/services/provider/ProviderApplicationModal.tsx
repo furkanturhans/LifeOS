@@ -19,6 +19,7 @@ import {
 } from '@/types/providerAuth';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface ProviderApplicationModalProps {
   isOpen: boolean;
@@ -31,6 +32,7 @@ export function ProviderApplicationModal({
   onClose,
   serviceType = 'moving',
 }: ProviderApplicationModalProps) {
+  const localizeText = useLocaleRender();
   const { user } = useAuthStore();
   const { submitApplication } = useProviderAuthStore();
 
@@ -92,24 +94,20 @@ export function ProviderApplicationModal({
             {/* Header - Strictly Service Specific */}
             <div className="mb-4 text-center">
               <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-emerald-600 text-3xl shadow-lg shadow-emerald-500/20 text-white">
-                {config.iconEmoji}
+                {localizeText(config.iconEmoji)}
               </div>
               <h3 className="text-xl font-bold text-foreground">
-                {config.titleTr} Hizmet Veren Başvurusu
-              </h3>
+                {localizeText(config.titleTr)}{localizeText(" Hizmet Veren Başvurusu")}</h3>
               <p className="mt-1 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                {config.roleNameTr} Profili
-              </p>
+                {localizeText(config.roleNameTr)}{localizeText(" Profili")}</p>
               {/* Mandatory Policy Text */}
-              <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed px-2">
-                “Hizmet veren olarak teklif verebilmek için başvurunuzun onaylanması gerekir.”
-              </p>
+              <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed px-2">{localizeText("“Hizmet veren olarak teklif verebilmek için başvurunuzun onaylanması gerekir.”")}</p>
             </div>
 
             {error && (
               <div className="mb-4 flex items-center gap-2 rounded-2xl bg-destructive/15 border border-destructive/30 p-3 text-xs text-destructive">
                 <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                <span>{error}</span>
+                <span>{localizeText(error)}</span>
               </div>
             )}
 
@@ -117,15 +115,15 @@ export function ProviderApplicationModal({
               {/* Personal / Company Info */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <Input
-                  label="Ad Soyad / Yetkili *"
-                  placeholder="Adınız Soyadınız"
+                  label={localizeText("Ad Soyad / Yetkili *")}
+                  placeholder={localizeText("Adınız Soyadınız")}
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
                 />
                 <Input
-                  label="Ticari Unvan / Şirket"
-                  placeholder="Örn: Öz Hilal Taşımacılık Ltd."
+                  label={localizeText("Ticari Unvan / Şirket")}
+                  placeholder={localizeText("Örn: Öz Hilal Taşımacılık Ltd.")}
                   value={businessTitle}
                   onChange={(e) => setBusinessTitle(e.target.value)}
                   icon={<Building className="h-4 w-4 text-muted-foreground" />}
@@ -135,17 +133,17 @@ export function ProviderApplicationModal({
               {/* Service Specific Vehicle / Equipment / Certification Info */}
               <div>
                 <label className="mb-1 block text-xs font-medium text-foreground">
-                  {serviceType === 'moving'
+                  {localizeText(serviceType === 'moving'
                     ? 'Araç, Plaka & Yetki Belgesi Bilgisi'
                     : serviceType === 'taxi'
                     ? 'Ticari Plaka, Ruhsat & Taksi Bilgisi'
                     : serviceType === 'travel'
                     ? 'Otobüs/Minibüs Plaka & D2 Yetki Bilgisi'
-                    : 'Ustalık Belgesi & Mesleki Uzmanlık Alanı'}
+                    : 'Ustalık Belgesi & Mesleki Uzmanlık Alanı')}
                 </label>
                 <input
                   type="text"
-                  placeholder={config.vehicleOrEquipmentPlaceholder}
+                  placeholder={localizeText(config.vehicleOrEquipmentPlaceholder)}
                   value={vehicleOrEquipmentInfo}
                   onChange={(e) => setVehicleOrEquipmentInfo(e.target.value)}
                   className="w-full rounded-2xl border border-border bg-card p-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
@@ -154,13 +152,11 @@ export function ProviderApplicationModal({
 
               {/* Additional notes */}
               <div>
-                <label className="mb-1 block text-xs font-medium text-foreground">
-                  Ek Açıklama & Deneyim (Opsiyonel)
-                </label>
+                <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Ek Açıklama & Deneyim (Opsiyonel)")}</label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Hizmet tecrübeniz, ekip kapasiteniz veya belirtmek istediğiniz ek bilgiler..."
+                  placeholder={localizeText("Hizmet tecrübeniz, ekip kapasiteniz veya belirtmek istediğiniz ek bilgiler...")}
                   rows={2}
                   className="w-full rounded-2xl border border-border bg-card p-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
                 />
@@ -170,17 +166,17 @@ export function ProviderApplicationModal({
               <div className="rounded-2xl border border-border/80 bg-muted/30 p-3.5 text-xs space-y-2">
                 <div className="font-semibold text-foreground flex items-center gap-1.5">
                   <FileText className="h-4 w-4 text-emerald-500" />
-                  <span>{config.titleTr} İçin Gerekli Belge Standartları</span>
+                  <span>{localizeText(config.titleTr)}{localizeText(" İçin Gerekli Belge Standartları")}</span>
                 </div>
                 <div className="space-y-1.5">
                   {docs.map((doc, idx) => (
                     <div key={idx} className="flex items-start justify-between gap-2 text-[11px]">
                       <div>
-                        <span className="font-medium text-foreground">• {doc.titleTr}</span>
-                        <p className="text-[10px] text-muted-foreground ml-2.5">{doc.descriptionTr}</p>
+                        <span className="font-medium text-foreground">• {localizeText(doc.titleTr)}</span>
+                        <p className="text-[10px] text-muted-foreground ml-2.5">{localizeText(doc.descriptionTr)}</p>
                       </div>
                       <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">
-                        {doc.isMandatory ? 'Zorunlu' : 'Opsiyonel'}
+                        {localizeText(doc.isMandatory ? 'Zorunlu' : 'Opsiyonel')}
                       </span>
                     </div>
                   ))}
@@ -195,8 +191,7 @@ export function ProviderApplicationModal({
                   className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 font-semibold text-white shadow-lg shadow-emerald-500/25 hover:from-emerald-600 hover:to-teal-700"
                 >
                   <Sparkles className="mr-2 h-4 w-4" />
-                  {config.titleTr} Başvurusunu Gönder
-                </Button>
+                  {localizeText(config.titleTr)}{localizeText(" Başvurusunu Gönder")}</Button>
               </div>
             </form>
           </motion.div>

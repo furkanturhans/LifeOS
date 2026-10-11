@@ -26,6 +26,7 @@ import { KidsGameCreditsModal } from './KidsGameCreditsModal';
 import { useKidsGamesStore } from '@/stores/useKidsGamesStore';
 import type { KidsGameId } from '@/types/arcade';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 const KIDS_GAMES = [
   {
@@ -62,6 +63,7 @@ interface KidsGamesHubProps {
 }
 
 export function KidsGamesHub({ onBackToArcade }: KidsGamesHubProps) {
+  const localizeText = useLocaleRender();
   const { isMuted, toggleMute } = useKidsGamesStore();
   const [activeGameId, setActiveGameId] = useState<KidsGameId | null>(null);
   const [isCreditsOpen, setIsCreditsOpen] = useState(false);
@@ -88,7 +90,7 @@ export function KidsGamesHub({ onBackToArcade }: KidsGamesHubProps) {
             type="button"
             onClick={onBackToArcade}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Arcade'e Dön"
+            aria-label={localizeText("Arcade'e Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -99,14 +101,10 @@ export function KidsGamesHub({ onBackToArcade }: KidsGamesHubProps) {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Çocuk Oyunları
-              </h1>
-              <StatusBadge status="verified" label="Güvenli Alan" size="sm" />
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Çocuk Oyunları")}</h1>
+              <StatusBadge status="verified" label={localizeText("Güvenli Alan")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Reklamsız • Çevrimdışı • Eğitici Mini Oyunlar
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Reklamsız • Çevrimdışı • Eğitici Mini Oyunlar")}</p>
           </div>
         </div>
 
@@ -115,7 +113,7 @@ export function KidsGamesHub({ onBackToArcade }: KidsGamesHubProps) {
           <button
             onClick={toggleMute}
             className="h-8 w-8 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title={isMuted ? 'Sesi Aç' : 'Sesi Kapat'}
+            title={localizeText(isMuted ? 'Sesi Aç' : 'Sesi Kapat')}
           >
             {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4 text-primary" />}
           </button>
@@ -123,7 +121,7 @@ export function KidsGamesHub({ onBackToArcade }: KidsGamesHubProps) {
           <button
             onClick={() => setIsCreditsOpen(true)}
             className="h-8 w-8 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title="Oyun Kredileri & Lisans"
+            title={localizeText("Oyun Kredileri & Lisans")}
           >
             <Info className="h-4 w-4" />
           </button>
@@ -137,16 +135,14 @@ export function KidsGamesHub({ onBackToArcade }: KidsGamesHubProps) {
           <div className="flex items-center gap-2.5">
             <ShieldCheck className="h-5 w-5 text-emerald-500 shrink-0" />
             <div className="min-w-0">
-              <span className="font-bold block">Ebeveyn Güvencesi</span>
-              <span className="text-[11px] opacity-90 block">Reklam, uygulama içi satın alma ve veri toplama bulunmaz.</span>
+              <span className="font-bold block">{localizeText("Ebeveyn Güvencesi")}</span>
+              <span className="text-[11px] opacity-90 block">{localizeText("Reklam, uygulama içi satın alma ve veri toplama bulunmaz.")}</span>
             </div>
           </div>
           <button
             onClick={() => setIsCreditsOpen(true)}
             className="text-[11px] font-bold underline hover:opacity-80 shrink-0"
-          >
-            Lisans & Bilgi
-          </button>
+          >{localizeText("Lisans & Bilgi")}</button>
         </div>
 
         {/* 3 Interactive Kids Game Cards */}
@@ -164,21 +160,21 @@ export function KidsGamesHub({ onBackToArcade }: KidsGamesHubProps) {
                       game.colorClass
                     )}
                   >
-                    {game.iconEmoji}
+                    {localizeText(game.iconEmoji)}
                   </div>
 
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
-                        {game.title}
+                        {localizeText(game.title)}
                       </h3>
                       <span className="rounded-md bg-muted px-2 py-0.5 text-[10px] font-bold text-muted-foreground">
-                        {game.ageRange}
+                        {localizeText(game.ageRange)}
                       </span>
                     </div>
 
                     <p className="mt-1 text-xs text-muted-foreground leading-snug">
-                      {game.subtitle}
+                      {localizeText(game.subtitle)}
                     </p>
                   </div>
                 </div>
@@ -189,9 +185,7 @@ export function KidsGamesHub({ onBackToArcade }: KidsGamesHubProps) {
                   onClick={() => setActiveGameId(game.id)}
                   className="font-bold text-xs h-9 px-4 shrink-0 shadow-xs"
                 >
-                  <Play className="h-3.5 w-3.5 mr-1" />
-                  Başla
-                </Button>
+                  <Play className="h-3.5 w-3.5 mr-1" />{localizeText("Başla")}</Button>
               </div>
             </Card>
           ))}

@@ -1,0 +1,3002 @@
+[
+  {
+    "id": "learn-1-1",
+    "title": "Kırmızı",
+    "description": "Renkler",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kırmızı",
+        "visual": "🔴",
+        "color": "#3b82f6",
+        "narration": "Elmayı kırmızı çizebiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🔴",
+        "color": "#3b82f6",
+        "narration": "Resimde kırmızı bir nesne gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-1-2",
+    "title": "Sarı",
+    "description": "Renkler",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Sarı",
+        "visual": "🟡",
+        "color": "#3b82f6",
+        "narration": "Güneşi sarı çizebiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🟡",
+        "color": "#3b82f6",
+        "narration": "Birlikte sarı bir güneş çizelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-1-3",
+    "title": "Mavi",
+    "description": "Renkler",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Mavi",
+        "visual": "🔵",
+        "color": "#3b82f6",
+        "narration": "Gökyüzünü mavi çizebiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🔵",
+        "color": "#3b82f6",
+        "narration": "Resimde mavi gökyüzünü bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-1-4",
+    "title": "Yeşil",
+    "description": "Renkler",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Yeşil",
+        "visual": "🟢",
+        "color": "#3b82f6",
+        "narration": "Yapraklar çoğunlukla yeşildir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🟢",
+        "color": "#3b82f6",
+        "narration": "Resimdeki yapraklara birlikte bakalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-1-5",
+    "title": "Turuncu",
+    "description": "Renkler",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Turuncu",
+        "visual": "🟠",
+        "color": "#3b82f6",
+        "narration": "Portakalın kabuğu turuncu olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🟠",
+        "color": "#3b82f6",
+        "narration": "Portakal resmiyle bu rengi eşleştirelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-1-6",
+    "title": "Mor",
+    "description": "Renkler",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Mor",
+        "visual": "🟣",
+        "color": "#3b82f6",
+        "narration": "Bazı üzüm taneleri mordur."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🟣",
+        "color": "#3b82f6",
+        "narration": "Mor bir üzüm resmi çizelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-1-7",
+    "title": "Pembe",
+    "description": "Renkler",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Pembe",
+        "visual": "🌸",
+        "color": "#3b82f6",
+        "narration": "Bu çiçeği pembe çizebiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🌸",
+        "color": "#3b82f6",
+        "narration": "Pembe çiçek resmi gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-1-8",
+    "title": "Kahverengi",
+    "description": "Renkler",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kahverengi",
+        "visual": "🟤",
+        "color": "#3b82f6",
+        "narration": "Ağaçların gövdeleri kahverengi olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🟤",
+        "color": "#3b82f6",
+        "narration": "Bir ağaç resminde gövdeyi bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-1-9",
+    "title": "Beyaz",
+    "description": "Renkler",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Beyaz",
+        "visual": "⚪",
+        "color": "#3b82f6",
+        "narration": "Bazı bulutlar beyaz görünür."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "⚪",
+        "color": "#3b82f6",
+        "narration": "Beyaz bir bulut resmi çizelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-1-10",
+    "title": "Siyah",
+    "description": "Renkler",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Siyah",
+        "visual": "⚫",
+        "color": "#3b82f6",
+        "narration": "Gece gökyüzünü siyah çizebiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "⚫",
+        "color": "#3b82f6",
+        "narration": "Bir gece resmi üzerinde konuşalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-2-1",
+    "title": "Daire",
+    "description": "Şekiller ve karşılaştırmalar",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Daire",
+        "visual": "⭕",
+        "color": "#a855f7",
+        "narration": "Dairenin köşesi yoktur."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "⭕",
+        "color": "#a855f7",
+        "narration": "Parmağımızla ekranda yuvarlak bir yol çizelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-2-2",
+    "title": "Kare",
+    "description": "Şekiller ve karşılaştırmalar",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kare",
+        "visual": "◻️",
+        "color": "#a855f7",
+        "narration": "Karenin dört kenarı vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "◻️",
+        "color": "#a855f7",
+        "narration": "Resimdeki karenin kenarlarını birlikte izleyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-2-3",
+    "title": "Üçgen",
+    "description": "Şekiller ve karşılaştırmalar",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Üçgen",
+        "visual": "🔺",
+        "color": "#a855f7",
+        "narration": "Üçgenin üç köşesi vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🔺",
+        "color": "#a855f7",
+        "narration": "Birlikte üç köşeyi gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-2-4",
+    "title": "Dikdörtgen",
+    "description": "Şekiller ve karşılaştırmalar",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Dikdörtgen",
+        "visual": "▭",
+        "color": "#a855f7",
+        "narration": "Bu şekil bir dikdörtgendir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "▭",
+        "color": "#a855f7",
+        "narration": "Kitap resminin dış çizgisine bakalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-2-5",
+    "title": "Oval",
+    "description": "Şekiller ve karşılaştırmalar",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Oval",
+        "visual": "🥚",
+        "color": "#a855f7",
+        "narration": "Bu yumurta resmi oval görünür."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🥚",
+        "color": "#a855f7",
+        "narration": "Ovalin etrafında parmağımızı gezdirelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-2-6",
+    "title": "Yıldız şekli",
+    "description": "Şekiller ve karşılaştırmalar",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Yıldız şekli",
+        "visual": "⭐",
+        "color": "#a855f7",
+        "narration": "Resimde sivri uçları olan bir yıldız var."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "⭐",
+        "color": "#a855f7",
+        "narration": "Yıldızın bir ucunu gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-2-7",
+    "title": "Kalp şekli",
+    "description": "Şekiller ve karşılaştırmalar",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kalp şekli",
+        "visual": "💛",
+        "color": "#a855f7",
+        "narration": "Sevgiyi anlatmak için kalp çizebiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "💛",
+        "color": "#a855f7",
+        "narration": "Birlikte bir kalp resmi çizelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-2-8",
+    "title": "Büyük ve küçük",
+    "description": "Şekiller ve karşılaştırmalar",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Büyük ve küçük",
+        "visual": "🐘 🐭",
+        "color": "#a855f7",
+        "narration": "Fil resmini büyük, fare resmini küçük çizdik."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐘 🐭",
+        "color": "#a855f7",
+        "narration": "Büyük resmi ve küçük resmi sırayla gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-2-9",
+    "title": "Uzun ve kısa",
+    "description": "Şekiller ve karşılaştırmalar",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Uzun ve kısa",
+        "visual": "📏",
+        "color": "#a855f7",
+        "narration": "İki çizgi farklı uzunlukta olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "📏",
+        "color": "#a855f7",
+        "narration": "Yetişkin iki çizgi çizsin; birlikte uzun olanı bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-2-10",
+    "title": "İçinde ve dışında",
+    "description": "Şekiller ve karşılaştırmalar",
+    "category": "education",
+    "subject": "shapes",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "İçinde ve dışında",
+        "visual": "📦",
+        "color": "#a855f7",
+        "narration": "Bir oyuncak kutunun içinde ya da dışında olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "📦",
+        "color": "#a855f7",
+        "narration": "Yetişkin büyük bir oyuncağı kutuya koyup konumunu anlatsın."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-3-1",
+    "title": "Kedi",
+    "description": "Hayvanlar",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kedi",
+        "visual": "🐱",
+        "color": "#ea580c",
+        "narration": "Kedinin patileri ve bıyıkları vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐱",
+        "color": "#ea580c",
+        "narration": "Birlikte miyav sesini taklit edelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-3-2",
+    "title": "Köpek",
+    "description": "Hayvanlar",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Köpek",
+        "visual": "🐶",
+        "color": "#ea580c",
+        "narration": "Köpek kokuları burnuyla tanır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐶",
+        "color": "#ea580c",
+        "narration": "Birlikte hav hav diyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-3-3",
+    "title": "Kuş",
+    "description": "Hayvanlar",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kuş",
+        "visual": "🐦",
+        "color": "#ea580c",
+        "narration": "Kuşların tüyleri vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐦",
+        "color": "#ea580c",
+        "narration": "Kollarımızı kanat gibi açalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-3-4",
+    "title": "Balık",
+    "description": "Hayvanlar",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Balık",
+        "visual": "🐟",
+        "color": "#ea580c",
+        "narration": "Balıklar suda yaşar."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐟",
+        "color": "#ea580c",
+        "narration": "Ellerimizle yüzme hareketi yapalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-3-5",
+    "title": "Tavşan",
+    "description": "Hayvanlar",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Tavşan",
+        "visual": "🐰",
+        "color": "#ea580c",
+        "narration": "Tavşanın uzun kulakları vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐰",
+        "color": "#ea580c",
+        "narration": "Tavşan resminde kulakları bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-3-6",
+    "title": "İnek",
+    "description": "Hayvanlar",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "İnek",
+        "visual": "🐮",
+        "color": "#ea580c",
+        "narration": "İnek bir çiftlik hayvanıdır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐮",
+        "color": "#ea580c",
+        "narration": "Birlikte möö sesini taklit edelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-3-7",
+    "title": "Koyun",
+    "description": "Hayvanlar",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Koyun",
+        "visual": "🐑",
+        "color": "#ea580c",
+        "narration": "Koyunun vücudunda yün bulunur."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐑",
+        "color": "#ea580c",
+        "narration": "Koyun resmindeki yüne bakalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-3-8",
+    "title": "At",
+    "description": "Hayvanlar",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "At",
+        "visual": "🐴",
+        "color": "#ea580c",
+        "narration": "Atın dört bacağı vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐴",
+        "color": "#ea580c",
+        "narration": "Birlikte at resminin bacaklarını gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-3-9",
+    "title": "Fil",
+    "description": "Hayvanlar",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Fil",
+        "visual": "🐘",
+        "color": "#ea580c",
+        "narration": "Filin uzun bir hortumu vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐘",
+        "color": "#ea580c",
+        "narration": "Kolumuzu filin hortumu gibi yavaşça oynatalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-3-10",
+    "title": "Kelebek",
+    "description": "Hayvanlar",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kelebek",
+        "visual": "🦋",
+        "color": "#ea580c",
+        "narration": "Kelebeğin kanatları vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🦋",
+        "color": "#ea580c",
+        "narration": "İki elimizi kelebek kanadı gibi açalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-4-1",
+    "title": "Elma",
+    "description": "Meyveler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Elma",
+        "visual": "🍎",
+        "color": "#ef4444",
+        "narration": "Elma bir meyvedir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍎",
+        "color": "#ef4444",
+        "narration": "Resimde elmanın sapını bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-4-2",
+    "title": "Muz",
+    "description": "Meyveler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Muz",
+        "visual": "🍌",
+        "color": "#ef4444",
+        "narration": "Muzun kabuğu sarı olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍌",
+        "color": "#ef4444",
+        "narration": "Muz resminin eğri çizgisini izleyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-4-3",
+    "title": "Portakal",
+    "description": "Meyveler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Portakal",
+        "visual": "🍊",
+        "color": "#ef4444",
+        "narration": "Portakalın dışı kabukla kaplıdır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍊",
+        "color": "#ef4444",
+        "narration": "Portakalın yuvarlak şeklini gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-4-4",
+    "title": "Çilek",
+    "description": "Meyveler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Çilek",
+        "visual": "🍓",
+        "color": "#ef4444",
+        "narration": "Çileğin üzerinde küçük çekirdekler vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍓",
+        "color": "#ef4444",
+        "narration": "Resimdeki küçük noktaları gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-4-5",
+    "title": "Üzüm",
+    "description": "Meyveler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Üzüm",
+        "visual": "🍇",
+        "color": "#ef4444",
+        "narration": "Üzüm taneleri salkımda bir arada büyür."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍇",
+        "color": "#ef4444",
+        "narration": "Resimde bir üzüm tanesini gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-4-6",
+    "title": "Armut",
+    "description": "Meyveler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Armut",
+        "visual": "🍐",
+        "color": "#ef4444",
+        "narration": "Armutun üst kısmı daha dar olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍐",
+        "color": "#ef4444",
+        "narration": "Resmin dar ve geniş taraflarını gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-4-7",
+    "title": "Karpuz",
+    "description": "Meyveler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Karpuz",
+        "visual": "🍉",
+        "color": "#ef4444",
+        "narration": "Karpuzun dışı yeşil, içi kırmızı olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍉",
+        "color": "#ef4444",
+        "narration": "Resimde kabuk ile iç kısmı ayıralım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-4-8",
+    "title": "Kiraz",
+    "description": "Meyveler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kiraz",
+        "visual": "🍒",
+        "color": "#ef4444",
+        "narration": "Kirazın ince bir sapı vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍒",
+        "color": "#ef4444",
+        "narration": "Resimdeki sapları birlikte bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-4-9",
+    "title": "Şeftali",
+    "description": "Meyveler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Şeftali",
+        "visual": "🍑",
+        "color": "#ef4444",
+        "narration": "Şeftalinin kabuğu ince tüylerle kaplı olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍑",
+        "color": "#ef4444",
+        "narration": "Şeftali resmini birlikte inceleyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-4-10",
+    "title": "Ananas",
+    "description": "Meyveler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Ananas",
+        "visual": "🍍",
+        "color": "#ef4444",
+        "narration": "Ananasın üstünde uzun yapraklar vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍍",
+        "color": "#ef4444",
+        "narration": "Resimdeki yaprakları gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-5-1",
+    "title": "Havuç",
+    "description": "Sebzeler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Havuç",
+        "visual": "🥕",
+        "color": "#22c55e",
+        "narration": "Havucun yenilen kısmı toprağın altında büyür."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🥕",
+        "color": "#22c55e",
+        "narration": "Resimde havucun yeşil yapraklarını bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-5-2",
+    "title": "Salatalık",
+    "description": "Sebzeler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Salatalık",
+        "visual": "🥒",
+        "color": "#22c55e",
+        "narration": "Salatalık yeşil ve uzun olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🥒",
+        "color": "#22c55e",
+        "narration": "Resimdeki uzun şekli izleyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-5-3",
+    "title": "Brokoli",
+    "description": "Sebzeler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Brokoli",
+        "visual": "🥦",
+        "color": "#22c55e",
+        "narration": "Brokolinin çiçekli kısmını yeriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🥦",
+        "color": "#22c55e",
+        "narration": "Brokoliyi küçük bir ağaç resmiyle karşılaştıralım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-5-4",
+    "title": "Patates",
+    "description": "Sebzeler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Patates",
+        "visual": "🥔",
+        "color": "#22c55e",
+        "narration": "Patates toprağın altında büyür."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🥔",
+        "color": "#22c55e",
+        "narration": "Bir patatesin resmini birlikte çizelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-5-5",
+    "title": "Soğan",
+    "description": "Sebzeler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Soğan",
+        "visual": "🧅",
+        "color": "#22c55e",
+        "narration": "Soğanın içinde kat kat yapraklar vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🧅",
+        "color": "#22c55e",
+        "narration": "Yetişkin bir kesit resmi üzerinde katları göstersin."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-5-6",
+    "title": "Biber",
+    "description": "Sebzeler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Biber",
+        "visual": "🫑",
+        "color": "#22c55e",
+        "narration": "Biberler farklı renklerde olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🫑",
+        "color": "#22c55e",
+        "narration": "Yeşil ve kırmızı biber resimlerine bakalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-5-7",
+    "title": "Domates",
+    "description": "Sebzeler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Domates",
+        "visual": "🍅",
+        "color": "#22c55e",
+        "narration": "Domatesi yemeklerde sebze gibi kullanırız; bitkide meyve olarak oluşur."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍅",
+        "color": "#22c55e",
+        "narration": "Resimde domatesin yeşil sapını bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-5-8",
+    "title": "Patlıcan",
+    "description": "Sebzeler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Patlıcan",
+        "visual": "🍆",
+        "color": "#22c55e",
+        "narration": "Patlıcanın kabuğu mor olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍆",
+        "color": "#22c55e",
+        "narration": "Resimde mor rengi gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-5-9",
+    "title": "Marul",
+    "description": "Sebzeler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Marul",
+        "visual": "🥬",
+        "color": "#22c55e",
+        "narration": "Marulun büyük yeşil yaprakları vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🥬",
+        "color": "#22c55e",
+        "narration": "Yaprak resminin kıvrımlarına bakalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-5-10",
+    "title": "Mısır",
+    "description": "Sebzeler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Mısır",
+        "visual": "🌽",
+        "color": "#22c55e",
+        "narration": "Mısır taneleri koçanda sıralanır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🌽",
+        "color": "#22c55e",
+        "narration": "Resimde bir tane sırasını gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-6-1",
+    "title": "Top",
+    "description": "Günlük nesneler",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Top",
+        "visual": "⚽",
+        "color": "#0284c7",
+        "narration": "Top yuvarlanabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "⚽",
+        "color": "#0284c7",
+        "narration": "Yetişkin büyük, yumuşak bir topu yavaşça yuvarlasın."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-6-2",
+    "title": "Kitap",
+    "description": "Günlük nesneler",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kitap",
+        "visual": "📖",
+        "color": "#0284c7",
+        "narration": "Kitapların sayfalarında resimler ve yazılar olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "📖",
+        "color": "#0284c7",
+        "narration": "Bir resimli kitabın sayfasını birlikte çevirelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-6-3",
+    "title": "Bardak",
+    "description": "Günlük nesneler",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Bardak",
+        "visual": "🥛",
+        "color": "#0284c7",
+        "narration": "Bardak bir içeceği tutabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🥛",
+        "color": "#0284c7",
+        "narration": "Boş ve kırılmaz bir bardak resmine bakalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-6-4",
+    "title": "Kaşık",
+    "description": "Günlük nesneler",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kaşık",
+        "visual": "🥄",
+        "color": "#0284c7",
+        "narration": "Kaşığı yemek yerken kullanabiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🥄",
+        "color": "#0284c7",
+        "narration": "Resimde kaşığın sapını bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-6-5",
+    "title": "Ayakkabı",
+    "description": "Günlük nesneler",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Ayakkabı",
+        "visual": "👟",
+        "color": "#0284c7",
+        "narration": "Ayakkabıyı ayağımıza giyeriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "👟",
+        "color": "#0284c7",
+        "narration": "Bir ayakkabı resmini ayağımızla eşleştirelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-6-6",
+    "title": "Şapka",
+    "description": "Günlük nesneler",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Şapka",
+        "visual": "🧢",
+        "color": "#0284c7",
+        "narration": "Şapkayı başımıza takarız."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🧢",
+        "color": "#0284c7",
+        "narration": "Resimde başımıza takılacak nesneyi gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-6-7",
+    "title": "Yastık",
+    "description": "Günlük nesneler",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Yastık",
+        "visual": "🛏️",
+        "color": "#0284c7",
+        "narration": "Yastık başımızı destekleyebilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🛏️",
+        "color": "#0284c7",
+        "narration": "Bir yatak resminde yastığı bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-6-8",
+    "title": "Sandalye",
+    "description": "Günlük nesneler",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Sandalye",
+        "visual": "🪑",
+        "color": "#0284c7",
+        "narration": "Sandalyeye oturabiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🪑",
+        "color": "#0284c7",
+        "narration": "Sandalye resminde oturulan bölümü gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-6-9",
+    "title": "Çanta",
+    "description": "Günlük nesneler",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Çanta",
+        "visual": "🎒",
+        "color": "#0284c7",
+        "narration": "Çantaya eşyalar koyabiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🎒",
+        "color": "#0284c7",
+        "narration": "Bir çanta resminde sapları bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-6-10",
+    "title": "Saat",
+    "description": "Günlük nesneler",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Saat",
+        "visual": "🕒",
+        "color": "#0284c7",
+        "narration": "Saat zamanı göstermeye yardımcı olur."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🕒",
+        "color": "#0284c7",
+        "narration": "Resimde saatin yuvarlak yüzünü gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-7-1",
+    "title": "Güneş",
+    "description": "Doğa ve sesler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Güneş",
+        "visual": "☀️",
+        "color": "#14b8a6",
+        "narration": "Güneş gündüz gökyüzünde görülebilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "☀️",
+        "color": "#14b8a6",
+        "narration": "Güneş resmi üzerinden gündüzü konuşalım; doğrudan güneşe bakmayalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-7-2",
+    "title": "Ay",
+    "description": "Doğa ve sesler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Ay",
+        "visual": "🌙",
+        "color": "#14b8a6",
+        "narration": "Ay gökyüzünde farklı şekillerde görünebilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🌙",
+        "color": "#14b8a6",
+        "narration": "Hilal ve yuvarlak ay resimlerini birlikte inceleyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-7-3",
+    "title": "Bulut",
+    "description": "Doğa ve sesler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Bulut",
+        "visual": "☁️",
+        "color": "#14b8a6",
+        "narration": "Bulutlar gökyüzünde görünür."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "☁️",
+        "color": "#14b8a6",
+        "narration": "Bir bulut resmini birlikte çizelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-7-4",
+    "title": "Yağmur",
+    "description": "Doğa ve sesler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Yağmur",
+        "visual": "🌧️",
+        "color": "#14b8a6",
+        "narration": "Yağmur bulutlardan düşen su damlalarıdır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🌧️",
+        "color": "#14b8a6",
+        "narration": "Parmaklarımızla masaya hafif yağmur ritmi yapalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-7-5",
+    "title": "Kar",
+    "description": "Doğa ve sesler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Kar",
+        "visual": "❄️",
+        "color": "#14b8a6",
+        "narration": "Kar, buz kristallerinden oluşur."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "❄️",
+        "color": "#14b8a6",
+        "narration": "Bir kar tanesi resmini birlikte inceleyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-7-6",
+    "title": "Rüzgâr",
+    "description": "Doğa ve sesler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Rüzgâr",
+        "visual": "🍃",
+        "color": "#14b8a6",
+        "narration": "Rüzgâr hareket eden havadır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍃",
+        "color": "#14b8a6",
+        "narration": "Resimde sallanan yaprakları gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-7-7",
+    "title": "Ağaç",
+    "description": "Doğa ve sesler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Ağaç",
+        "visual": "🌳",
+        "color": "#14b8a6",
+        "narration": "Ağacın kökleri, gövdesi ve dalları vardır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🌳",
+        "color": "#14b8a6",
+        "narration": "Ağaç resminde gövdeyi bulalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-7-8",
+    "title": "Çiçek",
+    "description": "Doğa ve sesler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Çiçek",
+        "visual": "🌼",
+        "color": "#14b8a6",
+        "narration": "Çiçeklerin taç yaprakları farklı renklerde olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🌼",
+        "color": "#14b8a6",
+        "narration": "Resimde çiçeğin ortasını gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-7-9",
+    "title": "Dalga sesi",
+    "description": "Doğa ve sesler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Dalga sesi",
+        "visual": "🌊",
+        "color": "#14b8a6",
+        "narration": "Dalgalar kıyıya ulaşınca ses çıkarır."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🌊",
+        "color": "#14b8a6",
+        "narration": "Birlikte yumuşakça şşş diyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-7-10",
+    "title": "Yaprak hışırtısı",
+    "description": "Doğa ve sesler",
+    "category": "education",
+    "subject": "nature",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Yaprak hışırtısı",
+        "visual": "🍂",
+        "color": "#14b8a6",
+        "narration": "Yapraklar hareket edince hışırdayabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍂",
+        "color": "#14b8a6",
+        "narration": "Yetişkin hışır hışır sesini taklit etsin."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-8-1",
+    "title": "El sallama",
+    "description": "Hareketler ve duygular",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "El sallama",
+        "visual": "👋",
+        "color": "#ec4899",
+        "narration": "El sallayarak merhaba diyebiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "👋",
+        "color": "#ec4899",
+        "narration": "Birbirimize merhaba diyerek el sallayalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-8-2",
+    "title": "Alkış",
+    "description": "Hareketler ve duygular",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Alkış",
+        "visual": "👏",
+        "color": "#ec4899",
+        "narration": "İki elimizi hafifçe birleştirince ses çıkar."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "👏",
+        "color": "#ec4899",
+        "narration": "Yavaşça bir alkış yapalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-8-3",
+    "title": "Dinleme",
+    "description": "Hareketler ve duygular",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Dinleme",
+        "visual": "👂",
+        "color": "#ec4899",
+        "narration": "Kulaklarımızla sesleri duyarız."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "👂",
+        "color": "#ec4899",
+        "narration": "Yetişkin kısa bir ses çıkarsın; birlikte dinleyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-8-4",
+    "title": "Gülümseme",
+    "description": "Hareketler ve duygular",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Gülümseme",
+        "visual": "🙂",
+        "color": "#ec4899",
+        "narration": "Gülümsemek bir yüz ifadesidir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🙂",
+        "color": "#ec4899",
+        "narration": "Aynada birlikte gülümseyen yüzümüze bakalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-8-5",
+    "title": "Mutlu hissetme",
+    "description": "Hareketler ve duygular",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Mutlu hissetme",
+        "visual": "😊",
+        "color": "#ec4899",
+        "narration": "Bazen mutlu hissederiz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "😊",
+        "color": "#ec4899",
+        "narration": "Yetişkin kendisini mutlu eden bir şeyi anlatsın."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-8-6",
+    "title": "Üzgün hissetme",
+    "description": "Hareketler ve duygular",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Üzgün hissetme",
+        "visual": "😔",
+        "color": "#ec4899",
+        "narration": "Bazen üzgün hissederiz; duygularımızı anlatabiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "😔",
+        "color": "#ec4899",
+        "narration": "Yetişkin üzgünken yanında olduğunu sakin bir sesle söylesin."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-8-7",
+    "title": "Şaşırma",
+    "description": "Hareketler ve duygular",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Şaşırma",
+        "visual": "😮",
+        "color": "#ec4899",
+        "narration": "Yeni bir şey görünce şaşırabiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "😮",
+        "color": "#ec4899",
+        "narration": "Birlikte şaşırmış yüz resmi yapalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-8-8",
+    "title": "Sırayla oynama",
+    "description": "Hareketler ve duygular",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Sırayla oynama",
+        "visual": "🧸",
+        "color": "#ec4899",
+        "narration": "Birlikte oyunda sıra alabiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🧸",
+        "color": "#ec4899",
+        "narration": "Yetişkinle büyük bir oyuncağı sırayla gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-8-9",
+    "title": "Yardım isteme",
+    "description": "Hareketler ve duygular",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Yardım isteme",
+        "visual": "🤝",
+        "color": "#ec4899",
+        "narration": "Bir işi yaparken yardım isteyebiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🤝",
+        "color": "#ec4899",
+        "narration": "Yetişkin bana yardım eder misin sözlerini model olarak söylesin."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-8-10",
+    "title": "Dinlenme",
+    "description": "Hareketler ve duygular",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Dinlenme",
+        "visual": "😴",
+        "color": "#ec4899",
+        "narration": "Yorulduğumuzda dinlenebiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "😴",
+        "color": "#ec4899",
+        "narration": "Ekranı kapatıp birlikte sakin bir mola verelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-9-1",
+    "title": "Gündüz ve gece",
+    "description": "İlk bilim keşifleri",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Gündüz ve gece",
+        "visual": "☀️ 🌙",
+        "color": "#6366f1",
+        "narration": "Gündüz ve gece boyunca gökyüzü farklı görünür."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "☀️ 🌙",
+        "color": "#6366f1",
+        "narration": "Gündüz ve gece resimlerini karşılaştıralım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-9-2",
+    "title": "Gölge",
+    "description": "İlk bilim keşifleri",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Gölge",
+        "visual": "🌤️",
+        "color": "#6366f1",
+        "narration": "Işık bir nesneyle engellendiğinde gölge oluşabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🌤️",
+        "color": "#6366f1",
+        "narration": "Yetişkin güvenli bir ışıkla duvarda el gölgesi göstersin."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-9-3",
+    "title": "Yansıma",
+    "description": "İlk bilim keşifleri",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Yansıma",
+        "visual": "🪞",
+        "color": "#6366f1",
+        "narration": "Aynada görüntümüzü görebiliriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🪞",
+        "color": "#6366f1",
+        "narration": "Yetişkinle sabit, güvenli bir aynaya bakalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-9-4",
+    "title": "Islak ve kuru",
+    "description": "İlk bilim keşifleri",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Islak ve kuru",
+        "visual": "💧",
+        "color": "#6366f1",
+        "narration": "Su değen bir yüzey ıslak olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "💧",
+        "color": "#6366f1",
+        "narration": "Islak ve kuru bez resimlerini birlikte karşılaştıralım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-9-5",
+    "title": "Yumuşak ve sert",
+    "description": "İlk bilim keşifleri",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Yumuşak ve sert",
+        "visual": "🧸 🪵",
+        "color": "#6366f1",
+        "narration": "Oyuncakların yüzeyleri farklı hissedilebilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🧸 🪵",
+        "color": "#6366f1",
+        "narration": "Yetişkin büyük, güvenli iki nesnenin yüzeylerini anlatsın."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-9-6",
+    "title": "Yuvarlanma",
+    "description": "İlk bilim keşifleri",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Yuvarlanma",
+        "visual": "⚽",
+        "color": "#6366f1",
+        "narration": "Yuvarlak nesneler yuvarlanabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "⚽",
+        "color": "#6366f1",
+        "narration": "Yetişkin büyük bir topun yavaş hareketini göstersin."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-9-7",
+    "title": "Bitkinin büyümesi",
+    "description": "İlk bilim keşifleri",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Bitkinin büyümesi",
+        "visual": "🌱",
+        "color": "#6366f1",
+        "narration": "Bitkiler büyümek için suya ve uygun ışığa ihtiyaç duyar."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🌱",
+        "color": "#6366f1",
+        "narration": "Fidan ve büyük ağaç resimlerini karşılaştıralım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-9-8",
+    "title": "Dolu ve boş",
+    "description": "İlk bilim keşifleri",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Dolu ve boş",
+        "visual": "🪣",
+        "color": "#6366f1",
+        "narration": "Bir kap dolu ya da boş olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🪣",
+        "color": "#6366f1",
+        "narration": "İki kap resmi üzerinde dolu ve boş sözcüklerini söyleyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-9-9",
+    "title": "Yakın ve uzak",
+    "description": "İlk bilim keşifleri",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Yakın ve uzak",
+        "visual": "🏠",
+        "color": "#6366f1",
+        "narration": "Nesneler bize yakın veya uzakta olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🏠",
+        "color": "#6366f1",
+        "narration": "Yetişkin bir resimde yakın ve uzaktaki evi göstersin."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-9-10",
+    "title": "Sesli ve sessiz",
+    "description": "İlk bilim keşifleri",
+    "category": "education",
+    "subject": "science",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Sesli ve sessiz",
+        "visual": "🔔",
+        "color": "#6366f1",
+        "narration": "Bazı anlarda ses duyar, bazen sessizliği dinleriz."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🔔",
+        "color": "#6366f1",
+        "narration": "Yetişkin kısa ve yumuşak bir ses çıkarsın, ardından duralım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-10-1",
+    "title": "Bir",
+    "description": "İlk sayılar ve sözcükler",
+    "category": "education",
+    "subject": "numbers",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Bir",
+        "visual": "🍎",
+        "color": "#f59e0b",
+        "narration": "Resimde bir elma var."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍎",
+        "color": "#f59e0b",
+        "narration": "Bir parmağımızı gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-10-2",
+    "title": "İki",
+    "description": "İlk sayılar ve sözcükler",
+    "category": "education",
+    "subject": "numbers",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "İki",
+        "visual": "🍎 🍎",
+        "color": "#f59e0b",
+        "narration": "Resimde iki elma var."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍎 🍎",
+        "color": "#f59e0b",
+        "narration": "Bir, iki diyerek iki resmi gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-10-3",
+    "title": "Üç",
+    "description": "İlk sayılar ve sözcükler",
+    "category": "education",
+    "subject": "numbers",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Üç",
+        "visual": "🍎 🍎 🍎",
+        "color": "#f59e0b",
+        "narration": "Resimde üç elma var."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍎 🍎 🍎",
+        "color": "#f59e0b",
+        "narration": "Bir, iki, üç diyerek yavaşça sayalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-10-4",
+    "title": "Az ve çok",
+    "description": "İlk sayılar ve sözcükler",
+    "category": "education",
+    "subject": "numbers",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Az ve çok",
+        "visual": "🟠 🟠🟠🟠",
+        "color": "#f59e0b",
+        "narration": "Bir grupta az, diğerinde çok nesne olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🟠 🟠🟠🟠",
+        "color": "#f59e0b",
+        "narration": "Resimde daha çok olan grubu birlikte gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-10-5",
+    "title": "Bir çift",
+    "description": "İlk sayılar ve sözcükler",
+    "category": "education",
+    "subject": "numbers",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Bir çift",
+        "visual": "🧦",
+        "color": "#f59e0b",
+        "narration": "Bir çift çorapta iki çorap bulunur."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🧦",
+        "color": "#f59e0b",
+        "narration": "Çorap resimlerini birlikte gösterelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-10-6",
+    "title": "Önce ve sonra",
+    "description": "İlk sayılar ve sözcükler",
+    "category": "education",
+    "subject": "numbers",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "Önce ve sonra",
+        "visual": "🌱 🌳",
+        "color": "#f59e0b",
+        "narration": "Fidan zamanla büyüyüp ağaç olabilir."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🌱 🌳",
+        "color": "#f59e0b",
+        "narration": "Önce fidan, sonra ağaç diyelim."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-10-7",
+    "title": "A sesi",
+    "description": "İlk sayılar ve sözcükler",
+    "category": "education",
+    "subject": "letters",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "A sesi",
+        "visual": "🐝",
+        "color": "#f59e0b",
+        "narration": "Arı sözcüğü a sesiyle başlar."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐝",
+        "color": "#f59e0b",
+        "narration": "Yetişkin a ve arı desin; çocuk isterse sesi taklit etsin."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-10-8",
+    "title": "B sesi",
+    "description": "İlk sayılar ve sözcükler",
+    "category": "education",
+    "subject": "letters",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "B sesi",
+        "visual": "🐟",
+        "color": "#f59e0b",
+        "narration": "Balık sözcüğü b sesiyle başlar."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐟",
+        "color": "#f59e0b",
+        "narration": "Yetişkin b ve balık desin; birlikte resme bakalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-10-9",
+    "title": "E sesi",
+    "description": "İlk sayılar ve sözcükler",
+    "category": "education",
+    "subject": "letters",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "E sesi",
+        "visual": "🍎",
+        "color": "#f59e0b",
+        "narration": "Elma sözcüğü e sesiyle başlar."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🍎",
+        "color": "#f59e0b",
+        "narration": "Yetişkin e ve elma desin; sesleri tanıyalım."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  },
+  {
+    "id": "learn-10-10",
+    "title": "K sesi",
+    "description": "İlk sayılar ve sözcükler",
+    "category": "education",
+    "subject": "letters",
+    "ageMin": 0,
+    "ageMax": 3,
+    "locale": "tr",
+    "status": "published",
+    "reviewed": true,
+    "reviewNote": "Özgün kısa tanışma etkinliği. Okuma, yazma veya sınav koşulu yok; ebeveyn yönetiminde, çocuğun isteğine göre kullanılır. Tıbbi veya gelişim değerlendirmesi değildir.",
+    "cards": [
+      {
+        "label": "K sesi",
+        "visual": "🐱",
+        "color": "#f59e0b",
+        "narration": "Kedi sözcüğü k sesiyle başlar."
+      },
+      {
+        "label": "Birlikte deneyelim",
+        "visual": "🐱",
+        "color": "#f59e0b",
+        "narration": "Yetişkin k ve kedi desin; tekrar etmek zorunlu değil."
+      }
+    ],
+    "license": "LifeOS original",
+    "author": "LifeOS",
+    "source": "LifeOS"
+  }
+]

@@ -19,8 +19,10 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { useEducationStore } from '@/stores/useEducationStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function ExamTakerScreen() {
+  const localizeText = useLocaleRender();
   const {
     activeExam,
     activeAttempt,
@@ -109,44 +111,40 @@ export function ExamTakerScreen() {
           </div>
 
           <div className="space-y-1.5">
-            <h2 className="text-lg font-bold text-foreground">
-              Sınavınız Öğretmeninize Teslim Edildi
-            </h2>
+            <h2 className="text-lg font-bold text-foreground">{localizeText("Sınavınız Öğretmeninize Teslim Edildi")}</h2>
             <p className="text-xs text-muted-foreground">
-              {activeExam.title} • {activeExam.courseTitle}
+              {localizeText(activeExam.title)} • {localizeText(activeExam.courseTitle)}
             </p>
           </div>
 
           {/* Submission Stats */}
           <div className="p-4 rounded-2xl border border-border bg-muted/30 grid grid-cols-2 gap-3 text-left">
             <div>
-              <span className="text-[11px] text-muted-foreground block">Cevaplanan Soru</span>
+              <span className="text-[11px] text-muted-foreground block">{localizeText("Cevaplanan Soru")}</span>
               <span className="text-sm font-bold text-foreground">
-                {answeredCount} / {questions.length}
+                {localizeText(answeredCount)} / {localizeText(questions.length)}
               </span>
             </div>
             <div>
-              <span className="text-[11px] text-muted-foreground block">Durum</span>
+              <span className="text-[11px] text-muted-foreground block">{localizeText("Durum")}</span>
               <span className="text-xs font-semibold text-emerald-500 inline-flex items-center gap-1">
-                <CheckCircle2 className="h-3.5 w-3.5" />
-                Teslim Edildi
-              </span>
+                <CheckCircle2 className="h-3.5 w-3.5" />{localizeText("Teslim Edildi")}</span>
             </div>
             {activeAttempt.scorePercent !== undefined && (
               <>
                 <div className="pt-2 border-t border-border/50">
-                  <span className="text-[11px] text-muted-foreground block">Başarı Notu</span>
+                  <span className="text-[11px] text-muted-foreground block">{localizeText("Başarı Notu")}</span>
                   <span className="text-base font-extrabold text-foreground">
-                    %{activeAttempt.scorePercent}
+                    %{localizeText(activeAttempt.scorePercent)}
                   </span>
                 </div>
                 <div className="pt-2 border-t border-border/50">
-                  <span className="text-[11px] text-muted-foreground block">Sonuç</span>
+                  <span className="text-[11px] text-muted-foreground block">{localizeText("Sonuç")}</span>
                   <span className={cn(
                     'text-xs font-bold inline-flex items-center gap-1',
                     activeAttempt.isPassed ? 'text-emerald-500' : 'text-amber-500'
                   )}>
-                    {activeAttempt.isPassed ? '✅ Başarılı (Geçti)' : '⏳ İncelemede'}
+                    {localizeText(activeAttempt.isPassed ? '✅ Başarılı (Geçti)' : '⏳ İncelemede')}
                   </span>
                 </div>
               </>
@@ -154,17 +152,14 @@ export function ExamTakerScreen() {
           </div>
 
           <div className="p-3 rounded-xl border border-border bg-background text-[11px] text-muted-foreground text-left">
-            <span className="font-semibold text-foreground">Güvenlik Notu:</span> Cevaplarınız sunucuda kilitlendi ve denetim kaydı oluşturuldu. Detaylı soru analizleri eğitmeniniz değerlendirmeyi yayınladığında açılacaktır.
-          </div>
+            <span className="font-semibold text-foreground">{localizeText("Güvenlik Notu:")}</span>{localizeText("Cevaplarınız sunucuda kilitlendi ve denetim kaydı oluşturuldu. Detaylı soru analizleri eğitmeniniz değerlendirmeyi yayınladığında açılacaktır.")}</div>
 
           <Button
             variant="primary"
             size="md"
             onClick={closeExamTaker}
             className="w-full font-bold text-xs h-11 shadow-xs"
-          >
-            Sınav Merkezine Dön
-          </Button>
+          >{localizeText("Sınav Merkezine Dön")}</Button>
         </motion.div>
       </div>
     );
@@ -183,10 +178,10 @@ export function ExamTakerScreen() {
           </div>
           <div className="min-w-0">
             <h1 className="text-xs font-bold text-foreground truncate">
-              {activeExam.title}
+              {localizeText(activeExam.title)}
             </h1>
             <p className="text-[11px] text-muted-foreground truncate">
-              {activeExam.courseTitle} • Eğitmen: {activeExam.instructorName}
+              {localizeText(activeExam.courseTitle)}{localizeText("• Eğitmen: ")}{localizeText(activeExam.instructorName)}
             </p>
           </div>
         </div>
@@ -197,16 +192,14 @@ export function ExamTakerScreen() {
           <div className="hidden sm:flex items-center gap-1.5 text-[11px]">
             {saveStatus === 'saving' && (
               <span className="text-muted-foreground animate-pulse flex items-center gap-1">
-                <Clock className="h-3 w-3" /> Kaydediliyor...
-              </span>
+                <Clock className="h-3 w-3" />{localizeText("Kaydediliyor...")}</span>
             )}
             {saveStatus === 'saved' && (
               <span className="text-emerald-500 font-medium flex items-center gap-1">
-                <Check className="h-3 w-3" /> Kaydedildi
-              </span>
+                <Check className="h-3 w-3" />{localizeText("Kaydedildi")}</span>
             )}
             {saveStatus === 'error' && (
-              <span className="text-red-400 font-medium">Kayıt hatası</span>
+              <span className="text-red-400 font-medium">{localizeText("Kayıt hatası")}</span>
             )}
           </div>
 
@@ -220,7 +213,7 @@ export function ExamTakerScreen() {
             )}
           >
             <Clock className="h-3.5 w-3.5 text-primary" />
-            <span>{formatTimer(remainingSeconds)}</span>
+            <span>{localizeText(formatTimer(remainingSeconds))}</span>
           </div>
 
           {/* Submit Action Button */}
@@ -230,9 +223,7 @@ export function ExamTakerScreen() {
             onClick={() => setIsSubmitModalOpen(true)}
             className="font-bold text-xs h-8 px-3 shadow-xs bg-emerald-600 hover:bg-emerald-700 text-white"
           >
-            <Send className="h-3 w-3 mr-1" />
-            Sınavı Bitir
-          </Button>
+            <Send className="h-3 w-3 mr-1" />{localizeText("Sınavı Bitir")}</Button>
         </div>
       </header>
 
@@ -245,17 +236,15 @@ export function ExamTakerScreen() {
               {/* Question Header */}
               <div className="flex items-center justify-between border-b border-border/50 pb-3">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-purple-500 bg-purple-500/10 px-2.5 py-0.5 rounded-lg">
-                    Soru {currentQuestionIndex + 1} / {questions.length}
+                  <span className="text-xs font-bold uppercase tracking-wider text-purple-500 bg-purple-500/10 px-2.5 py-0.5 rounded-lg">{localizeText("Soru ")}{localizeText(currentQuestionIndex + 1)} / {localizeText(questions.length)}
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    ({currentQuestion.points} Puan)
-                  </span>
+                    ({localizeText(currentQuestion.points)}{localizeText(" Puan)")}</span>
                 </div>
 
                 <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
                   <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-                  <span>Otomatik Kaydediliyor</span>
+                  <span>{localizeText("Otomatik Kaydediliyor")}</span>
                 </div>
               </div>
 
@@ -293,9 +282,9 @@ export function ExamTakerScreen() {
                             : 'border-border bg-muted/60 text-muted-foreground'
                         )}
                       >
-                        {letter}
+                        {localizeText(letter)}
                       </div>
-                      <span className="text-xs font-medium leading-normal">{opt.text}</span>
+                      <span className="text-xs font-medium leading-normal">{localizeText(opt.text)}</span>
                     </button>
                   );
                 })}
@@ -310,13 +299,10 @@ export function ExamTakerScreen() {
                   onClick={() => setCurrentQuestionIndex((prev) => prev - 1)}
                   className="text-xs font-semibold h-9"
                 >
-                  <ArrowLeft className="h-3.5 w-3.5 mr-1" />
-                  Önceki Soru
-                </Button>
+                  <ArrowLeft className="h-3.5 w-3.5 mr-1" />{localizeText("Önceki Soru")}</Button>
 
                 <span className="text-xs text-muted-foreground font-semibold">
-                  {answeredCount} / {questions.length} Cevaplandı
-                </span>
+                  {localizeText(answeredCount)} / {localizeText(questions.length)}{localizeText(" Cevaplandı")}</span>
 
                 <Button
                   variant="outline"
@@ -324,25 +310,19 @@ export function ExamTakerScreen() {
                   disabled={currentQuestionIndex === questions.length - 1}
                   onClick={() => setCurrentQuestionIndex((prev) => prev + 1)}
                   className="text-xs font-semibold h-9"
-                >
-                  Sonraki Soru
-                  <ArrowRight className="h-3.5 w-3.5 ml-1" />
+                >{localizeText("Sonraki Soru")}<ArrowRight className="h-3.5 w-3.5 ml-1" />
                 </Button>
               </div>
             </Card>
           ) : (
-            <div className="flex-1 flex items-center justify-center text-xs text-muted-foreground">
-              Soru yüklenemedi.
-            </div>
+            <div className="flex-1 flex items-center justify-center text-xs text-muted-foreground">{localizeText("Soru yüklenemedi.")}</div>
           )}
         </main>
 
         {/* Right / Side: Question Palette */}
         <aside className="w-full md:w-64 flex flex-col gap-4">
           <Card className="p-4 border-border bg-card shadow-xs space-y-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Soru Gezintisi
-            </h3>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Soru Gezintisi")}</h3>
 
             <div className="grid grid-cols-5 gap-2">
               {questions.map((q, idx) => {
@@ -361,7 +341,7 @@ export function ExamTakerScreen() {
                         : 'border-border bg-background text-muted-foreground hover:bg-muted'
                     )}
                   >
-                    {idx + 1}
+                    {localizeText(idx + 1)}
                   </button>
                 );
               })}
@@ -370,11 +350,11 @@ export function ExamTakerScreen() {
             <div className="pt-2 border-t border-border text-[11px] text-muted-foreground space-y-1.5">
               <div className="flex items-center gap-2">
                 <span className="h-3 w-3 rounded-md bg-emerald-500/20 border border-emerald-500/40" />
-                <span>Cevaplandı ({answeredCount})</span>
+                <span>{localizeText("Cevaplandı (")}{localizeText(answeredCount)})</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="h-3 w-3 rounded-md bg-background border border-border" />
-                <span>Boş ({questions.length - answeredCount})</span>
+                <span>{localizeText("Boş (")}{localizeText(questions.length - answeredCount)})</span>
               </div>
             </div>
           </Card>
@@ -393,21 +373,16 @@ export function ExamTakerScreen() {
             >
               <div className="flex items-center gap-3 text-foreground font-bold text-sm">
                 <Send className="h-5 w-5 text-emerald-500" />
-                <span>Sınavı Teslim Et</span>
+                <span>{localizeText("Sınavı Teslim Et")}</span>
               </div>
 
               <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
-                <p>
-                  Toplam <strong>{questions.length}</strong> sorudan <strong>{answeredCount}</strong> tanesini cevapladınız.
-                </p>
+                <p>{localizeText("Toplam")}<strong>{localizeText(questions.length)}</strong>{localizeText("sorudan")}<strong>{localizeText(answeredCount)}</strong>{localizeText("tanesini cevapladınız.")}</p>
                 {questions.length > answeredCount && (
                   <p className="text-amber-500 font-semibold">
-                    ⚠️ {questions.length - answeredCount} soruyu henüz cevaplamadınız.
-                  </p>
+                    ⚠️ {localizeText(questions.length - answeredCount)}{localizeText(" soruyu henüz cevaplamadınız.")}</p>
                 )}
-                <p>
-                  Teslim ettikten sonra cevaplarınızı değiştiremez veya sınava yeniden başlayamazsınız.
-                </p>
+                <p>{localizeText("Teslim ettikten sonra cevaplarınızı değiştiremez veya sınava yeniden başlayamazsınız.")}</p>
               </div>
 
               <div className="flex items-center justify-end gap-2 pt-2 border-t border-border">
@@ -417,9 +392,7 @@ export function ExamTakerScreen() {
                   onClick={() => setIsSubmitModalOpen(false)}
                   disabled={isSubmitting}
                   className="text-xs"
-                >
-                  Sorulara Dön
-                </Button>
+                >{localizeText("Sorulara Dön")}</Button>
                 <Button
                   variant="primary"
                   size="sm"
@@ -427,7 +400,7 @@ export function ExamTakerScreen() {
                   disabled={isSubmitting}
                   className="font-bold text-xs px-4 h-9 shadow-xs bg-emerald-600 hover:bg-emerald-700 text-white"
                 >
-                  {isSubmitting ? 'Teslim Ediliyor...' : 'Evet, Sınavı Teslim Et'}
+                  {localizeText(isSubmitting ? 'Teslim Ediliyor...' : 'Evet, Sınavı Teslim Et')}
                 </Button>
               </div>
             </motion.div>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 
 export const metadata: Metadata = {
-  title: 'LifeOS — Yönetim Paneli',
+  title: 'LifeOS',
   description: 'LifeOS Güvenli Sistem ve Başvuru Yönetim Merkezi',
 };
 

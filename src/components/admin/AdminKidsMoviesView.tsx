@@ -23,8 +23,10 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { KIDS_MOVIES_CATALOG } from '@/components/kids/KidsMovieView';
 import type { KidsMovieItem } from '@/types/kids';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function AdminKidsMoviesView() {
+  const localizeText = useLocaleRender();
   const [moviesList, setMoviesList] = useState<KidsMovieItem[]>(KIDS_MOVIES_CATALOG);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -103,12 +105,10 @@ export function AdminKidsMoviesView() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-foreground">Kids Movie İçerik Yönetimi</h1>
-            <StatusBadge status="verified" label="Telif Korumalı" size="sm" />
+            <h1 className="text-xl font-bold text-foreground">{localizeText("Kids Movie İçerik Yönetimi")}</h1>
+            <StatusBadge status="verified" label={localizeText("Telif Korumalı")} size="sm" />
           </div>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            Kids Movie alanında yayınlanan animasyonlar, kaynak lisansları ve atıf denetimi
-          </p>
+          <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Kids Movie alanında yayınlanan animasyonlar, kaynak lisansları ve atıf denetimi")}</p>
         </div>
 
         <Button
@@ -117,9 +117,7 @@ export function AdminKidsMoviesView() {
           onClick={() => setIsAddModalOpen(true)}
           className="h-10 px-4 font-bold text-xs shadow-xs shrink-0"
         >
-          <Plus className="h-4 w-4 mr-1.5" />
-          Yeni Doğrulanmış Video Ekle
-        </Button>
+          <Plus className="h-4 w-4 mr-1.5" />{localizeText("Yeni Doğrulanmış Video Ekle")}</Button>
       </div>
 
       {/* Mandatory License & Compliance Banner */}
@@ -127,12 +125,8 @@ export function AdminKidsMoviesView() {
         <div className="flex items-start gap-3">
           <ShieldCheck className="h-5 w-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
           <div className="space-y-1">
-            <h4 className="text-xs font-bold text-emerald-950 dark:text-emerald-200">
-              Yayınlanabilirlik ve Telif Standartları
-            </h4>
-            <p className="text-[11px] text-emerald-900/80 dark:text-emerald-300/80 leading-relaxed">
-              Çocuk güvenliği politikası gereğince; içerik sahibi, geçerli lisans türü ve kaynak bağlantısı doğrulanmamış hiçbir video Kids alanında yayınlanamaz. Tüm içerikler LifeOS kapalı güvenli oynatıcısında oynatılır.
-            </p>
+            <h4 className="text-xs font-bold text-emerald-950 dark:text-emerald-200">{localizeText("Yayınlanabilirlik ve Telif Standartları")}</h4>
+            <p className="text-[11px] text-emerald-900/80 dark:text-emerald-300/80 leading-relaxed">{localizeText("Çocuk güvenliği politikası gereğince; içerik sahibi, geçerli lisans türü ve kaynak bağlantısı doğrulanmamış hiçbir video Kids alanında yayınlanamaz. Tüm içerikler LifeOS kapalı güvenli oynatıcısında oynatılır.")}</p>
           </div>
         </div>
       </Card>
@@ -140,8 +134,8 @@ export function AdminKidsMoviesView() {
       {/* Videos List Table */}
       <div className="space-y-3">
         <div className="px-1 flex items-center justify-between text-xs font-bold text-muted-foreground uppercase tracking-wider">
-          <span>Yayınlanan Videolar ({moviesList.length})</span>
-          <span>Durum & Lisans</span>
+          <span>{localizeText("Yayınlanan Videolar (")}{localizeText(moviesList.length)})</span>
+          <span>{localizeText("Durum & Lisans")}</span>
         </div>
 
         {moviesList.map((movie) => (
@@ -149,40 +143,34 @@ export function AdminKidsMoviesView() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="flex items-start gap-3.5 min-w-0">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-rose-500/10 border border-rose-500/20 text-3xl shadow-xs">
-                  {movie.thumbnailEmoji}
+                  {localizeText(movie.thumbnailEmoji)}
                 </div>
 
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <h3 className="text-sm font-bold text-foreground truncate">
-                      {movie.title}
+                      {localizeText(movie.title)}
                     </h3>
-                    <span className="rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 px-2 py-0.5 text-[10px] font-bold">
-                      ● YAYINDA
-                    </span>
+                    <span className="rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 px-2 py-0.5 text-[10px] font-bold">{localizeText("● YAYINDA")}</span>
                     <span className="text-[11px] text-muted-foreground">
-                      {movie.ageRange} • {movie.durationMinutes} Dk
-                    </span>
+                      {localizeText(movie.ageRange)} • {localizeText(movie.durationMinutes)}{localizeText(" Dk")}</span>
                   </div>
 
                   <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
-                    {movie.description}
+                    {localizeText(movie.description)}
                   </p>
 
                   <div className="mt-2 flex items-center gap-2 flex-wrap text-[11px]">
-                    <span className="px-2 py-0.5 rounded-md bg-muted font-medium text-foreground">
-                      Sahip: {movie.creator}
+                    <span className="px-2 py-0.5 rounded-md bg-muted font-medium text-foreground">{localizeText("Sahip: ")}{localizeText(movie.creator)}
                     </span>
-                    <span className="px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400 font-medium">
-                      Lisans: {movie.license}
+                    <span className="px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400 font-medium">{localizeText("Lisans: ")}{localizeText(movie.license)}
                     </span>
                     <a
                       href={movie.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary hover:underline inline-flex items-center gap-0.5 font-semibold"
-                    >
-                      Kaynak <ExternalLink className="h-3 w-3" />
+                    >{localizeText("Kaynak")}<ExternalLink className="h-3 w-3" />
                     </a>
                   </div>
                 </div>
@@ -195,8 +183,7 @@ export function AdminKidsMoviesView() {
                   rel="noopener noreferrer"
                   className="px-3 py-1.5 rounded-xl border border-border bg-muted/40 hover:bg-muted text-xs font-semibold text-foreground inline-flex items-center gap-1"
                 >
-                  <Eye className="h-3.5 w-3.5" /> Akışı Test Et
-                </a>
+                  <Eye className="h-3.5 w-3.5" />{localizeText("Akışı Test Et")}</a>
               </div>
             </div>
           </Card>
@@ -207,89 +194,79 @@ export function AdminKidsMoviesView() {
       <Modal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
-        title="Yeni Telifli Video Yayınla"
-        description="Kids Movie alanına eklenecek açık kaynak veya lisanslı video bilgilerini girin."
+        title={localizeText("Yeni Telifli Video Yayınla")}
+        description={localizeText("Kids Movie alanına eklenecek açık kaynak veya lisanslı video bilgilerini girin.")}
         size="md"
       >
         <form onSubmit={handleAddMovie} className="space-y-4 pt-2">
           {formError && (
             <div className="p-3 rounded-xl bg-destructive/10 border border-destructive/20 text-xs font-semibold text-destructive flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 shrink-0" />
-              <span>{formError}</span>
+              <span>{localizeText(formError)}</span>
             </div>
           )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-foreground mb-1">
-                Video Başlığı *
-              </label>
+              <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Video Başlığı *")}</label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Örn: Sintel"
+                placeholder={localizeText("Örn: Sintel")}
                 className="w-full h-9 rounded-xl border border-border bg-background px-3 text-xs font-semibold focus:border-primary focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-foreground mb-1">
-                İçerik Sahibi / Yapımcı *
-              </label>
+              <label className="block text-xs font-bold text-foreground mb-1">{localizeText("İçerik Sahibi / Yapımcı *")}</label>
               <input
                 type="text"
                 required
                 value={creator}
                 onChange={(e) => setCreator(e.target.value)}
-                placeholder="Örn: Blender Foundation"
+                placeholder={localizeText("Örn: Blender Foundation")}
                 className="w-full h-9 rounded-xl border border-border bg-background px-3 text-xs font-semibold focus:border-primary focus:outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-foreground mb-1">
-              Gerçek Video Kaynak Bağlantısı (MP4 Stream URL) *
-            </label>
+            <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Gerçek Video Kaynak Bağlantısı (MP4 Stream URL) *")}</label>
             <input
               type="url"
               required
               value={videoUrl}
               onChange={(e) => setVideoUrl(e.target.value)}
-              placeholder="https://.../video.mp4"
+              placeholder={localizeText("https://.../video.mp4")}
               className="w-full h-9 rounded-xl border border-border bg-background px-3 text-xs font-mono focus:border-primary focus:outline-none"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-foreground mb-1">
-                Lisans / Telif Durumu *
-              </label>
+              <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Lisans / Telif Durumu *")}</label>
               <select
                 value={license}
                 onChange={(e) => setLicense(e.target.value)}
                 className="w-full h-9 rounded-xl border border-border bg-background px-3 text-xs font-semibold focus:border-primary focus:outline-none"
               >
-                <option value="Creative Commons Attribution 3.0">CC BY 3.0</option>
-                <option value="Creative Commons Attribution 4.0">CC BY 4.0</option>
-                <option value="Creative Commons Zero (Public Domain)">CC0 (Kamu Malı)</option>
-                <option value="Telif İzinli / Lisanslı Yayın">Telif İzinli / Lisanslı</option>
+                <option value="Creative Commons Attribution 3.0">{localizeText("CC BY 3.0")}</option>
+                <option value="Creative Commons Attribution 4.0">{localizeText("CC BY 4.0")}</option>
+                <option value="Creative Commons Zero (Public Domain)">{localizeText("CC0 (Kamu Malı)")}</option>
+                <option value="Telif İzinli / Lisanslı Yayın">{localizeText("Telif İzinli / Lisanslı")}</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-foreground mb-1">
-                Resmî Kaynak / Atıf URL *
-              </label>
+              <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Resmî Kaynak / Atıf URL *")}</label>
               <input
                 type="url"
                 required
                 value={sourceUrl}
                 onChange={(e) => setSourceUrl(e.target.value)}
-                placeholder="https://peach.blender.org/"
+                placeholder={localizeText("https://peach.blender.org/")}
                 className="w-full h-9 rounded-xl border border-border bg-background px-3 text-xs font-mono focus:border-primary focus:outline-none"
               />
             </div>
@@ -297,9 +274,7 @@ export function AdminKidsMoviesView() {
 
           <div className="grid grid-cols-3 gap-2">
             <div>
-              <label className="block text-xs font-bold text-foreground mb-1">
-                Yaş Grubu
-              </label>
+              <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Yaş Grubu")}</label>
               <select
                 value={ageFilter}
                 onChange={(e) => {
@@ -309,16 +284,14 @@ export function AdminKidsMoviesView() {
                 }}
                 className="w-full h-9 rounded-xl border border-border bg-background px-2 text-xs font-semibold focus:border-primary focus:outline-none"
               >
-                <option value="age_3_5">3-5 Yaş</option>
-                <option value="age_6_8">6-8 Yaş (7+)</option>
-                <option value="age_9_12">9-12 Yaş</option>
+                <option value="age_3_5">{localizeText("3-5 Yaş")}</option>
+                <option value="age_6_8">{localizeText("6-8 Yaş (7+)")}</option>
+                <option value="age_9_12">{localizeText("9-12 Yaş")}</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-foreground mb-1">
-                Süre (Dk)
-              </label>
+              <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Süre (Dk)")}</label>
               <input
                 type="number"
                 min={1}
@@ -330,9 +303,7 @@ export function AdminKidsMoviesView() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-foreground mb-1">
-                Kapak Emojisi
-              </label>
+              <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Kapak Emojisi")}</label>
               <input
                 type="text"
                 maxLength={2}
@@ -344,14 +315,12 @@ export function AdminKidsMoviesView() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-foreground mb-1">
-              Türkçe Açıklama
-            </label>
+            <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Türkçe Açıklama")}</label>
             <textarea
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Animasyon konusu..."
+              placeholder={localizeText("Animasyon konusu...")}
               className="w-full rounded-xl border border-border bg-background p-2 text-xs focus:border-primary focus:outline-none"
             />
           </div>
@@ -362,16 +331,12 @@ export function AdminKidsMoviesView() {
               variant="outline"
               onClick={() => setIsAddModalOpen(false)}
               className="flex-1 font-semibold text-xs h-10"
-            >
-              İptal
-            </Button>
+            >{localizeText("İptal")}</Button>
             <Button
               type="submit"
               variant="primary"
               className="flex-1 font-bold text-xs h-10 shadow-xs"
-            >
-              Onayla ve Yayınla
-            </Button>
+            >{localizeText("Onayla ve Yayınla")}</Button>
           </div>
         </form>
       </Modal>

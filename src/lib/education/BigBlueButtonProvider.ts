@@ -11,6 +11,18 @@ import type { BigBlueButtonJoinResult, LiveClassHealthResult } from '@/types/edu
  * - Enforces max 70 participant cap and role-based passwords.
  */
 export class BigBlueButtonProvider {
+  public async isMeetingRunning(meetingId: string): Promise<boolean> {
+    if (!this.isConfigured()) return false;
+    const query = new URLSearchParams({ meetingID: meetingId }).toString();
+    const checksum = this.generateChecksum('isMeetingRunning', query, this.getSecret()!);
+    const response = await fetch(`${this.getBaseUrl()!.replace(/\/+$/, '')}/api/isMeetingRunning?${query}&checksum=${checksum}`, {
+      cache:'no-store', signal:AbortSignal.timeout(8000),
+    });
+    if (!response.ok) throw new Error('LIVE_UNAVAILABLE');
+    const xml = await response.text();
+    if (!/<returncode>\s*SUCCESS\s*<\/returncode>/.test(xml)) throw new Error('LIVE_UNAVAILABLE');
+    return /<running>\s*true\s*<\/running>/.test(xml);
+  }
   private getBaseUrl(): string | undefined {
     return process.env.BBB_BASE_URL?.trim();
   }
@@ -161,7 +173,7 @@ export class BigBlueButtonProvider {
       const checksum = this.generateChecksum('create', queryString, secret);
       const url = `${baseUrl}/api/create?${queryString}&checksum=${checksum}`;
 
-      const response = await fetch(url, { method: 'GET' });
+      const response = await fetch(url, { method: 'GET', signal:AbortSignal.timeout(10000) });
       const xmlText = await response.text();
 
       // Check if returncode is SUCCESS or duplicateWarning
@@ -290,7 +302,7 @@ export class BigBlueButtonProvider {
       const checksum = this.generateChecksum('end', queryString, secret);
       const url = `${baseUrl}/api/end?${queryString}&checksum=${checksum}`;
 
-      const response = await fetch(url, { method: 'GET' });
+      const response = await fetch(url, { method: 'GET', signal:AbortSignal.timeout(10000) });
       const xmlText = await response.text();
 
       if (xmlText.includes('<returncode>SUCCESS</returncode>')) {
@@ -301,13 +313,13 @@ export class BigBlueButtonProvider {
       }
 
       return {
-        success: true, // Meeting may already be closed
+        success: false,
         message: 'Canlı ders oturumu kapatıldı.',
       };
     } catch (error) {
       console.error('BigBlueButton end meeting error:', error);
       return {
-        success: true, // Graceful fallback
+        success: false,
         message: 'Canlı ders oturumu yerel olarak sonlandırıldı.',
       };
     }

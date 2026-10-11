@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { MovingScreen } from '@/components/services/moving/MovingScreen';
+import { ServicePlatform } from '@/components/platform/ServicePlatform';
 
 export const metadata: Metadata = {
   title: 'Nakliye & Taşıma — LifeOS',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function MovingPage() {
-  return <MovingScreen />;
+  return <ServicePlatform kind="moving" />;
 }

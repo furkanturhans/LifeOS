@@ -13,8 +13,10 @@ import { InstructorHubView } from './InstructorHubView';
 import { ExamTakerScreen } from './ExamTakerScreen';
 import { Dock } from '@/components/os/Dock';
 import { useEducationStore } from '@/stores/useEducationStore';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function EducationScreen() {
+  const localizeText = useLocaleRender();
   const { activeSection, setActiveSection, isTakingExam } = useEducationStore();
 
   // Active Exam Taker takes full screen priority
@@ -97,14 +99,10 @@ export function EducationScreen() {
             <div className="flex-1 pr-2">
               <div className="flex items-center gap-1.5 text-xs font-semibold text-blue-500">
                 <GraduationCap className="h-3.5 w-3.5" />
-                <span>LifeOS Akademi Merkezi</span>
+                <span>{localizeText("LifeOS Akademi Merkezi")}</span>
               </div>
-              <h2 className="mt-1 text-base font-bold text-foreground">
-                Gelişim, Eğitim ve Canlı Dersler
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                Her yaş grubuna uygun kurslar, 70 kişilik interaktif canlı dersler, sınavlar ve eğitmenlik stüdyosu.
-              </p>
+              <h2 className="mt-1 text-base font-bold text-foreground">{localizeText("Gelişim, Eğitim ve Canlı Dersler")}</h2>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{localizeText("Her yaş grubuna uygun kurslar, 70 kişilik interaktif canlı dersler, sınavlar ve eğitmenlik stüdyosu.")}</p>
             </div>
             <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-blue-500/15 text-2xl shadow-sm">
               🎓
@@ -114,12 +112,12 @@ export function EducationScreen() {
           <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-border/40">
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <ShieldCheck className="h-3.5 w-3.5 text-blue-500" />
-              <span>Doğrulanmış Eğitmenler</span>
+              <span>{localizeText("Doğrulanmış Eğitmenler")}</span>
             </div>
             <span className="text-muted-foreground/40">•</span>
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-indigo-500" />
-              <span>Sertifikasyon & Sınavlar</span>
+              <span>{localizeText("Sertifikasyon & Sınavlar")}</span>
             </div>
           </div>
         </motion.div>

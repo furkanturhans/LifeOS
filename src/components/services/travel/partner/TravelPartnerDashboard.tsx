@@ -15,6 +15,7 @@ import { RoutesSection } from './RoutesSection';
 import { TripsSection } from './TripsSection';
 import { SeatPlansSection } from './SeatPlansSection';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 type PartnerTab = 'firmam' | 'araclar' | 'rotalar' | 'seferler' | 'koltuk_planlari';
 
@@ -27,6 +28,7 @@ const PARTNER_TABS: { id: PartnerTab; labelTr: string; icon: React.ReactNode }[]
 ];
 
 export function TravelPartnerDashboard() {
+  const localizeText = useLocaleRender();
   const [activeTab, setActiveTab] = useState<PartnerTab>('firmam');
 
   return (
@@ -47,8 +49,8 @@ export function TravelPartnerDashboard() {
                   : 'text-muted-foreground hover:text-foreground'
               )}
             >
-              {tab.icon}
-              <span>{tab.labelTr}</span>
+              {localizeText(tab.icon)}
+              <span>{localizeText(tab.labelTr)}</span>
             </button>
           );
         })}

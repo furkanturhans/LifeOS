@@ -1,6 +1,9 @@
+'use client';
+
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { AlertCircle } from 'lucide-react';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -12,6 +15,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, helperText, error, icon, rightIcon, type, id, ...props }, ref) => {
+  const localizeText = useLocaleRender();
     const generatedId = React.useId();
     const inputId = id ?? (label ? label.toLowerCase().replace(/[^a-z0-9]/g, '-') : generatedId);
 
@@ -22,13 +26,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             htmlFor={inputId}
             className="mb-1.5 block text-xs font-semibold text-foreground tracking-tight"
           >
-            {label}
+            {localizeText(label)}
           </label>
         )}
         <div className="relative">
           {icon && (
             <div className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground flex items-center justify-center">
-              {icon}
+              {localizeText(icon)}
             </div>
           )}
           <input
@@ -46,22 +50,25 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             )}
             ref={ref}
             {...props}
+            placeholder={localizeText(props.placeholder)}
+            title={localizeText(props.title)}
+            aria-label={localizeText(props['aria-label'])}
           />
           {rightIcon && (
             <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center justify-center">
-              {rightIcon}
+              {localizeText(rightIcon)}
             </div>
           )}
         </div>
         {helperText && !error && (
           <p className="mt-1 text-[11px] text-muted-foreground">
-            {helperText}
+            {localizeText(helperText)}
           </p>
         )}
         {error && (
           <p className="mt-1.5 flex items-center gap-1.5 text-xs text-destructive">
             <AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
-            <span>{error}</span>
+            <span>{localizeText(error)}</span>
           </p>
         )}
       </div>

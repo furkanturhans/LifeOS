@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AssistantHeader } from './AssistantHeader';
 import { AssistantSecurityBanner } from './AssistantSecurityBanner';
 import { AssistantCommandInput } from './AssistantCommandInput';
@@ -13,6 +13,7 @@ import { Dock } from '@/components/os/Dock';
 
 export function AssistantScreen() {
   const { currentView } = useAssistantStore();
+  useEffect(() => { useAssistantStore.getState().setCurrentView('chat'); }, []);
 
   return (
     <div className="flex h-full flex-col bg-background">

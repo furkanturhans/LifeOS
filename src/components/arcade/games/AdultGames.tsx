@@ -23,11 +23,13 @@ import { Card } from '@/components/ui/Card';
 import { GameShell, type Difficulty } from '../engine/GameShell';
 import { useArcadeStore } from '@/stores/useArcadeStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 // ==========================================
 // 1. TAVLA (BACKGAMMON) GAME
 // ==========================================
 export function TavlaGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { recordGameSession } = useArcadeStore();
   const [dice, setDice] = useState<[number, number]>([5, 3]);
   const [isRolling, setIsRolling] = useState(false);
@@ -143,7 +145,7 @@ export function TavlaGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Tavla (Backgammon)"
+      title={localizeText("Tavla (Backgammon)")}
       iconEmoji="🎲"
       onBack={onBack}
       onRestart={handleRestart}
@@ -169,7 +171,7 @@ export function TavlaGame({ onBack }: { onBack: () => void }) {
                     isSelected && 'ring-2 ring-amber-400 bg-amber-500/20'
                   )}
                 >
-                  <span className="text-[9px] text-amber-300/60">{pointIdx + 1}</span>
+                  <span className="text-[9px] text-amber-300/60">{localizeText(pointIdx + 1)}</span>
                   <div className="flex flex-col gap-0.5 mt-1">
                     {Array.from({ length: Math.min(4, Math.abs(checkers)) }).map((_, cIdx) => (
                       <div
@@ -181,7 +183,7 @@ export function TavlaGame({ onBack }: { onBack: () => void }) {
                             : 'bg-slate-900 border-slate-700 text-amber-100'
                         )}
                       >
-                        {cIdx === 3 && Math.abs(checkers) > 4 ? `+${Math.abs(checkers) - 3}` : ''}
+                        {localizeText(cIdx === 3 && Math.abs(checkers) > 4 ? `+${Math.abs(checkers) - 3}` : '')}
                       </div>
                     ))}
                   </div>
@@ -193,13 +195,13 @@ export function TavlaGame({ onBack }: { onBack: () => void }) {
           {/* Center Bar */}
           <div className="my-2 flex items-center justify-between px-3 py-1.5 bg-amber-900/50 rounded-xl border border-amber-800/60">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-amber-200">Zarlar:</span>
+              <span className="text-xs font-bold text-amber-200">{localizeText("Zarlar:")}</span>
               <div className="flex items-center gap-1">
                 <div className="h-7 w-7 rounded-lg bg-amber-100 text-slate-900 font-extrabold flex items-center justify-center shadow-xs text-sm">
-                  {dice[0]}
+                  {localizeText(dice[0])}
                 </div>
                 <div className="h-7 w-7 rounded-lg bg-amber-100 text-slate-900 font-extrabold flex items-center justify-center shadow-xs text-sm">
-                  {dice[1]}
+                  {localizeText(dice[1])}
                 </div>
               </div>
             </div>
@@ -211,9 +213,7 @@ export function TavlaGame({ onBack }: { onBack: () => void }) {
               disabled={movesLeft.length > 0 || turn !== 'player'}
               className="h-8 text-xs font-bold px-3"
             >
-              <Dices className="h-3.5 w-3.5 mr-1" />
-              Zar At
-            </Button>
+              <Dices className="h-3.5 w-3.5 mr-1" />{localizeText("Zar At")}</Button>
           </div>
 
           {/* Bottom Half (Points 0-11) */}
@@ -231,7 +231,7 @@ export function TavlaGame({ onBack }: { onBack: () => void }) {
                     isSelected && 'ring-2 ring-amber-400 bg-amber-500/20'
                   )}
                 >
-                  <span className="text-[9px] text-amber-300/60">{pointIdx + 1}</span>
+                  <span className="text-[9px] text-amber-300/60">{localizeText(pointIdx + 1)}</span>
                   <div className="flex flex-col-reverse gap-0.5 mb-1">
                     {Array.from({ length: Math.min(4, Math.abs(checkers)) }).map((_, cIdx) => (
                       <div
@@ -243,7 +243,7 @@ export function TavlaGame({ onBack }: { onBack: () => void }) {
                             : 'bg-slate-900 border-slate-700 text-amber-100'
                         )}
                       >
-                        {cIdx === 3 && Math.abs(checkers) > 4 ? `+${Math.abs(checkers) - 3}` : ''}
+                        {localizeText(cIdx === 3 && Math.abs(checkers) > 4 ? `+${Math.abs(checkers) - 3}` : '')}
                       </div>
                     ))}
                   </div>
@@ -255,7 +255,7 @@ export function TavlaGame({ onBack }: { onBack: () => void }) {
 
         {/* Status Message */}
         <Card className="p-3 bg-card border-border text-center text-xs font-medium text-muted-foreground">
-          {gameMessage}
+          {localizeText(gameMessage)}
         </Card>
       </div>
     </GameShell>
@@ -295,6 +295,7 @@ const CHESS_SYMBOLS: Record<PieceColor, Record<PieceType, string>> = {
 };
 
 export function SatrancGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { recordGameSession } = useArcadeStore();
   const [board, setBoard] = useState<(ChessPiece | null)[][]>(INITIAL_CHESS_BOARD);
   const [selectedSquare, setSelectedSquare] = useState<[number, number] | null>(null);
@@ -395,7 +396,7 @@ export function SatrancGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Satranç (Chess)"
+      title={localizeText("Satranç (Chess)")}
       iconEmoji="♟️"
       onBack={onBack}
       onRestart={handleRestart}
@@ -429,7 +430,7 @@ export function SatrancGame({ onBack }: { onBack: () => void }) {
                           piece.color === 'w' ? 'text-slate-900 font-extrabold' : 'text-slate-950 font-bold'
                         )}
                       >
-                        {CHESS_SYMBOLS[piece.color][piece.type]}
+                        {localizeText(CHESS_SYMBOLS[piece.color][piece.type])}
                       </span>
                     )}
                   </button>
@@ -440,7 +441,7 @@ export function SatrancGame({ onBack }: { onBack: () => void }) {
         </div>
 
         <Card className="p-2.5 bg-card border-border text-center text-xs font-medium text-muted-foreground">
-          {message}
+          {localizeText(message)}
         </Card>
       </div>
     </GameShell>
@@ -458,6 +459,7 @@ interface OkeyTile {
 }
 
 export function Okey101Game({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { recordGameSession } = useArcadeStore();
   const [hand, setHand] = useState<OkeyTile[]>([]);
   const [openedSeries, setOpenedSeries] = useState<OkeyTile[][]>([]);
@@ -503,7 +505,7 @@ export function Okey101Game({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="101 Okey"
+      title={localizeText("101 Okey")}
       iconEmoji="🀄"
       onBack={onBack}
       onRestart={generateHand}
@@ -515,8 +517,8 @@ export function Okey101Game({ onBack }: { onBack: () => void }) {
         {/* Istaka (Rack) */}
         <div className="rounded-3xl border-4 border-amber-900 bg-amber-950/60 p-4 shadow-xl">
           <div className="flex items-center justify-between mb-3 text-xs font-bold text-amber-200">
-            <span>Istakanız (21 Taş)</span>
-            <span className="bg-amber-800/60 px-2 py-0.5 rounded-md">Toplam: {sumHand} Sayı</span>
+            <span>{localizeText("Istakanız (21 Taş)")}</span>
+            <span className="bg-amber-800/60 px-2 py-0.5 rounded-md">{localizeText("Toplam: ")}{localizeText(sumHand)}{localizeText(" Sayı")}</span>
           </div>
 
           <div className="grid grid-cols-7 gap-1.5 p-2 bg-amber-900/30 rounded-2xl border border-amber-800/40">
@@ -531,7 +533,7 @@ export function Okey101Game({ onBack }: { onBack: () => void }) {
                   tile.color === 'orange' && 'text-amber-600'
                 )}
               >
-                <span>{tile.number}</span>
+                <span>{localizeText(tile.number)}</span>
                 <span className="text-[9px] opacity-80">●</span>
               </div>
             ))}
@@ -543,20 +545,16 @@ export function Okey101Game({ onBack }: { onBack: () => void }) {
             variant="primary"
             onClick={handleOpenHand}
             className="flex-1 font-bold h-11 text-xs"
-          >
-            Eli Aç (101 Barajı)
-          </Button>
+          >{localizeText("Eli Aç (101 Barajı)")}</Button>
           <Button
             variant="outline"
             onClick={generateHand}
             className="font-semibold h-11 text-xs px-4"
-          >
-            Yeniden Dağıt
-          </Button>
+          >{localizeText("Yeniden Dağıt")}</Button>
         </div>
 
         <Card className="p-3 bg-card border-border text-center text-xs font-medium text-muted-foreground">
-          {message}
+          {localizeText(message)}
         </Card>
       </div>
     </GameShell>
@@ -573,6 +571,7 @@ interface CardType {
 }
 
 export function PokerGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { recordGameSession } = useArcadeStore();
   const [playerHand, setPlayerHand] = useState<CardType[]>([]);
   const [communityCards, setCommunityCards] = useState<CardType[]>([]);
@@ -648,7 +647,7 @@ export function PokerGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Poker (Texas Hold'em Simülasyonu)"
+      title={localizeText("Poker (Texas Hold'em Simülasyonu)")}
       iconEmoji="♠️"
       onBack={onBack}
       onRestart={dealNewHand}
@@ -660,16 +659,14 @@ export function PokerGame({ onBack }: { onBack: () => void }) {
         {/* Anti-Gambling Safety Banner */}
         <div className="flex items-center gap-2 p-2.5 rounded-2xl border border-blue-500/30 bg-blue-500/10 text-[11px] text-blue-700 dark:text-blue-300">
           <ShieldAlert className="h-4 w-4 shrink-0 text-blue-500" />
-          <span>Eğlence ve strateji amaçlı simülasyon. Gerçek para, kredi veya bahis içermez.</span>
+          <span>{localizeText("Eğlence ve strateji amaçlı simülasyon. Gerçek para, kredi veya bahis içermez.")}</span>
         </div>
 
         {/* Poker Green Table */}
         <div className="rounded-3xl border-4 border-emerald-950 bg-emerald-900/90 p-5 shadow-2xl text-center space-y-4">
           {/* Community Cards */}
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80 block mb-2">
-              Ortak Kartlar (Board)
-            </span>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80 block mb-2">{localizeText("Ortak Kartlar (Board)")}</span>
             <div className="flex items-center justify-center gap-1.5 min-h-[64px]">
               {communityCards.length > 0 ? (
                 communityCards.map((c, i) => (
@@ -680,21 +677,19 @@ export function PokerGame({ onBack }: { onBack: () => void }) {
                       c.suit === '♥' || c.suit === '♦' ? 'text-red-600' : 'text-slate-900'
                     )}
                   >
-                    <span>{c.label}</span>
-                    <span className="text-xs">{c.suit}</span>
+                    <span>{localizeText(c.label)}</span>
+                    <span className="text-xs">{localizeText(c.suit)}</span>
                   </div>
                 ))
               ) : (
-                <div className="text-xs text-emerald-200/50 italic py-4">Kartlar bekleniyor...</div>
+                <div className="text-xs text-emerald-200/50 italic py-4">{localizeText("Kartlar bekleniyor...")}</div>
               )}
             </div>
           </div>
 
           {/* Player Hand */}
           <div className="pt-2 border-t border-emerald-800/80">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80 block mb-2">
-              Sizin Kartlarınız
-            </span>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80 block mb-2">{localizeText("Sizin Kartlarınız")}</span>
             <div className="flex items-center justify-center gap-2">
               {playerHand.map((c, i) => (
                 <div
@@ -704,8 +699,8 @@ export function PokerGame({ onBack }: { onBack: () => void }) {
                     c.suit === '♥' || c.suit === '♦' ? 'text-red-600' : 'text-slate-900'
                   )}
                 >
-                  <span>{c.label}</span>
-                  <span className="text-sm">{c.suit}</span>
+                  <span>{localizeText(c.label)}</span>
+                  <span className="text-sm">{localizeText(c.suit)}</span>
                 </div>
               ))}
             </div>
@@ -720,30 +715,24 @@ export function PokerGame({ onBack }: { onBack: () => void }) {
                 variant="outline"
                 onClick={handleNextStage}
                 className="flex-1 font-semibold text-xs h-11"
-              >
-                Gör / Pas
-              </Button>
+              >{localizeText("Gör / Pas")}</Button>
               <Button
                 variant="primary"
                 onClick={handleNextStage}
                 className="flex-1 font-bold text-xs h-11"
-              >
-                Bahis Arttır (+30 Puan)
-              </Button>
+              >{localizeText("Bahis Arttır (+30 Puan)")}</Button>
             </>
           ) : (
             <Button
               variant="primary"
               onClick={dealNewHand}
               className="w-full font-bold text-xs h-11"
-            >
-              Yeni El Dağıt
-            </Button>
+            >{localizeText("Yeni El Dağıt")}</Button>
           )}
         </div>
 
         <Card className="p-3 bg-card border-border text-center text-xs font-medium text-muted-foreground">
-          {handResult}
+          {localizeText(handResult)}
         </Card>
       </div>
     </GameShell>
@@ -754,6 +743,7 @@ export function PokerGame({ onBack }: { onBack: () => void }) {
 // 5. BATAK (İHALELİ / KOZ MAÇA) GAME
 // ==========================================
 export function BatakGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { recordGameSession } = useArcadeStore();
   const [tricksWon, setTricksWon] = useState(0);
   const [targetBid, setTargetBid] = useState(5);
@@ -821,7 +811,7 @@ export function BatakGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Batak (Koz Maça)"
+      title={localizeText("Batak (Koz Maça)")}
       iconEmoji="🃏"
       onBack={onBack}
       onRestart={generateBatakHand}
@@ -833,8 +823,8 @@ export function BatakGame({ onBack }: { onBack: () => void }) {
         {/* Table Felt */}
         <div className="rounded-3xl border-4 border-slate-800 bg-slate-900/90 p-5 shadow-2xl text-center space-y-3">
           <div className="flex items-center justify-between text-xs text-muted-foreground font-bold">
-            <span>Koz: ♠ Maça</span>
-            <span>Hedef: {targetBid} El</span>
+            <span>{localizeText("Koz: ♠ Maça")}</span>
+            <span>{localizeText("Hedef: ")}{localizeText(targetBid)}{localizeText(" El")}</span>
           </div>
 
           {/* Center Trick Pot */}
@@ -848,19 +838,18 @@ export function BatakGame({ onBack }: { onBack: () => void }) {
                     c.suit === '♥' || c.suit === '♦' ? 'text-red-600' : 'text-slate-900'
                   )}
                 >
-                  <span>{c.label}</span>
-                  <span className="text-[10px]">{c.suit}</span>
+                  <span>{localizeText(c.label)}</span>
+                  <span className="text-[10px]">{localizeText(c.suit)}</span>
                 </div>
               ))
             ) : (
-              <span className="text-xs text-muted-foreground italic">Masa boş, kart atın.</span>
+              <span className="text-xs text-muted-foreground italic">{localizeText("Masa boş, kart atın.")}</span>
             )}
           </div>
 
           {/* Hand Cards */}
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mb-2">
-              Elinizdeki Kartlar ({hand.length})
+            <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mb-2">{localizeText("Elinizdeki Kartlar (")}{localizeText(hand.length)})
             </span>
             <div className="flex flex-wrap items-center justify-center gap-1.5">
               {hand.map((c, i) => (
@@ -872,8 +861,8 @@ export function BatakGame({ onBack }: { onBack: () => void }) {
                     c.suit === '♥' || c.suit === '♦' ? 'text-red-600' : 'text-slate-900'
                   )}
                 >
-                  <span>{c.label}</span>
-                  <span className="text-[9px]">{c.suit}</span>
+                  <span>{localizeText(c.label)}</span>
+                  <span className="text-[9px]">{localizeText(c.suit)}</span>
                 </button>
               ))}
             </div>
@@ -881,7 +870,7 @@ export function BatakGame({ onBack }: { onBack: () => void }) {
         </div>
 
         <Card className="p-3 bg-card border-border text-center text-xs font-medium text-muted-foreground">
-          {message}
+          {localizeText(message)}
         </Card>
       </div>
     </GameShell>
@@ -892,6 +881,7 @@ export function BatakGame({ onBack }: { onBack: () => void }) {
 // 6. PİŞTİ GAME
 // ==========================================
 export function PistiGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { recordGameSession } = useArcadeStore();
   const [hand, setHand] = useState<CardType[]>([]);
   const [pot, setPot] = useState<CardType[]>([]);
@@ -960,7 +950,7 @@ export function PistiGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Pişti"
+      title={localizeText("Pişti")}
       iconEmoji="🎴"
       onBack={onBack}
       onRestart={initGame}
@@ -973,9 +963,7 @@ export function PistiGame({ onBack }: { onBack: () => void }) {
         <div className="rounded-3xl border-4 border-amber-900/60 bg-amber-950/40 p-5 shadow-xl text-center space-y-4">
           {/* Pot Pile */}
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mb-2">
-              Ortadaki Yığın ({pot.length} Kart)
-            </span>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mb-2">{localizeText("Ortadaki Yığın (")}{localizeText(pot.length)}{localizeText(" Kart)")}</span>
             <div className="flex items-center justify-center min-h-[80px]">
               {pot.length > 0 ? (
                 <div
@@ -986,20 +974,18 @@ export function PistiGame({ onBack }: { onBack: () => void }) {
                       : 'text-slate-900'
                   )}
                 >
-                  <span>{pot[pot.length - 1].label}</span>
-                  <span className="text-sm">{pot[pot.length - 1].suit}</span>
+                  <span>{localizeText(pot[pot.length - 1].label)}</span>
+                  <span className="text-sm">{localizeText(pot[pot.length - 1].suit)}</span>
                 </div>
               ) : (
-                <div className="text-xs text-muted-foreground italic py-4">Masa temizlendi.</div>
+                <div className="text-xs text-muted-foreground italic py-4">{localizeText("Masa temizlendi.")}</div>
               )}
             </div>
           </div>
 
           {/* Player Hand */}
           <div className="pt-3 border-t border-border/40">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mb-2">
-              Elinizdeki Kartlar
-            </span>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block mb-2">{localizeText("Elinizdeki Kartlar")}</span>
             <div className="flex items-center justify-center gap-2">
               {hand.map((c, i) => (
                 <button
@@ -1010,8 +996,8 @@ export function PistiGame({ onBack }: { onBack: () => void }) {
                     c.suit === '♥' || c.suit === '♦' ? 'text-red-600' : 'text-slate-900'
                   )}
                 >
-                  <span>{c.label}</span>
-                  <span className="text-xs">{c.suit}</span>
+                  <span>{localizeText(c.label)}</span>
+                  <span className="text-xs">{localizeText(c.suit)}</span>
                 </button>
               ))}
             </div>
@@ -1019,7 +1005,7 @@ export function PistiGame({ onBack }: { onBack: () => void }) {
         </div>
 
         <Card className="p-3 bg-card border-border text-center text-xs font-medium text-muted-foreground">
-          {message}
+          {localizeText(message)}
         </Card>
       </div>
     </GameShell>
@@ -1030,6 +1016,7 @@ export function PistiGame({ onBack }: { onBack: () => void }) {
 // 7. SOLITAIRE (KLONDIKE) GAME
 // ==========================================
 export function SolitaireGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { recordGameSession } = useArcadeStore();
   const [score, setScore] = useState(0);
   const [moves, setMoves] = useState(0);
@@ -1076,7 +1063,7 @@ export function SolitaireGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Solitaire (Klondike)"
+      title={localizeText("Solitaire (Klondike)")}
       iconEmoji="♠️"
       onBack={onBack}
       onRestart={initSolitaire}
@@ -1093,8 +1080,8 @@ export function SolitaireGame({ onBack }: { onBack: () => void }) {
               onClick={() => handleFoundationClick(i)}
               className="flex-1 h-16 rounded-xl border-2 border-dashed border-primary/40 bg-primary/5 flex flex-col items-center justify-center font-bold text-xs text-primary hover:bg-primary/10 transition-colors"
             >
-              <span className="text-[10px] opacity-70">Temel {i + 1}</span>
-              <span className="text-sm font-extrabold">{f > 0 ? `${f}` : '+ Ekle'}</span>
+              <span className="text-[10px] opacity-70">{localizeText("Temel ")}{localizeText(i + 1)}</span>
+              <span className="text-sm font-extrabold">{localizeText(f > 0 ? `${f}` : '+ Ekle')}</span>
             </button>
           ))}
         </div>
@@ -1111,8 +1098,8 @@ export function SolitaireGame({ onBack }: { onBack: () => void }) {
                     c.suit === '♥' || c.suit === '♦' ? 'text-red-600' : 'text-slate-900'
                   )}
                 >
-                  <span>{c.label}</span>
-                  <span className="text-[9px]">{c.suit}</span>
+                  <span>{localizeText(c.label)}</span>
+                  <span className="text-[9px]">{localizeText(c.suit)}</span>
                 </div>
               ))}
             </div>
@@ -1127,6 +1114,7 @@ export function SolitaireGame({ onBack }: { onBack: () => void }) {
 // 8. SUDOKU MASTER (ADULT 9x9) GAME
 // ==========================================
 export function SudokuMasterGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { recordGameSession } = useArcadeStore();
   const [grid, setGrid] = useState<number[][]>([]);
   const [initialFixed, setInitialFixed] = useState<boolean[][]>([]);
@@ -1186,7 +1174,7 @@ export function SudokuMasterGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Sudoku Master (9x9)"
+      title={localizeText("Sudoku Master (9x9)")}
       iconEmoji="🔢"
       onBack={onBack}
       onRestart={initSudoku}
@@ -1217,7 +1205,7 @@ export function SudokuMasterGame({ onBack }: { onBack: () => void }) {
                       isBorderB && 'border-b-2 border-b-border'
                     )}
                   >
-                    {val !== 0 ? val : ''}
+                    {localizeText(val !== 0 ? val : '')}
                   </button>
                 );
               })
@@ -1235,7 +1223,7 @@ export function SudokuMasterGame({ onBack }: { onBack: () => void }) {
               onClick={() => handleNumberInput(n)}
               className="h-10 font-bold text-sm p-0"
             >
-              {n}
+              {localizeText(n)}
             </Button>
           ))}
         </div>
@@ -1248,6 +1236,7 @@ export function SudokuMasterGame({ onBack }: { onBack: () => void }) {
 // 9. 2048 GAME
 // ==========================================
 export function Game2048({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { recordGameSession } = useArcadeStore();
   const [board, setBoard] = useState<number[][]>([
     [0, 0, 0, 0],
@@ -1311,7 +1300,7 @@ export function Game2048({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="2048"
+      title={localizeText("2048")}
       iconEmoji="🔢"
       onBack={onBack}
       onRestart={restart2048}
@@ -1344,7 +1333,7 @@ export function Game2048({ onBack }: { onBack: () => void }) {
                       : 'bg-primary text-primary-foreground'
                   )}
                 >
-                  {val > 0 ? val : ''}
+                  {localizeText(val > 0 ? val : '')}
                 </div>
               ))
             )}
@@ -1377,6 +1366,7 @@ export function Game2048({ onBack }: { onBack: () => void }) {
 // 10. KELİME BULMACA (WORDLE TURKISH) GAME
 // ==========================================
 export function KelimeBulmacaGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { recordGameSession } = useArcadeStore();
   const targetWords = ['KİTAP', 'GÜNEŞ', 'MASAL', 'DENİZ', 'KALEM', 'YILDIZ'];
   const [targetWord, setTargetWord] = useState('KİTAP');
@@ -1433,7 +1423,7 @@ export function KelimeBulmacaGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Kelime Bulmaca"
+      title={localizeText("Kelime Bulmaca")}
       iconEmoji="🔤"
       onBack={onBack}
       onRestart={initWordle}
@@ -1468,7 +1458,7 @@ export function KelimeBulmacaGame({ onBack }: { onBack: () => void }) {
                           : 'bg-card text-foreground border-border'
                       )}
                     >
-                      {letter}
+                      {localizeText(letter)}
                     </div>
                   );
                 })}
@@ -1487,18 +1477,14 @@ export function KelimeBulmacaGame({ onBack }: { onBack: () => void }) {
                   onClick={() => handleKeyPress(char)}
                   className="h-8 w-7 rounded-lg bg-card border border-border text-xs font-bold hover:bg-muted active:scale-95"
                 >
-                  {char}
+                  {localizeText(char)}
                 </button>
               ))}
             </div>
           ))}
           <div className="flex gap-1.5 pt-1">
-            <Button variant="outline" size="sm" onClick={handleBackspace} className="flex-1 font-bold text-xs">
-              Sil
-            </Button>
-            <Button variant="primary" size="sm" onClick={handleEnter} className="flex-1 font-bold text-xs">
-              Dene (Enter)
-            </Button>
+            <Button variant="outline" size="sm" onClick={handleBackspace} className="flex-1 font-bold text-xs">{localizeText("Sil")}</Button>
+            <Button variant="primary" size="sm" onClick={handleEnter} className="flex-1 font-bold text-xs">{localizeText("Dene (Enter)")}</Button>
           </div>
         </div>
       </div>

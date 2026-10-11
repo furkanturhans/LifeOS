@@ -64,6 +64,7 @@ import {
   HayvanBilgisiGame,
   BayraklarGame,
 } from '../arcade/games/LearningTriviaGames';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface KidsGameItem {
   id: string;
@@ -395,6 +396,7 @@ const CATEGORY_TABS = [
 ];
 
 export function KidsMiniGamesView({ onBackToKids }: { onBackToKids: () => void }) {
+  const localizeText = useLocaleRender();
   const { soundEnabled, toggleSound } = useKidsStore();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -489,7 +491,7 @@ export function KidsMiniGamesView({ onBackToKids }: { onBackToKids: () => void }
             type="button"
             onClick={onBackToKids}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Kids Hub'a Dön"
+            aria-label={localizeText("Kids Hub'a Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -500,14 +502,10 @@ export function KidsMiniGamesView({ onBackToKids }: { onBackToKids: () => void }
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Çocuk Mini Oyunları
-              </h1>
-              <StatusBadge status="verified" label="30 Eğitici Oyun" size="sm" />
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Çocuk Mini Oyunları")}</h1>
+              <StatusBadge status="verified" label={localizeText("30 Eğitici Oyun")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Reklamsız, güvenli ve zeka geliştirici oyunlar
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Reklamsız, güvenli ve zeka geliştirici oyunlar")}</p>
           </div>
         </div>
 
@@ -527,7 +525,7 @@ export function KidsMiniGamesView({ onBackToKids }: { onBackToKids: () => void }
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Oyun ara..."
+            placeholder={localizeText("Oyun ara...")}
             className="w-full h-9 pl-9 pr-3 rounded-xl border border-border bg-card text-xs text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
           />
         </div>
@@ -544,8 +542,8 @@ export function KidsMiniGamesView({ onBackToKids }: { onBackToKids: () => void }
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
               )}
             >
-              <span>{tab.icon}</span>
-              <span>{tab.label}</span>
+              <span>{localizeText(tab.icon)}</span>
+              <span>{localizeText(tab.label)}</span>
             </button>
           ))}
         </div>
@@ -569,20 +567,20 @@ export function KidsMiniGamesView({ onBackToKids }: { onBackToKids: () => void }
                       game.colorClass
                     )}
                   >
-                    {game.iconEmoji}
+                    {localizeText(game.iconEmoji)}
                   </div>
 
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <h3 className="text-sm font-bold text-foreground group-hover:text-pink-500 transition-colors truncate">
-                        {game.title}
+                        {localizeText(game.title)}
                       </h3>
                       <span className="rounded-md bg-muted px-2 py-0.5 text-[10px] font-bold text-muted-foreground">
-                        {game.ageRange}
+                        {localizeText(game.ageRange)}
                       </span>
                     </div>
                     <p className="mt-0.5 text-xs text-muted-foreground leading-snug line-clamp-1">
-                      {game.subtitle}
+                      {localizeText(game.subtitle)}
                     </p>
                   </div>
                 </div>
@@ -593,9 +591,7 @@ export function KidsMiniGamesView({ onBackToKids }: { onBackToKids: () => void }
                   onClick={() => setActiveGameId(game.id)}
                   className="font-bold text-xs h-9 px-3.5 shrink-0 bg-pink-500 hover:bg-pink-600 border-none text-white shadow-xs"
                 >
-                  <Play className="h-3.5 w-3.5 mr-1" />
-                  Oyna
-                </Button>
+                  <Play className="h-3.5 w-3.5 mr-1" />{localizeText("Oyna")}</Button>
               </div>
             </Card>
           </motion.div>

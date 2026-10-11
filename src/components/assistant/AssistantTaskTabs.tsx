@@ -17,6 +17,7 @@ import {
 import { cn } from '@/lib/utils';
 import { useAssistantStore } from '@/stores/useAssistantStore';
 import { ASSISTANT_TYPE_CONFIG, type AssistantTaskType } from '@/types/assistant';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 const STATUS_TABS = [
   { id: 'all' as const, label: 'Görevlerim' },
@@ -36,6 +37,7 @@ const CATEGORIES: { id: AssistantTaskType | 'all'; label: string }[] = [
 ];
 
 export function AssistantTaskTabs() {
+  const localizeText = useLocaleRender();
   const {
     tasks,
     activeTab,
@@ -66,10 +68,10 @@ export function AssistantTaskTabs() {
                   : 'text-muted-foreground hover:bg-muted hover:text-foreground'
               )}
             >
-              <span>{tab.label}</span>
+              <span>{localizeText(tab.label)}</span>
               {showBadge && (
                 <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-amber-500 text-white px-1 text-[10px] font-bold">
-                  {pendingCount}
+                  {localizeText(pendingCount)}
                 </span>
               )}
             </button>
@@ -93,7 +95,7 @@ export function AssistantTaskTabs() {
                   : 'border-border/70 bg-card text-muted-foreground hover:border-border hover:text-foreground'
               )}
             >
-              {cat.label}
+              {localizeText(cat.label)}
             </button>
           );
         })}

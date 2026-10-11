@@ -14,6 +14,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/Ca
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { useEducationStore } from '@/stores/useEducationStore';
 import type { EducationSectionKey } from '@/types/education';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export interface EducationSectionConfig {
   id: EducationSectionKey;
@@ -31,6 +32,7 @@ interface EducationFeaturesGridProps {
 }
 
 export function EducationFeaturesGrid({ onSectionClick }: EducationFeaturesGridProps) {
+  const localizeText = useLocaleRender();
   const { role } = useEducationStore();
 
   const isInstructor = role === 'instructor_verified';
@@ -100,12 +102,8 @@ export function EducationFeaturesGrid({ onSectionClick }: EducationFeaturesGridP
   return (
     <div className="mt-4 px-4">
       <div className="mb-3 px-1 flex items-center justify-between">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Akademi Bölümleri
-        </h2>
-        <span className="text-xs font-medium text-muted-foreground">
-          5 Bölüm
-        </span>
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Akademi Bölümleri")}</h2>
+        <span className="text-xs font-medium text-muted-foreground">{localizeText("5 Bölüm")}</span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -124,28 +122,28 @@ export function EducationFeaturesGrid({ onSectionClick }: EducationFeaturesGridP
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
                     <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-muted border border-border">
-                      {section.icon}
+                      {localizeText(section.icon)}
                     </div>
 
                     <div className="flex-1 min-w-0">
                       <CardTitle className="text-sm font-semibold">
-                        {section.title}
+                        {localizeText(section.title)}
                       </CardTitle>
                       <CardDescription className="mt-1 text-xs line-clamp-2">
-                        {section.description}
+                        {localizeText(section.description)}
                       </CardDescription>
                     </div>
                   </div>
 
                   <StatusBadge
                     status={section.statusType || 'active'}
-                    label={section.statusLabel || 'Aktif'}
+                    label={localizeText(section.statusLabel || 'Aktif')}
                     size="sm"
                   />
                 </div>
 
                 <div className="mt-3 pt-2.5 border-t border-border/50 flex items-center justify-between text-xs text-muted-foreground">
-                  <span>Bölüme Gir</span>
+                  <span>{localizeText("Bölüme Gir")}</span>
                   <ChevronRight className="h-3.5 w-3.5" />
                 </div>
               </CardHeader>

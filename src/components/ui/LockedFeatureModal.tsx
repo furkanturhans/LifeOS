@@ -4,6 +4,7 @@ import React from 'react';
 import { Sparkles } from 'lucide-react';
 import { Modal } from './Modal';
 import { Button } from './Button';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export interface LockedFeatureModalProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ export function LockedFeatureModal({
   description,
   moduleName,
 }: LockedFeatureModalProps) {
+  const localizeText = useLocaleRender();
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="sm">
       <div className="text-center py-2">
@@ -29,19 +31,17 @@ export function LockedFeatureModal({
 
         {moduleName && (
           <span className="inline-block px-2.5 py-0.5 mb-1.5 rounded-full bg-muted text-[11px] font-semibold text-muted-foreground">
-            {moduleName}
+            {localizeText(moduleName)}
           </span>
         )}
 
-        <h3 className="text-base font-bold text-foreground">{title}</h3>
+        <h3 className="text-base font-bold text-foreground">{localizeText(title)}</h3>
         <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-          {description}
+          {localizeText(description)}
         </p>
 
         <div className="mt-6">
-          <Button onClick={onClose} variant="secondary" size="md" className="w-full">
-            Anladım
-          </Button>
+          <Button onClick={onClose} variant="secondary" size="md" className="w-full">{localizeText("Anladım")}</Button>
         </div>
       </div>
     </Modal>

@@ -8,6 +8,7 @@ import { FAMILY_ROLES, type FamilyRole } from '@/types/family';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface InviteMemberModalProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ export function InviteMemberModal({
   onClose,
   inviteCode = 'LIFEOS-FAM-7482',
 }: InviteMemberModalProps) {
+  const localizeText = useLocaleRender();
   const { inviteMember } = useFamilyStore();
   const [memberName, setMemberName] = useState('');
   const [selectedRole, setSelectedRole] = useState<FamilyRole>('child');
@@ -73,44 +75,38 @@ export function InviteMemberModal({
               <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-2xl shadow-lg shadow-amber-500/20 text-white">
                 <UserPlus className="h-7 w-7" />
               </div>
-              <h3 className="text-xl font-bold text-foreground">Aile Üyesi Davet Et</h3>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Aile kodunu paylaş veya yeni bir aile ferdi tanımla.
-              </p>
+              <h3 className="text-xl font-bold text-foreground">{localizeText("Aile Üyesi Davet Et")}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{localizeText("Aile kodunu paylaş veya yeni bir aile ferdi tanımla.")}</p>
             </div>
 
             {/* Invite Code Box */}
             <div className="mb-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-[10px] font-semibold uppercase tracking-wider text-amber-500 dark:text-amber-400">
-                    Özel Aile Davet Kodu
-                  </div>
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-amber-500 dark:text-amber-400">{localizeText("Özel Aile Davet Kodu")}</div>
                   <div className="mt-1 font-mono text-lg font-bold tracking-wider text-foreground">
-                    {inviteCode}
+                    {localizeText(inviteCode)}
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={handleCopy}
                   className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500 text-white shadow-md transition-all hover:bg-amber-600 active:scale-95"
-                  title="Kodu Kopyala"
+                  title={localizeText("Kodu Kopyala")}
                 >
                   {isCopied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
                 </button>
               </div>
               {isCopied && (
-                <div className="mt-2 text-center text-xs font-medium text-emerald-500">
-                  ✓ Davet kodu panoya kopyalandı!
-                </div>
+                <div className="mt-2 text-center text-xs font-medium text-emerald-500">{localizeText("✓ Davet kodu panoya kopyalandı!")}</div>
               )}
             </div>
 
             {/* Add Member Form */}
             <form onSubmit={handleAddMember} className="space-y-4">
               <Input
-                label="Üye Adı Soyadı"
-                placeholder="Örn: Can, Ayşe Hanım..."
+                label={localizeText("Üye Adı Soyadı")}
+                placeholder={localizeText("Örn: Can, Ayşe Hanım...")}
                 value={memberName}
                 onChange={(e) => setMemberName(e.target.value)}
                 required
@@ -118,9 +114,7 @@ export function InviteMemberModal({
 
               {/* Role Selection */}
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Üyenin Rolü
-                </label>
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Üyenin Rolü")}</label>
                 <div className="grid grid-cols-2 gap-2">
                   {FAMILY_ROLES.map((role) => (
                     <button
@@ -134,10 +128,10 @@ export function InviteMemberModal({
                           : 'border-border bg-card hover:bg-muted/40 text-muted-foreground'
                       )}
                     >
-                      <span className="text-xl">{role.icon}</span>
+                      <span className="text-xl">{localizeText(role.icon)}</span>
                       <div className="flex-1 min-w-0">
                         <div className="text-xs font-semibold truncate text-foreground">
-                          {role.labelTr}
+                          {localizeText(role.labelTr)}
                         </div>
                       </div>
                       {selectedRole === role.id && (
@@ -154,9 +148,7 @@ export function InviteMemberModal({
                   size="lg"
                   className="w-full rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 font-semibold text-white shadow-lg shadow-amber-500/25 hover:from-amber-600 hover:to-orange-700"
                 >
-                  <UserPlus className="mr-2 h-4 w-4" />
-                  Üyeyi Aileye Ekle
-                </Button>
+                  <UserPlus className="mr-2 h-4 w-4" />{localizeText("Üyeyi Aileye Ekle")}</Button>
               </div>
             </form>
           </motion.div>

@@ -5,8 +5,10 @@ import { motion } from 'framer-motion';
 import { Clock, MapPin, ArrowRight, History } from 'lucide-react';
 import { useTravelStore } from '@/stores/useTravelStore';
 import type { TravelSearchQuery } from '@/types/travel';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function RecentSearchesSection() {
+  const localizeText = useLocaleRender();
   const { searchQuery, setSearchQuery, executeSearch } = useTravelStore();
   const recentSearches: TravelSearchQuery[] = [];
 
@@ -20,12 +22,11 @@ export function RecentSearchesSection() {
       <div className="mb-3 px-2 flex items-center justify-between">
         <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
           <History className="h-3.5 w-3.5" />
-          <span>Son Aramalarınız</span>
+          <span>{localizeText("Son Aramalarınız")}</span>
         </h3>
         {recentSearches.length > 0 && (
           <span className="text-[11px] font-medium text-muted-foreground">
-            {recentSearches.length} Arama
-          </span>
+            {localizeText(recentSearches.length)}{localizeText(" Arama")}</span>
         )}
       </div>
 
@@ -34,12 +35,8 @@ export function RecentSearchesSection() {
           <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-2xl bg-muted/80 text-muted-foreground">
             <Clock className="h-5 w-5" />
           </div>
-          <h4 className="text-xs font-semibold text-foreground">
-            Henüz geçmiş bir seyahat aramanız bulunmuyor
-          </h4>
-          <p className="mt-0.5 text-[11px] text-muted-foreground">
-            Yaptığınız otobüs seferi aramaları hızlı erişim için burada listelenecektir.
-          </p>
+          <h4 className="text-xs font-semibold text-foreground">{localizeText("Henüz geçmiş bir seyahat aramanız bulunmuyor")}</h4>
+          <p className="mt-0.5 text-[11px] text-muted-foreground">{localizeText("Yaptığınız otobüs seferi aramaları hızlı erişim için burada listelenecektir.")}</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -56,12 +53,11 @@ export function RecentSearchesSection() {
                 </div>
                 <div>
                   <div className="text-xs font-bold text-foreground group-hover:text-blue-500 transition-colors">
-                    {item.fromLocation} → {item.toLocation}
+                    {localizeText(item.fromLocation)} → {localizeText(item.toLocation)}
                   </div>
                   <div className="text-[11px] text-muted-foreground">
-                    {item.departureDate ? `${item.departureDate} • ` : ''}
-                    {item.passengerCount} Yolcu
-                  </div>
+                    {localizeText(item.departureDate ? `${item.departureDate} • ` : '')}
+                    {localizeText(item.passengerCount)}{localizeText(" Yolcu")}</div>
                 </div>
               </div>
 

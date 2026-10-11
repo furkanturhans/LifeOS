@@ -8,8 +8,10 @@ import { AssistantTaskDetailModal } from './AssistantTaskDetailModal';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { useAssistantStore } from '@/stores/useAssistantStore';
 import type { AssistantTask } from '@/types/assistant';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function AssistantTaskList() {
+  const localizeText = useLocaleRender();
   const { tasks, activeTab, selectedCategory } = useAssistantStore();
   const [selectedTask, setSelectedTask] = useState<AssistantTask | null>(null);
 
@@ -37,18 +39,18 @@ export function AssistantTaskList() {
         <EmptyState
           icon={Bot}
           title={
-            activeTab === 'pending_approval'
+            localizeText(activeTab === 'pending_approval'
               ? 'Onay Bekleyen Görev Yok'
               : activeTab === 'in_progress'
               ? 'Yürütülen Aktif Görev Yok'
               : activeTab === 'completed'
               ? 'Henüz Tamamlanan Görev Yok'
-              : 'Henüz Bir Görev Başlatılmadı'
+              : 'Henüz Bir Görev Başlatılmadı')
           }
           description={
-            activeTab === 'all'
+            localizeText(activeTab === 'all'
               ? "Yukarıdaki komut alanına ne yapmak istediğinizi yazarak yapay zekâ asistanınıza ilk görevi verebilirsiniz."
-              : 'Bu filtre kriterine uygun görev bulunmuyor.'
+              : 'Bu filtre kriterine uygun görev bulunmuyor.')
           }
           className="border-border bg-card/50 py-12"
         />

@@ -1,36 +1,31 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import videoUi from './experience/catalog/video-ui.json';
+import { useThemeStore } from '@/stores/useThemeStore';
+import { AppArtwork } from '@/components/ui/AppArtwork';
+
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   Sparkles,
-  Shield,
   Clock,
   Volume2,
   VolumeX,
   Lock,
-  Gamepad2,
-  BookOpen,
-  Film,
-  BookMarked,
-  Palette,
-  KeyRound,
 } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { ParentPinModal } from './ParentPinModal';
 import { ParentDashboardView } from './ParentDashboardView';
-import { KidsMiniGamesView } from './KidsMiniGamesView';
-import { KidsStudyView } from './KidsStudyView';
 import { KidsMovieView } from './KidsMovieView';
-import { KidsStoriesView } from './KidsStoriesView';
-import { KidsDrawView } from './KidsDrawView';
+import { KidsExperience } from './experience/KidsExperience';
 import { useKidsStore } from '@/stores/useKidsStore';
 import type { KidsSectionKey } from '@/types/kids';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function KidsHomeScreen() {
+  const localizeText = useLocaleRender();
+  const videoLocale = useThemeStore(state => state.locale);
   const {
     activeSection,
     setActiveSection,
@@ -40,10 +35,28 @@ export function KidsHomeScreen() {
     dailyTimeLimitMinutes,
     isParentUnlocked,
     unlockParent,
+    lockParent,
   } = useKidsStore();
 
   const [isPinModalOpen, setIsPinModalOpen] = useState(false);
   const [pendingSection, setPendingSection] = useState<KidsSectionKey | null>(null);
+
+  const [counts, setCounts] = useState({ game: 100, education: 100, story: 100, drawing: 100 });
+  useEffect(() => {
+    if (activeSection !== null) return;
+    const controller = new AbortController();
+    fetch('/api/kids/content', { signal: controller.signal, cache: 'no-store' })
+      .then(response => response.ok ? response.json() : null)
+      .then(data => {
+        if (!Array.isArray(data?.content)) return;
+        const next = { game: 0, education: 0, story: 0, drawing: 0 };
+        for (const item of data.content) {
+          if (Object.hasOwn(next, item.category)) next[item.category as keyof typeof next]++;
+        }
+        setCounts(next);
+      }).catch(() => {});
+    return () => controller.abort();
+  }, [activeSection]);
 
   const handleSectionClick = (sectionKey: KidsSectionKey) => {
     if (sectionKey === 'parent') {
@@ -68,22 +81,22 @@ export function KidsHomeScreen() {
 
   // Section Views Router
   if (activeSection === 'mini_games') {
-    return <KidsMiniGamesView onBackToKids={() => setActiveSection(null)} />;
+    return <KidsExperience section="mini_games" onBack={() => setActiveSection(null)} />;
   }
   if (activeSection === 'study') {
-    return <KidsStudyView onBackToKids={() => setActiveSection(null)} />;
+    return <KidsExperience section="study" onBack={() => setActiveSection(null)} />;
   }
   if (activeSection === 'movie') {
     return <KidsMovieView onBackToKids={() => setActiveSection(null)} />;
   }
   if (activeSection === 'stories') {
-    return <KidsStoriesView onBackToKids={() => setActiveSection(null)} />;
+    return <KidsExperience section="stories" onBack={() => setActiveSection(null)} />;
   }
   if (activeSection === 'draw') {
-    return <KidsDrawView onBackToKids={() => setActiveSection(null)} />;
+    return <KidsExperience section="draw" onBack={() => setActiveSection(null)} />;
   }
   if (activeSection === 'parent') {
-    return <ParentDashboardView onBackToKids={() => setActiveSection(null)} />;
+    return <ParentDashboardView onBackToKids={() => { lockParent(); setActiveSection(null); }} />;
   }
 
   const SECTIONS: {
@@ -98,25 +111,25 @@ export function KidsHomeScreen() {
     {
       id: 'mini_games',
       title: 'Mini Oyunlar',
-      subtitle: '30 zeka, bulmaca ve refleks oyunu',
+      subtitle: 'Dokunmatik oyunlar ve yaratıcı keşifler',
       emoji: '🎮',
       gradient: 'from-pink-500/20 via-pink-500/5 to-card',
       borderClass: 'border-pink-500/30 hover:border-pink-500',
-      badge: '30 Oyun',
+      badge: `${counts.game} Oyun`,
     },
     {
       id: 'study',
-      title: 'Kids Study',
-      subtitle: 'Harfler, sayılar ve bilim dersleri',
+      title: 'Çocuk Eğitimi',
+      subtitle: '0–3 yaş için birlikte keşif',
       emoji: '📚',
       gradient: 'from-blue-500/20 via-blue-500/5 to-card',
       borderClass: 'border-blue-500/30 hover:border-blue-500',
-      badge: 'Eğitici',
+      badge: `${counts.education} Etkinlik`,
     },
     {
       id: 'movie',
-      title: 'Kids Movie',
-      subtitle: 'Güvenli çizgi film & animasyonlar',
+      title: 'Çocuk Filmleri',
+      subtitle: videoUi['Birlikte izleyelim, keşfedelim.'][videoLocale],
       emoji: '🎬',
       gradient: 'from-rose-500/20 via-rose-500/5 to-card',
       borderClass: 'border-rose-500/30 hover:border-rose-500',
@@ -129,16 +142,16 @@ export function KidsHomeScreen() {
       emoji: '📖',
       gradient: 'from-amber-500/20 via-amber-500/5 to-card',
       borderClass: 'border-amber-500/30 hover:border-amber-500',
-      badge: 'Sesli Masal',
+      badge: `${counts.story} Hikâye`,
     },
     {
       id: 'draw',
       title: 'Çizim & Sanat',
-      subtitle: 'Renkli tuval, fırçalar ve çıkartmalar',
+      subtitle: 'Rengini seç, dokunarak boya',
       emoji: '🎨',
       gradient: 'from-teal-500/20 via-teal-500/5 to-card',
       borderClass: 'border-teal-500/30 hover:border-teal-500',
-      badge: 'Yaratıcı',
+      badge: `${counts.drawing} Çizim`,
     },
     {
       id: 'parent',
@@ -162,14 +175,10 @@ export function KidsHomeScreen() {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-extrabold text-foreground">
-                LifeOS Kids
-              </h1>
-              <StatusBadge status="verified" label="Güvenli Mod" size="sm" />
+              <h1 className="truncate text-base font-extrabold text-foreground">{localizeText("LifeOS Çocuk Dünyası")}</h1>
+              <StatusBadge status="verified" label={localizeText("Güvenli Mod")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Çocuklara özel eğlence ve öğrenme merkezi
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Çocuklara özel eğlence ve öğrenme merkezi")}</p>
           </div>
         </div>
 
@@ -179,7 +188,7 @@ export function KidsHomeScreen() {
           <button
             onClick={toggleSound}
             className="h-8 w-8 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title="Ses"
+            title={localizeText("Ses")}
           >
             {soundEnabled ? <Volume2 className="h-4 w-4 text-primary" /> : <VolumeX className="h-4 w-4" />}
           </button>
@@ -190,7 +199,7 @@ export function KidsHomeScreen() {
             className="flex items-center gap-1.5 h-8 px-2.5 rounded-xl border border-purple-500/30 bg-purple-500/10 text-purple-600 dark:text-purple-400 font-bold text-xs hover:bg-purple-500/20 transition-all active:scale-95 shadow-2xs"
           >
             <Lock className="h-3.5 w-3.5" />
-            <span>Ebeveyn</span>
+            <span>{localizeText("Ebeveyn")}</span>
           </button>
         </div>
       </div>
@@ -207,14 +216,10 @@ export function KidsHomeScreen() {
             <div>
               <div className="flex items-center gap-1.5 text-xs font-bold text-pink-600 dark:text-pink-400">
                 <Sparkles className="h-4 w-4" />
-                <span>Hoş Geldin Küçük Kaşif!</span>
+                <span>{localizeText("Hoş Geldin Küçük Kaşif!")}</span>
               </div>
-              <h2 className="mt-1 text-lg font-extrabold text-foreground">
-                Öğren, Oyna ve Keşfet 🌟
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground max-w-xs leading-relaxed">
-                Tüm oyunlar, çizgi filmler ve masallar senin için özenle hazırlandı.
-              </p>
+              <h2 className="mt-1 text-lg font-extrabold text-foreground">{localizeText("Öğren, Oyna ve Keşfet 🌟")}</h2>
+              <p className="mt-1 text-xs text-muted-foreground max-w-xs leading-relaxed">{localizeText("Tüm oyunlar, çizgi filmler ve masallar senin için özenle hazırlandı.")}</p>
             </div>
             <span className="text-5xl drop-shadow-md">🦄</span>
           </div>
@@ -223,13 +228,10 @@ export function KidsHomeScreen() {
           <div className="mt-4 pt-3 border-t border-border/40 flex items-center justify-between text-xs">
             <div className="flex items-center gap-1.5 font-bold text-muted-foreground">
               <Clock className="h-3.5 w-3.5 text-amber-500" />
-              <span>
-                Bugün: {todayUsageMinutes} dk {dailyTimeLimitMinutes ? `/ ${dailyTimeLimitMinutes} dk` : ''}
+              <span>{localizeText("Bugün: ")}{todayUsageMinutes} {localizeText("dk")}{dailyTimeLimitMinutes ? <> / {dailyTimeLimitMinutes} {localizeText("dk")}</> : null}
               </span>
             </div>
-            <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
-              Süre Sınırı Güvende
-            </span>
+            <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">{localizeText("Süre Sınırı Güvende")}</span>
           </div>
         </motion.div>
 
@@ -253,19 +255,19 @@ export function KidsHomeScreen() {
               >
                 <div className="flex items-start justify-between">
                   <span className="text-4xl group-hover:scale-110 transition-transform block">
-                    {sec.emoji}
+                    <AppArtwork id={sec.id} fallback={sec.emoji} className="h-16 w-16" />
                   </span>
                   <span className="rounded-xl bg-card/80 backdrop-blur-sm border border-border/60 px-2.5 py-1 text-[11px] font-bold text-foreground shadow-2xs">
-                    {sec.badge}
+                    {localizeText(sec.badge)}
                   </span>
                 </div>
 
                 <div className="mt-3">
                   <h3 className="text-base font-extrabold text-foreground group-hover:text-primary transition-colors">
-                    {sec.title}
+                    {localizeText(sec.title)}
                   </h3>
                   <p className="text-xs text-muted-foreground leading-snug mt-0.5">
-                    {sec.subtitle}
+                    {localizeText(sec.subtitle)}
                   </p>
                 </div>
               </button>

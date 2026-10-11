@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob: data:; connect-src 'none'; base-uri 'none'; form-action 'none'"><script>const lifeosGameStorage=(()=>{const data=new Map();return{getItem:k=>data.get(k)??null,setItem:(k,v)=>data.set(k,String(v)),removeItem:k=>data.delete(k),clear:()=>data.clear()}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Hayvan Dostları · LifeOS</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;overflow:hidden;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:linear-gradient(180deg,#87ceeb 0%, #a8e6a3 60%, #6bbf59 100%);user-select:none;touch-action:none;}
+  #app{display:flex;flex-direction:column;height:100vh;height:100dvh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);}
+  header{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,0.3);}
+  #score{font-size:18px;}
+  #pet-info{font-size:14px;}
+  #stage{flex:1 1 auto;position:relative;overflow:hidden;}
+  .pet{position:absolute;font-size:64px;transition:transform 0.2s;}
+  .food{position:absolute;font-size:34px;cursor:grab;touch-action:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.25));}
+  .food.dragging{z-index:10;}
+  .pet.happy{animation:bounce 0.5s;}
+  .pet.full{animation:wobble 0.6s;}
+  @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px) scale(1.1);}}
+  @keyframes wobble{0%,100%{transform:rotate(0);}25%{transform:rotate(-10deg);}75%{transform:rotate(10deg);}}
+  #message{position:absolute;left:0;right:0;top:10px;text-align:center;color:#fff;font-size:14px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,0.4);pointer-events:none;}
+  #pet-tag{position:absolute;background:rgba(255,255,255,0.95);border-radius:16px;padding:4px 10px;font-size:12px;font-weight:700;color:#333;pointer-events:none;white-space:nowrap;}
+  footer{padding:10px 14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  button.btn{background:#fff;color:#2d7a3a;border:0;border-radius:24px;padding:8px 16px;font-weight:700;font-size:14px;cursor:pointer;}
+  button.btn.alt{background:#feca57;color:#2d3436;}
+  /* 풀잎 */
+  .grass{position:absolute;bottom:0;font-size:22px;pointer-events:none;}
+</style>
+<!-- jangyoon-s-game catalog metadata -->
+
+
+
+</head>
+<body>
+<div id="app">
+  <header>
+    <div id="score">⭐ 0</div>
+    <div id="pet-info">Mutluluk ❤️ 0</div>
+  </header>
+  <div id="stage">
+    <div id="message">Hayvan arkadaşınıza en sevdiği yemeği getirin! 🐾</div>
+    <div class="pet" id="pet">🐶</div>
+    <div id="pet-tag">Köpek yavrusu 🐶</div>
+  </div>
+  <footer>
+    <button class="btn" id="nextPet">başka bir arkadaş</button>
+    <button class="btn alt" id="moreFood">Daha fazla yiyecek ➕</button>
+    <button class="btn" id="resetBtn">başından beri</button>
+  </footer>
+</div>
+<script>
+const PETS = [
+  {emoji:'🐶',name:"köpek yavrusu",love:['🦴','🍖','🍗'],ok:['🍞','🥩'],bad:['🍫','🍇']},
+  {emoji:'🐱',name:"kedi",love:['🐟','🐠','🥛'],ok:['🍗','🍤'],bad:['🍫','🍪']},
+  {emoji:'🐰',name:"tavşan",love:['🥕','🥬','🌿'],ok:['🍎','🍓'],bad:['🍖','🍕']},
+  {emoji:'🐹',name:"hamster",love:['🌰','🥜','🌻'],ok:['🍎','🥕'],bad:['🍫','🧀']},
+  {emoji:'🐵',name:"maymun",love:['🍌','🍑','🥥'],ok:['🍎','🍓'],bad:['🍖','🥩']},
+  {emoji:'🐼',name:"Panda",love:['🎋','🌿','🥬'],ok:['🍎','🍓'],bad:['🍖','🍕']},
+  {emoji:'🐻',name:"ayı",love:['🍯','🐟','🍓'],ok:['🍎','🍞'],bad:['🌶️','🧅']},
+  {emoji:'🐯',name:"kaplan",love:['🥩','🍖','🍗'],ok:['🐟','🍤'],bad:['🥬','🥕']},
+];
+const ALL_FOODS = ['🦴','🍖','🍗','🍞','🥩','🐟','🐠','🥛','🍤','🥕','🥬','🌿','🍎','🍓','🌰','🥜','🌻','🧀','🍌','🍑','🥥','🎋','🍯','🍫','🍇','🍪','🍕','🌶️','🧅'];
+
+const stage=document.getElementById('stage'), petEl=document.getElementById('pet'), tagEl=document.getElementById('pet-tag'), msgEl=document.getElementById('message'), scoreEl=document.getElementById('score'), infoEl=document.getElementById('pet-info');
+let score=0, love=0, petIdx=0, currentPet=PETS[0], foods=[];
+
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function placePet(){
+  currentPet = PETS[petIdx % PETS.length];
+  petEl.textContent = currentPet.emoji;
+  const r = stage.getBoundingClientRect();
+  const px = r.width/2 - 32, py = r.height*0.30;
+  petEl.style.left = px+'px';
+  petEl.style.top = py+'px';
+  tagEl.textContent = currentPet.name+' '+currentPet.emoji;
+  tagEl.style.left = (px-10)+'px';
+  tagEl.style.top = (py+72)+'px';
+}
+
+function spawnFoods(n=6){
+  clearFoods();
+  const r = stage.getBoundingClientRect();
+  // 음식 풀: love 1~2개 + 다른 음식 섞어서
+  const pool = shuffle([...currentPet.love.slice(0,2), ...currentPet.ok.slice(0,1), ...currentPet.bad.slice(0,1), ...shuffle(ALL_FOODS).slice(0,n)]);
+  const picks = shuffle(pool).slice(0,n);
+  picks.forEach((emoji,i)=>{
+    const el = document.createElement('div');
+    el.className='food';
+    el.textContent=emoji;
+    el.dataset.emoji=emoji;
+    // 하단에 배치
+    const cols = Math.ceil(Math.sqrt(n));
+    const cw = r.width/(cols+1);
+    const col = i % cols;
+    const row = Math.floor(i/cols);
+    el.style.left = (cw*(col+1)-22)+'px';
+    el.style.top = (r.height*0.65 + row*52)+'px';
+    stage.appendChild(el);
+    foods.push(el);
+    enableDrag(el);
+  });
+}
+
+function clearFoods(){foods.forEach(f=>f.remove());foods=[];}
+
+function enableDrag(el){
+  let ox=0, oy=0, dragging=false, sx=0, sy=0;
+  el.addEventListener('pointerdown',e=>{
+    e.preventDefault();
+    dragging=true;
+    el.classList.add('dragging');
+    el.setPointerCapture(e.pointerId);
+    const r = el.getBoundingClientRect();
+    sx=r.left; sy=r.top;
+    ox = e.clientX - sx;
+    oy = e.clientY - sy;
+  });
+  el.addEventListener('pointermove',e=>{
+    if(!dragging)return;
+    const sr = stage.getBoundingClientRect();
+    el.style.left = (e.clientX - sr.left - ox)+'px';
+    el.style.top = (e.clientY - sr.top - oy)+'px';
+  });
+  const finish = e=>{
+    if(!dragging)return;
+    dragging=false;
+    el.classList.remove('dragging');
+    // 펫과 충돌?
+    const er = el.getBoundingClientRect();
+    const pr = petEl.getBoundingClientRect();
+    const ex = er.left+er.width/2, ey = er.top+er.height/2;
+    if(ex > pr.left && ex < pr.right && ey > pr.top && ey < pr.bottom){
+      feed(el.dataset.emoji, el);
+    }
+  };
+  el.addEventListener('pointerup',finish);
+  el.addEventListener('pointercancel',finish);
+}
+
+function feed(emoji, el){
+  const p = currentPet;
+  if(p.love.includes(emoji)){
+    score+=20;love+=2;
+    msgEl.textContent="🎉 Vay be! Gerçekten hoşuma gitti!";
+    petEl.classList.add('happy');
+    setTimeout(()=>petEl.classList.remove('happy'),500);
+    el.remove();foods=foods.filter(f=>f!==el);
+  }else if(p.ok.includes(emoji)){
+    score+=10;love+=1;
+    msgEl.textContent="😊 Mmm... Çok lezzetli!";
+    petEl.classList.add('happy');
+    setTimeout(()=>petEl.classList.remove('happy'),500);
+    el.remove();foods=foods.filter(f=>f!==el);
+  }else{
+    msgEl.textContent=`😖 ${p.name}öyle mi${emoji}Sakın yeme!`;
+    petEl.classList.add('full');
+    setTimeout(()=>petEl.classList.remove('full'),600);
+    // 음식 원위치
+    const r = stage.getBoundingClientRect();
+    el.style.left = (Math.random()*(r.width-44))+'px';
+    el.style.top = (r.height*0.75)+'px';
+  }
+  scoreEl.textContent='⭐ '+score;
+  infoEl.textContent="Mutluluk da ❤️"+love;
+  if(foods.length===0){
+    msgEl.textContent="🌟Hepsini yedim! Sana yeni yiyecek getireceğim!";
+    setTimeout(spawnFoods,800);
+  }
+}
+
+document.getElementById('nextPet').addEventListener('click',()=>{
+  petIdx++;
+  msgEl.textContent="Yeni bir arkadaş geldi! 🎈";
+  placePet();
+  spawnFoods();
+});
+document.getElementById('moreFood').addEventListener('click',()=>{spawnFoods();});
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  score=0;love=0;petIdx=0;
+  scoreEl.textContent='⭐ 0';infoEl.textContent="Mutluluk ❤️ 0";
+  placePet();spawnFoods();
+});
+
+window.addEventListener('resize',()=>{placePet();spawnFoods();});
+placePet();
+spawnFoods();
+</script>
+</body>
+</html>

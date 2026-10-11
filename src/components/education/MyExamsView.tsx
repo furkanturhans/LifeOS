@@ -21,12 +21,14 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { useEducationStore } from '@/stores/useEducationStore';
 import type { Exam, ExamAttempt } from '@/types/education';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface MyExamsViewProps {
   onBackToHub: () => void;
 }
 
 export function MyExamsView({ onBackToHub }: MyExamsViewProps) {
+  const localizeText = useLocaleRender();
   const { exams, fetchExams, startExamAttempt } = useEducationStore();
   const [learnerAttempts, setLearnerAttempts] = useState<ExamAttempt[]>([]);
   const [isStarting, setIsStarting] = useState<string | null>(null);
@@ -58,7 +60,7 @@ export function MyExamsView({ onBackToHub }: MyExamsViewProps) {
             type="button"
             onClick={onBackToHub}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Dersler Merkezine Dön"
+            aria-label={localizeText("Dersler Merkezine Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -69,14 +71,10 @@ export function MyExamsView({ onBackToHub }: MyExamsViewProps) {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Sınavlarım & Sertifikalar
-              </h1>
-              <StatusBadge status="active" label="Sınav Merkezi" size="sm" />
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Sınavlarım & Sertifikalar")}</h1>
+              <StatusBadge status="active" label={localizeText("Sınav Merkezi")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Süreli deneme sınavları, değerlendirmeler ve başarı belgeleri
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Süreli deneme sınavları, değerlendirmeler ve başarı belgeleri")}</p>
           </div>
         </div>
       </div>
@@ -90,12 +88,8 @@ export function MyExamsView({ onBackToHub }: MyExamsViewProps) {
               <Award className="h-5 w-5" />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-sm font-bold text-foreground">
-                Süreli Sınav & Sertifikasyon Güvencesi
-              </h3>
-              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                Sınavlar sunucu saatine göre senkronize çalışır. İnternet kesintisinde süreniz sunucuda akmaya devam eder; süreniz bitmeden sınava geri dönebilirsiniz. %70 üzeri başarı gösteren öğrenciler başarı sertifikası kazanır.
-              </p>
+              <h3 className="text-sm font-bold text-foreground">{localizeText("Süreli Sınav & Sertifikasyon Güvencesi")}</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{localizeText("Sınavlar sunucu saatine göre senkronize çalışır. İnternet kesintisinde süreniz sunucuda akmaya devam eder; süreniz bitmeden sınava geri dönebilirsiniz. %70 üzeri başarı gösteren öğrenciler başarı sertifikası kazanır.")}</p>
             </div>
           </div>
         </Card>
@@ -103,15 +97,12 @@ export function MyExamsView({ onBackToHub }: MyExamsViewProps) {
         {/* SECTION 1: AVAILABLE EXAMS */}
         <div className="space-y-3">
           <div className="flex items-center justify-between px-1">
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Aktif ve Yaklaşan Sınavlarım ({exams.length})
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{localizeText("Aktif ve Yaklaşan Sınavlarım (")}{localizeText(exams.length)})
             </h2>
           </div>
 
           {exams.length === 0 ? (
-            <div className="py-10 text-center text-xs text-muted-foreground border border-dashed border-border rounded-2xl">
-              Kayıtlı olduğunuz kurslar için henüz bir sınav planlanmadı.
-            </div>
+            <div className="py-10 text-center text-xs text-muted-foreground border border-dashed border-border rounded-2xl">{localizeText("Kayıtlı olduğunuz kurslar için henüz bir sınav planlanmadı.")}</div>
           ) : (
             exams.map((exam) => {
               const attempt = learnerAttempts.find((a) => a.examId === exam.id);
@@ -129,24 +120,23 @@ export function MyExamsView({ onBackToHub }: MyExamsViewProps) {
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
                           <h3 className="text-sm font-bold text-foreground truncate">
-                            {exam.title}
+                            {localizeText(exam.title)}
                           </h3>
                           {isCompleted ? (
-                            <StatusBadge status="completed" label="Teslim Edildi" size="sm" />
+                            <StatusBadge status="completed" label={localizeText("Teslim Edildi")} size="sm" />
                           ) : isInProgress ? (
                             <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 animate-pulse">
-                              <Clock className="h-3 w-3" /> Devam Ediyor
-                            </span>
+                              <Clock className="h-3 w-3" />{localizeText("Devam Ediyor")}</span>
                           ) : (
-                            <StatusBadge status="active" label="Sınava Açık" size="sm" />
+                            <StatusBadge status="active" label={localizeText("Sınava Açık")} size="sm" />
                           )}
                         </div>
                         <p className="mt-0.5 text-xs text-muted-foreground">
-                          {exam.courseTitle} • Eğitmen: {exam.instructorName}
+                          {localizeText(exam.courseTitle)}{localizeText("• Eğitmen: ")}{localizeText(exam.instructorName)}
                         </p>
                         {exam.description && (
                           <p className="mt-1 text-xs text-muted-foreground/80 line-clamp-1">
-                            {exam.description}
+                            {localizeText(exam.description)}
                           </p>
                         )}
                       </div>
@@ -154,10 +144,8 @@ export function MyExamsView({ onBackToHub }: MyExamsViewProps) {
 
                     <div className="text-right shrink-0">
                       <span className="text-xs font-bold text-purple-500 block">
-                        {exam.durationMinutes} Dakika
-                      </span>
-                      <span className="text-[11px] text-muted-foreground">
-                        Geçme Notu: %{exam.passScorePercent}
+                        {localizeText(exam.durationMinutes)}{localizeText(" Dakika")}</span>
+                      <span className="text-[11px] text-muted-foreground">{localizeText("Geçme Notu: %")}{localizeText(exam.passScorePercent)}
                       </span>
                     </div>
                   </div>
@@ -165,23 +153,20 @@ export function MyExamsView({ onBackToHub }: MyExamsViewProps) {
                   {/* Meta Bar & Start Button */}
                   <div className="pt-2 border-t border-border/50 flex items-center justify-between gap-2 text-xs">
                     <div className="flex items-center gap-3 text-muted-foreground text-[11px]">
-                      <span>{exam.questionsCount || 0} Soru</span>
+                      <span>{localizeText(exam.questionsCount || 0)}{localizeText(" Soru")}</span>
                       <span>•</span>
-                      <span>Tek Deneme Hakkı</span>
+                      <span>{localizeText("Tek Deneme Hakkı")}</span>
                     </div>
 
                     <div>
                       {isCompleted ? (
                         <div className="flex items-center gap-2">
                           {attempt?.scorePercent !== undefined && (
-                            <span className="text-xs font-bold text-foreground">
-                              Notunuz: %{attempt.scorePercent}
+                            <span className="text-xs font-bold text-foreground">{localizeText("Notunuz: %")}{localizeText(attempt.scorePercent)}
                             </span>
                           )}
                           <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-lg">
-                            <CheckCircle2 className="h-3.5 w-3.5" />
-                            Teslim Edildi
-                          </span>
+                            <CheckCircle2 className="h-3.5 w-3.5" />{localizeText("Teslim Edildi")}</span>
                         </div>
                       ) : (
                         <Button
@@ -192,7 +177,7 @@ export function MyExamsView({ onBackToHub }: MyExamsViewProps) {
                           className="font-bold text-xs h-8 px-3.5 bg-purple-600 hover:bg-purple-700 text-white shadow-xs"
                         >
                           <Play className="h-3 w-3 mr-1" />
-                          {isInProgress ? 'Sınava Devam Et' : 'Sınavı Başlat'}
+                          {localizeText(isInProgress ? 'Sınava Devam Et' : 'Sınavı Başlat')}
                         </Button>
                       )}
                     </div>

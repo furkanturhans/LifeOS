@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Loader2, Sparkles, Check, X } from 'lucide-react';
 import type { LocationPlace, LocationAutocompleteResponse } from '@/types/location';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 // Client-side cache to avoid repeated network calls for identical queries
 const clientQueryCache = new Map<string, LocationAutocompleteResponse>();
@@ -36,6 +37,7 @@ export function LocationAutocompleteInput({
   countryCode = 'tr',
   onClear,
 }: LocationAutocompleteInputProps) {
+  const localizeText = useLocaleRender();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<LocationPlace[]>([]);
@@ -136,7 +138,7 @@ export function LocationAutocompleteInput({
     <div ref={containerRef} className={cn('relative w-full', className)}>
       {label && (
         <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-          {label}
+          {localizeText(label)}
         </label>
       )}
 
@@ -155,7 +157,7 @@ export function LocationAutocompleteInput({
             }
           }}
           onKeyDown={handleKeyDown}
-          placeholder={placeholder}
+          placeholder={localizeText(placeholder)}
           required={required}
           disabled={disabled}
           autoComplete="off"
@@ -205,11 +207,9 @@ export function LocationAutocompleteInput({
               <div className="p-3 text-center">
                 <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-muted-foreground">
                   <Sparkles className="h-3.5 w-3.5 text-blue-500" />
-                  <span>Konum önerileri yakında kullanılabilir olacak.</span>
+                  <span>{localizeText("Konum önerileri yakında kullanılabilir olacak.")}</span>
                 </div>
-                <p className="mt-0.5 text-[10px] text-muted-foreground/80">
-                  Adresinizi veya bölgenizi doğrudan yazarak devam edebilirsiniz.
-                </p>
+                <p className="mt-0.5 text-[10px] text-muted-foreground/80">{localizeText("Adresinizi veya bölgenizi doğrudan yazarak devam edebilirsiniz.")}</p>
               </div>
             )}
 
@@ -236,10 +236,10 @@ export function LocationAutocompleteInput({
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="font-bold text-foreground text-[11px] truncate">
-                          {place.name}
+                          {localizeText(place.name)}
                         </div>
                         <div className="text-[10px] text-muted-foreground truncate">
-                          {place.formattedAddress}
+                          {localizeText(place.formattedAddress)}
                         </div>
                       </div>
                     </button>
@@ -250,9 +250,7 @@ export function LocationAutocompleteInput({
 
             {/* If configured but no results found */}
             {isConfigured !== false && !isLoading && suggestions.length === 0 && (
-              <div className="p-3 text-center text-xs text-muted-foreground">
-                Eşleşen konum önerisi bulunamadı.
-              </div>
+              <div className="p-3 text-center text-xs text-muted-foreground">{localizeText("Eşleşen konum önerisi bulunamadı.")}</div>
             )}
           </motion.div>
         )}

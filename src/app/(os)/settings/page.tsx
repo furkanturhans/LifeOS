@@ -14,12 +14,13 @@ interface SettingsRowProps {
 }
 
 function SettingsRow({ label, value, href }: SettingsRowProps) {
+  const localizeText = useLocaleRender();
   return (
     <Link href={href}>
       <div className="flex items-center gap-3 px-4 py-3.5 hover:bg-muted/50 transition-colors cursor-pointer">
         <div className="flex-1">
-          <div className="text-sm font-medium text-foreground">{label}</div>
-          {value && <div className="text-xs text-muted-foreground">{value}</div>}
+          <div className="text-sm font-medium text-foreground">{localizeText(label)}</div>
+          {value && <div className="text-xs text-muted-foreground">{localizeText(value)}</div>}
         </div>
         <ChevronRight className="h-4 w-4 text-muted-foreground flex-shrink-0" />
       </div>
@@ -28,10 +29,11 @@ function SettingsRow({ label, value, href }: SettingsRowProps) {
 }
 
 function SettingsSection({ title, children }: { title: string; children: React.ReactNode }) {
+  const localizeText = useLocaleRender();
   return (
     <div className="mt-4">
       <p className="px-6 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        {title}
+        {localizeText(title)}
       </p>
       <div className="mx-4 overflow-hidden rounded-2xl border border-border bg-card divide-y divide-border">
         {children}
@@ -40,12 +42,22 @@ function SettingsSection({ title, children }: { title: string; children: React.R
   );
 }
 
-export default function SettingsPage() {
-  const router = useRouter();
-  const { locale, theme } = useThemeStore();
+import { useTranslation, LANGUAGE_MAP } from '@/lib/i18n';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
-  const themeLabels = { light: locale === 'tr' ? 'Açık' : 'Light', dark: locale === 'tr' ? 'Koyu' : 'Dark', system: locale === 'tr' ? 'Sistem' : 'System' };
-  const localeLabels = { tr: 'Türkçe', en: 'English' };
+export default function SettingsPage() {
+  const localizeText = useLocaleRender();
+  const router = useRouter();
+  const { t, locale } = useTranslation();
+  const { theme } = useThemeStore();
+
+  const themeLabels = {
+    light: t.settings.light,
+    dark: t.settings.dark,
+    system: t.settings.system,
+  };
+
+  const activeLangName = LANGUAGE_MAP.get(locale)?.nativeName || locale;
 
   return (
     <div className="flex h-full flex-col">
@@ -61,53 +73,53 @@ export default function SettingsPage() {
             <ArrowLeft className="h-4 w-4" />
           </button>
           <h1 className="text-2xl font-bold text-foreground">
-            {locale === 'tr' ? 'Ayarlar' : 'Settings'}
+            {localizeText(t.settings.title)}
           </h1>
         </motion.div>
 
         {/* Appearance */}
-        <SettingsSection title={locale === 'tr' ? 'Görünüm' : 'Appearance'}>
+        <SettingsSection title={localizeText(t.settings.appearance)}>
           <SettingsRow
-            label={locale === 'tr' ? 'Tema' : 'Theme'}
+            label={localizeText(t.settings.theme)}
             value={themeLabels[theme]}
             href="/settings/appearance"
           />
         </SettingsSection>
 
         {/* Language */}
-        <SettingsSection title={locale === 'tr' ? 'Dil' : 'Language'}>
+        <SettingsSection title={localizeText(t.settings.language)}>
           <SettingsRow
-            label={locale === 'tr' ? 'Uygulama Dili' : 'App Language'}
-            value={localeLabels[locale]}
+            label={localizeText(t.settings.appLanguage)}
+            value={activeLangName}
             href="/settings/language"
           />
         </SettingsSection>
 
         {/* Notifications */}
-        <SettingsSection title={locale === 'tr' ? 'Bildirimler' : 'Notifications'}>
+        <SettingsSection title={localizeText(t.settings.notifications)}>
           <SettingsRow
-            label={locale === 'tr' ? 'Bildirim Tercihleri' : 'Notification Preferences'}
+            label={localizeText(t.settings.notificationPrefs)}
             href="/settings/notifications"
           />
         </SettingsSection>
 
         {/* Security */}
-        <SettingsSection title={locale === 'tr' ? 'Güvenlik' : 'Security'}>
-          <SettingsRow label={locale === 'tr' ? 'Şifre Değiştir' : 'Change Password'} href="/settings/security" />
-          <SettingsRow label={locale === 'tr' ? 'Oturumlar' : 'Sessions'} href="/settings/security#sessions" />
-          <SettingsRow label={locale === 'tr' ? 'Giriş Geçmişi' : 'Login History'} href="/settings/security#history" />
+        <SettingsSection title={localizeText(t.settings.security)}>
+          <SettingsRow label={localizeText(t.settings.changePassword)} href="/settings/security" />
+          <SettingsRow label={localizeText(t.settings.sessions)} href="/settings/security#sessions" />
+          <SettingsRow label={localizeText(t.settings.loginHistory)} href="/settings/security#history" />
         </SettingsSection>
 
         {/* Privacy */}
-        <SettingsSection title={locale === 'tr' ? 'Gizlilik' : 'Privacy'}>
-          <SettingsRow label={locale === 'tr' ? 'Gizlilik Ayarları' : 'Privacy Settings'} href="/settings/privacy" />
-          <SettingsRow label={locale === 'tr' ? 'Veri Yönetimi' : 'Data Management'} href="/settings/privacy#data" />
+        <SettingsSection title={localizeText(t.settings.privacy)}>
+          <SettingsRow label={localizeText(t.settings.privacy)} href="/settings/privacy" />
+          <SettingsRow label={localizeText("Veri Yönetimi")} href="/settings/privacy#data" />
         </SettingsSection>
 
         {/* Account */}
-        <SettingsSection title={locale === 'tr' ? 'Hesap' : 'Account'}>
-          <SettingsRow label={locale === 'tr' ? 'Hesap Bilgileri' : 'Account Info'} href="/settings/account" />
-          <SettingsRow label={locale === 'tr' ? 'Cihazlar' : 'Devices'} href="/settings/devices" />
+        <SettingsSection title={localizeText(t.settings.account)}>
+          <SettingsRow label={localizeText(t.settings.account)} href="/settings/account" />
+          <SettingsRow label={localizeText(t.settings.devices)} href="/settings/devices" />
         </SettingsSection>
       </div>
 

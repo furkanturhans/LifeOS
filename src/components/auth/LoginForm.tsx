@@ -14,6 +14,7 @@ import { useThemeStore } from '@/stores/useThemeStore';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { cleanLifeOSId, setSessionCookie, generateLocalUserId } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 const loginSchema = z.object({
   email: z.string().email('Geçerli bir e-posta adresi girin'),
@@ -23,6 +24,7 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
+  const localizeText = useLocaleRender();
   const router = useRouter();
   const { setUser } = useAuthStore();
   const { setBackground, setTheme } = useThemeStore();
@@ -117,8 +119,7 @@ export function LoginForm() {
         setTheme(fullUser.theme as any);
       }
 
-      router.push('/home');
-      router.refresh();
+      router.replace('/home');
     } catch (err: any) {
       console.error('Login process error:', err);
       const username = cleanLifeOSId(data.email.split('@')[0]);
@@ -139,8 +140,7 @@ export function LoginForm() {
         updatedAt: new Date().toISOString(),
       });
       setSessionCookie(localSupabaseId);
-      router.push('/home');
-      router.refresh();
+      router.replace('/home');
     }
   }
 
@@ -162,8 +162,8 @@ export function LoginForm() {
           <span className="text-3xl">⚡</span>
         </motion.div>
         <div className="text-center">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">LifeOS</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">Kişisel dijital yaşam alanın</p>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">{localizeText("LifeOS")}</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">{localizeText("Kişisel dijital yaşam alanın")}</p>
         </div>
       </div>
 
@@ -175,16 +175,16 @@ export function LoginForm() {
         className="rounded-3xl border border-border bg-card p-6 shadow-sm space-y-5"
       >
         <div>
-          <h2 className="text-xl font-semibold text-foreground">Giriş Yap</h2>
-          <p className="text-sm text-muted-foreground mt-0.5">Hesabına hoş geldin.</p>
+          <h2 className="text-xl font-semibold text-foreground">{localizeText("Giriş Yap")}</h2>
+          <p className="text-sm text-muted-foreground mt-0.5">{localizeText("Hesabına hoş geldin.")}</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <Input
             {...register('email')}
-            label="E-posta"
+            label={localizeText("E-posta")}
             type="email"
-            placeholder="ornek@email.com"
+            placeholder={localizeText("ornek@email.com")}
             autoComplete="email"
             autoCapitalize="off"
             icon={<Mail className="h-4 w-4" />}
@@ -193,9 +193,9 @@ export function LoginForm() {
 
           <Input
             {...register('password')}
-            label="Şifre"
+            label={localizeText("Şifre")}
             type={showPassword ? 'text' : 'password'}
-            placeholder="••••••••"
+            placeholder={localizeText("••••••••")}
             autoComplete="current-password"
             icon={<Lock className="h-4 w-4" />}
             rightIcon={
@@ -217,21 +217,16 @@ export function LoginForm() {
               animate={{ opacity: 1, y: 0 }}
               className="rounded-xl bg-destructive/10 border border-destructive/20 px-4 py-3 text-sm text-destructive"
             >
-              {error}
+              {localizeText(error)}
             </motion.div>
           )}
 
-          <Button type="submit" size="lg" className="w-full" isLoading={isSubmitting}>
-            Giriş Yap
-          </Button>
+          <Button type="submit" size="lg" className="w-full" isLoading={isSubmitting}>{localizeText("Giriş Yap")}</Button>
         </form>
       </motion.div>
 
-      <p className="text-center text-sm text-muted-foreground">
-        Hesabın yok mu?{' '}
-        <Link href="/register" className="font-semibold text-primary hover:underline underline-offset-4">
-          Hesap oluştur
-        </Link>
+      <p className="text-center text-sm text-muted-foreground">{localizeText("Hesabın yok mu?")}{localizeText(' ')}
+        <Link href="/register" className="font-semibold text-primary hover:underline underline-offset-4">{localizeText("Hesap oluştur")}</Link>
       </p>
     </motion.div>
   );

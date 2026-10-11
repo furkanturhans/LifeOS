@@ -1,5 +1,25 @@
 export type ThemePreference = 'light' | 'dark' | 'system';
-export type LocalePreference = 'tr' | 'en';
+export type LocalePreference =
+  | 'tr'
+  | 'en'
+  | 'de'
+  | 'fr'
+  | 'es'
+  | 'it'
+  | 'pt'
+  | 'ru'
+  | 'ar'
+  | 'zh'
+  | 'ja'
+  | 'ko'
+  | 'nl'
+  | 'pl'
+  | 'sv'
+  | 'az'
+  | 'hi'
+  | 'id'
+  | 'uk'
+  | 'el';
 export type BackgroundType = 'default' | 'color' | 'image';
 export type AccentColor = 'blue' | 'green' | 'purple' | 'orange';
 
@@ -11,7 +31,7 @@ export interface UserProfile {
   displayName: string;
   avatarUrl: string | null;
   bio: string | null;
-  locale: 'tr' | 'en';
+  locale: LocalePreference;
   theme: ThemePreference;
   accentColor?: AccentColor;
   reducedMotion?: boolean;

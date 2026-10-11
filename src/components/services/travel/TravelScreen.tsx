@@ -22,6 +22,7 @@ import { cn } from '@/lib/utils';
 import { Bus, Plane, Building, Car, ChevronRight, ArrowLeft } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { StatusBadge } from '@/components/ui/StatusBadge';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 const TRAVEL_PRODUCTS = [
   {
@@ -66,6 +67,7 @@ const TRAVEL_PRODUCTS = [
 ];
 
 export function TravelScreen() {
+  const localizeText = useLocaleRender();
   const { activeTab, setActiveTab } = useTravelStore();
   const {
     activePartnerProduct,
@@ -153,16 +155,16 @@ export function TravelScreen() {
                               <div className="min-w-0">
                                 <div className="flex items-center gap-2">
                                   <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
-                                    {prod.title}
+                                    {localizeText(prod.title)}
                                   </h3>
                                   <StatusBadge
                                     status={prod.isActive ? 'active' : 'open'}
-                                    label={prod.status}
+                                    label={localizeText(prod.status)}
                                     size="sm"
                                   />
                                 </div>
                                 <p className="text-xs text-muted-foreground truncate mt-0.5">
-                                  {prod.subtitle}
+                                  {localizeText(prod.subtitle)}
                                 </p>
                               </div>
                             </div>
@@ -186,7 +188,7 @@ export function TravelScreen() {
                       className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors py-1"
                     >
                       <ArrowLeft className="h-3.5 w-3.5" />
-                      <span>Tüm Seyahat Seçenekleri</span>
+                      <span>{localizeText("Tüm Seyahat Seçenekleri")}</span>
                     </button>
                   </div>
 
@@ -243,8 +245,8 @@ export function TravelScreen() {
                             : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
                         )}
                       >
-                        <span>{info.emoji}</span>
-                        <span>{info.labelTr.split(' ')[0]} Paneli</span>
+                        <span>{localizeText(info.emoji)}</span>
+                        <span>{localizeText(info.labelTr.split(' ')[0])}{localizeText(" Paneli")}</span>
                         {prodStatus === 'partner_verified' && (
                           <span className="text-[10px] opacity-80">✓</span>
                         )}
@@ -285,7 +287,7 @@ export function TravelScreen() {
         serviceTitle={lockedFeatureModal.title}
         serviceIcon={
           lockedFeatureModal.iconEmoji ? (
-            <span className="text-4xl">{lockedFeatureModal.iconEmoji}</span>
+            <span className="text-4xl">{localizeText(lockedFeatureModal.iconEmoji)}</span>
           ) : undefined
         }
       />

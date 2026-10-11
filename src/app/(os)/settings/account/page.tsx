@@ -18,6 +18,7 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { cleanLifeOSId, isValidLifeOSId, formatLifeOSId } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 type FieldKey = 'displayName' | 'lifeosId';
 
@@ -30,6 +31,7 @@ interface SaveState {
 const defaultSaveState: SaveState = { loading: false, saved: false, error: null };
 
 export default function AccountSettingsPage() {
+  const localizeText = useLocaleRender();
   const { user, setUser } = useAuthStore();
 
   const [editing, setEditing] = useState<FieldKey | null>(null);
@@ -153,8 +155,8 @@ export default function AccountSettingsPage() {
           <ArrowLeft className="w-5 h-5" />
         </Link>
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-foreground">Hesap Bilgileri</h1>
-          <p className="text-xs text-muted-foreground">Profil ve kimlik tercihlerinizi yönetin</p>
+          <h1 className="text-xl font-bold tracking-tight text-foreground">{localizeText("Hesap Bilgileri")}</h1>
+          <p className="text-xs text-muted-foreground">{localizeText("Profil ve kimlik tercihlerinizi yönetin")}</p>
         </div>
       </div>
 
@@ -171,10 +173,10 @@ export default function AccountSettingsPage() {
               {/* Field header */}
               <div className="flex items-center justify-between px-5 pt-4 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <span className="text-primary">{field.icon}</span>
+                  <span className="text-primary">{localizeText(field.icon)}</span>
                   <div>
-                    <p className="text-[13px] font-semibold text-foreground">{field.label}</p>
-                    <p className="text-[11px] text-muted-foreground">{field.description}</p>
+                    <p className="text-[13px] font-semibold text-foreground">{localizeText(field.label)}</p>
+                    <p className="text-[11px] text-muted-foreground">{localizeText(field.description)}</p>
                   </div>
                 </div>
                 {!isActive && (
@@ -182,16 +184,14 @@ export default function AccountSettingsPage() {
                     onClick={() => startEditing(field.key)}
                     className="flex items-center gap-1.5 text-[11px] font-medium text-primary/80 hover:text-primary px-2.5 py-1.5 rounded-lg hover:bg-primary/10 transition-colors"
                   >
-                    <Pencil className="w-3 h-3" />
-                    Düzenle
-                  </button>
+                    <Pencil className="w-3 h-3" />{localizeText("Düzenle")}</button>
                 )}
               </div>
 
               {/* Current value (collapsed state) */}
               {!isActive && (
                 <div className="px-5 pb-4">
-                  <span className="text-sm font-medium text-foreground/80">{field.display}</span>
+                  <span className="text-sm font-medium text-foreground/80">{localizeText(field.display)}</span>
                 </div>
               )}
 
@@ -199,13 +199,13 @@ export default function AccountSettingsPage() {
               {isActive && (
                 <div className="px-5 pb-5 space-y-3 border-t border-white/5 pt-3">
                   <Input
-                    label=""
+                    label={localizeText("")}
                     value={tempValue}
                     onChange={(e) => {
                       setSaveState(defaultSaveState);
                       setTempValue(e.target.value);
                     }}
-                    placeholder={field.key === 'lifeosId' ? 'furkan' : 'Adınızı girin'}
+                    placeholder={localizeText(field.key === 'lifeosId' ? 'furkan' : 'Adınızı girin')}
                     icon={field.icon}
                     autoFocus
                     onKeyDown={(e) => {
@@ -216,15 +216,15 @@ export default function AccountSettingsPage() {
 
                   {field.hint && (
                     <p className="text-[11px] text-muted-foreground px-1">
-                      {field.hint.split(':')[0]}:{' '}
-                      <span className="font-semibold text-primary">{field.hint.split(':')[1]}</span>
+                      {localizeText(field.hint.split(':')[0])}:{localizeText(' ')}
+                      <span className="font-semibold text-primary">{localizeText(field.hint.split(':')[1])}</span>
                     </p>
                   )}
 
                   {saveState.error && (
                     <div className="rounded-xl bg-destructive/10 border border-destructive/20 px-3 py-2 flex items-start gap-2 text-xs text-destructive">
                       <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                      <span>{saveState.error}</span>
+                      <span>{localizeText(saveState.error)}</span>
                     </div>
                   )}
 
@@ -233,9 +233,7 @@ export default function AccountSettingsPage() {
                       onClick={cancelEditing}
                       className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border border-white/10 bg-card/60 hover:bg-card text-xs font-medium text-muted-foreground transition-colors"
                     >
-                      <X className="w-3.5 h-3.5" />
-                      İptal
-                    </button>
+                      <X className="w-3.5 h-3.5" />{localizeText("İptal")}</button>
                     <button
                       onClick={() => handleSave(field.key)}
                       disabled={saveState.loading || saveState.saved}
@@ -245,14 +243,10 @@ export default function AccountSettingsPage() {
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
                       ) : saveState.saved ? (
                         <>
-                          <Check className="w-3.5 h-3.5 text-emerald-300" />
-                          Kaydedildi
-                        </>
+                          <Check className="w-3.5 h-3.5 text-emerald-300" />{localizeText("Kaydedildi")}</>
                       ) : (
                         <>
-                          <Check className="w-3.5 h-3.5" />
-                          Kaydet
-                        </>
+                          <Check className="w-3.5 h-3.5" />{localizeText("Kaydet")}</>
                       )}
                     </button>
                   </div>
@@ -270,32 +264,23 @@ export default function AccountSettingsPage() {
                 <Mail className="w-4 h-4" />
               </span>
               <div>
-                <p className="text-[13px] font-semibold text-foreground">E-posta Adresi</p>
-                <p className="text-[11px] text-muted-foreground">Hesap e-postanız</p>
+                <p className="text-[13px] font-semibold text-foreground">{localizeText("E-posta Adresi")}</p>
+                <p className="text-[11px] text-muted-foreground">{localizeText("Hesap e-postanız")}</p>
               </div>
             </div>
-            <span className="text-[10px] font-medium bg-muted/40 text-muted-foreground px-2 py-0.5 rounded-full border border-white/5">
-              Değiştirilemez
-            </span>
+            <span className="text-[10px] font-medium bg-muted/40 text-muted-foreground px-2 py-0.5 rounded-full border border-white/5">{localizeText("Değiştirilemez")}</span>
           </div>
           <p className="mt-2 text-sm font-medium text-foreground/60 pl-[26px]">
-            {user?.email || 'user@lifeos.local'}
+            {user?.email || localizeText('user@lifeos.local')}
           </p>
         </div>
 
         {/* Password card */}
         <div className="rounded-3xl border border-white/10 bg-card/40 backdrop-blur-xl p-5 space-y-3">
           <h2 className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Key className="w-4 h-4 text-primary" />
-            Şifre ve Doğrulama
-          </h2>
-          <p className="text-xs text-muted-foreground">
-            Şifrenizi yenilemek veya güvenlik anahtarı bağlamak için doğrulama e-postası
-            talep edebilirsiniz.
-          </p>
-          <Button variant="outline" size="sm" type="button" className="w-full">
-            Şifre Sıfırlama E-postası Gönder
-          </Button>
+            <Key className="w-4 h-4 text-primary" />{localizeText("Şifre ve Doğrulama")}</h2>
+          <p className="text-xs text-muted-foreground">{localizeText("Şifrenizi yenilemek veya güvenlik anahtarı bağlamak için doğrulama e-postası talep edebilirsiniz.")}</p>
+          <Button variant="outline" size="sm" type="button" className="w-full">{localizeText("Şifre Sıfırlama E-postası Gönder")}</Button>
         </div>
       </div>
     </div>

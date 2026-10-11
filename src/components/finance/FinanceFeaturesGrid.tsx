@@ -13,6 +13,7 @@ import {
 import { cn } from '@/lib/utils';
 import type { FinanceSectionKey } from '@/types/finance';
 import { StatusBadge } from '@/components/ui/StatusBadge';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export interface FinanceFeatureCardConfig {
   id: FinanceSectionKey;
@@ -59,15 +60,12 @@ interface FinanceFeaturesGridProps {
 }
 
 export function FinanceFeaturesGrid({ onFeatureClick }: FinanceFeaturesGridProps) {
+  const localizeText = useLocaleRender();
   return (
     <div className="mt-4 px-4 sm:px-6">
       <div className="mb-3 px-1 flex items-center justify-between">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          Finansal Bölümler
-        </h2>
-        <span className="text-xs font-semibold text-muted-foreground">
-          5 Bölüm
-        </span>
+        <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Finansal Bölümler")}</h2>
+        <span className="text-xs font-semibold text-muted-foreground">{localizeText("5 Bölüm")}</span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -86,22 +84,22 @@ export function FinanceFeaturesGrid({ onFeatureClick }: FinanceFeaturesGridProps
             <div>
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-muted/40 shadow-xs transition-transform group-hover:scale-105">
-                  {section.icon}
+                  {localizeText(section.icon)}
                 </div>
 
-                <StatusBadge status="locked" label="Çok Yakında" size="sm" />
+                <StatusBadge status="locked" label={localizeText("Çok Yakında")} size="sm" />
               </div>
 
               <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
-                {section.title}
+                {localizeText(section.title)}
               </h3>
               <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
-                {section.description}
+                {localizeText(section.description)}
               </p>
             </div>
 
             <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs text-muted-foreground">
-              <span className="font-semibold text-primary">Önizle</span>
+              <span className="font-semibold text-primary">{localizeText("Önizle")}</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-0.5 transition-transform" />
             </div>
           </motion.div>

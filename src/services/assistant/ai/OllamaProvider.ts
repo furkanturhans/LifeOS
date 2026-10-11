@@ -6,6 +6,7 @@ import type {
   AIChatMessage,
 } from './types';
 import type { AssistantToolCall, AssistantPermissionScopeKey } from '@/types/assistant';
+import { SUPPORTED_LANGUAGES } from '@/lib/i18n/languages';
 
 export class OllamaProvider implements AIChatProvider {
   readonly id = 'ollama' as const;
@@ -234,7 +235,8 @@ export class OllamaProvider implements AIChatProvider {
       contextSection += '\n- LifeOS Görevleri: Görev listesini inceleme ve yeni görev planlama yetkisi açık.';
     }
 
-    return `Sen LifeOS Asistanısın. Türkçe konuşan, nazik, son derece güvenilir, saygılı ve net bir kişisel yaşam işletim sistemi yapay zekâsısın.
+    const responseLanguage = SUPPORTED_LANGUAGES.find(language => language.code === request.contextData?.locale)?.name ?? 'Turkish';
+    return `Sen LifeOS Asistanısın. Nazik, son derece güvenilir, saygılı ve net bir kişisel yaşam işletim sistemi yapay zekâsısın.
 
 GÜVENLİK VE GİZLİLİK KURALLARI:
 1. Kullanıcının cihazındaki veya buluttaki kişisel verilerine yalnızca açıkça izin verilen kapsamlarda erişebilirsin.
@@ -242,7 +244,7 @@ GÜVENLİK VE GİZLİLİK KURALLARI:
 3. Kapsam izinleri:${contextSection}
 4. ASLA sahte finansal sayı, takvim randevusu veya kişi bilgisi uydurma. Veri izni yoksa nazikçe kullanıcıdan izin istemesi gerektiğini belirt.
 5. Kullanıcı adına dış dünyaya mesaj gönderme, ödeme yapma, rezervasyon tamamlama veya veri silme gibi eylemleri ASLA tek başına yapma; kullanıcıdan açık onay iste.
-6. Yanıtların Türkçe, net, profesyonel ve düzenli olsun. Gerekirse maddeler halinde yaz.`;
+6. Yanıtların ${responseLanguage} dilinde, net, profesyonel ve düzenli olsun. Gerekirse maddeler halinde yaz.`;
   }
 
   /**

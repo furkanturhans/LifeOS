@@ -7,6 +7,7 @@ import { useTravelPartnerStore } from '@/stores/useTravelPartnerStore';
 import { VEHICLE_TYPE_LABELS } from '@/types/travelPartner';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface CreateVehicleModalProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface CreateVehicleModalProps {
 }
 
 export function CreateVehicleModal({ isOpen, onClose }: CreateVehicleModalProps) {
+  const localizeText = useLocaleRender();
   const { addDraftVehicle } = useTravelPartnerStore();
 
   const [vehicleCode, setVehicleCode] = useState('');
@@ -77,32 +79,30 @@ export function CreateVehicleModal({ isOpen, onClose }: CreateVehicleModalProps)
             </button>
 
             <div className="mb-4">
-              <h3 className="text-xl font-bold text-foreground">Yeni Araç Tanımla</h3>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Filonuzdaki otobüsü koltuk düzeni ve kapasitesiyle sisteme kaydedin.
-              </p>
+              <h3 className="text-xl font-bold text-foreground">{localizeText("Yeni Araç Tanımla")}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{localizeText("Filonuzdaki otobüsü koltuk düzeni ve kapasitesiyle sisteme kaydedin.")}</p>
             </div>
 
             {error && (
               <div className="mb-4 flex items-center gap-2 rounded-2xl bg-destructive/15 border border-destructive/30 p-3 text-xs text-destructive">
                 <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                <span>{error}</span>
+                <span>{localizeText(error)}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <Input
-                  label="Araç Adı / Filo Kodu *"
-                  placeholder="Örn: Travego-01 / 34-LIF-01"
+                  label={localizeText("Araç Adı / Filo Kodu *")}
+                  placeholder={localizeText("Örn: Travego-01 / 34-LIF-01")}
                   value={vehicleCode}
                   onChange={(e) => setVehicleCode(e.target.value)}
                   icon={<Bus className="h-4 w-4 text-muted-foreground" />}
                   required
                 />
                 <Input
-                  label="Plaka No *"
-                  placeholder="Örn: 34 TRV 100"
+                  label={localizeText("Plaka No *")}
+                  placeholder={localizeText("Örn: 34 TRV 100")}
                   value={plateNumber}
                   onChange={(e) => setPlateNumber(e.target.value)}
                   required
@@ -110,9 +110,7 @@ export function CreateVehicleModal({ isOpen, onClose }: CreateVehicleModalProps)
               </div>
 
               <div>
-                <label className="mb-1 block text-xs font-medium text-foreground">
-                  Koltuk Düzeni & Araç Tipi *
-                </label>
+                <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Koltuk Düzeni & Araç Tipi *")}</label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
@@ -126,10 +124,8 @@ export function CreateVehicleModal({ isOpen, onClose }: CreateVehicleModalProps)
                         : 'border-border/80 bg-muted/30 text-foreground'
                     }`}
                   >
-                    <div>💺 2+1 Rahat Hat</div>
-                    <div className="text-[10px] text-muted-foreground font-normal mt-0.5">
-                      38 Koltuklu Geniş Otobüs
-                    </div>
+                    <div>{localizeText("💺 2+1 Rahat Hat")}</div>
+                    <div className="text-[10px] text-muted-foreground font-normal mt-0.5">{localizeText("38 Koltuklu Geniş Otobüs")}</div>
                   </button>
 
                   <button
@@ -144,18 +140,14 @@ export function CreateVehicleModal({ isOpen, onClose }: CreateVehicleModalProps)
                         : 'border-border/80 bg-muted/30 text-foreground'
                     }`}
                   >
-                    <div>🚌 2+2 Standart</div>
-                    <div className="text-[10px] text-muted-foreground font-normal mt-0.5">
-                      46-54 Koltuklu Standart
-                    </div>
+                    <div>{localizeText("🚌 2+2 Standart")}</div>
+                    <div className="text-[10px] text-muted-foreground font-normal mt-0.5">{localizeText("46-54 Koltuklu Standart")}</div>
                   </button>
                 </div>
               </div>
 
               <div>
-                <label className="mb-1 block text-xs font-medium text-foreground">
-                  Koltuk Kapasitesi
-                </label>
+                <label className="mb-1 block text-xs font-medium text-foreground">{localizeText("Koltuk Kapasitesi")}</label>
                 <input
                   type="number"
                   value={seatCapacity}
@@ -171,9 +163,7 @@ export function CreateVehicleModal({ isOpen, onClose }: CreateVehicleModalProps)
                   size="lg"
                   className="w-full rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 font-semibold text-white shadow-lg shadow-blue-500/25"
                 >
-                  <Sparkles className="mr-2 h-4 w-4" />
-                  Aracı Filoya Ekle
-                </Button>
+                  <Sparkles className="mr-2 h-4 w-4" />{localizeText("Aracı Filoya Ekle")}</Button>
               </div>
             </form>
           </motion.div>

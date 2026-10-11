@@ -21,6 +21,7 @@ import { useKidsStore } from '@/stores/useKidsStore';
 import { kidsSpeech } from '@/services/kidsSpeechService';
 import type { KidsStudySubject, KidsStudyLesson } from '@/types/kids';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 const LESSONS: KidsStudyLesson[] = [
   {
@@ -144,6 +145,7 @@ const LESSONS: KidsStudyLesson[] = [
 ];
 
 export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
+  const localizeText = useLocaleRender();
   const { allowedSubjects, voiceSettings, isSpeaking, setIsSpeaking } = useKidsStore();
   const [activeLesson, setActiveLesson] = useState<KidsStudyLesson | null>(null);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -204,13 +206,13 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
               <ArrowLeft className="h-4 w-4" />
             </button>
 
-            <span className="text-2xl">{activeLesson.iconEmoji}</span>
+            <span className="text-2xl">{localizeText(activeLesson.iconEmoji)}</span>
             <div className="min-w-0">
               <h1 className="truncate text-base font-bold text-foreground">
-                {activeLesson.title}
+                {localizeText(activeLesson.title)}
               </h1>
               <p className="truncate text-xs text-muted-foreground">
-                {isQuizMode ? 'Soru Zamanı 🎯' : `Kart ${currentCardIndex + 1} / ${activeLesson.cards.length}`}
+                {localizeText(isQuizMode ? 'Soru Zamanı 🎯' : `Kart ${currentCardIndex + 1} / ${activeLesson.cards.length}`)}
               </p>
             </div>
           </div>
@@ -224,7 +226,7 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
             }}
             className="text-xs font-bold h-8"
           >
-            {isQuizMode ? 'Kartlara Dön' : 'Mini Test 🎯'}
+            {localizeText(isQuizMode ? 'Kartlara Dön' : 'Mini Test 🎯')}
           </Button>
         </div>
 
@@ -251,18 +253,17 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
                     : 'border-primary/40 bg-gradient-to-br from-primary/10 via-card to-primary/5'
                 )}
               >
-                <span className="text-6xl mb-3">{card.iconEmoji}</span>
+                <span className="text-6xl mb-3">{localizeText(card.iconEmoji)}</span>
                 <span className="text-3xl font-extrabold text-foreground">
-                  {isFlipped ? card.backText : card.frontText}
+                  {localizeText(isFlipped ? card.backText : card.frontText)}
                 </span>
                 {isFlipped && (
                   <p className="mt-2 text-xs font-medium text-muted-foreground">
-                    {card.subtext}
+                    {localizeText(card.subtext)}
                   </p>
                 )}
                 <span className="mt-4 text-[11px] font-bold text-primary/80 flex items-center gap-1">
-                  <RotateCcw className="h-3.5 w-3.5" /> Dokun ve Çevir
-                </span>
+                  <RotateCcw className="h-3.5 w-3.5" />{localizeText("Dokun ve Çevir")}</span>
               </motion.div>
 
               {/* Pronunciation & Next/Prev Controls */}
@@ -276,9 +277,7 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
                     setIsFlipped(false);
                   }}
                   className="font-bold text-xs flex-1 h-10"
-                >
-                  ◀ Önceki
-                </Button>
+                >{localizeText("◀ Önceki")}</Button>
 
                 <Button
                   variant="primary"
@@ -287,8 +286,7 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
                   onClick={() => speakText(card.audioPrompt || card.frontText)}
                   className="h-10 px-4 font-bold text-xs bg-blue-500 hover:bg-blue-600 border-none text-white shadow-xs disabled:opacity-40"
                 >
-                  <Volume2 className="h-4 w-4 mr-1" /> Dinle
-                </Button>
+                  <Volume2 className="h-4 w-4 mr-1" />{localizeText("Dinle")}</Button>
 
                 <Button
                   variant="outline"
@@ -299,20 +297,17 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
                     setIsFlipped(false);
                   }}
                   className="font-bold text-xs flex-1 h-10"
-                >
-                  Sonraki ▶
-                </Button>
+                >{localizeText("Sonraki ▶")}</Button>
               </div>
             </div>
           ) : (
             /* Quiz view */
             <div className="w-full space-y-4">
               <Card className="p-5 border-border bg-card shadow-lg text-center space-y-3">
-                <span className="text-xs font-bold text-blue-500 uppercase tracking-wider block">
-                  Soru {quizIndex + 1}
+                <span className="text-xs font-bold text-blue-500 uppercase tracking-wider block">{localizeText("Soru ")}{localizeText(quizIndex + 1)}
                 </span>
                 <h3 className="text-base font-extrabold text-foreground">
-                  {quizItem.question}
+                  {localizeText(quizItem.question)}
                 </h3>
               </Card>
 
@@ -337,7 +332,7 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
                           : 'border-border bg-card hover:border-blue-400 text-foreground'
                       )}
                     >
-                      {opt}
+                      {localizeText(opt)}
                     </button>
                   );
                 })}
@@ -345,9 +340,9 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
 
               {selectedOption !== null && (
                 <Card className="p-3 bg-muted/40 border-border text-center text-xs font-medium text-foreground">
-                  {selectedOption === quizItem.correctIndex
+                  {localizeText(selectedOption === quizItem.correctIndex
                     ? quizItem.explanation
-                    : 'Yanlış seçenek. Başka bir şıkkı dene!'}
+                    : 'Yanlış seçenek. Başka bir şıkkı dene!')}
                 </Card>
               )}
             </div>
@@ -366,7 +361,7 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
             type="button"
             onClick={onBackToKids}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Kids Hub'a Dön"
+            aria-label={localizeText("Kids Hub'a Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -377,14 +372,10 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Kids Study (Öğrenme)
-              </h1>
-              <StatusBadge status="verified" label="Eğitici Dersler" size="sm" />
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Kids Study (Öğrenme)")}</h1>
+              <StatusBadge status="verified" label={localizeText("Eğitici Dersler")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Harfler, sayılar, bilim ve doğa keşfi
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Harfler, sayılar, bilim ve doğa keşfi")}</p>
           </div>
         </div>
       </div>
@@ -402,21 +393,20 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-blue-500/20 bg-blue-500/10 text-2xl shadow-xs group-hover:scale-105 transition-transform">
-                    {lesson.iconEmoji}
+                    {localizeText(lesson.iconEmoji)}
                   </div>
 
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <h3 className="text-sm font-bold text-foreground group-hover:text-blue-500 transition-colors truncate">
-                        {lesson.title}
+                        {localizeText(lesson.title)}
                       </h3>
                       <span className="rounded-md bg-muted px-2 py-0.5 text-[10px] font-bold text-muted-foreground">
-                        {lesson.ageRange}
+                        {localizeText(lesson.ageRange)}
                       </span>
                     </div>
                     <p className="mt-0.5 text-xs text-muted-foreground">
-                      {lesson.cards.length} İnteraktif Kart & Quiz
-                    </p>
+                      {localizeText(lesson.cards.length)}{localizeText(" İnteraktif Kart & Quiz")}</p>
                   </div>
                 </div>
 
@@ -430,8 +420,7 @@ export function KidsStudyView({ onBackToKids }: { onBackToKids: () => void }) {
                     setIsQuizMode(false);
                   }}
                   className="font-bold text-xs h-9 px-3.5 shrink-0 bg-blue-500 hover:bg-blue-600 border-none text-white shadow-xs"
-                >
-                  Ders Başlat <ChevronRight className="h-3.5 w-3.5 ml-1" />
+                >{localizeText("Ders Başlat")}<ChevronRight className="h-3.5 w-3.5 ml-1" />
                 </Button>
               </div>
             </Card>

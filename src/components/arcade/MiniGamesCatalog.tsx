@@ -36,6 +36,7 @@ import {
   Game2048,
   KelimeBulmacaGame,
 } from './games/AdultGames';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export const MINI_GAMES_CATALOG: MiniGameMeta[] = [
   // 🎲 Masa & Taş Oyunları
@@ -169,6 +170,7 @@ interface MiniGamesCatalogProps {
 }
 
 export function MiniGamesCatalog({ onBackToArcade }: MiniGamesCatalogProps) {
+  const localizeText = useLocaleRender();
   const { isMuted, toggleMute, activeGameId, setActiveGameId } = useArcadeStore();
   const [selectedCategory, setSelectedCategory] = useState<GameCatalogCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -226,7 +228,7 @@ export function MiniGamesCatalog({ onBackToArcade }: MiniGamesCatalogProps) {
             type="button"
             onClick={onBackToArcade}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Arcade'e Dön"
+            aria-label={localizeText("Arcade'e Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -237,14 +239,10 @@ export function MiniGamesCatalog({ onBackToArcade }: MiniGamesCatalogProps) {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Oyun Kataloğu
-              </h1>
-              <StatusBadge status="verified" label="10 Klasik Oyun" size="sm" />
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Oyun Kataloğu")}</h1>
+              <StatusBadge status="verified" label={localizeText("10 Klasik Oyun")} size="sm" />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Masa, kart, strateji ve zihin oyunları
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Masa, kart, strateji ve zihin oyunları")}</p>
           </div>
         </div>
 
@@ -253,7 +251,7 @@ export function MiniGamesCatalog({ onBackToArcade }: MiniGamesCatalogProps) {
           <button
             onClick={toggleMute}
             className="h-8 w-8 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title={isMuted ? 'Sesi Aç' : 'Sesi Kapat'}
+            title={localizeText(isMuted ? 'Sesi Aç' : 'Sesi Kapat')}
           >
             {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4 text-primary" />}
           </button>
@@ -261,7 +259,7 @@ export function MiniGamesCatalog({ onBackToArcade }: MiniGamesCatalogProps) {
           <button
             onClick={() => setIsCreditsOpen(true)}
             className="h-8 w-8 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title="Oyun Lisansı & Bilgi"
+            title={localizeText("Oyun Lisansı & Bilgi")}
           >
             <Info className="h-4 w-4" />
           </button>
@@ -277,7 +275,7 @@ export function MiniGamesCatalog({ onBackToArcade }: MiniGamesCatalogProps) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Oyunlar içinde ara..."
+            placeholder={localizeText("Oyunlar içinde ara...")}
             className="w-full h-9 pl-9 pr-3 rounded-xl border border-border bg-card text-xs text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
           />
         </div>
@@ -295,8 +293,8 @@ export function MiniGamesCatalog({ onBackToArcade }: MiniGamesCatalogProps) {
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
               )}
             >
-              <span>{tab.icon}</span>
-              <span>{tab.label}</span>
+              <span>{localizeText(tab.icon)}</span>
+              <span>{localizeText(tab.label)}</span>
             </button>
           ))}
         </div>
@@ -309,18 +307,14 @@ export function MiniGamesCatalog({ onBackToArcade }: MiniGamesCatalogProps) {
           <div className="flex items-center gap-2.5">
             <ShieldCheck className="h-5 w-5 text-emerald-500 shrink-0" />
             <div className="min-w-0">
-              <span className="font-bold block">Adil ve Güvenli Oyun Alanı</span>
-              <span className="text-[11px] opacity-90 block">
-                Gerçek para veya kumar içermez. Yalnızca eğlence, zeka ve rekabet odaklıdır.
-              </span>
+              <span className="font-bold block">{localizeText("Adil ve Güvenli Oyun Alanı")}</span>
+              <span className="text-[11px] opacity-90 block">{localizeText("Gerçek para veya kumar içermez. Yalnızca eğlence, zeka ve rekabet odaklıdır.")}</span>
             </div>
           </div>
           <button
             onClick={() => setIsCreditsOpen(true)}
             className="text-[11px] font-bold underline hover:opacity-80 shrink-0"
-          >
-            Bilgi
-          </button>
+          >{localizeText("Bilgi")}</button>
         </div>
 
         {/* Game Cards List */}
@@ -342,26 +336,26 @@ export function MiniGamesCatalog({ onBackToArcade }: MiniGamesCatalogProps) {
                           game.colorClass
                         )}
                       >
-                        {game.iconEmoji}
+                        {localizeText(game.iconEmoji)}
                       </div>
 
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
                           <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors truncate">
-                            {game.title}
+                            {localizeText(game.title)}
                           </h3>
                           {game.badge && (
                             <span className="rounded-md bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 text-[10px] font-bold">
-                              {game.badge}
+                              {localizeText(game.badge)}
                             </span>
                           )}
                           <span className="text-[10px] text-muted-foreground/60 hidden sm:inline">
-                            • {game.category}
+                            • {localizeText(game.category)}
                           </span>
                         </div>
 
                         <p className="mt-0.5 text-xs text-muted-foreground leading-snug line-clamp-1 sm:line-clamp-2">
-                          {game.subtitle}
+                          {localizeText(game.subtitle)}
                         </p>
                       </div>
                     </div>
@@ -372,17 +366,13 @@ export function MiniGamesCatalog({ onBackToArcade }: MiniGamesCatalogProps) {
                       onClick={() => setActiveGameId(game.id)}
                       className="font-bold text-xs h-9 px-3.5 shrink-0 shadow-xs"
                     >
-                      <Play className="h-3.5 w-3.5 mr-1" />
-                      Oyna
-                    </Button>
+                      <Play className="h-3.5 w-3.5 mr-1" />{localizeText("Oyna")}</Button>
                   </div>
                 </Card>
               </motion.div>
             ))
           ) : (
-            <div className="py-12 text-center text-muted-foreground text-xs">
-              Aramanıza uygun oyun bulunamadı.
-            </div>
+            <div className="py-12 text-center text-muted-foreground text-xs">{localizeText("Aramanıza uygun oyun bulunamadı.")}</div>
           )}
         </div>
       </div>

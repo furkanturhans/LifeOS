@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CraftsmanScreen } from '@/components/services/craftsman/CraftsmanScreen';
+import { ServicePlatform } from '@/components/platform/ServicePlatform';
 
 export const metadata: Metadata = {
   title: 'Usta & Tamirat — LifeOS',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function CraftsmanPage() {
-  return <CraftsmanScreen />;
+  return <ServicePlatform kind="craftsman" />;
 }

@@ -42,7 +42,7 @@ const INSTRUCTOR_STATES: Record<string, UserInstructorState> = {
       teachingCategories: ['Yazılım & Yapay Zeka', 'Matematik & Fen Bilimleri'],
       isVerified: true,
       verifiedAt: new Date(Date.now() - 86400000 * 29).toISOString(),
-      revenueSharePercent: 70,
+      revenueSharePercent: 90,
     },
   },
   // Default Local User (Starts as learner)
@@ -145,7 +145,7 @@ export class InstructorRegistry {
       teachingCategories: app?.teachingCategories || ['Genel Eğitim'],
       isVerified: true,
       verifiedAt: new Date().toISOString(),
-      revenueSharePercent: 70,
+      revenueSharePercent: 90,
     };
 
     INSTRUCTOR_STATES[userId] = {

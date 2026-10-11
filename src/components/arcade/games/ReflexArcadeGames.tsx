@@ -7,6 +7,7 @@ import { useArcadeStore } from '@/stores/useArcadeStore';
 import { kidsSound } from '@/lib/arcade/kidsSound';
 import { cn } from '@/lib/utils';
 import { ArrowLeft, ArrowRight, Play, Sparkles } from 'lucide-react';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 // =============================================================================
 // 1. SİMON DİYOR (SIMON SAYS SEQUENCE)
@@ -19,6 +20,7 @@ const SIMON_PADS = [
 ];
 
 export function SimonDiyorGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [sequence, setSequence] = useState<string[]>([]);
   const [userStep, setUserStep] = useState(0);
@@ -119,7 +121,7 @@ export function SimonDiyorGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Simon Diyor"
+      title={localizeText("Simon Diyor")}
       iconEmoji="🚦"
       onBack={onBack}
       onRestart={handleRestart}
@@ -130,7 +132,7 @@ export function SimonDiyorGame({ onBack }: { onBack: () => void }) {
     >
       <div className="w-full max-w-xs space-y-4 text-center">
         <span className="text-xs font-bold text-muted-foreground block">
-          {isPlaying ? '👀 Sırayı izleyin...' : '🎯 Sıradaki renklere dokunun!'}
+          {localizeText(isPlaying ? '👀 Sırayı izleyin...' : '🎯 Sıradaki renklere dokunun!')}
         </span>
 
         <div className="grid grid-cols-2 gap-3 p-3 rounded-3xl border border-border bg-card/80 aspect-square">
@@ -146,7 +148,7 @@ export function SimonDiyorGame({ onBack }: { onBack: () => void }) {
                 activePad === pad.id ? pad.active : 'opacity-85 hover:opacity-100'
               )}
             >
-              {pad.emoji}
+              {localizeText(pad.emoji)}
             </motion.button>
           ))}
         </div>
@@ -159,6 +161,7 @@ export function SimonDiyorGame({ onBack }: { onBack: () => void }) {
 // 2. HIZLI DOKUN (FAST TAP / TARGET HIT)
 // =============================================================================
 export function HizliDokunGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [activeSlot, setActiveSlot] = useState<number | null>(null);
   const [score, setScore] = useState(0);
@@ -213,7 +216,7 @@ export function HizliDokunGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Hızlı Dokun"
+      title={localizeText("Hızlı Dokun")}
       iconEmoji="⚡️"
       onBack={onBack}
       onRestart={handleRestart}
@@ -240,7 +243,7 @@ export function HizliDokunGame({ onBack }: { onBack: () => void }) {
                   : 'border-border/60 bg-muted/40'
               )}
             >
-              {activeSlot === i ? '⭐️' : ''}
+              {localizeText(activeSlot === i ? '⭐️' : '')}
             </motion.button>
           ))}
         </div>
@@ -259,6 +262,7 @@ interface Balloon {
 }
 
 export function BalonPatlatGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [balloons, setBalloons] = useState<Balloon[]>([]);
   const [score, setScore] = useState(0);
@@ -313,7 +317,7 @@ export function BalonPatlatGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Balon Patlat"
+      title={localizeText("Balon Patlat")}
       iconEmoji="🎈"
       onBack={onBack}
       onRestart={handleRestart}
@@ -340,7 +344,7 @@ export function BalonPatlatGame({ onBack }: { onBack: () => void }) {
             className="absolute text-4xl p-2 cursor-pointer hover:scale-125 transition-transform select-none"
             style={{ left: `${b.x}%` }}
           >
-            {b.emoji}
+            {localizeText(b.emoji)}
           </motion.button>
         ))}
       </div>
@@ -352,6 +356,7 @@ export function BalonPatlatGame({ onBack }: { onBack: () => void }) {
 // 4. MEYVE YAKALA (FRUIT CATCH)
 // =============================================================================
 export function MeyveYakalaGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [basketX, setBasketX] = useState(50);
   const [fruitX, setFruitX] = useState(50);
@@ -409,7 +414,7 @@ export function MeyveYakalaGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Meyve Yakala"
+      title={localizeText("Meyve Yakala")}
       iconEmoji="🧺"
       onBack={onBack}
       onRestart={handleRestart}
@@ -429,7 +434,7 @@ export function MeyveYakalaGame({ onBack }: { onBack: () => void }) {
             className="absolute text-3xl transition-all select-none"
             style={{ left: `${fruitX}%`, top: `${fruitY}%`, transform: 'translate(-50%, 0)' }}
           >
-            {fruitEmoji}
+            {localizeText(fruitEmoji)}
           </div>
 
           {/* Basket */}
@@ -447,13 +452,11 @@ export function MeyveYakalaGame({ onBack }: { onBack: () => void }) {
             onClick={() => setBasketX((x) => Math.max(15, x - 20))}
             className="h-12 w-24 rounded-2xl border border-border bg-card hover:bg-muted flex items-center justify-center font-bold"
           >
-            <ArrowLeft className="h-5 w-5 mr-1" /> Sol
-          </button>
+            <ArrowLeft className="h-5 w-5 mr-1" />{localizeText("Sol")}</button>
           <button
             onClick={() => setBasketX((x) => Math.min(85, x + 20))}
             className="h-12 w-24 rounded-2xl border border-border bg-card hover:bg-muted flex items-center justify-center font-bold"
-          >
-            Sağ <ArrowRight className="h-5 w-5 ml-1" />
+          >{localizeText("Sağ")}<ArrowRight className="h-5 w-5 ml-1" />
           </button>
         </div>
       </div>
@@ -465,6 +468,7 @@ export function MeyveYakalaGame({ onBack }: { onBack: () => void }) {
 // 5. RENK KOŞUSU (COLOR RUN)
 // =============================================================================
 export function RenkKosusuGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [playerColor, setPlayerColor] = useState('red');
   const [gateColor, setGateColor] = useState('red');
@@ -517,7 +521,7 @@ export function RenkKosusuGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Renk Koşusu"
+      title={localizeText("Renk Koşusu")}
       iconEmoji="🏃‍♂️"
       onBack={onBack}
       onRestart={handleRestart}
@@ -533,17 +537,15 @@ export function RenkKosusuGame({ onBack }: { onBack: () => void }) {
       <div className="w-full max-w-xs space-y-4 text-center">
         {/* Gate View */}
         <div className="rounded-3xl border border-border bg-card/80 p-5 shadow-xs flex flex-col items-center">
-          <span className="text-xs font-bold text-muted-foreground mb-2">Hedef Kapı Rengi</span>
+          <span className="text-xs font-bold text-muted-foreground mb-2">{localizeText("Hedef Kapı Rengi")}</span>
           <div
             className={cn(
               'h-16 w-36 rounded-2xl flex items-center justify-center font-extrabold text-white text-lg shadow-sm',
               COLORS.find((c) => c.id === gateColor)?.bg
             )}
-          >
-            KAPI
-          </div>
+          >{localizeText("KAPI")}</div>
 
-          <span className="text-xs font-bold text-muted-foreground mt-4 mb-2">Oyuncu Renginiz</span>
+          <span className="text-xs font-bold text-muted-foreground mt-4 mb-2">{localizeText("Oyuncu Renginiz")}</span>
           <div
             className={cn(
               'h-12 w-12 rounded-full border-2 border-white shadow-md',
@@ -567,7 +569,7 @@ export function RenkKosusuGame({ onBack }: { onBack: () => void }) {
                 playerColor === c.id ? 'ring-4 ring-primary' : 'opacity-80'
               )}
             >
-              {c.name}
+              {localizeText(c.name)}
             </button>
           ))}
         </div>
@@ -575,9 +577,7 @@ export function RenkKosusuGame({ onBack }: { onBack: () => void }) {
         <button
           onClick={handlePass}
           className="w-full h-11 rounded-2xl bg-primary text-primary-foreground font-bold text-sm shadow-xs"
-        >
-          Kapıdan Geç 🚪
-        </button>
+        >{localizeText("Kapıdan Geç 🚪")}</button>
       </div>
     </GameShell>
   );
@@ -587,6 +587,7 @@ export function RenkKosusuGame({ onBack }: { onBack: () => void }) {
 // 6. BALONCUK BİRLEŞTİR (BUBBLE MERGE)
 // =============================================================================
 export function BaloncukBirlestirGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [bubbles, setBubbles] = useState([2, 2, 4, 4, 8, 8, 16, 2]);
   const [score, setScore] = useState(0);
@@ -629,7 +630,7 @@ export function BaloncukBirlestirGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Baloncuk Birleştir"
+      title={localizeText("Baloncuk Birleştir")}
       iconEmoji="🫧"
       onBack={onBack}
       onRestart={handleRestart}
@@ -639,7 +640,7 @@ export function BaloncukBirlestirGame({ onBack }: { onBack: () => void }) {
       gameOverDescription="Baloncukları birleştirerek 64 sayısına ulaştınız!"
     >
       <div className="w-full max-w-xs space-y-4 text-center">
-        <p className="text-xs font-bold text-muted-foreground">Aynı sayıdaki baloncuklara dokunup birleştirin!</p>
+        <p className="text-xs font-bold text-muted-foreground">{localizeText("Aynı sayıdaki baloncuklara dokunup birleştirin!")}</p>
         <div className="grid grid-cols-4 gap-2.5 p-4 rounded-3xl border border-border bg-card/80 shadow-xs">
           {bubbles.map((num, i) => (
             <motion.button
@@ -648,7 +649,7 @@ export function BaloncukBirlestirGame({ onBack }: { onBack: () => void }) {
               onClick={() => handleMerge(i)}
               className="aspect-square rounded-2xl border border-primary/40 bg-primary/10 hover:bg-primary/20 text-primary text-xl font-extrabold flex items-center justify-center shadow-xs"
             >
-              {num}
+              {localizeText(num)}
             </motion.button>
           ))}
         </div>
@@ -661,6 +662,7 @@ export function BaloncukBirlestirGame({ onBack }: { onBack: () => void }) {
 // 7. KULE YAP (TOWER BUILDER)
 // =============================================================================
 export function KuleYapGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [towerHeight, setTowerHeight] = useState(1);
   const [score, setScore] = useState(0);
@@ -695,7 +697,7 @@ export function KuleYapGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Kule Yap"
+      title={localizeText("Kule Yap")}
       iconEmoji="🏗️"
       onBack={onBack}
       onRestart={handleRestart}
@@ -716,8 +718,7 @@ export function KuleYapGame({ onBack }: { onBack: () => void }) {
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               className="h-6 w-32 rounded-lg bg-amber-500 border border-amber-600 shadow-xs flex items-center justify-center text-[10px] text-white font-bold"
-            >
-              Kat {i + 1}
+            >{localizeText("Kat ")}{localizeText(i + 1)}
             </motion.div>
           ))}
         </div>
@@ -725,9 +726,7 @@ export function KuleYapGame({ onBack }: { onBack: () => void }) {
         <button
           onClick={handleDropBlock}
           className="w-full h-12 rounded-2xl bg-primary text-primary-foreground font-extrabold text-sm shadow-xs"
-        >
-          Yeni Kat Ekle 🧱
-        </button>
+        >{localizeText("Yeni Kat Ekle 🧱")}</button>
       </div>
     </GameShell>
   );
@@ -737,6 +736,7 @@ export function KuleYapGame({ onBack }: { onBack: () => void }) {
 // 8. MİNİ KOŞUCU (MINI RUNNER)
 // =============================================================================
 export function MiniKosucuGame({ onBack }: { onBack: () => void }) {
+  const localizeText = useLocaleRender();
   const { isMuted, recordGameSession } = useArcadeStore();
   const [isJumping, setIsJumping] = useState(false);
   const [distance, setDistance] = useState(0);
@@ -782,7 +782,7 @@ export function MiniKosucuGame({ onBack }: { onBack: () => void }) {
 
   return (
     <GameShell
-      title="Mini Koşucu"
+      title={localizeText("Mini Koşucu")}
       iconEmoji="🏃"
       onBack={onBack}
       onRestart={handleRestart}
@@ -822,9 +822,7 @@ export function MiniKosucuGame({ onBack }: { onBack: () => void }) {
         <button
           onClick={handleJump}
           className="w-full h-12 rounded-2xl bg-primary text-primary-foreground font-extrabold text-sm shadow-xs"
-        >
-          Zıpla ⬆️
-        </button>
+        >{localizeText("Zıpla ⬆️")}</button>
       </div>
     </GameShell>
   );

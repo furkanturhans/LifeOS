@@ -5,8 +5,10 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeft, Truck } from 'lucide-react';
 import { useMovingStore } from '@/stores/useMovingStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function MovingHeader() {
+  const localizeText = useLocaleRender();
   const router = useRouter();
   const { currentRole, setCurrentRole } = useMovingStore();
 
@@ -19,7 +21,7 @@ export function MovingHeader() {
             type="button"
             onClick={() => router.push('/services')}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Hizmetlere Dön"
+            aria-label={localizeText("Hizmetlere Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -30,16 +32,10 @@ export function MovingHeader() {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Nakliye
-              </h1>
-              <span className="hidden sm:inline-block rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
-                Akıllı Teklif
-              </span>
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Nakliye")}</h1>
+              <span className="hidden sm:inline-block rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">{localizeText("Akıllı Teklif")}</span>
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Evden Eve ve Parça Eşya Taşımacılığı
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Evden Eve ve Parça Eşya Taşımacılığı")}</p>
           </div>
         </div>
 
@@ -54,9 +50,7 @@ export function MovingHeader() {
                 ? 'bg-card text-foreground shadow-xs'
                 : 'text-muted-foreground hover:text-foreground'
             )}
-          >
-            Müşteri
-          </button>
+          >{localizeText("Müşteri")}</button>
           <button
             type="button"
             onClick={() => setCurrentRole('provider')}
@@ -66,9 +60,7 @@ export function MovingHeader() {
                 ? 'bg-card text-foreground shadow-xs'
                 : 'text-muted-foreground hover:text-foreground'
             )}
-          >
-            Taşıyıcı
-          </button>
+          >{localizeText("Taşıyıcı")}</button>
         </div>
       </div>
     </div>

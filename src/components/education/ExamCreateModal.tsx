@@ -19,6 +19,7 @@ import { Card } from '@/components/ui/Card';
 import { useEducationStore } from '@/stores/useEducationStore';
 import type { CourseDraft } from '@/types/education';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface ExamCreateModalProps {
   isOpen: boolean;
@@ -40,6 +41,7 @@ export function ExamCreateModal({
   onClose,
   courseDrafts,
 }: ExamCreateModalProps) {
+  const localizeText = useLocaleRender();
   const { createExam, fetchExams } = useEducationStore();
 
   const [courseId, setCourseId] = useState(courseDrafts[0]?.id || 'crs-math-101');
@@ -193,10 +195,8 @@ export function ExamCreateModal({
               📝
             </div>
             <div>
-              <h2 className="text-sm font-bold text-foreground">Yeni Sınav Oluştur</h2>
-              <p className="text-xs text-muted-foreground">
-                Çoktan seçmeli süreli sınav ve soru bankası tanımlayın
-              </p>
+              <h2 className="text-sm font-bold text-foreground">{localizeText("Yeni Sınav Oluştur")}</h2>
+              <p className="text-xs text-muted-foreground">{localizeText("Çoktan seçmeli süreli sınav ve soru bankası tanımlayın")}</p>
             </div>
           </div>
 
@@ -213,21 +213,17 @@ export function ExamCreateModal({
           {errorMessage && (
             <div className="p-3.5 rounded-xl border border-red-500/20 bg-red-500/10 text-red-400 text-xs font-semibold flex items-center gap-2">
               <AlertCircle className="h-4 w-4 shrink-0" />
-              <span>{errorMessage}</span>
+              <span>{localizeText(errorMessage)}</span>
             </div>
           )}
 
           {/* Section 1: General Exam Settings */}
           <div className="space-y-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Genel Sınav Bilgileri
-            </h3>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Genel Sınav Bilgileri")}</h3>
 
             {/* Course Picker */}
             <div>
-              <label className="block text-xs font-bold text-foreground mb-1">
-                Bağlı Kurs *
-              </label>
+              <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Bağlı Kurs *")}</label>
               <select
                 value={courseId}
                 onChange={(e) => handleCourseChange(e.target.value)}
@@ -235,39 +231,35 @@ export function ExamCreateModal({
               >
                 {courseDrafts.map((c) => (
                   <option key={c.id} value={c.id}>
-                    {c.title}
+                    {localizeText(c.title)}
                   </option>
                 ))}
-                <option value="crs-math-101">İleri Matematik 101</option>
-                <option value="crs-ai-foundations">Yapay Zeka Temelleri</option>
+                <option value="crs-math-101">{localizeText("İleri Matematik 101")}</option>
+                <option value="crs-ai-foundations">{localizeText("Yapay Zeka Temelleri")}</option>
               </select>
             </div>
 
             {/* Exam Title */}
             <div>
-              <label className="block text-xs font-bold text-foreground mb-1">
-                Sınav Başlığı *
-              </label>
+              <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Sınav Başlığı *")}</label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Örn: 1. Dönem Değerlendirme Sınavı"
+                placeholder={localizeText("Örn: 1. Dönem Değerlendirme Sınavı")}
                 className="w-full h-10 rounded-xl border border-border bg-background px-3 text-xs font-semibold text-foreground focus:border-primary focus:outline-none"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-xs font-bold text-foreground mb-1">
-                Sınav Açıklaması ve Yönergeler
-              </label>
+              <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Sınav Açıklaması ve Yönergeler")}</label>
               <textarea
                 rows={2}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Öğrenciler için sınav kuralları ve kapsam bilgisi..."
+                placeholder={localizeText("Öğrenciler için sınav kuralları ve kapsam bilgisi...")}
                 className="w-full rounded-xl border border-border bg-background p-3 text-xs text-foreground focus:border-primary focus:outline-none resize-none"
               />
             </div>
@@ -275,9 +267,7 @@ export function ExamCreateModal({
             {/* Configurable Duration & Passing Score Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="block text-xs font-bold text-foreground mb-1">
-                  Süre (Dakika) *
-                </label>
+                <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Süre (Dakika) *")}</label>
                 <input
                   type="number"
                   min={5}
@@ -290,9 +280,7 @@ export function ExamCreateModal({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-foreground mb-1">
-                  Geçme Notu (%) *
-                </label>
+                <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Geçme Notu (%) *")}</label>
                 <input
                   type="number"
                   min={10}
@@ -305,12 +293,9 @@ export function ExamCreateModal({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-foreground mb-1">
-                  Toplam Puan
-                </label>
+                <label className="block text-xs font-bold text-foreground mb-1">{localizeText("Toplam Puan")}</label>
                 <div className="w-full h-10 rounded-xl border border-border bg-muted/40 px-3 flex items-center text-xs font-bold text-foreground">
-                  {totalExamPoints} Puan
-                </div>
+                  {localizeText(totalExamPoints)}{localizeText(" Puan")}</div>
               </div>
             </div>
           </div>
@@ -319,12 +304,8 @@ export function ExamCreateModal({
           <div className="space-y-4 pt-4 border-t border-border">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  Soru Listesi ({questions.length} Soru)
-                </h3>
-                <p className="text-[11px] text-muted-foreground">
-                  Doğru seçeneği daireye tıklayarak belirleyin.
-                </p>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Soru Listesi (")}{localizeText(questions.length)}{localizeText(" Soru)")}</h3>
+                <p className="text-[11px] text-muted-foreground">{localizeText("Doğru seçeneği daireye tıklayarak belirleyin.")}</p>
               </div>
 
               <Button
@@ -334,9 +315,7 @@ export function ExamCreateModal({
                 onClick={handleAddQuestion}
                 className="text-xs font-bold h-8 px-3 text-purple-600 dark:text-purple-400 border-purple-500/30 hover:bg-purple-500/10"
               >
-                <Plus className="h-3.5 w-3.5 mr-1" />
-                Soru Ekle
-              </Button>
+                <Plus className="h-3.5 w-3.5 mr-1" />{localizeText("Soru Ekle")}</Button>
             </div>
 
             {/* Questions List */}
@@ -344,13 +323,12 @@ export function ExamCreateModal({
               {questions.map((q, qIdx) => (
                 <Card key={q.id} className="p-4 border-border bg-card/60 shadow-xs space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-extrabold text-foreground">
-                      Soru {qIdx + 1}
+                    <span className="text-xs font-extrabold text-foreground">{localizeText("Soru ")}{localizeText(qIdx + 1)}
                     </span>
 
                     <div className="flex items-center gap-2">
                       <div className="flex items-center gap-1 text-xs">
-                        <span className="text-muted-foreground text-[11px]">Puan:</span>
+                        <span className="text-muted-foreground text-[11px]">{localizeText("Puan:")}</span>
                         <input
                           type="number"
                           min={1}
@@ -366,7 +344,7 @@ export function ExamCreateModal({
                           type="button"
                           onClick={() => handleRemoveQuestion(qIdx)}
                           className="h-7 w-7 rounded-lg text-muted-foreground hover:text-destructive flex items-center justify-center hover:bg-muted"
-                          title="Soruyu Sil"
+                          title={localizeText("Soruyu Sil")}
                         >
                           <Trash2 className="h-3.5 w-3.5" />
                         </button>
@@ -380,7 +358,7 @@ export function ExamCreateModal({
                     required
                     value={q.questionText}
                     onChange={(e) => handleQuestionTextChange(qIdx, e.target.value)}
-                    placeholder={`${qIdx + 1}. Sorunun metnini yazınız...`}
+                    placeholder={localizeText(`${qIdx + 1}. Sorunun metnini yazınız...`)}
                     className="w-full rounded-xl border border-border bg-background p-2.5 text-xs text-foreground focus:border-primary focus:outline-none resize-none"
                   />
 
@@ -401,7 +379,7 @@ export function ExamCreateModal({
                                 ? 'border-emerald-500 bg-emerald-500 text-white shadow-xs'
                                 : 'border-border bg-muted/40 text-muted-foreground hover:border-border/80'
                             )}
-                            title={isCorrect ? 'Doğru Cevap' : 'Doğru Cevap Olarak Seç'}
+                            title={localizeText(isCorrect ? 'Doğru Cevap' : 'Doğru Cevap Olarak Seç')}
                           >
                             {isCorrect ? <Check className="h-4 w-4" /> : letter}
                           </button>
@@ -411,7 +389,7 @@ export function ExamCreateModal({
                             required
                             value={opt.text}
                             onChange={(e) => handleOptionTextChange(qIdx, optIdx, e.target.value)}
-                            placeholder={`${letter} Seçeneği metni...`}
+                            placeholder={localizeText(`${letter} Seçeneği metni...`)}
                             className={cn(
                               'flex-1 h-9 rounded-xl border bg-background px-3 text-xs font-medium text-foreground focus:outline-none',
                               isCorrect ? 'border-emerald-500/50 bg-emerald-500/5' : 'border-border'
@@ -435,9 +413,7 @@ export function ExamCreateModal({
               onClick={onClose}
               disabled={isSubmitting}
               className="text-xs"
-            >
-              Vazgeç
-            </Button>
+            >{localizeText("Vazgeç")}</Button>
             <Button
               type="submit"
               variant="primary"
@@ -445,7 +421,7 @@ export function ExamCreateModal({
               disabled={isSubmitting}
               className="font-bold text-xs px-5 h-10 shadow-xs"
             >
-              {isSubmitting ? 'Sınav Kaydediliyor...' : 'Sınavı Yayınla & Planla'}
+              {localizeText(isSubmitting ? 'Sınav Kaydediliyor...' : 'Sınavı Yayınla & Planla')}
             </Button>
           </div>
         </form>

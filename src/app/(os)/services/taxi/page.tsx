@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { TaxiScreen } from '@/components/services/taxi/TaxiScreen';
+import { ServicePlatform } from '@/components/platform/ServicePlatform';
 
 export const metadata: Metadata = {
   title: 'Taksi — LifeOS',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function TaxiPage() {
-  return <TaxiScreen />;
+  return <ServicePlatform kind="taxi" />;
 }

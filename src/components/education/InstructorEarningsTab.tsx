@@ -14,10 +14,11 @@ import {
 } from 'lucide-react';
 import type { ProviderEarningsSummary } from '@/types/payment';
 import { cn } from '@/lib/utils';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 function formatTL(kurus: number): string {
   const tl = kurus / 100;
-  return new Intl.NumberFormat('tr-TR', {
+  return new Intl.NumberFormat(getFormattingLocale(), {
     style: 'currency',
     currency: 'TRY',
     minimumFractionDigits: 2,
@@ -25,6 +26,7 @@ function formatTL(kurus: number): string {
 }
 
 export function InstructorEarningsTab({ instructorId = 'usr-instructor-ahmet' }: { instructorId?: string }) {
+  const localizeText = useLocaleRender();
   const [data, setData] = useState<ProviderEarningsSummary | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -48,7 +50,7 @@ export function InstructorEarningsTab({ instructorId = 'usr-instructor-ahmet' }:
     return (
       <div className="flex flex-col items-center justify-center py-16 gap-3 text-muted-foreground">
         <RefreshCw className="h-7 w-7 animate-spin text-primary" />
-        <span className="text-xs font-semibold">Kazanç ve hakediş verileri hesaplanıyor...</span>
+        <span className="text-xs font-semibold">{localizeText("Kazanç ve hakediş verileri hesaplanıyor...")}</span>
       </div>
     );
   }
@@ -93,17 +95,15 @@ export function InstructorEarningsTab({ instructorId = 'usr-instructor-ahmet' }:
             <Award className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-foreground">Eğitmen Kazançlarım ve Hakediş Takibi</h3>
-            <p className="text-xs text-muted-foreground">
-              Yayınlanan video kurslarınız ve canlı ders katılımlarınızdan elde edilen net gelirler
-            </p>
+            <h3 className="text-sm font-bold text-foreground">{localizeText("Eğitmen Kazançlarım ve Hakediş Takibi")}</h3>
+            <p className="text-xs text-muted-foreground">{localizeText("Yayınlanan video kurslarınız ve canlı ders katılımlarınızdan elde edilen net gelirler")}</p>
           </div>
         </div>
 
         <button
           onClick={fetchEarnings}
           className="p-2 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-          title="Yenile"
+          title={localizeText("Yenile")}
         >
           <RefreshCw className={cn('h-4 w-4', isLoading && 'animate-spin')} />
         </button>
@@ -125,13 +125,13 @@ export function InstructorEarningsTab({ instructorId = 'usr-instructor-ahmet' }:
               </div>
               <div>
                 <span className="text-[11px] font-semibold text-muted-foreground block truncate">
-                  {kpi.title}
+                  {localizeText(kpi.title)}
                 </span>
                 <div className="text-xl font-black font-mono text-foreground mt-0.5">
-                  {kpi.value}
+                  {localizeText(kpi.value)}
                 </div>
                 <span className="text-[10px] text-muted-foreground mt-1 block truncate">
-                  {kpi.subtitle}
+                  {localizeText(kpi.subtitle)}
                 </span>
               </div>
             </div>
@@ -142,57 +142,54 @@ export function InstructorEarningsTab({ instructorId = 'usr-instructor-ahmet' }:
       {/* Transactions List */}
       <div className="rounded-3xl border border-border/70 bg-card overflow-hidden shadow-2xs">
         <div className="p-4 border-b border-border/70 flex items-center justify-between">
-          <h4 className="text-xs font-bold text-foreground">Satış ve Katılım Dökümü</h4>
+          <h4 className="text-xs font-bold text-foreground">{localizeText("Satış ve Katılım Dökümü")}</h4>
           <span className="text-[10px] font-mono text-muted-foreground">
-            {data?.recentTransactions.length || 0} Gerçekleşen Satış
-          </span>
+            {localizeText(data?.recentTransactions.length || 0)}{localizeText(" Gerçekleşen Satış")}</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
               <tr className="bg-muted/40 border-b border-border text-[11px] text-muted-foreground font-bold">
-                <th className="p-3.5">Tarih & Kod</th>
-                <th className="p-3.5">Kurs / Canlı Ders Adı</th>
-                <th className="p-3.5">Öğrenci (Maskeli)</th>
-                <th className="p-3.5 text-right">Brüt Tutar</th>
-                <th className="p-3.5 text-right">LifeOS Komisyonu (%30)</th>
-                <th className="p-3.5 text-right">Eğitmen Net Kazancı (%70)</th>
-                <th className="p-3.5 text-center">Durum</th>
+                <th className="p-3.5">{localizeText("Tarih & Kod")}</th>
+                <th className="p-3.5">{localizeText("Kurs / Canlı Ders Adı")}</th>
+                <th className="p-3.5">{localizeText("Öğrenci (Maskeli)")}</th>
+                <th className="p-3.5 text-right">{localizeText("Brüt Tutar")}</th>
+                <th className="p-3.5 text-right">{localizeText("LifeOS Komisyonu (%30)")}</th>
+                <th className="p-3.5 text-right">{localizeText("Eğitmen Net Kazancı (%70)")}</th>
+                <th className="p-3.5 text-center">{localizeText("Durum")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/40">
               {!data?.recentTransactions || data.recentTransactions.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="p-8 text-center text-muted-foreground text-xs">
-                    Henüz kayıtlı bir satış hareketi bulunmuyor.
-                  </td>
+                  <td colSpan={7} className="p-8 text-center text-muted-foreground text-xs">{localizeText("Henüz kayıtlı bir satış hareketi bulunmuyor.")}</td>
                 </tr>
               ) : (
                 data.recentTransactions.map((tx) => (
                   <tr key={tx.id} className="hover:bg-muted/30 transition-colors">
                     <td className="p-3.5">
-                      <div className="font-mono font-bold text-foreground text-xs">{tx.id}</div>
+                      <div className="font-mono font-bold text-foreground text-xs">{localizeText(tx.id)}</div>
                       <div className="text-[10px] text-muted-foreground">
-                        {new Date(tx.date).toLocaleDateString('tr-TR')}
+                        {localizeText(new Date(tx.date).toLocaleDateString(getFormattingLocale()))}
                       </div>
                     </td>
                     <td className="p-3.5 font-bold text-foreground max-w-[200px] truncate">
-                      {tx.itemTitle}
+                      {localizeText(tx.itemTitle)}
                     </td>
-                    <td className="p-3.5 font-mono text-muted-foreground">{tx.customerMaskedId}</td>
+                    <td className="p-3.5 font-mono text-muted-foreground">{localizeText(tx.customerMaskedId)}</td>
                     <td className="p-3.5 text-right font-bold font-mono text-foreground">
-                      {formatTL(tx.grossKurus)}
+                      {localizeText(formatTL(tx.grossKurus))}
                     </td>
                     <td className="p-3.5 text-right font-bold font-mono text-primary">
-                      {formatTL(tx.commissionKurus)}
+                      {localizeText(formatTL(tx.commissionKurus))}
                     </td>
                     <td className="p-3.5 text-right font-black font-mono text-emerald-500">
-                      {formatTL(tx.netEarningsKurus)}
+                      {localizeText(formatTL(tx.netEarningsKurus))}
                     </td>
                     <td className="p-3.5 text-center">
                       <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-md">
-                        {tx.status === 'succeeded' ? 'Onaylandı' : tx.status}
+                        {localizeText(tx.status === 'succeeded' ? 'Onaylandı' : tx.status)}
                       </span>
                     </td>
                   </tr>

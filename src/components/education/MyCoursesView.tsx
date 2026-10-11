@@ -18,12 +18,14 @@ import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { useEducationStore } from '@/stores/useEducationStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 interface MyCoursesViewProps {
   onBackToHub: () => void;
 }
 
 export function MyCoursesView({ onBackToHub }: MyCoursesViewProps) {
+  const localizeText = useLocaleRender();
   const {
     setActiveSection,
     registrations,
@@ -43,7 +45,7 @@ export function MyCoursesView({ onBackToHub }: MyCoursesViewProps) {
             type="button"
             onClick={onBackToHub}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground active:scale-95"
-            aria-label="Dersler Merkezine Dön"
+            aria-label={localizeText("Dersler Merkezine Dön")}
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -54,18 +56,14 @@ export function MyCoursesView({ onBackToHub }: MyCoursesViewProps) {
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="truncate text-base font-bold text-foreground">
-                Öğrenim Merkezim
-              </h1>
+              <h1 className="truncate text-base font-bold text-foreground">{localizeText("Öğrenim Merkezim")}</h1>
               <StatusBadge
                 status="active"
-                label={`${activeRegistrations.length} Canlı Ders`}
+                label={localizeText(`${activeRegistrations.length} Canlı Ders`)}
                 size="sm"
               />
             </div>
-            <p className="truncate text-xs text-muted-foreground">
-              Kayıtlı olduğunuz eğitimler ve canlı ders oturumlarınız
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{localizeText("Kayıtlı olduğunuz eğitimler ve canlı ders oturumlarınız")}</p>
           </div>
         </div>
       </div>
@@ -80,9 +78,7 @@ export function MyCoursesView({ onBackToHub }: MyCoursesViewProps) {
               ? 'bg-primary text-primary-foreground shadow-xs'
               : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
           )}
-        >
-          Kurslarım (0)
-        </button>
+        >{localizeText("Kurslarım (0)")}</button>
         <button
           onClick={() => setActiveSubTab('live_sessions')}
           className={cn(
@@ -92,10 +88,10 @@ export function MyCoursesView({ onBackToHub }: MyCoursesViewProps) {
               : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
           )}
         >
-          <span>Kayıtlı Canlı Derslerim</span>
+          <span>{localizeText("Kayıtlı Canlı Derslerim")}</span>
           {activeRegistrations.length > 0 && (
             <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-rose-500 text-white">
-              {activeRegistrations.length}
+              {localizeText(activeRegistrations.length)}
             </span>
           )}
         </button>
@@ -108,12 +104,8 @@ export function MyCoursesView({ onBackToHub }: MyCoursesViewProps) {
             <div className="flex h-16 w-16 mx-auto items-center justify-center rounded-3xl border border-border bg-muted/40 text-3xl shadow-xs">
               🎒
             </div>
-            <h3 className="mt-4 text-base font-bold text-foreground">
-              Henüz Kayıtlı Bir Kursunuz Yok
-            </h3>
-            <p className="mt-1.5 text-xs text-muted-foreground max-w-sm mx-auto leading-relaxed">
-              Keşfet bölümünden ilginizi çeken eğitimleri inceleyebilir, eğitmenler tarafından hazırlanan kurs ve canlı ders programlarına kaydolabilirsiniz.
-            </p>
+            <h3 className="mt-4 text-base font-bold text-foreground">{localizeText("Henüz Kayıtlı Bir Kursunuz Yok")}</h3>
+            <p className="mt-1.5 text-xs text-muted-foreground max-w-sm mx-auto leading-relaxed">{localizeText("Keşfet bölümünden ilginizi çeken eğitimleri inceleyebilir, eğitmenler tarafından hazırlanan kurs ve canlı ders programlarına kaydolabilirsiniz.")}</p>
 
             <div className="mt-6 flex justify-center gap-2">
               <Button
@@ -122,9 +114,7 @@ export function MyCoursesView({ onBackToHub }: MyCoursesViewProps) {
                 onClick={() => setActiveSection('explore')}
                 className="font-bold text-xs h-10 px-5 shadow-xs"
               >
-                <Compass className="h-4 w-4 mr-1.5" />
-                Kursları Keşfet
-              </Button>
+                <Compass className="h-4 w-4 mr-1.5" />{localizeText("Kursları Keşfet")}</Button>
             </div>
           </div>
         )}
@@ -149,31 +139,27 @@ export function MyCoursesView({ onBackToHub }: MyCoursesViewProps) {
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
                             <h4 className="text-sm font-bold text-foreground truncate">
-                              {reg.sessionTitle}
+                              {localizeText(reg.sessionTitle)}
                             </h4>
                             {isLive ? (
-                              <span className="inline-flex items-center gap-1 font-bold px-2 py-0.5 rounded-full text-[10px] bg-rose-500 text-white animate-pulse">
-                                Canlı Yayında
-                              </span>
+                              <span className="inline-flex items-center gap-1 font-bold px-2 py-0.5 rounded-full text-[10px] bg-rose-500 text-white animate-pulse">{localizeText("Canlı Yayında")}</span>
                             ) : (
-                              <StatusBadge status="active" label="Planlandı" size="sm" />
+                              <StatusBadge status="active" label={localizeText("Planlandı")} size="sm" />
                             )}
                           </div>
-                          <p className="text-xs text-muted-foreground mt-0.5">
-                            Eğitmen: <strong className="text-foreground">{reg.instructorName}</strong>
+                          <p className="text-xs text-muted-foreground mt-0.5">{localizeText("Eğitmen:")}<strong className="text-foreground">{localizeText(reg.instructorName)}</strong>
                           </p>
                         </div>
                       </div>
 
                       <span className="text-[11px] font-bold text-rose-500 bg-rose-500/10 px-2 py-0.5 rounded-md">
-                        {reg.creditsPaid} Kredi
-                      </span>
+                        {localizeText(reg.creditsPaid)}{localizeText(" Kredi")}</span>
                     </div>
 
                     <div className="pt-2 border-t border-border/50 flex items-center justify-between text-xs">
                       <div className="flex items-center gap-1.5 text-muted-foreground">
                         <Calendar className="h-3.5 w-3.5" />
-                        <span>{new Date(reg.scheduledAt).toLocaleString('tr-TR')}</span>
+                        <span>{localizeText(new Date(reg.scheduledAt).toLocaleString(getFormattingLocale()))}</span>
                       </div>
 
                       <Button
@@ -186,7 +172,7 @@ export function MyCoursesView({ onBackToHub }: MyCoursesViewProps) {
                         )}
                       >
                         <Video className="h-3.5 w-3.5 mr-1" />
-                        {isLive ? 'Canlı Sınıfa Gir' : 'Canlı Sınıfı Görüntüle'}
+                        {localizeText(isLive ? 'Canlı Sınıfa Gir' : 'Canlı Sınıfı Görüntüle')}
                       </Button>
                     </div>
                   </Card>
@@ -195,16 +181,14 @@ export function MyCoursesView({ onBackToHub }: MyCoursesViewProps) {
             ) : (
               <div className="py-12 text-center text-xs text-muted-foreground space-y-2">
                 <div className="text-3xl">🎥</div>
-                <p className="font-semibold text-foreground">Kayıtlı canlı dersiniz bulunmuyor.</p>
-                <p>Canlı Dersler bölümünden ilgilendiğiniz derslere kaydolabilirsiniz.</p>
+                <p className="font-semibold text-foreground">{localizeText("Kayıtlı canlı dersiniz bulunmuyor.")}</p>
+                <p>{localizeText("Canlı Dersler bölümünden ilgilendiğiniz derslere kaydolabilirsiniz.")}</p>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setActiveSection('live_sessions')}
                   className="mt-2 text-xs font-bold"
-                >
-                  Canlı Derslere Göz At
-                </Button>
+                >{localizeText("Canlı Derslere Göz At")}</Button>
               </div>
             )}
           </div>

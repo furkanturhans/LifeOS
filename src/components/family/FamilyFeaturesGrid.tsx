@@ -6,6 +6,7 @@ import { Globe, Image as ImageIcon, Calendar, FileText, ChevronRight } from 'luc
 import { cn } from '@/lib/utils';
 import type { FamilyFeatureKey } from '@/types/family';
 import { StatusBadge } from '@/components/ui/StatusBadge';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface FeatureCardConfig {
   id: FamilyFeatureKey;
@@ -46,15 +47,12 @@ interface FamilyFeaturesGridProps {
 }
 
 export function FamilyFeaturesGrid({ onFeatureClick }: FamilyFeaturesGridProps) {
+  const localizeText = useLocaleRender();
   return (
     <div className="mt-4 px-4 sm:px-6">
       <div className="mb-3 px-1 flex items-center justify-between">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          Aile Modülleri
-        </h2>
-        <span className="text-xs font-semibold text-muted-foreground">
-          4 Modül
-        </span>
+        <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{localizeText("Aile Modülleri")}</h2>
+        <span className="text-xs font-semibold text-muted-foreground">{localizeText("4 Modül")}</span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -72,22 +70,22 @@ export function FamilyFeaturesGrid({ onFeatureClick }: FamilyFeaturesGridProps) 
             <div>
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-border/80 bg-muted/40 shadow-xs transition-transform group-hover:scale-105">
-                  {feature.icon}
+                  {localizeText(feature.icon)}
                 </div>
 
-                <StatusBadge status="locked" label="Çok Yakında" size="sm" />
+                <StatusBadge status="locked" label={localizeText("Çok Yakında")} size="sm" />
               </div>
 
               <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
-                {feature.title}
+                {localizeText(feature.title)}
               </h3>
               <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
-                {feature.description}
+                {localizeText(feature.description)}
               </p>
             </div>
 
             <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs text-muted-foreground">
-              <span className="font-semibold text-primary">Önizle</span>
+              <span className="font-semibold text-primary">{localizeText("Önizle")}</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-0.5 transition-transform" />
             </div>
           </motion.div>

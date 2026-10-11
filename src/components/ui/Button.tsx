@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
@@ -21,10 +23,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const sizes: Record<string, string> = {
       xs: 'h-7 px-2.5 text-xs rounded-lg font-medium',
-      sm: 'h-8 px-3 text-xs rounded-lg font-medium',
-      md: 'h-10 px-4 py-2 text-xs sm:text-sm rounded-xl font-medium',
-      lg: 'h-11 px-5 text-sm rounded-xl font-semibold',
-      icon: 'h-9 w-9 rounded-xl',
+      sm: 'min-h-11 px-3 py-2 text-sm rounded-xl font-medium',
+      md: 'min-h-12 px-4 py-2.5 text-sm rounded-2xl font-medium',
+      lg: 'min-h-12 px-5 py-3 text-sm rounded-2xl font-semibold',
+      icon: 'h-11 w-11 rounded-xl',
     };
 
     return (

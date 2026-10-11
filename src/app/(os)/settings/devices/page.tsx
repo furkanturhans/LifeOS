@@ -4,8 +4,10 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Laptop, Smartphone, ShieldCheck, Clock, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export default function DevicesSettingsPage() {
+  const localizeText = useLocaleRender();
   const currentDevice = {
     name: 'LifeOS Web Browser',
     type: 'desktop',
@@ -46,8 +48,8 @@ export default function DevicesSettingsPage() {
           <ArrowLeft className="w-5 h-5" />
         </Link>
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-foreground">Bağlı Cihazlar</h1>
-          <p className="text-xs text-muted-foreground">Aktif LifeOS oturumlarınızı yönetin</p>
+          <h1 className="text-xl font-bold tracking-tight text-foreground">{localizeText("Bağlı Cihazlar")}</h1>
+          <p className="text-xs text-muted-foreground">{localizeText("Aktif LifeOS oturumlarınızı yönetin")}</p>
         </div>
       </div>
 
@@ -60,28 +62,24 @@ export default function DevicesSettingsPage() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-semibold text-foreground">{currentDevice.name}</h3>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary font-medium">
-                    Bu Cihaz
-                  </span>
+                  <h3 className="text-sm font-semibold text-foreground">{localizeText(currentDevice.name)}</h3>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary font-medium">{localizeText("Bu Cihaz")}</span>
                 </div>
-                <p className="text-xs text-muted-foreground mt-0.5">{currentDevice.browser}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{localizeText(currentDevice.browser)}</p>
                 <div className="flex items-center gap-3 mt-2 text-[11px] text-emerald-500 font-medium">
                   <span className="flex items-center gap-1">
                     <ShieldCheck className="w-3.5 h-3.5" />
-                    {currentDevice.lastActive}
+                    {localizeText(currentDevice.lastActive)}
                   </span>
                   <span>•</span>
-                  <span>{currentDevice.location}</span>
+                  <span>{localizeText(currentDevice.location)}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground px-2 pt-2">
-          Diğer Oturumlar
-        </h2>
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground px-2 pt-2">{localizeText("Diğer Oturumlar")}</h2>
 
         <div className="rounded-3xl border border-white/10 bg-card/40 backdrop-blur-xl divide-y divide-white/5 overflow-hidden">
           {otherDevices.map((dev) => (
@@ -95,13 +93,13 @@ export default function DevicesSettingsPage() {
                   )}
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-foreground">{dev.name}</h3>
-                  <p className="text-xs text-muted-foreground">{dev.browser}</p>
+                  <h3 className="text-sm font-medium text-foreground">{localizeText(dev.name)}</h3>
+                  <p className="text-xs text-muted-foreground">{localizeText(dev.browser)}</p>
                   <div className="flex items-center gap-2 mt-1 text-[11px] text-muted-foreground">
                     <Clock className="w-3 h-3" />
-                    <span>{dev.lastActive}</span>
+                    <span>{localizeText(dev.lastActive)}</span>
                     <span>•</span>
-                    <span>{dev.location}</span>
+                    <span>{localizeText(dev.location)}</span>
                   </div>
                 </div>
               </div>
@@ -110,7 +108,7 @@ export default function DevicesSettingsPage() {
                 variant="ghost"
                 size="sm"
                 className="text-destructive hover:bg-destructive/10 h-8 px-2"
-                onClick={() => alert('Oturum sonlandırıldı.')}
+                onClick={() => alert(localizeText('Oturum sonlandırıldı.'))}
               >
                 <Trash2 className="w-4 h-4" />
               </Button>
@@ -121,10 +119,8 @@ export default function DevicesSettingsPage() {
         <Button
           variant="destructive"
           className="w-full mt-4"
-          onClick={() => alert('Diğer tüm cihazlardaki oturumlar sonlandırıldı.')}
-        >
-          Diğer Tüm Oturumlardan Çıkış Yap
-        </Button>
+          onClick={() => alert(localizeText('Diğer tüm cihazlardaki oturumlar sonlandırıldı.'))}
+        >{localizeText("Diğer Tüm Oturumlardan Çıkış Yap")}</Button>
       </div>
     </div>
   );

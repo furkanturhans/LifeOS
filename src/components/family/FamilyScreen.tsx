@@ -12,8 +12,10 @@ import { LockedFeatureModal } from './LockedFeatureModal';
 import { Dock } from '@/components/os/Dock';
 import { useFamilyStore } from '@/stores/useFamilyStore';
 import { Button } from '@/components/ui/Button';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export function FamilyScreen() {
+  const localizeText = useLocaleRender();
   const { family } = useFamilyStore();
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -44,14 +46,12 @@ export function FamilyScreen() {
             <div className="flex-1 pr-2">
               <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-500">
                 <Heart className="h-3.5 w-3.5 fill-amber-500" />
-                <span>LifeOS Aile Alanı</span>
+                <span>{localizeText("LifeOS Aile Alanı")}</span>
               </div>
               <h2 className="mt-1 text-base font-bold text-foreground">
-                {family ? `${family.name} Dijital Yuvanız` : 'Aileniz İçin Güvenli Alan'}
+                {localizeText(family ? `${family.name} Dijital Yuvanız` : 'Aileniz İçin Güvenli Alan')}
               </h2>
-              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                Tüm aile bireyleri tek bir güvenli çatı altında. Anılarınızı paylaşın, takvimlerinizi birleştirin ve ortak notlarınızı tutun.
-              </p>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{localizeText("Tüm aile bireyleri tek bir güvenli çatı altında. Anılarınızı paylaşın, takvimlerinizi birleştirin ve ortak notlarınızı tutun.")}</p>
             </div>
             <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-amber-500/15 text-2xl shadow-sm">
               ✨
@@ -61,12 +61,12 @@ export function FamilyScreen() {
           <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-border/40">
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-              <span>Uçtan Uca Özel Alan</span>
+              <span>{localizeText("Uçtan Uca Özel Alan")}</span>
             </div>
             <span className="text-muted-foreground/40">•</span>
             <div className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
               <Sparkles className="h-3.5 w-3.5 text-amber-500" />
-              <span>Genişletilebilir Altyapı</span>
+              <span>{localizeText("Genişletilebilir Altyapı")}</span>
             </div>
           </div>
         </motion.div>

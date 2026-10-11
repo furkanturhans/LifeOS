@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 export interface ModalProps {
   isOpen: boolean;
@@ -24,6 +25,7 @@ export function Modal({
   className,
   size = 'md',
 }: ModalProps) {
+  const localizeText = useLocaleRender();
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -64,7 +66,7 @@ export function Modal({
             transition={{ type: 'spring', damping: 26, stiffness: 350 }}
             role="dialog"
             aria-modal="true"
-            aria-label={title}
+            aria-label={localizeText(title)}
             className={cn(
               'relative max-h-[90vh] w-full overflow-y-auto rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-xl',
               sizeClasses[size],
@@ -75,14 +77,14 @@ export function Modal({
               type="button"
               onClick={onClose}
               className="absolute right-3.5 top-3.5 rounded-xl p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:scale-95"
-              aria-label="Kapat"
+              aria-label={localizeText("Kapat")}
             >
               <X className="h-4 w-4" />
             </button>
             {(title || description) && (
               <div className="mb-4 pr-7">
-                {title && <h3 className="text-base sm:text-lg font-bold text-foreground">{title}</h3>}
-                {description && <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{description}</p>}
+                {title && <h3 className="text-base sm:text-lg font-bold text-foreground">{localizeText(title)}</h3>}
+                {description && <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{localizeText(description)}</p>}
               </div>
             )}
             {children}

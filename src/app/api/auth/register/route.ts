@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { cleanLifeOSId, isValidLifeOSId } from '@/lib/utils';
+import { saveLocalUser } from '@/lib/localDb';
 
 export async function POST(request: NextRequest) {
   try {
@@ -112,23 +113,27 @@ export async function POST(request: NextRequest) {
       console.warn('DB creation fallback to local:', dbError);
       const finalSupabaseId = supabaseId || `sb_${Date.now()}`;
 
+      const fallbackUser = {
+        id: `local_${Date.now()}`,
+        supabaseId: finalSupabaseId,
+        lifeosId,
+        email,
+        displayName,
+        avatarUrl: null,
+        bio: null,
+        locale: 'tr',
+        theme: 'dark',
+        backgroundType: 'default',
+        backgroundValue: null,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      saveLocalUser(finalSupabaseId, fallbackUser);
+
       const response = NextResponse.json({
         success: true,
-        user: {
-          id: `local_${Date.now()}`,
-          supabaseId: finalSupabaseId,
-          lifeosId,
-          email,
-          displayName,
-          avatarUrl: null,
-          bio: null,
-          locale: 'tr',
-          theme: 'dark',
-          backgroundType: 'default',
-          backgroundValue: null,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        },
+        user: fallbackUser,
       });
       response.cookies.set('lifeos_session', finalSupabaseId, {
         path: '/',

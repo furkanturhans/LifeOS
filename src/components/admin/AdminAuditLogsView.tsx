@@ -4,15 +4,17 @@ import React from 'react';
 import { Card } from '@/components/ui/Card';
 import { Activity, ShieldCheck, Clock, User } from 'lucide-react';
 import { useAdminStore } from '@/stores/useAdminStore';
+import { useLocaleRender, getFormattingLocale } from '@/lib/i18n/runtime';
 
 export function AdminAuditLogsView() {
+  const localizeText = useLocaleRender();
   const { auditLogs } = useAdminStore();
 
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-sm font-bold text-foreground">Denetim Kayıtları (Audit Logs)</h2>
-        <p className="text-xs text-muted-foreground">Platform yöneticileri tarafından yapılan tüm onay, ret, askıya alma ve durum değişikliklerinin değiştirilemez zaman damgalı dökümü</p>
+        <h2 className="text-sm font-bold text-foreground">{localizeText("Denetim Kayıtları (Audit Logs)")}</h2>
+        <p className="text-xs text-muted-foreground">{localizeText("Platform yöneticileri tarafından yapılan tüm onay, ret, askıya alma ve durum değişikliklerinin değiştirilemez zaman damgalı dökümü")}</p>
       </div>
 
       <div className="space-y-2">
@@ -24,36 +26,31 @@ export function AdminAuditLogsView() {
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-bold text-foreground">{log.adminDisplayName}</span>
+                  <span className="font-bold text-foreground">{localizeText(log.adminDisplayName)}</span>
                   <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-muted text-muted-foreground">
-                    {log.action}
+                    {localizeText(log.action)}
                   </span>
                   <span className="text-muted-foreground">➔</span>
-                  <span className="font-semibold text-foreground">{log.targetTitle || log.targetId}</span>
+                  <span className="font-semibold text-foreground">{localizeText(log.targetTitle || log.targetId)}</span>
                 </div>
 
-                <p className="text-muted-foreground text-[11px] leading-relaxed">
-                  Gerekçe / Not: &ldquo;{log.reason}&rdquo;
-                </p>
+                <p className="text-muted-foreground text-[11px] leading-relaxed">{localizeText("Gerekçe / Not: “")}{localizeText(log.reason)}{localizeText("”")}</p>
 
                 {log.previousState && log.newState && (
-                  <div className="text-[10px] text-muted-foreground font-mono">
-                    Durum Geçişi: <span className="text-amber-500">{log.previousState}</span> ➔ <span className="text-emerald-500">{log.newState}</span>
+                  <div className="text-[10px] text-muted-foreground font-mono">{localizeText("Durum Geçişi:")}<span className="text-amber-500">{localizeText(log.previousState)}</span> ➔ <span className="text-emerald-500">{localizeText(log.newState)}</span>
                   </div>
                 )}
               </div>
             </div>
 
             <span className="text-[10px] text-muted-foreground shrink-0 font-mono">
-              {new Date(log.timestamp).toLocaleString('tr-TR')}
+              {localizeText(new Date(log.timestamp).toLocaleString(getFormattingLocale()))}
             </span>
           </Card>
         ))}
 
         {auditLogs.length === 0 && (
-          <div className="py-10 text-center text-xs text-muted-foreground border border-dashed border-border rounded-3xl">
-            Henüz kayıtlı denetim işlemi bulunmuyor.
-          </div>
+          <div className="py-10 text-center text-xs text-muted-foreground border border-dashed border-border rounded-3xl">{localizeText("Henüz kayıtlı denetim işlemi bulunmuyor.")}</div>
         )}
       </div>
     </div>

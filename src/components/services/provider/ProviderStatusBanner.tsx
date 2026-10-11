@@ -18,6 +18,7 @@ import {
   type ServiceCategoryKey,
 } from '@/types/providerAuth';
 import { Badge } from '@/components/ui/Badge';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface ProviderStatusBannerProps {
   className?: string;
@@ -26,6 +27,7 @@ interface ProviderStatusBannerProps {
 const SERVICE_KEYS: ServiceCategoryKey[] = ['moving', 'taxi', 'travel', 'craftsman'];
 
 export function ProviderStatusBanner({ className = '' }: ProviderStatusBannerProps) {
+  const localizeText = useLocaleRender();
   const { getProfile } = useProviderAuthStore();
   const [activeModalService, setActiveModalService] = useState<ServiceCategoryKey | null>(null);
 
@@ -71,13 +73,13 @@ export function ProviderStatusBanner({ className = '' }: ProviderStatusBannerPro
                         : 'bg-muted text-foreground'
                     }`}
                   >
-                    {config.iconEmoji}
+                    {localizeText(config.iconEmoji)}
                   </div>
 
                   <div>
                     <div className="flex items-center gap-2">
                       <h4 className="text-xs font-bold text-foreground">
-                        {config.titleTr}
+                        {localizeText(config.titleTr)}
                       </h4>
                       <Badge
                         variant={
@@ -91,22 +93,22 @@ export function ProviderStatusBanner({ className = '' }: ProviderStatusBannerPro
                         }
                         className="text-[9px] py-0 px-1.5"
                       >
-                        {isVerified
+                        {localizeText(isVerified
                           ? '✓ Doğrulandı'
                           : isApplicant
                           ? 'İnceleniyor'
                           : isSuspended
                           ? 'Askıda'
-                          : 'Başvuru Yapılmadı'}
+                          : 'Başvuru Yapılmadı')}
                       </Badge>
                     </div>
 
                     <p className="text-[11px] text-muted-foreground mt-0.5 line-clamp-1">
-                      {isVerified
+                      {localizeText(isVerified
                         ? `${config.roleNameTr} yetkiniz aktif. Açık ilanlara teklif verebilirsiniz.`
                         : isApplicant
                         ? 'Belgeleriniz inceleniyor. Onay bekliyor.'
-                        : `${config.roleNameTr} olarak hizmet vermek için başvurun.`}
+                        : `${config.roleNameTr} olarak hizmet vermek için başvurun.`)}
                     </p>
                   </div>
                 </div>

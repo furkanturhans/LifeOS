@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/Button';
 import { useEducationStore } from '@/stores/useEducationStore';
 import type { AgeGroup, CourseDraft } from '@/types/education';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface LiveSessionSchedulerModalProps {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export function LiveSessionSchedulerModal({
   onClose,
   courseDrafts = [],
 }: LiveSessionSchedulerModalProps) {
+  const localizeText = useLocaleRender();
   const { createLiveSession } = useEducationStore();
 
   const [title, setTitle] = useState('');
@@ -109,12 +111,8 @@ export function LiveSessionSchedulerModal({
                 🎥
               </div>
               <div>
-                <h3 className="text-sm font-bold text-foreground">
-                  Canlı Ders Oturumu Planla
-                </h3>
-                <p className="text-xs text-muted-foreground">
-                  Eğitmen stüdyosunda yeni canlı eğitim oluşturun
-                </p>
+                <h3 className="text-sm font-bold text-foreground">{localizeText("Canlı Ders Oturumu Planla")}</h3>
+                <p className="text-xs text-muted-foreground">{localizeText("Eğitmen stüdyosunda yeni canlı eğitim oluşturun")}</p>
               </div>
             </div>
 
@@ -130,24 +128,20 @@ export function LiveSessionSchedulerModal({
           <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-5 space-y-4 text-xs">
             {errorMsg && (
               <div className="p-3 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-xs font-semibold">
-                {errorMsg}
+                {localizeText(errorMsg)}
               </div>
             )}
 
             {/* Live Session Guidelines Banner */}
             <div className="p-3 rounded-xl border border-rose-500/20 bg-rose-500/5 flex items-start gap-2.5">
               <Sparkles className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
-              <div className="text-[11px] text-muted-foreground leading-relaxed">
-                Canlı dersler için varsayılan katılım bedeli <strong className="text-foreground">50 Kredi</strong> ve maksimum kontenjan sınırı <strong className="text-foreground">70 Öğrenci</strong>dir. Oturum BigBlueButton güvenli video altyapısına otomatik bağlanır.
-              </div>
+              <div className="text-[11px] text-muted-foreground leading-relaxed">{localizeText("Canlı dersler için varsayılan katılım bedeli")}<strong className="text-foreground">{localizeText("50 Kredi")}</strong>{localizeText("ve maksimum kontenjan sınırı")}<strong className="text-foreground">{localizeText("70 Öğrenci")}</strong>{localizeText("dir. Oturum BigBlueButton güvenli video altyapısına otomatik bağlanır.")}</div>
             </div>
 
             {/* Course Link (Optional) */}
             {courseDrafts.length > 0 && (
               <div>
-                <label className="block font-bold text-foreground mb-1">
-                  Bağlı Kurs Taslağı (İsteğe Bağlı)
-                </label>
+                <label className="block font-bold text-foreground mb-1">{localizeText("Bağlı Kurs Taslağı (İsteğe Bağlı)")}</label>
                 <select
                   value={selectedCourseId}
                   onChange={(e) => {
@@ -159,10 +153,10 @@ export function LiveSessionSchedulerModal({
                   }}
                   className="w-full h-10 rounded-xl border border-border bg-background px-3 font-semibold text-foreground focus:border-primary focus:outline-none"
                 >
-                  <option value="">Bağımsız Canlı Ders (Kurs Dışı)</option>
+                  <option value="">{localizeText("Bağımsız Canlı Ders (Kurs Dışı)")}</option>
                   {courseDrafts.map((c) => (
                     <option key={c.id} value={c.id}>
-                      {c.coverEmoji} {c.title}
+                      {localizeText(c.coverEmoji)} {localizeText(c.title)}
                     </option>
                   ))}
                 </select>
@@ -171,29 +165,25 @@ export function LiveSessionSchedulerModal({
 
             {/* Title */}
             <div>
-              <label className="block font-bold text-foreground mb-1">
-                Ders Başlığı *
-              </label>
+              <label className="block font-bold text-foreground mb-1">{localizeText("Ders Başlığı *")}</label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Örn: Canlı Kodlama: İlk Yapay Zeka Modelimiz"
+                placeholder={localizeText("Örn: Canlı Kodlama: İlk Yapay Zeka Modelimiz")}
                 className="w-full h-10 rounded-xl border border-border bg-background px-3 font-semibold text-foreground focus:border-primary focus:outline-none"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="block font-bold text-foreground mb-1">
-                Ders Açıklaması ve İçerik Özeti
-              </label>
+              <label className="block font-bold text-foreground mb-1">{localizeText("Ders Açıklaması ve İçerik Özeti")}</label>
               <textarea
                 rows={2}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Öğrencilerin bu canlı derste öğreneceği temel konular..."
+                placeholder={localizeText("Öğrencilerin bu canlı derste öğreneceği temel konular...")}
                 className="w-full rounded-xl border border-border bg-background p-2.5 text-foreground focus:border-primary focus:outline-none resize-none"
               />
             </div>
@@ -202,9 +192,7 @@ export function LiveSessionSchedulerModal({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block font-bold text-foreground mb-1 flex items-center gap-1">
-                  <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
-                  Planlanan Tarih ve Saat *
-                </label>
+                  <Calendar className="h-3.5 w-3.5 text-muted-foreground" />{localizeText("Planlanan Tarih ve Saat *")}</label>
                 <input
                   type="datetime-local"
                   required
@@ -216,18 +204,16 @@ export function LiveSessionSchedulerModal({
 
               <div>
                 <label className="block font-bold text-foreground mb-1 flex items-center gap-1">
-                  <Clock className="h-3.5 w-3.5 text-muted-foreground" />
-                  Ders Süresi
-                </label>
+                  <Clock className="h-3.5 w-3.5 text-muted-foreground" />{localizeText("Ders Süresi")}</label>
                 <select
                   value={durationMinutes}
                   onChange={(e) => setDurationMinutes(Number(e.target.value))}
                   className="w-full h-10 rounded-xl border border-border bg-background px-3 font-semibold text-foreground focus:border-primary focus:outline-none"
                 >
-                  <option value={30}>30 Dakika</option>
-                  <option value={45}>45 Dakika</option>
-                  <option value={60}>60 Dakika (1 Saat)</option>
-                  <option value={90}>90 Dakika</option>
+                  <option value={30}>{localizeText("30 Dakika")}</option>
+                  <option value={45}>{localizeText("45 Dakika")}</option>
+                  <option value={60}>{localizeText("60 Dakika (1 Saat)")}</option>
+                  <option value={90}>{localizeText("90 Dakika")}</option>
                 </select>
               </div>
             </div>
@@ -235,27 +221,23 @@ export function LiveSessionSchedulerModal({
             {/* Age Group & Credits */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="block font-bold text-foreground mb-1">
-                  Hedef Yaş Grubu
-                </label>
+                <label className="block font-bold text-foreground mb-1">{localizeText("Hedef Yaş Grubu")}</label>
                 <select
                   value={ageGroup}
                   onChange={(e) => setAgeGroup(e.target.value as AgeGroup)}
                   className="w-full h-10 rounded-xl border border-border bg-background px-2.5 font-semibold text-foreground focus:border-primary focus:outline-none"
                 >
-                  <option value="preschool">Okul Öncesi (3-6)</option>
-                  <option value="child">Çocuk (7-12)</option>
-                  <option value="youth">Genç (13-18)</option>
-                  <option value="adult">Yetişkin (19-64)</option>
-                  <option value="senior">65+ Yaş</option>
+                  <option value="preschool">{localizeText("Okul Öncesi (3-6)")}</option>
+                  <option value="child">{localizeText("Çocuk (7-12)")}</option>
+                  <option value="youth">{localizeText("Genç (13-18)")}</option>
+                  <option value="adult">{localizeText("Yetişkin (19-64)")}</option>
+                  <option value="senior">{localizeText("65+ Yaş")}</option>
                 </select>
               </div>
 
               <div>
                 <label className="block font-bold text-foreground mb-1 flex items-center gap-1">
-                  <Coins className="h-3.5 w-3.5 text-rose-500" />
-                  Katılım Bedeli
-                </label>
+                  <Coins className="h-3.5 w-3.5 text-rose-500" />{localizeText("Katılım Bedeli")}</label>
                 <div className="relative">
                   <input
                     type="number"
@@ -265,17 +247,13 @@ export function LiveSessionSchedulerModal({
                     onChange={(e) => setCreditsRequired(Number(e.target.value))}
                     className="w-full h-10 rounded-xl border border-border bg-background pl-3 pr-12 font-bold text-foreground focus:border-primary focus:outline-none"
                   />
-                  <span className="absolute right-3 top-2.5 text-[11px] font-bold text-muted-foreground">
-                    Kredi
-                  </span>
+                  <span className="absolute right-3 top-2.5 text-[11px] font-bold text-muted-foreground">{localizeText("Kredi")}</span>
                 </div>
               </div>
 
               <div>
                 <label className="block font-bold text-foreground mb-1 flex items-center gap-1">
-                  <Users className="h-3.5 w-3.5 text-blue-500" />
-                  Kontenjan (Maks 70)
-                </label>
+                  <Users className="h-3.5 w-3.5 text-blue-500" />{localizeText("Kontenjan (Maks 70)")}</label>
                 <input
                   type="number"
                   min={5}
@@ -294,11 +272,10 @@ export function LiveSessionSchedulerModal({
             <div className="p-3 rounded-xl border border-border bg-muted/30 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-emerald-500" />
-                <span className="text-muted-foreground text-[11px]">Eğitmen Hakedişi (%70 Pay):</span>
+                <span className="text-muted-foreground text-[11px]">{localizeText("Eğitmen Hakedişi (%70 Pay):")}</span>
               </div>
               <span className="font-bold text-emerald-600 dark:text-emerald-400">
-                {Math.round(creditsRequired * 0.70)} Kredi / Öğrenci Başı
-              </span>
+                {localizeText(Math.round(creditsRequired * 0.70))}{localizeText(" Kredi / Öğrenci Başı")}</span>
             </div>
 
             {/* Submit Buttons */}
@@ -310,9 +287,7 @@ export function LiveSessionSchedulerModal({
                 onClick={onClose}
                 disabled={isSubmitting}
                 className="text-xs"
-              >
-                Vazgeç
-              </Button>
+              >{localizeText("Vazgeç")}</Button>
               <Button
                 type="submit"
                 variant="primary"
@@ -320,7 +295,7 @@ export function LiveSessionSchedulerModal({
                 disabled={isSubmitting || !title.trim() || !scheduledDate}
                 className="font-bold text-xs px-4 h-9 shadow-xs"
               >
-                {isSubmitting ? 'Planlanıyor...' : 'Canlı Dersi Yayınla'}
+                {localizeText(isSubmitting ? 'Planlanıyor...' : 'Canlı Dersi Yayınla')}
               </Button>
             </div>
           </form>

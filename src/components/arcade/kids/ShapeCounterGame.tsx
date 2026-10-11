@@ -16,6 +16,7 @@ import { Modal } from '@/components/ui/Modal';
 import { kidsSound } from '@/lib/arcade/kidsSound';
 import { useArcadeStore } from '@/stores/useArcadeStore';
 import { cn } from '@/lib/utils';
+import { useLocaleRender } from '@/lib/i18n/runtime';
 
 interface ShapeItem {
   id: number;
@@ -45,6 +46,7 @@ interface ShapeCounterGameProps {
 }
 
 export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
+  const localizeText = useLocaleRender();
   const { isMuted, toggleMute, scores, recordGameSession } = useArcadeStore();
 
   const [round, setRound] = useState(1);
@@ -195,14 +197,14 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
             className="h-9 px-2.5 text-xs font-semibold"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
-            <span className="hidden sm:inline">Oyunlar</span>
+            <span className="hidden sm:inline">{localizeText("Oyunlar")}</span>
           </Button>
-          <span className="font-bold text-sm text-foreground">Şekil Sayma</span>
+          <span className="font-bold text-sm text-foreground">{localizeText("Şekil Sayma")}</span>
         </div>
 
         {/* Round Progress Pill */}
         <div className="flex items-center gap-1.5 rounded-full border border-border bg-muted/40 px-3 py-1 text-xs font-bold text-foreground">
-          <span>Tur {round}/{TOTAL_ROUNDS}</span>
+          <span>{localizeText("Tur ")}{localizeText(round)}/{localizeText(TOTAL_ROUNDS)}</span>
         </div>
 
         {/* Action icons */}
@@ -210,7 +212,7 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
           <button
             onClick={toggleMute}
             className="h-9 w-9 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title={isMuted ? 'Sesi Aç' : 'Sesi Kapat'}
+            title={localizeText(isMuted ? 'Sesi Aç' : 'Sesi Kapat')}
           >
             {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4 text-primary" />}
           </button>
@@ -218,7 +220,7 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
           <button
             onClick={() => setIsPaused(true)}
             className="h-9 w-9 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title="Duraklat"
+            title={localizeText("Duraklat")}
           >
             <Pause className="h-4 w-4" />
           </button>
@@ -226,7 +228,7 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
           <button
             onClick={handleRestart}
             className="h-9 w-9 rounded-xl border border-border/80 bg-card flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            title="Yeniden Başlat"
+            title={localizeText("Yeniden Başlat")}
           >
             <RotateCcw className="h-4 w-4" />
           </button>
@@ -236,19 +238,19 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
       {/* Stats Bar */}
       <div className="grid grid-cols-3 gap-2 px-4 py-2 max-w-md mx-auto w-full text-center">
         <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-          <span className="block text-[10px] uppercase font-bold text-muted-foreground">Puan</span>
-          <span className="text-base font-extrabold text-foreground">{score}</span>
+          <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Puan")}</span>
+          <span className="text-base font-extrabold text-foreground">{localizeText(score)}</span>
         </div>
         <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-          <span className="block text-[10px] uppercase font-bold text-muted-foreground">Seri (Streak)</span>
+          <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("Seri (Streak)")}</span>
           <span className="text-base font-extrabold text-amber-500">
-            {streak > 1 ? `🔥 ${streak}x` : `${streak}`}
+            {localizeText(streak > 1 ? `🔥 ${streak}x` : `${streak}`)}
           </span>
         </div>
         <div className="rounded-xl border border-border bg-card p-1.5 shadow-2xs">
-          <span className="block text-[10px] uppercase font-bold text-muted-foreground">En Yüksek</span>
+          <span className="block text-[10px] uppercase font-bold text-muted-foreground">{localizeText("En Yüksek")}</span>
           <span className="text-base font-extrabold text-primary">
-            {bestScore > 0 ? `${bestScore}` : '-'}
+            {localizeText(bestScore > 0 ? `${bestScore}` : '-')}
           </span>
         </div>
       </div>
@@ -256,10 +258,8 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
       {/* Question Prompt */}
       <div className="px-4 text-center mt-1">
         <div className="inline-flex items-center gap-2 rounded-2xl border border-primary/20 bg-primary/5 px-4 py-2 shadow-2xs">
-          <span className="text-2xl">{targetShape.emoji}</span>
-          <span className="text-sm font-extrabold text-foreground">
-            Kaç tane {targetShape.nameTr} var?
-          </span>
+          <span className="text-2xl">{localizeText(targetShape.emoji)}</span>
+          <span className="text-sm font-extrabold text-foreground">{localizeText("Kaç tane ")}{localizeText(targetShape.nameTr)}{localizeText(" var?")}</span>
         </div>
       </div>
 
@@ -280,7 +280,7 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
                 fontSize: `${item.sizeRem}rem`,
               }}
             >
-              {item.emoji}
+              {localizeText(item.emoji)}
             </motion.div>
           ))}
 
@@ -294,7 +294,7 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
                 className="absolute inset-0 flex flex-col items-center justify-center bg-emerald-500/20 backdrop-blur-xs text-emerald-600 dark:text-emerald-400 font-extrabold text-lg"
               >
                 <CheckCircle2 className="h-12 w-12 mb-1 animate-bounce" />
-                <span>Harika! Doğru Cevap: {targetCount}</span>
+                <span>{localizeText("Harika! Doğru Cevap: ")}{localizeText(targetCount)}</span>
               </motion.div>
             )}
 
@@ -306,7 +306,7 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
                 className="absolute inset-0 flex flex-col items-center justify-center bg-rose-500/20 backdrop-blur-xs text-rose-600 dark:text-rose-400 font-extrabold text-lg"
               >
                 <span className="text-3xl mb-1">🧐</span>
-                <span>Tekrar dikkatle sayalım!</span>
+                <span>{localizeText("Tekrar dikkatle sayalım!")}</span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -331,7 +331,7 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
                   : 'border-border/80 bg-card hover:border-primary/50 hover:bg-primary/5 text-foreground'
               )}
             >
-              {num}
+              {localizeText(num)}
             </motion.button>
           ))}
         </div>
@@ -341,8 +341,8 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
       <Modal
         isOpen={isPaused}
         onClose={() => setIsPaused(false)}
-        title="Oyun Duraklatıldı"
-        description="Şekil sayma molası. Hazır olduğunuzda devam edin."
+        title={localizeText("Oyun Duraklatıldı")}
+        description={localizeText("Şekil sayma molası. Hazır olduğunuzda devam edin.")}
         size="sm"
       >
         <div className="space-y-3 pt-2">
@@ -351,24 +351,18 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
             onClick={() => setIsPaused(false)}
             className="w-full font-bold h-11 text-sm"
           >
-            <Play className="h-4 w-4 mr-1.5" />
-            Devam Et
-          </Button>
+            <Play className="h-4 w-4 mr-1.5" />{localizeText("Devam Et")}</Button>
           <Button
             variant="outline"
             onClick={handleRestart}
             className="w-full font-semibold text-xs"
           >
-            <RotateCcw className="h-3.5 w-3.5 mr-1.5" />
-            Yeniden Başlat
-          </Button>
+            <RotateCcw className="h-3.5 w-3.5 mr-1.5" />{localizeText("Yeniden Başlat")}</Button>
           <Button
             variant="ghost"
             onClick={onBack}
             className="w-full text-xs text-muted-foreground"
-          >
-            Oyunlardan Çık
-          </Button>
+          >{localizeText("Oyunlardan Çık")}</Button>
         </div>
       </Modal>
 
@@ -376,16 +370,16 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
       <Modal
         isOpen={isGameOver}
         onClose={handleRestart}
-        title="Oyun Tamamlandı! 🏆"
-        description="10 turun tamamını başarıyla tamamladınız!"
+        title={localizeText("Oyun Tamamlandı! 🏆")}
+        description={localizeText("10 turun tamamını başarıyla tamamladınız!")}
         size="sm"
       >
         <div className="text-center py-2 space-y-4">
           <div className="text-4xl">🌟</div>
 
           <div className="rounded-2xl border border-border bg-muted/30 p-4">
-            <span className="text-xs text-muted-foreground block mb-1">Toplam Skorunuz</span>
-            <span className="text-3xl font-extrabold text-primary">{score} Puan</span>
+            <span className="text-xs text-muted-foreground block mb-1">{localizeText("Toplam Skorunuz")}</span>
+            <span className="text-3xl font-extrabold text-primary">{localizeText(score)}{localizeText(" Puan")}</span>
           </div>
 
           <div className="space-y-2 pt-2">
@@ -394,16 +388,12 @@ export function ShapeCounterGame({ onBack }: ShapeCounterGameProps) {
               onClick={handleRestart}
               className="w-full font-bold h-11 text-sm"
             >
-              <RotateCcw className="h-4 w-4 mr-1.5" />
-              Tekrar Oyna
-            </Button>
+              <RotateCcw className="h-4 w-4 mr-1.5" />{localizeText("Tekrar Oyna")}</Button>
             <Button
               variant="outline"
               onClick={onBack}
               className="w-full text-xs font-semibold"
-            >
-              Diğer Oyunlara Dön
-            </Button>
+            >{localizeText("Diğer Oyunlara Dön")}</Button>
           </div>
         </div>
       </Modal>
